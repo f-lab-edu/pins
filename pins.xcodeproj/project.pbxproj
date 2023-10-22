@@ -14,7 +14,8 @@
 		B7AF69482AE0FEE000385632 /* pinsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF69472AE0FEE000385632 /* pinsTests.swift */; };
 		B7AF69522AE0FEE000385632 /* pinsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF69512AE0FEE000385632 /* pinsUITests.swift */; };
 		B7AF69542AE0FEE000385632 /* pinsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF69532AE0FEE000385632 /* pinsUITestsLaunchTests.swift */; };
-		B7F6A8D32AE2B3F100892215 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F6A8D22AE2B3F100892215 /* LaunchScreen.storyboard */; };
+		B7E050F12AE4FB3A007903C3 /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E050F02AE4FB3A007903C3 /* MainMapView.swift */; };
+		B7F6A8DA2AE2B61500892215 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F6A8D82AE2B61500892215 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +47,8 @@
 		B7AF694D2AE0FEE000385632 /* pinsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pinsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7AF69512AE0FEE000385632 /* pinsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pinsUITests.swift; sourceTree = "<group>"; };
 		B7AF69532AE0FEE000385632 /* pinsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pinsUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		B7F6A8D22AE2B3F100892215 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B7E050F02AE4FB3A007903C3 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
+		B7F6A8D92AE2B61500892215 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +99,8 @@
 		B7AF692F2AE0FEDF00385632 /* pins */ = {
 			isa = PBXGroup;
 			children = (
-				B7F6A8D22AE2B3F100892215 /* LaunchScreen.storyboard */,
+				B7E050EF2AE4FB30007903C3 /* View */,
+				B7F6A8D82AE2B61500892215 /* LaunchScreen.storyboard */,
 				B7AF69302AE0FEDF00385632 /* AppDelegate.swift */,
 				B7AF69322AE0FEDF00385632 /* SceneDelegate.swift */,
 				B7AF69342AE0FEDF00385632 /* ViewController.swift */,
@@ -122,6 +125,14 @@
 				B7AF69532AE0FEE000385632 /* pinsUITestsLaunchTests.swift */,
 			);
 			path = pinsUITests;
+			sourceTree = "<group>";
+		};
+		B7E050EF2AE4FB30007903C3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B7E050F02AE4FB3A007903C3 /* MainMapView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,8 +239,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7F6A8DA2AE2B61500892215 /* LaunchScreen.storyboard in Resources */,
 				B7AF693A2AE0FEE000385632 /* Assets.xcassets in Resources */,
-				B7F6A8D32AE2B3F100892215 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +267,7 @@
 			files = (
 				B7AF69352AE0FEDF00385632 /* ViewController.swift in Sources */,
 				B7AF69312AE0FEDF00385632 /* AppDelegate.swift in Sources */,
+				B7E050F12AE4FB3A007903C3 /* MainMapView.swift in Sources */,
 				B7AF69332AE0FEDF00385632 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,6 +303,17 @@
 			targetProxy = B7AF694E2AE0FEE000385632 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B7F6A8D82AE2B61500892215 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B7F6A8D92AE2B61500892215 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		B7AF69552AE0FEE000385632 /* Debug */ = {
@@ -422,6 +445,7 @@
 				DEVELOPMENT_TEAM = X843D4L2C2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pins/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "이 앱에서 지도 기능을 사용하기 위해 위치 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -449,6 +473,7 @@
 				DEVELOPMENT_TEAM = X843D4L2C2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pins/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "이 앱에서 지도 기능을 사용하기 위해 위치 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
