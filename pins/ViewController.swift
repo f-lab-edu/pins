@@ -21,6 +21,7 @@ class ViewController: UIViewController {
         locationManager.delegate = self
         
         setLocationManager()
+        setAction()
     }
     
     override func loadView() {
@@ -55,6 +56,12 @@ class ViewController: UIViewController {
         guard let location = locationManager.location else { return }
         let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
         mainMapView.mapView.setRegion(region, animated: true)
+    }
+    
+    private func setAction() {
+        mainMapView.setMylocationButtonAction(UIAction(handler: { [weak self] _ in
+            self?.moveCurrentPosition()
+        }))
     }
 }
 

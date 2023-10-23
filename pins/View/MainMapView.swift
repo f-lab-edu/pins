@@ -81,4 +81,8 @@ class MainMapView: UIView {
         button.layer.shadowRadius = 5
         button.layer.shadowOpacity = 0.2
     }
+    
+    func setMylocationButtonAction(_ action: UIAction) {
+        myLocationButton.addAction(action, for: .touchUpInside)
+    }
 }
