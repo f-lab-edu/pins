@@ -13,6 +13,7 @@ class MainMapView: UIView {
     let searchButton: UIButton = UIButton()
     let createButton: UIButton = UIButton()
     let refeshButton: UIButton = UIButton()
+    let myLocationButton: UIButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,6 +59,14 @@ class MainMapView: UIView {
         refeshButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         refeshButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         setButtonStyle(button: refeshButton, systemName: "arrow.clockwise")
+        
+        addSubview(myLocationButton)
+        myLocationButton.translatesAutoresizingMaskIntoConstraints = false
+        myLocationButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
+        myLocationButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+        myLocationButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        myLocationButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        setButtonStyle(button: myLocationButton, systemName: "location")
     }
     
     private func setButtonStyle(button: UIButton, systemName: String) {
