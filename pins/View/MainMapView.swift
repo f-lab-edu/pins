@@ -12,6 +12,7 @@ class MainMapView: UIView {
     let mapView: MKMapView = MKMapView()
     let searchButton: UIButton = UIButton()
     let createButton: UIButton = UIButton()
+    let refeshButton: UIButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,19 +47,26 @@ class MainMapView: UIView {
         createButton.translatesAutoresizingMaskIntoConstraints = false
         createButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         createButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
-        createButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        createButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        createButton.widthAnchor.constraint(equalToConstant: 45).isActive = true
+        createButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
         setButtonStyle(button: createButton, systemName: "plus")
         
+        addSubview(refeshButton)
+        refeshButton.translatesAutoresizingMaskIntoConstraints = false
+        refeshButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
+        refeshButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+        refeshButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        refeshButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        setButtonStyle(button: refeshButton, systemName: "arrow.clockwise")
     }
     
     private func setButtonStyle(button: UIButton, systemName: String) {
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .medium, scale: .medium)
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium, scale: .medium)
         
         button.setImage(UIImage(systemName: systemName, withConfiguration: largeConfig), for: .normal)
-        button.tintColor = .black
+        button.tintColor = .gray
         button.backgroundColor = .white
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 15
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 0, height: 0)
         button.layer.shadowRadius = 5
