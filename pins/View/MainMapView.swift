@@ -85,4 +85,8 @@ class MainMapView: UIView {
     func setMylocationButtonAction(_ action: UIAction) {
         myLocationButton.addAction(action, for: .touchUpInside)
     }
+    
+    func setSearchButtonAction(_ action: UIAction) {
+        searchButton.addAction(action, for: .touchUpInside)
+    }
 }

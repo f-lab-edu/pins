@@ -62,6 +62,11 @@ class ViewController: UIViewController {
         mainMapView.setMylocationButtonAction(UIAction(handler: { [weak self] _ in
             self?.moveCurrentPosition()
         }))
+        
+        mainMapView.setSearchButtonAction(UIAction(handler: { [weak self] _ in
+            let searchViewController: SearchViewController = SearchViewController()
+            self?.navigationController?.pushViewController(searchViewController, animated: true)
+        }))
     }
 }
 
