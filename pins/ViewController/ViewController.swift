@@ -67,6 +67,11 @@ class ViewController: UIViewController {
             let searchViewController: SearchViewController = SearchViewController()
             self?.navigationController?.pushViewController(searchViewController, animated: true)
         }))
+        
+        mainMapView.setCreateButtonAction(UIAction(handler: { [weak self] _ in
+            let createViewController: CreateViewController = CreateViewController()
+            self?.navigationController?.pushViewController(createViewController, animated: true)
+        }))
     }
 }
 

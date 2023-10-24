@@ -89,4 +89,8 @@ class MainMapView: UIView {
     func setSearchButtonAction(_ action: UIAction) {
         searchButton.addAction(action, for: .touchUpInside)
     }
+    
+    func setCreateButtonAction(_ action: UIAction) {
+        createButton.addAction(action, for: .touchUpInside)
+    }
 }
