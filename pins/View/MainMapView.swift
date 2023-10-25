@@ -22,6 +22,7 @@ class MainMapView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        fatalError()
     }
     
     private func setLayout() {

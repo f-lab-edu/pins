@@ -15,5 +15,6 @@ class SearchView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        fatalError()
     }
 }
