@@ -28,7 +28,12 @@ class MainMapView: UIView {
         addSubview(mapView)
         mapView.showsUserLocation = true
         mapView.setUserTrackingMode(.follow, animated: true)
-        mapView.preferredConfiguration = MKStandardMapConfiguration()
+        
+        if #available(iOS 16.0, *) {
+            mapView.preferredConfiguration = MKStandardMapConfiguration()
+        } else {
+            mapView.mapType = .standard
+        }
         
         mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
