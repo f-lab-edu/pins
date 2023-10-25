@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     var mainMapView: MainMapView {
         view as! MainMapView
     }
@@ -71,11 +71,11 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: MKMapViewDelegate {
+extension MainViewController: MKMapViewDelegate {
     
 }
 
-extension ViewController: CLLocationManagerDelegate {
+extension MainViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         moveCurrentPosition()
     }
