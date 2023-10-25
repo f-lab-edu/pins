@@ -13,7 +13,7 @@ class ViewController: UIViewController {
         view as! MainMapView
     }
     
-    var locationManager = CLLocationManager()
+    var locationManager: CLLocationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()

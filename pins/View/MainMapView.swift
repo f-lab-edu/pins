@@ -9,7 +9,11 @@ import UIKit
 import MapKit
 
 class MainMapView: UIView {
-    let mapView = MKMapView()
+    let mapView: MKMapView = MKMapView()
+    let searchButton: UIButton = UIButton()
+    let createButton: UIButton = UIButton()
+    let refeshButton: UIButton = UIButton()
+    let myLocationButton: UIButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,5 +35,50 @@ class MainMapView: UIView {
         mapView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         mapView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         mapView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        
+        addSubview(searchButton)
+        searchButton.translatesAutoresizingMaskIntoConstraints = false
+        searchButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
+        searchButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
+        searchButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        searchButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        setButtonStyle(button: searchButton, systemName: "magnifyingglass")
+        
+        addSubview(createButton)
+        createButton.translatesAutoresizingMaskIntoConstraints = false
+        createButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        createButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+        createButton.widthAnchor.constraint(equalToConstant: 45).isActive = true
+        createButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        setButtonStyle(button: createButton, systemName: "plus")
+        
+        addSubview(refeshButton)
+        refeshButton.translatesAutoresizingMaskIntoConstraints = false
+        refeshButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
+        refeshButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+        refeshButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        refeshButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        setButtonStyle(button: refeshButton, systemName: "arrow.clockwise")
+        
+        addSubview(myLocationButton)
+        myLocationButton.translatesAutoresizingMaskIntoConstraints = false
+        myLocationButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
+        myLocationButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+        myLocationButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        myLocationButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        setButtonStyle(button: myLocationButton, systemName: "location")
+    }
+    
+    private func setButtonStyle(button: UIButton, systemName: String) {
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium, scale: .medium)
+        
+        button.setImage(UIImage(systemName: systemName, withConfiguration: largeConfig), for: .normal)
+        button.tintColor = .gray
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 15
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 0)
+        button.layer.shadowRadius = 5
+        button.layer.shadowOpacity = 0.2
     }
 }
