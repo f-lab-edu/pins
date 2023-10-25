@@ -31,11 +31,7 @@ class ViewController: UIViewController {
     private func setLocationManager() {
         let authorizationStatus: CLAuthorizationStatus
         
-        if #available(iOS 14, *) {
-            authorizationStatus = locationManager.authorizationStatus
-        } else {
-            authorizationStatus = CLLocationManager.authorizationStatus()
-        }
+        authorizationStatus = locationManager.authorizationStatus    
         
         switch authorizationStatus {
         case .notDetermined:
