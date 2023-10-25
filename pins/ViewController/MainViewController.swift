@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import OSLog
 import MapKit
 
 class MainViewController: UIViewController {
@@ -31,7 +32,7 @@ class MainViewController: UIViewController {
     private func setLocationManager() {
         let authorizationStatus: CLAuthorizationStatus
         
-        authorizationStatus = locationManager.authorizationStatus    
+        authorizationStatus = locationManager.authorizationStatus
         
         switch authorizationStatus {
         case .notDetermined:
@@ -39,8 +40,8 @@ class MainViewController: UIViewController {
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
         case .denied, .restricted:
-            print("거절됨")
             // 위치 서비스를 사용할 수 없을 때 설정 창으로 이동하는 얼럿창 띄우기
+            os_log("위치 서비스를 사용할 수 없습니다.")
         case .authorizedWhenInUse, .authorizedAlways:
             locationManager.startUpdatingLocation()
         @unknown default:
