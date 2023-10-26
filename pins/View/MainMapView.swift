@@ -22,13 +22,19 @@ class MainMapView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        fatalError()
     }
     
     private func setLayout() {
         addSubview(mapView)
         mapView.showsUserLocation = true
         mapView.setUserTrackingMode(.follow, animated: true)
-        mapView.preferredConfiguration = MKStandardMapConfiguration()
+        
+        if #available(iOS 16.0, *) {
+            mapView.preferredConfiguration = MKStandardMapConfiguration()
+        } else {
+            mapView.mapType = .standard
+        }
         
         mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
@@ -80,5 +86,17 @@ class MainMapView: UIView {
         button.layer.shadowOffset = CGSize(width: 0, height: 0)
         button.layer.shadowRadius = 5
         button.layer.shadowOpacity = 0.2
+    }
+    
+    func setMylocationButtonAction(_ action: UIAction) {
+        myLocationButton.addAction(action, for: .touchUpInside)
+    }
+    
+    func setSearchButtonAction(_ action: UIAction) {
+        searchButton.addAction(action, for: .touchUpInside)
+    }
+    
+    func setCreateButtonAction(_ action: UIAction) {
+        createButton.addAction(action, for: .touchUpInside)
     }
 }

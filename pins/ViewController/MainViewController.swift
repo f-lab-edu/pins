@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import OSLog
 import MapKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     var mainMapView: MainMapView {
         view as! MainMapView
     }
@@ -21,6 +22,7 @@ class ViewController: UIViewController {
         locationManager.delegate = self
         
         setLocationManager()
+        setAction()
     }
     
     override func loadView() {
@@ -30,11 +32,7 @@ class ViewController: UIViewController {
     private func setLocationManager() {
         let authorizationStatus: CLAuthorizationStatus
         
-        if #available(iOS 14, *) {
-            authorizationStatus = locationManager.authorizationStatus
-        } else {
-            authorizationStatus = CLLocationManager.authorizationStatus()
-        }
+        authorizationStatus = locationManager.authorizationStatus
         
         switch authorizationStatus {
         case .notDetermined:
@@ -42,8 +40,8 @@ class ViewController: UIViewController {
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
         case .denied, .restricted:
-            print("거절됨")
             // 위치 서비스를 사용할 수 없을 때 설정 창으로 이동하는 얼럿창 띄우기
+            os_log("위치 서비스를 사용할 수 없습니다.")
         case .authorizedWhenInUse, .authorizedAlways:
             locationManager.startUpdatingLocation()
         @unknown default:
@@ -56,13 +54,29 @@ class ViewController: UIViewController {
         let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
         mainMapView.mapView.setRegion(region, animated: true)
     }
+    
+    private func setAction() {
+        mainMapView.setMylocationButtonAction(UIAction(handler: { [weak self] _ in
+            self?.moveCurrentPosition()
+        }))
+        
+        mainMapView.setSearchButtonAction(UIAction(handler: { [weak self] _ in
+            let searchViewController: SearchViewController = SearchViewController()
+            self?.navigationController?.pushViewController(searchViewController, animated: true)
+        }))
+        
+        mainMapView.setCreateButtonAction(UIAction(handler: { [weak self] _ in
+            let createViewController: CreateViewController = CreateViewController()
+            self?.navigationController?.pushViewController(createViewController, animated: true)
+        }))
+    }
 }
 
-extension ViewController: MKMapViewDelegate {
+extension MainViewController: MKMapViewDelegate {
     
 }
 
-extension ViewController: CLLocationManagerDelegate {
+extension MainViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         moveCurrentPosition()
     }
