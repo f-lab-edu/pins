@@ -8,12 +8,20 @@
 import UIKit
 
 class CreateView: UIView {
-    private let itemCount: Int = 10
-    private let categoryColumn: Int = 3
-    private let interGap: CGFloat = 12
-    private let categoryPadding: CGFloat = 16
-    private let lineGap: CGFloat = 12
-    private let itemHeight: CGFloat = 35
+    private enum Constants {
+        static let categoryColumn: Int = 3
+        static let interGap: CGFloat = 12
+        static let categoryPadding: CGFloat = 16
+        static let lineGap: CGFloat = 12
+        static let itemHeight: CGFloat = 35
+    }
+    
+    private let placeholderColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.25)
+    private let itemCount: Int
+    private var titleTextView = UITextView()
+    private var contentTextView = UITextView()
+    private let titleDivider = Divider()
+    private let contentDivider = Divider()
     
     private let backButton: CustomButton = {
         let button = CustomButton()
@@ -33,14 +41,14 @@ class CreateView: UIView {
     private lazy var categoryCollectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         let screenWidth: CGFloat = UIScreen.main.bounds.width
-        let paddingSum: Int = Int(categoryPadding) * 2
-        let interGapSum: Int = Int(interGap) * (categoryColumn - 1)
-        let itemWidth = ((Int(screenWidth) - paddingSum - interGapSum) / categoryColumn)
+        let paddingSum: Int = Int(Constants.categoryPadding) * 2
+        let interGapSum: Int = Int(Constants.interGap) * (Constants.categoryColumn - 1)
+        let itemWidth = ((Int(screenWidth) - paddingSum - interGapSum) / Constants.categoryColumn)
         
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = lineGap
-        layout.minimumInteritemSpacing = interGap
-        layout.itemSize = CGSize(width: itemWidth, height: Int(itemHeight))
+        layout.minimumLineSpacing = Constants.lineGap
+        layout.minimumInteritemSpacing = Constants.interGap
+        layout.itemSize = CGSize(width: itemWidth, height: Int(Constants.itemHeight))
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: "categoryCell")
@@ -48,39 +56,74 @@ class CreateView: UIView {
         return collectionView
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(categoryCount: Int) {
+        itemCount = categoryCount
+        super.init(frame: .zero)
         backgroundColor = .white
-        setLayout()
+        setupViews()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented because this view is not designed to be initialized from a nib or storyboard.")
     }
     
-    private func setLayout() {
-        addSubview(backButton)
+    private func createTextView(text: String, tag: Int) -> UITextView {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.text = text
+        textView.textColor = placeholderColor
+        textView.font = UIFont.systemFont(ofSize: 15)
+        textView.tag = tag
+        return textView
+    }
+    
+    private func setupViews() {
+        titleTextView = createTextView(text: "제목을 입력해주세요.", tag: 1)
+        contentTextView = createTextView(text: "내용을 입력해주세요.", tag: 2)
+        
+        titleTextView.delegate = self
+        contentTextView.delegate = self
+        [backButton, categoryLabel, categoryCollectionView, titleDivider, titleTextView, contentDivider, contentTextView].forEach {
+            addSubview($0)
+        }
+    }
+    
+    private func setupConstraints() {
         backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
         backButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
         backButton.setSize(width: 30, height: 30)
         
-        addSubview(categoryLabel)
         categoryLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
         categoryLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 45).isActive = true
         
-        addSubview(categoryCollectionView)
-        categoryCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: categoryPadding).isActive = true
+        categoryCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.categoryPadding).isActive = true
         categoryCollectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 80).isActive = true
-        categoryCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -categoryPadding).isActive = true
+        categoryCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.categoryPadding).isActive = true
         categoryCollectionView.heightAnchor.constraint(equalToConstant: getCagetoryHeight()).isActive = true
+        
+        titleDivider.topAnchor.constraint(equalTo: categoryCollectionView.bottomAnchor).isActive = true
+        titleDivider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
+        titleDivider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
+        
+        titleTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
+        titleTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
+        titleTextView.topAnchor.constraint(equalTo: categoryCollectionView.bottomAnchor, constant: 5).isActive = true
+        titleTextView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        contentDivider.topAnchor.constraint(equalTo: titleTextView.bottomAnchor, constant: 10).isActive = true
+        contentDivider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
+        contentDivider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
+        
+        contentTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
+        contentTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
+        contentTextView.topAnchor.constraint(equalTo: contentDivider.bottomAnchor, constant: 5).isActive = true
+        contentTextView.heightAnchor.constraint(equalToConstant: 200).isActive = true
     }
     
     private func getCagetoryHeight() -> CGFloat {
-        let maxRowCount = itemCount % 3 > 0 ? itemCount / 3 + 1 : itemCount / 3
-        return CGFloat(maxRowCount * 40 + Int(lineGap) * categoryColumn)
-    }
-    
-    private func registerCollectionView() {
+        let rowsNeeded = (itemCount + Constants.categoryColumn - 1) / Constants.categoryColumn
+        return CGFloat(rowsNeeded * 40 + (rowsNeeded - 1) * Int(Constants.lineGap))
     }
     
     func setBackButtonAction(_ action: UIAction) {
@@ -90,5 +133,28 @@ class CreateView: UIView {
     func configureCategoryCollectionView(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
         categoryCollectionView.delegate = delegate
         categoryCollectionView.dataSource = dataSource
+    }
+}
+
+extension CreateView: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == placeholderColor {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            switch textView.tag {
+            case 1:
+                textView.text = "제목을 입력해주세요."
+            case 2:
+                textView.text = "내용을 입력해주세요."
+            default:
+                return
+            }
+            textView.textColor = placeholderColor
+        }
     }
 }

@@ -22,7 +22,7 @@ class CreateViewController: UIViewController {
     }
     
     override func loadView() {
-        view = CreateView()
+        view = CreateView(categoryCount: viewModel.getCategoriesCount())
     }
     
     func setAction() {
