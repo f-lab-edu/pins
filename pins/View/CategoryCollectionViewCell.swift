@@ -8,7 +8,13 @@
 import UIKit
 
 class CategoryCollectionViewCell: UICollectionViewCell {
-    var button: UIButton = UIButton()
+    var categoryLabel: UILabel = {
+        let label: UILabel = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        label.textColor = .gray
+        label.textAlignment = .center
+        return label
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -20,14 +26,28 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     }
     
     private func setLayout() {
-        contentView.addSubview(button)
-        contentView.backgroundColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1)
-        contentView.layer.cornerRadius = 20
+        contentView.addSubview(categoryLabel)
+        contentView.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+        contentView.layer.cornerRadius = 17.5
+        
+        categoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        categoryLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        categoryLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        categoryLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        categoryLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
-    private func setAction() {
-        button.addAction(UIAction(handler: { [weak self] _ in
-            self?.button.backgroundColor = .blue
-        }), for: .touchUpInside)
+    func isSelect() {
+        contentView.backgroundColor = .blue
+        categoryLabel.textColor = .white
+    }
+    
+    func isUnSelect() {
+        contentView.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+        categoryLabel.textColor = .gray
+    }
+    
+    func setText(_ text: String) {
+        categoryLabel.text = text
     }
 }
