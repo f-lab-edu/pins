@@ -21,7 +21,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     private func setLayout() {
         contentView.addSubview(button)
-        contentView.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
+        contentView.backgroundColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1)
         contentView.layer.cornerRadius = 20
     }
     
