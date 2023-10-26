@@ -13,6 +13,7 @@ class CreateView: UIView {
     private let interGap: CGFloat = 12
     private let categoryPadding: CGFloat = 16
     private let lineGap: CGFloat = 12
+    private let itemHeight: CGFloat = 35
     
     private let backButton: CustomButton = {
         let button = CustomButton()
@@ -39,9 +40,10 @@ class CreateView: UIView {
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = lineGap
         layout.minimumInteritemSpacing = interGap
-        layout.itemSize = CGSize(width: itemWidth, height: 40)
+        layout.itemSize = CGSize(width: itemWidth, height: Int(itemHeight))
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: "categoryCell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -50,8 +52,6 @@ class CreateView: UIView {
         super.init(frame: frame)
         backgroundColor = .white
         setLayout()
-        setCategoryCollectionViewDelegate()
-        registerCollectionView()
     }
     
     required init?(coder: NSCoder) {
@@ -80,31 +80,15 @@ class CreateView: UIView {
         return CGFloat(maxRowCount * 40 + Int(lineGap) * categoryColumn)
     }
     
+    private func registerCollectionView() {
+    }
+    
     func setBackButtonAction(_ action: UIAction) {
         backButton.addAction(action, for: .touchUpInside)
     }
     
-    func setCategoryCollectionViewDelegate() {
-        categoryCollectionView.delegate = self
-        categoryCollectionView.dataSource = self
-    }
-    
-    func registerCollectionView() {
-        categoryCollectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: "categoryCell")
-    }
-}
-
-extension CreateView: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemCount
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath)
-        return cell
+    func configureCategoryCollectionView(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
+        categoryCollectionView.delegate = delegate
+        categoryCollectionView.dataSource = dataSource
     }
 }
