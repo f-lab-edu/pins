@@ -18,7 +18,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainMapView.mapView.delegate = self
+        mainMapView.setDelegate(self)
         locationManager.delegate = self
         
         setLocationManager()
@@ -41,7 +41,7 @@ class MainViewController: UIViewController {
             locationManager.startUpdatingLocation()
         case .denied, .restricted:
             // 위치 서비스를 사용할 수 없을 때 설정 창으로 이동하는 얼럿창 띄우기
-            os_log("위치 서비스를 사용할 수 없습니다.")
+            os_log("위치 서비스를 사용할 수 없습니다.", log: OSLog.ui, type: .info)
         case .authorizedWhenInUse, .authorizedAlways:
             locationManager.startUpdatingLocation()
         @unknown default:
@@ -52,7 +52,7 @@ class MainViewController: UIViewController {
     private func moveCurrentPosition() {
         guard let location = locationManager.location else { return }
         let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
-        mainMapView.mapView.setRegion(region, animated: true)
+        mainMapView.setRegion(region, animated: true)
     }
     
     private func setAction() {
