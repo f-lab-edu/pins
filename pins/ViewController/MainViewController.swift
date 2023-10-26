@@ -80,6 +80,8 @@ class MainViewController: UIViewController {
         mainMapView.setCreateButtonAction(UIAction(handler: { [weak self] _ in
             let createViewController: CreateViewController = CreateViewController()
             self?.navigationController?.pushViewController(createViewController, animated: true)
+            
+            self?.viewModel.setCreateViewIsPresented(isPresented: false)
         }))
     }
 }

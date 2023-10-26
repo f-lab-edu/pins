@@ -8,6 +8,6 @@
 import OSLog
 
 extension OSLog {
-  private static var subsystem = Bundle.main.bundleIdentifier!
-  static let ui = OSLog(subsystem: subsystem, category: "UI")
+    private static var subsystem = Bundle.main.bundleIdentifier!
+    static let ui = OSLog(subsystem: subsystem, category: "UI")
 }
