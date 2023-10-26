@@ -8,13 +8,17 @@
 import UIKit
 import OSLog
 import MapKit
+import Combine
 
 class MainViewController: UIViewController {
+    let viewModel: MainViewModel = MainViewModel()
+    
     var mainMapView: MainMapView {
         view as! MainMapView
     }
     
     var locationManager: CLLocationManager = CLLocationManager()
+    var cancellable = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +27,10 @@ class MainViewController: UIViewController {
         
         setLocationManager()
         setAction()
+        
+        viewModel.$createViewIsPresented.sink { [weak self] IsPresented in
+            self?.mainMapView.presentCreateView(isPresented: IsPresented)
+        }.store(in: &cancellable)
     }
     
     override func loadView() {
@@ -63,6 +71,10 @@ class MainViewController: UIViewController {
         mainMapView.setSearchButtonAction(UIAction(handler: { [weak self] _ in
             let searchViewController: SearchViewController = SearchViewController()
             self?.navigationController?.pushViewController(searchViewController, animated: true)
+        }))
+        
+        mainMapView.setCreateModeButtonAction(UIAction(handler: { [weak self] _ in
+            self?.viewModel.setCreateViewIsPresented(isPresented: true)
         }))
         
         mainMapView.setCreateButtonAction(UIAction(handler: { [weak self] _ in

@@ -10,7 +10,7 @@ import UIKit
 class CreateView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .blue
+        backgroundColor = .white
     }
     
     required init?(coder: NSCoder) {
