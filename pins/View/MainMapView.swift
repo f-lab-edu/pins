@@ -9,11 +9,11 @@ import UIKit
 import MapKit
 
 class MainMapView: UIView {
-    let mapView: MKMapView = MKMapView()
-    let searchButton: UIButton = UIButton()
-    let createButton: UIButton = UIButton()
-    let refeshButton: UIButton = UIButton()
-    let myLocationButton: UIButton = UIButton()
+    private let mapView: MKMapView = MKMapView()
+    private let searchButton: UIButton = UIButton()
+    private let createButton: UIButton = UIButton()
+    private let refeshButton: UIButton = UIButton()
+    private let myLocationButton: UIButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,8 +21,7 @@ class MainMapView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        fatalError()
+        fatalError("init(coder:) has not been implemented because this view is not designed to be initialized from a nib or storyboard.")
     }
     
     private func setLayout() {
@@ -86,6 +85,14 @@ class MainMapView: UIView {
         button.layer.shadowOffset = CGSize(width: 0, height: 0)
         button.layer.shadowRadius = 5
         button.layer.shadowOpacity = 0.2
+    }
+    
+    func setDelegate(_ delegate: MKMapViewDelegate) {
+        mapView.delegate = delegate
+    }
+    
+    func setRegion(_ region: MKCoordinateRegion, animated: Bool) {
+        mapView.setRegion(region, animated: animated)
     }
     
     func setMylocationButtonAction(_ action: UIAction) {

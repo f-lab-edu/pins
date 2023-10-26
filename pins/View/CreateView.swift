@@ -14,7 +14,7 @@ class CreateView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        fatalError()
+        fatalError("init(coder:) has not been implemented because this view is not designed to be initialized from a nib or storyboard.")
+
     }
 }
