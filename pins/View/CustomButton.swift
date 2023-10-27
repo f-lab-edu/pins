@@ -8,10 +8,11 @@
 import UIKit
 
 class CustomButton: UIButton {
-    init(backgroundColor: UIColor = .white, tintColor: UIColor = .gray) {
+    init(backgroundColor: UIColor = .white, tintColor: UIColor = .gray, cornerRadius: CGFloat = 15) {
         super.init(frame: .zero)
         self.tintColor = tintColor
         self.backgroundColor = backgroundColor
+        layer.cornerRadius = cornerRadius
         translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -25,8 +26,6 @@ class CustomButton: UIButton {
     }
     
     func setShadow() {
-        backgroundColor = .white
-        layer.cornerRadius = 15
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 0)
         layer.shadowRadius = 5

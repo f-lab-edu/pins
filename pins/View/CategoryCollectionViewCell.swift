@@ -38,7 +38,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     }
     
     func isSelect() {
-        contentView.backgroundColor = .blue
+        contentView.backgroundColor = .systemBlue
         categoryLabel.textColor = .white
     }
     
