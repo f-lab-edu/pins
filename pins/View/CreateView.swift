@@ -23,6 +23,14 @@ class CreateView: UIView {
     private let titleDivider = Divider()
     private let contentDivider = Divider()
     
+    private let createButton: CustomButton = {
+        let button = CustomButton()
+        button.setTitle(title: "핀 만들기", color: .white)
+        button.backgroundColor = .systemBlue
+        button.setShadow()
+        return button
+    }()
+    
     private let backButton: CustomButton = {
         let button = CustomButton()
         button.setImage(systemName: "chevron.backward")
@@ -84,7 +92,7 @@ class CreateView: UIView {
         
         titleTextView.delegate = self
         contentTextView.delegate = self
-        [backButton, categoryLabel, categoryCollectionView, titleDivider, titleTextView, contentDivider, contentTextView].forEach {
+        [backButton, categoryLabel, categoryCollectionView, titleDivider, titleTextView, contentDivider, contentTextView, createButton].forEach {
             addSubview($0)
         }
     }
@@ -119,6 +127,11 @@ class CreateView: UIView {
         contentTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
         contentTextView.topAnchor.constraint(equalTo: contentDivider.bottomAnchor, constant: 5).isActive = true
         contentTextView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        createButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
+        createButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
+        createButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+        createButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     private func getCagetoryHeight() -> CGFloat {
