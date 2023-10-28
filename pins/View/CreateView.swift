@@ -27,9 +27,9 @@ class CreateView: UIView {
     
     private let imageButton: CustomButton = {
         let button = CustomButton(cornerRadius: 10)
-        button.setImage(systemName: "photo.badge.plus")
+        button.setImageTitle(title: "0/5", systemName: "photo.badge.plus", titleColor: .gray, imageColor: .gray)
+        button.setBorder(width: 1, color: UIColor.lightGray.withAlphaComponent(0.5).cgColor)
         button.setSize(width: 70, height: 70)
-        button.setShadow()
         return button
     }()
     

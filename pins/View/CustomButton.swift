@@ -41,4 +41,25 @@ class CustomButton: UIButton {
         setTitle(title, for: .normal)
         setTitleColor(color, for: .normal)
     }
+    
+    func setImageTitle(title: String, systemName: String, titleColor: UIColor, imageColor: UIColor) {
+        var configuration = UIButton.Configuration.plain()
+        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+            var outgoing = incoming
+            outgoing.font = UIFont.systemFont(ofSize: 11)
+            return outgoing
+        }
+        configuration.title = title
+        configuration.titlePadding = 5
+        configuration.image = UIImage.init(systemName: systemName)
+        configuration.imagePadding = 5
+        configuration.imagePlacement = .top
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        self.configuration = configuration
+    }
+    
+    func setBorder(width: CGFloat, color: CGColor) {
+        layer.borderColor = color
+        layer.borderWidth = width
+    }
 }
