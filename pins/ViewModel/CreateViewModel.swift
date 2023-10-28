@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import UIKit
 
 class CreateViewModel {
+    var selectedImages: [UIImage] = []
     var selectedCategoryIndex: Int?
     let categories: [String] = [
         "친목",
@@ -25,11 +27,20 @@ class CreateViewModel {
         return categories.count
     }
     
-    func selectCategory(at index: Int) {
+    func didSelectCategory(at index: Int, previouslySelected: Int?) -> (selected: Int, unselected: Int?) {
         selectedCategoryIndex = index
+        return (index, previouslySelected)
     }
     
     func isCategorySelected(at index: Int) -> Bool {
         return selectedCategoryIndex == index
+    }
+    
+    func addSelectedImages(_ images: [UIImage]) {
+        selectedImages.append(contentsOf: images)
+    }
+
+    func removeSelectedImages(at index: Int) {
+        selectedImages.remove(at: index)
     }
 }

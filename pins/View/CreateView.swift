@@ -8,6 +8,7 @@
 import UIKit
 
 class CreateView: UIView {
+    // MARK: - 프로퍼티
     private enum Constants {
         static let categoryColumn: Int = 3
         static let interGap: CGFloat = 12
@@ -18,10 +19,19 @@ class CreateView: UIView {
     
     private let placeholderColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.25)
     private let itemCount: Int
-    private var titleTextView = UITextView()
-    private var contentTextView = UITextView()
     private let titleDivider = Divider()
     private let contentDivider = Divider()
+    private let imageDivider = Divider()
+    private var titleTextView = UITextView()
+    private var contentTextView = UITextView()
+    
+    private let imageButton: CustomButton = {
+        let button = CustomButton(cornerRadius: 10)
+        button.setImage(systemName: "photo.badge.plus")
+        button.setSize(width: 70, height: 70)
+        button.setShadow()
+        return button
+    }()
     
     private let createButton: CustomButton = {
         let button = CustomButton()
@@ -64,6 +74,7 @@ class CreateView: UIView {
         return collectionView
     }()
     
+    // MARK: - 생성자
     init(categoryCount: Int) {
         itemCount = categoryCount
         super.init(frame: .zero)
@@ -76,6 +87,7 @@ class CreateView: UIView {
         fatalError("init(coder:) has not been implemented because this view is not designed to be initialized from a nib or storyboard.")
     }
     
+    // MARK: - 메소드
     private func createTextView(text: String, tag: Int) -> UITextView {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -92,7 +104,8 @@ class CreateView: UIView {
         
         titleTextView.delegate = self
         contentTextView.delegate = self
-        [backButton, categoryLabel, categoryCollectionView, titleDivider, titleTextView, contentDivider, contentTextView, createButton].forEach {
+        
+        [backButton, categoryLabel, categoryCollectionView, titleDivider, titleTextView, contentDivider, contentTextView, createButton, imageDivider, imageButton].forEach {
             addSubview($0)
         }
     }
@@ -132,6 +145,13 @@ class CreateView: UIView {
         createButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
         createButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
         createButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        imageDivider.topAnchor.constraint(equalTo: contentTextView.bottomAnchor, constant: 10).isActive = true
+        imageDivider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
+        imageDivider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
+        
+        imageButton.topAnchor.constraint(equalTo: imageDivider.topAnchor, constant: 20).isActive = true
+        imageButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
     }
     
     private func getCagetoryHeight() -> CGFloat {
@@ -143,12 +163,17 @@ class CreateView: UIView {
         backButton.addAction(action, for: .touchUpInside)
     }
     
+    func setImageButtonAction(_ action: UIAction) {
+        imageButton.addAction(action, for: .touchUpInside)
+    }
+    
     func configureCategoryCollectionView(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
         categoryCollectionView.delegate = delegate
         categoryCollectionView.dataSource = dataSource
     }
 }
 
+// MARK: - 익스텐션
 extension CreateView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == placeholderColor {
