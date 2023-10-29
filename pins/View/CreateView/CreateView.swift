@@ -72,6 +72,7 @@ class CreateView: UIView {
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: "categoryCell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.tag = 0
+        collectionView.backgroundColor = .white
         return collectionView
     }()
     
@@ -85,6 +86,7 @@ class CreateView: UIView {
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "imageCell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.tag = 1
+        collectionView.backgroundColor = .white
         return collectionView
     }()
     

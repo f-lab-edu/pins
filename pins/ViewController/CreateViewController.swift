@@ -38,6 +38,10 @@ class CreateViewController: UIViewController {
         view = CreateView(categoryCount: viewModel.getCategoriesCount())
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     func setAction() {
         createView.setBackButtonAction(UIAction(handler: { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
@@ -63,7 +67,6 @@ class CreateViewController: UIViewController {
         if itemProvider.canLoadObject(ofClass: UIImage.self) {
             itemProvider.loadObject(ofClass: UIImage.self) { (object, error) in
                 if let image = object as? UIImage {
-//                    completion(image)
                     completion(image.resized(to: CGSize(width: 60, height: 60)) ?? image)
                 }
             }
