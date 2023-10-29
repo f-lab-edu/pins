@@ -8,11 +8,12 @@
 import UIKit
 
 class CategoryCollectionViewCell: UICollectionViewCell {
-    var categoryLabel: UILabel = {
+    private var categoryLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         label.textColor = .gray
         label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -30,7 +31,6 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
         contentView.layer.cornerRadius = 17.5
         
-        categoryLabel.translatesAutoresizingMaskIntoConstraints = false
         categoryLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         categoryLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         categoryLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true

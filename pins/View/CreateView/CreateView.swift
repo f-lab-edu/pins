@@ -29,7 +29,7 @@ class CreateView: UIView {
         let button = CustomButton(cornerRadius: 10)
         button.setImageTitle(title: "0/5", systemName: "photo.badge.plus", titleColor: .gray, imageColor: .gray)
         button.setBorder(width: 1, color: UIColor.lightGray.withAlphaComponent(0.5).cgColor)
-        button.setSize(width: 70, height: 70)
+        button.setSize(width: 60, height: 60)
         return button
     }()
     
@@ -71,6 +71,20 @@ class CreateView: UIView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: "categoryCell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.tag = 0
+        return collectionView
+    }()
+    
+    private lazy var imageCollectionView: UICollectionView = {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumInteritemSpacing = Constants.interGap
+        layout.itemSize = CGSize(width: 60, height: 60)
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "imageCell")
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.tag = 1
         return collectionView
     }()
     
@@ -105,7 +119,7 @@ class CreateView: UIView {
         titleTextView.delegate = self
         contentTextView.delegate = self
         
-        [backButton, categoryLabel, categoryCollectionView, titleDivider, titleTextView, contentDivider, contentTextView, createButton, imageDivider, imageButton].forEach {
+        [backButton, categoryLabel, categoryCollectionView, titleDivider, titleTextView, contentDivider, contentTextView, createButton, imageDivider, imageButton, imageCollectionView].forEach {
             addSubview($0)
         }
     }
@@ -152,6 +166,11 @@ class CreateView: UIView {
         
         imageButton.topAnchor.constraint(equalTo: imageDivider.topAnchor, constant: 20).isActive = true
         imageButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
+        
+        imageCollectionView.leadingAnchor.constraint(equalTo: imageButton.trailingAnchor, constant: 12).isActive = true
+        imageCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
+        imageCollectionView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        imageCollectionView.topAnchor.constraint(equalTo: imageDivider.topAnchor, constant: 20).isActive = true
     }
     
     private func getCagetoryHeight() -> CGFloat {
@@ -170,6 +189,13 @@ class CreateView: UIView {
     func configureCategoryCollectionView(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
         categoryCollectionView.delegate = delegate
         categoryCollectionView.dataSource = dataSource
+        
+        imageCollectionView.delegate = delegate
+        imageCollectionView.dataSource = dataSource
+    }
+    
+    func reloadImageCollectionView() {
+        imageCollectionView.reloadData()
     }
 }
 

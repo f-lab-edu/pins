@@ -16,6 +16,8 @@
 		B74A4FC32AE78BE700226EA7 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74A4FC22AE78BE700226EA7 /* SearchView.swift */; };
 		B74A4FC52AE7905500226EA7 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74A4FC42AE7905500226EA7 /* CreateViewController.swift */; };
 		B74A4FC72AE790BE00226EA7 /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74A4FC62AE790BE00226EA7 /* CreateView.swift */; };
+		B7614C0F2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7614C0E2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift */; };
+		B7614C132AEE19A100CAB8F0 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7614C122AEE19A100CAB8F0 /* UIImage.swift */; };
 		B7ADFF722AEA8DF300D34CEA /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADFF712AEA8DF300D34CEA /* Divider.swift */; };
 		B7AF69312AE0FEDF00385632 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF69302AE0FEDF00385632 /* AppDelegate.swift */; };
 		B7AF69332AE0FEDF00385632 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF69322AE0FEDF00385632 /* SceneDelegate.swift */; };
@@ -55,6 +57,8 @@
 		B74A4FC22AE78BE700226EA7 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		B74A4FC42AE7905500226EA7 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		B74A4FC62AE790BE00226EA7 /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
+		B7614C0E2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		B7614C122AEE19A100CAB8F0 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		B7ADFF712AEA8DF300D34CEA /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
 		B7AF692D2AE0FEDF00385632 /* pins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pins.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7AF69302AE0FEDF00385632 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				B710588D2AEA2699003D6039 /* OSLog.swift */,
+				B7614C122AEE19A100CAB8F0 /* UIImage.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -121,6 +126,25 @@
 				B74A4FC42AE7905500226EA7 /* CreateViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		B7614C102AEE085F00CAB8F0 /* CreateView */ = {
+			isa = PBXGroup;
+			children = (
+				B74A4FC62AE790BE00226EA7 /* CreateView.swift */,
+				B71058942AEA42F8003D6039 /* CategoryCollectionViewCell.swift */,
+				B7614C0E2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift */,
+			);
+			path = CreateView;
+			sourceTree = "<group>";
+		};
+		B7614C112AEE087000CAB8F0 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B71058922AEA2CB3003D6039 /* CustomButton.swift */,
+				B7ADFF712AEA8DF300D34CEA /* Divider.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		B7AF69242AE0FEDF00385632 = {
@@ -179,12 +203,10 @@
 		B7E050EF2AE4FB30007903C3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B7614C112AEE087000CAB8F0 /* Common */,
+				B7614C102AEE085F00CAB8F0 /* CreateView */,
 				B7E050F02AE4FB3A007903C3 /* MainMapView.swift */,
 				B74A4FC22AE78BE700226EA7 /* SearchView.swift */,
-				B74A4FC62AE790BE00226EA7 /* CreateView.swift */,
-				B71058922AEA2CB3003D6039 /* CustomButton.swift */,
-				B71058942AEA42F8003D6039 /* CategoryCollectionViewCell.swift */,
-				B7ADFF712AEA8DF300D34CEA /* Divider.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -325,8 +347,10 @@
 				B7ADFF722AEA8DF300D34CEA /* Divider.swift in Sources */,
 				B74A4FC52AE7905500226EA7 /* CreateViewController.swift in Sources */,
 				B742C5782AEA5EE900E95E96 /* CreateViewModel.swift in Sources */,
+				B7614C0F2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift in Sources */,
 				B7AF69312AE0FEDF00385632 /* AppDelegate.swift in Sources */,
 				B71058912AEA2974003D6039 /* MainViewModel.swift in Sources */,
+				B7614C132AEE19A100CAB8F0 /* UIImage.swift in Sources */,
 				B7E050F12AE4FB3A007903C3 /* MainMapView.swift in Sources */,
 				B71058932AEA2CB3003D6039 /* CustomButton.swift in Sources */,
 				B74A4FC32AE78BE700226EA7 /* SearchView.swift in Sources */,
