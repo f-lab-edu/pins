@@ -28,7 +28,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     private func setLayout() {
         contentView.addSubview(categoryLabel)
-        contentView.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+        contentView.backgroundColor = UIColor(resource: .extraLightGray)
         contentView.layer.cornerRadius = 17.5
         
         categoryLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
@@ -43,7 +43,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     }
     
     func isUnSelect() {
-        contentView.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+        contentView.backgroundColor = UIColor(resource: .extraLightGray)
         categoryLabel.textColor = .gray
     }
     

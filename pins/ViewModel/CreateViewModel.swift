@@ -24,7 +24,7 @@ class CreateViewModel {
     ]
     
     func getCategoriesCount() -> Int {
-        return categories.count
+        categories.count
     }
     
     func didSelectCategory(at index: Int, previouslySelected: Int?) -> (selected: Int, unselected: Int?) {
@@ -33,11 +33,11 @@ class CreateViewModel {
     }
     
     func isCategorySelected(at index: Int) -> Bool {
-        return selectedCategoryIndex == index
+        selectedCategoryIndex == index
     }
     
     func getSelectedImagesCount() -> Int {
-        return selectedImages.count
+        selectedImages.count
     }
     
     func addSelectedImage(_ image: UIImage) {

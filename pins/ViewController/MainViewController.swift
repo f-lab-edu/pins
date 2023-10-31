@@ -28,8 +28,8 @@ class MainViewController: UIViewController {
         setLocationManager()
         setAction()
         
-        viewModel.$createViewIsPresented.sink { [weak self] IsPresented in
-            self?.mainMapView.presentCreateView(isPresented: IsPresented)
+        viewModel.$createViewIsPresented.sink { [weak self] isPresented in
+            self?.mainMapView.presentCreateView(isPresented: isPresented)
         }.store(in: &cancellable)
     }
     

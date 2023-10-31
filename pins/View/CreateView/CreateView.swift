@@ -17,7 +17,7 @@ class CreateView: UIView {
         static let itemHeight: CGFloat = 35
     }
     
-    private let placeholderColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.25)
+    private let placeholderColor = UIColor(resource: .placeholderGray)
     private let itemCount: Int
     private let titleDivider = Divider()
     private let contentDivider = Divider()
