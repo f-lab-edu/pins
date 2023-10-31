@@ -199,6 +199,10 @@ class CreateView: UIView {
     func reloadImageCollectionView() {
         imageCollectionView.reloadData()
     }
+    
+    func setPhotoCount(count: Int) {
+        imageButton.setTitle(title: "\(count)/5", color: .gray)
+    }
 }
 
 // MARK: - 익스텐션

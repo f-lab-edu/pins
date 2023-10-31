@@ -31,6 +31,7 @@ class CreateViewController: UIViewController {
         
         viewModel.$selectedImages.sink { [weak self] images in
             self?.createView.reloadImageCollectionView()
+            self?.createView.setPhotoCount(count: images.count)
         }.store(in: &cancellable)
     }
     
@@ -67,7 +68,7 @@ class CreateViewController: UIViewController {
         if itemProvider.canLoadObject(ofClass: UIImage.self) {
             itemProvider.loadObject(ofClass: UIImage.self) { (object, error) in
                 if let image = object as? UIImage {
-                    completion(image.resized(to: CGSize(width: 60, height: 60)) ?? image)
+                    completion(image)
                 }
             }
         }
