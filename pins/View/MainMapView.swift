@@ -10,14 +10,18 @@ import MapKit
 
 class MainMapView: UIView {
     private let mapView: MKMapView = MKMapView()
-    private let searchButton: UIButton = UIButton()
-    private let createButton: UIButton = UIButton()
-    private let refeshButton: UIButton = UIButton()
-    private let myLocationButton: UIButton = UIButton()
-    
+    private let searchButton: CustomButton = CustomButton()
+    private let createModeButton: CustomButton = CustomButton()
+    private let refeshButton: CustomButton = CustomButton()
+    private let myLocationButton: CustomButton = CustomButton()
+    private let cancelButton: CustomButton = CustomButton()
+    private let createButton: CustomButton = CustomButton()
+    private let centerPinImage: UIImageView = UIImageView()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setLayout()
+        setAction()
     }
     
     required init?(coder: NSCoder) {
@@ -41,50 +45,77 @@ class MainMapView: UIView {
         mapView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         mapView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
-        addSubview(searchButton)
-        searchButton.translatesAutoresizingMaskIntoConstraints = false
-        searchButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
-        searchButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
-        searchButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        searchButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        setButtonStyle(button: searchButton, systemName: "magnifyingglass")
+        addSubview(centerPinImage)
+        centerPinImage.isHidden = true
+        centerPinImage.translatesAutoresizingMaskIntoConstraints = false
+        centerPinImage.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        centerPinImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        centerPinImage.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        centerPinImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        centerPinImage.image = UIImage(systemName: "mappin")
+        centerPinImage.tintColor = .systemBlue
         
         addSubview(createButton)
-        createButton.translatesAutoresizingMaskIntoConstraints = false
-        createButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        createButton.isHidden = true
+        createButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
+        createButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
         createButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
-        createButton.widthAnchor.constraint(equalToConstant: 45).isActive = true
-        createButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        setButtonStyle(button: createButton, systemName: "plus")
+        createButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        createButton.setShadow()
+        createButton.setTitle(title: "이 위치에 핀 만들기", color: .black)
+        
+        addSubview(cancelButton)
+        cancelButton.isHidden = true
+        cancelButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
+        cancelButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
+        cancelButton.setSize()
+        cancelButton.setShadow()
+        cancelButton.setImage(systemName: "xmark")
+        
+        addSubview(searchButton)
+        searchButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
+        searchButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
+        searchButton.setSize()
+        searchButton.setShadow()
+        searchButton.setImage(systemName: "magnifyingglass")
+        
+        addSubview(createModeButton)
+        createModeButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        createModeButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+        createModeButton.setSize(width: 45, height: 45)
+        createModeButton.setShadow()
+        createModeButton.setImage(systemName: "plus")
         
         addSubview(refeshButton)
-        refeshButton.translatesAutoresizingMaskIntoConstraints = false
         refeshButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
         refeshButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
-        refeshButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        refeshButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        setButtonStyle(button: refeshButton, systemName: "arrow.clockwise")
+        refeshButton.setSize()
+        refeshButton.setShadow()
+        refeshButton.setImage(systemName: "arrow.clockwise")
         
         addSubview(myLocationButton)
-        myLocationButton.translatesAutoresizingMaskIntoConstraints = false
         myLocationButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
         myLocationButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
-        myLocationButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        myLocationButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        setButtonStyle(button: myLocationButton, systemName: "location")
+        myLocationButton.setSize()
+        myLocationButton.setShadow()
+        myLocationButton.setImage(systemName: "location")
     }
     
-    private func setButtonStyle(button: UIButton, systemName: String) {
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium, scale: .medium)
+    private func setAction() {
+        cancelButton.addAction(UIAction(handler: { [weak self] _ in
+            self?.presentCreateView(isPresented: false)
+        }), for: .touchUpInside)
+    }
+    
+    func presentCreateView(isPresented: Bool) {
+        searchButton.isHidden = isPresented
+        refeshButton.isHidden = isPresented
+        createModeButton.isHidden = isPresented
+        myLocationButton.isHidden = isPresented
         
-        button.setImage(UIImage(systemName: systemName, withConfiguration: largeConfig), for: .normal)
-        button.tintColor = .gray
-        button.backgroundColor = .white
-        button.layer.cornerRadius = 15
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 0, height: 0)
-        button.layer.shadowRadius = 5
-        button.layer.shadowOpacity = 0.2
+        cancelButton.isHidden = !isPresented
+        createButton.isHidden = !isPresented
+        centerPinImage.isHidden = !isPresented
     }
     
     func setDelegate(_ delegate: MKMapViewDelegate) {
@@ -101,6 +132,10 @@ class MainMapView: UIView {
     
     func setSearchButtonAction(_ action: UIAction) {
         searchButton.addAction(action, for: .touchUpInside)
+    }
+    
+    func setCreateModeButtonAction(_ action: UIAction) {
+        createModeButton.addAction(action, for: .touchUpInside)
     }
     
     func setCreateButtonAction(_ action: UIAction) {
