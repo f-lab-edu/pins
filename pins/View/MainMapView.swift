@@ -17,6 +17,7 @@ class MainMapView: UIView {
     private let cancelButton: CustomButton = CustomButton()
     private let createButton: CustomButton = CustomButton()
     private let centerPinImage: UIImageView = UIImageView()
+    private let logoutButton: CustomButton = CustomButton()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -99,6 +100,13 @@ class MainMapView: UIView {
         myLocationButton.setSize()
         myLocationButton.setShadow()
         myLocationButton.setImage(systemName: "location")
+        
+        addSubview(logoutButton)
+        logoutButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
+        logoutButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
+        logoutButton.setSize()
+        logoutButton.setShadow()
+        logoutButton.setImage(systemName: "door.right.hand.open")
     }
     
     private func setAction() {
@@ -140,5 +148,9 @@ class MainMapView: UIView {
     
     func setCreateButtonAction(_ action: UIAction) {
         createButton.addAction(action, for: .touchUpInside)
+    }
+    
+    func setLogoutButtonAction(_ action: UIAction) {
+        logoutButton.addAction(action, for: .touchUpInside)
     }
 }

@@ -12,7 +12,7 @@ import CryptoKit
 import FirebaseAuth
 
 class LoginViewController: UIViewController {
-    fileprivate var currentNonce: String?
+    private var currentNonce: String?
 
     var loginView: LoginView {
         view as! LoginView
@@ -57,37 +57,23 @@ class LoginViewController: UIViewController {
         return hashString
     }
     
-    // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
     private func randomNonceString(length: Int = 32) -> String {
         precondition(length > 0)
-        let charset: Array<Character> =
-            Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
-        var result = ""
-        var remainingLength = length
+        var randomBytes = [UInt8](repeating: 0, count: length)
+        let errorCode = SecRandomCopyBytes(kSecRandomDefault, randomBytes.count, &randomBytes)
         
-        while remainingLength > 0 {
-            let randoms: [UInt8] = (0 ..< 16).map { _ in
-                var random: UInt8 = 0
-                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
-                if errorCode != errSecSuccess {
-                    fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
-                }
-                return random
-            }
-            
-            randoms.forEach { random in
-                if remainingLength == 0 {
-                    return
-                }
-                
-                if random < charset.count {
-                    result.append(charset[Int(random)])
-                    remainingLength -= 1
-                }
-            }
+        if errorCode != errSecSuccess {
+            fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
         }
-        
-        return result
+
+        let charset: [Character] =
+        Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+
+        let nonce = randomBytes.map { byte in
+            charset[Int(byte) % charset.count]
+        }
+
+        return String(nonce)
     }
 }
 
@@ -110,7 +96,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
                 return
             }
             
-            let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
+            let credential = OAuthProvider.appleCredential(withIDToken: idTokenString, rawNonce: nonce, fullName: appleIDCredential.fullName)
             
             Auth.auth().signIn(with: credential) { [weak self] authResult, error in
                 if let error = error {
@@ -125,6 +111,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        os_log("애플 로그인에 실패했습니다.", log: OSLog.ui, type: .fault)
+        os_log("애플 로그인에 실패했습니다. %@", log: OSLog.ui, type: .fault, error.localizedDescription)
     }
 }
