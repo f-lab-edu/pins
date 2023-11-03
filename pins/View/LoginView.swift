@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import AuthenticationServices
 
 class LoginView: UIView {
     private let icon: UIImageView = UIImageView(image: UIImage(resource: .pinsIcon))
     private let title: UIImageView = UIImageView(image: UIImage(resource: .pinsTitle))
-    private let loginButton: UIButton = UIButton()
+    private let loginButton: ASAuthorizationAppleIDButton = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .whiteOutline)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,10 +39,10 @@ class LoginView: UIView {
         title.widthAnchor.constraint(equalToConstant: 100).isActive = true
         title.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        loginButton.setImage(UIImage(resource: .appleIdButton), for: .normal)
         loginButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
         loginButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
         loginButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
+        loginButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
     }
     
     func setLoginAction(_ action: UIAction) {
