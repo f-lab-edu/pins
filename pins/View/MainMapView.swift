@@ -51,9 +51,9 @@ class MainMapView: UIView {
         centerPinImage.translatesAutoresizingMaskIntoConstraints = false
         centerPinImage.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         centerPinImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        centerPinImage.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        centerPinImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        centerPinImage.image = UIImage(systemName: "mappin")
+        centerPinImage.widthAnchor.constraint(equalToConstant: 35).isActive = true
+        centerPinImage.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        centerPinImage.image = UIImage(resource: .pinsIcon)
         centerPinImage.tintColor = .systemBlue
         
         addSubview(createButton)

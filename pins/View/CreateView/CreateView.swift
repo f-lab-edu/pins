@@ -110,6 +110,7 @@ class CreateView: UIView {
         textView.text = text
         textView.textColor = placeholderColor
         textView.font = UIFont.systemFont(ofSize: 15)
+        textView.backgroundColor = .white
         textView.tag = tag
         return textView
     }
