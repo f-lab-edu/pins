@@ -24,25 +24,23 @@ class LoginView: UIView {
     }
     
     private func setLayout() {
-        [icon, title, loginButton].forEach {
-            addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
+        icon.initLayout(self)
+            .centerXLayout(equalTo: centerXAnchor)
+            .centerYLayout(equalTo: centerYAnchor)
+            .widthLayout(100)
+            .heightLayout(100)
         
-        icon.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        icon.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -30).isActive = true
-        icon.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        icon.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        title.initLayout(self)
+            .centerXLayout(equalTo: centerXAnchor)
+            .topLayout(equalTo: icon.bottomAnchor, constant: 20)
+            .widthLayout(100)
+            .heightLayout(50)
         
-        title.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        title.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 20).isActive = true
-        title.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        title.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        loginButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
-        loginButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        loginButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
-        loginButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        loginButton.initLayout(self)
+            .bottomLayout(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -30)
+            .leadingLayout(equalTo: leadingAnchor, constant: 16)
+            .trailingLayout(equalTo: trailingAnchor, constant: -16)
+            .heightLayout(45)
     }
     
     func setLoginAction(_ action: UIAction) {
