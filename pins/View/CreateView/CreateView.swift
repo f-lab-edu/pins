@@ -22,8 +22,8 @@ class CreateView: UIView {
     private let titleDivider = Divider()
     private let contentDivider = Divider()
     private let imageDivider = Divider()
-    private var titleTextView = UITextView()
-    private var contentTextView = UITextView()
+    var titleTextView = UITextView()
+    var contentTextView = UITextView()
     
     private let imageButton: CustomButton = {
         let button = CustomButton(cornerRadius: 10)
@@ -187,6 +187,10 @@ class CreateView: UIView {
     
     func setImageButtonAction(_ action: UIAction) {
         imageButton.addAction(action, for: .touchUpInside)
+    }
+    
+    func setCreateButtonAction(_ action: UIAction) {
+        createButton.addAction(action, for: .touchUpInside)
     }
     
     func configureCategoryCollectionView(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {

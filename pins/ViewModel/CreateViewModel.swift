@@ -5,11 +5,18 @@
 //  Created by 주동석 on 2023/10/26.
 //
 
-import Foundation
+import FirebaseAuth
 import UIKit
+import CoreLocation
 
 class CreateViewModel {
     @Published var selectedImages: [UIImage] = []
+    @Published var title: String = "제목을 입력해주세요."
+    @Published var content: String = "내용을 입력해주세요."
+    private var longitude: Double = 0
+    private var latitude: Double = 0
+    private var category: String = ""
+    let pinRepository: PinRepository = PinRepository()
     var selectedCategoryIndex: Int?
     let categories: [String] = [
         "친목",
@@ -29,11 +36,8 @@ class CreateViewModel {
     
     func didSelectCategory(at index: Int, previouslySelected: Int?) -> (selected: Int, unselected: Int?) {
         selectedCategoryIndex = index
+        category = categories[index]
         return (index, previouslySelected)
-    }
-    
-    func isCategorySelected(at index: Int) -> Bool {
-        selectedCategoryIndex == index
     }
     
     func getSelectedImagesCount() -> Int {
@@ -46,5 +50,26 @@ class CreateViewModel {
 
     func resetSelectedImages() {
         selectedImages.removeAll()
+    }
+    
+    func setPosition(position: CLLocation) {
+        self.longitude = position.coordinate.longitude
+        self.latitude = position.coordinate.latitude
+    }
+    
+    func getPosition() -> CLLocation {
+        CLLocation(latitude: longitude, longitude: latitude)
+    }
+    
+    func createPin() {
+        pinRepository.createPin(pin: Pin(
+            id: Auth.auth().currentUser?.uid ?? "",
+            title: title,
+            content: content,
+            longitude: longitude,
+            latitude: latitude,
+            category: category,
+            created: Date().now())
+        )
     }
 }

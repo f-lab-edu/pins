@@ -30,13 +30,9 @@ class CreateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setAction()
+        bindViewModel()
         createView.configureCategoryCollectionView(delegate: self, dataSource: self)
         imagePicker.delegate = self
-        
-        viewModel.$selectedImages.sink { [weak self] images in
-            self?.createView.reloadImageCollectionView()
-            self?.createView.setPhotoCount(count: images.count)
-        }.store(in: &cancellable)
     }
     
     override func loadView() {
@@ -47,7 +43,22 @@ class CreateViewController: UIViewController {
         view.endEditing(true)
     }
     
-    func setAction() {
+    private func bindViewModel() {
+        viewModel.$selectedImages.sink { [weak self] images in
+            self?.createView.reloadImageCollectionView()
+            self?.createView.setPhotoCount(count: images.count)
+        }.store(in: &cancellable)
+        
+        createView.titleTextView.textPublisher
+            .assign(to: \.title, on: viewModel)
+            .store(in: &cancellable)
+        
+        createView.contentTextView.textPublisher
+            .assign(to: \.content, on: viewModel)
+            .store(in: &cancellable)
+    }
+    
+    private func setAction() {
         createView.setBackButtonAction(UIAction(handler: { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
         }))
@@ -55,6 +66,11 @@ class CreateViewController: UIViewController {
         createView.setImageButtonAction(UIAction(handler: { [weak self] _ in
             guard let imagePicker = self?.imagePicker else { return }
             self?.present(imagePicker, animated: true, completion: nil)
+        }))
+        
+        createView.setCreateButtonAction(UIAction(handler: { [weak self] _ in
+            self?.viewModel.createPin()
+            self?.navigationController?.popViewController(animated: true)
         }))
     }
 
