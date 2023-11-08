@@ -9,6 +9,7 @@ import UIKit
 import OSLog
 import MapKit
 import Combine
+import FirebaseAuth
 
 class MainViewController: UIViewController {
     let viewModel: MainViewModel = MainViewModel()
@@ -82,6 +83,15 @@ class MainViewController: UIViewController {
             self?.navigationController?.pushViewController(createViewController, animated: true)
             
             self?.viewModel.setCreateViewIsPresented(isPresented: false)
+        }))
+        
+        mainMapView.setLogoutButtonAction(UIAction(handler: { [weak self] _ in
+            do {
+                try Auth.auth().signOut()
+                self?.navigationController?.viewControllers = [LoginViewController()]
+            } catch let signOutError as NSError {
+                os_log("Error signing out: %@", log: .ui, type: .error, signOutError)
+            }
         }))
     }
 }

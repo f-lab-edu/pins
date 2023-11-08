@@ -8,6 +8,7 @@
 import UIKit
 
 class CategoryCollectionViewCell: UICollectionViewCell {
+    // MARK: - Properties
     private var categoryLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
@@ -19,6 +20,8 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        contentView.backgroundColor = UIColor(resource: .extraLightGray)
+        contentView.layer.cornerRadius = 17.5
         setLayout()
     }
     
@@ -26,17 +29,17 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented because this view is not designed to be initialized from a nib or storyboard.")
     }
     
+    // MARK: - Layouts
     private func setLayout() {
         contentView.addSubview(categoryLabel)
-        contentView.backgroundColor = UIColor(resource: .extraLightGray)
-        contentView.layer.cornerRadius = 17.5
-        
-        categoryLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        categoryLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        categoryLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        categoryLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        categoryLabel
+            .leadingLayout(equalTo: leadingAnchor)
+            .trailingLayout(equalTo: trailingAnchor)
+            .topLayout(equalTo: topAnchor)
+            .bottomLayout(equalTo: bottomAnchor)
     }
     
+    // MARK: - Methods
     func isSelect() {
         contentView.backgroundColor = .systemBlue
         categoryLabel.textColor = .white

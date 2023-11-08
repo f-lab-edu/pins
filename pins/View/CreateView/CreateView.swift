@@ -8,7 +8,7 @@
 import UIKit
 
 class CreateView: UIView {
-    // MARK: - 프로퍼티
+    // MARK: - Properties
     private enum Constants {
         static let categoryColumn: Int = 3
         static let interGap: CGFloat = 12
@@ -17,19 +17,10 @@ class CreateView: UIView {
         static let itemHeight: CGFloat = 35
     }
     
-    private let placeholderColor = UIColor(resource: .placeholderGray)
-    private let itemCount: Int
-    private let titleDivider = Divider()
-    private let contentDivider = Divider()
-    private let imageDivider = Divider()
-    private var titleTextView = UITextView()
-    private var contentTextView = UITextView()
-    
     private let imageButton: CustomButton = {
         let button = CustomButton(cornerRadius: 10)
         button.setImageTitle(title: "0/5", systemName: "photo.badge.plus", titleColor: .gray, imageColor: .gray)
         button.setBorder(width: 1, color: UIColor.lightGray.withAlphaComponent(0.5).cgColor)
-        button.setSize(width: 60, height: 60)
         return button
     }()
     
@@ -89,18 +80,96 @@ class CreateView: UIView {
         collectionView.backgroundColor = .white
         return collectionView
     }()
+
+    private let placeholderColor = UIColor(resource: .placeholderGray)
+    private let itemCount: Int
+    private let titleDivider = Divider()
+    private let contentDivider = Divider()
+    private let imageDivider = Divider()
+    private var titleTextView = UITextView()
+    private var contentTextView = UITextView()
     
     // MARK: - 생성자
     init(categoryCount: Int) {
         itemCount = categoryCount
         super.init(frame: .zero)
         backgroundColor = .white
-        setupViews()
-        setupConstraints()
+        titleTextView = createTextView(text: "제목을 입력해주세요.", tag: 1)
+        contentTextView = createTextView(text: "내용을 입력해주세요.", tag: 2)
+        titleTextView.delegate = self
+        contentTextView.delegate = self
+        setLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented because this view is not designed to be initialized from a nib or storyboard.")
+    }
+    
+    // // MARK: - Layouts
+    private func setLayout() {
+        [backButton, categoryLabel, categoryCollectionView, titleDivider, titleTextView, contentDivider, contentTextView, createButton, imageDivider, imageButton, imageCollectionView].forEach {
+            addSubview($0)
+        }
+        backButton
+            .leadingLayout(equalTo: leadingAnchor, constant: 16)
+            .topLayout(equalTo: safeAreaLayoutGuide.topAnchor)
+            .widthLayout(30)
+            .heightLayout(30)
+        
+        categoryLabel
+            .leadingLayout(equalTo: leadingAnchor, constant: 16)
+            .topLayout(equalTo: safeAreaLayoutGuide.topAnchor, constant: 45)
+        
+        categoryCollectionView
+            .leadingLayout(equalTo: leadingAnchor, constant: Constants.categoryPadding)
+            .topLayout(equalTo: safeAreaLayoutGuide.topAnchor, constant: 80)
+            .trailingLayout(equalTo: trailingAnchor, constant: -Constants.categoryPadding)
+            .heightLayout(getCagetoryHeight())
+        
+        titleDivider
+            .leadingLayout(equalTo: leadingAnchor, constant: 16)
+            .trailingLayout(equalTo: trailingAnchor, constant: -16)
+            .topLayout(equalTo: categoryCollectionView.bottomAnchor)
+        
+        titleTextView
+            .leadingLayout(equalTo: leadingAnchor, constant: 16)
+            .trailingLayout(equalTo: trailingAnchor, constant: -16)
+            .topLayout(equalTo: titleDivider.bottomAnchor, constant: 5)
+            .heightLayout(30)
+        
+        contentDivider
+            .leadingLayout(equalTo: leadingAnchor, constant: 16)
+            .trailingLayout(equalTo: trailingAnchor, constant: -16)
+            .topLayout(equalTo: titleTextView.bottomAnchor, constant: 10)
+        
+        contentTextView
+            .leadingLayout(equalTo: leadingAnchor, constant: 16)
+            .trailingLayout(equalTo: trailingAnchor, constant: -16)
+            .topLayout(equalTo: contentDivider.bottomAnchor, constant: 5)
+            .heightLayout(200)
+        
+        createButton
+            .leadingLayout(equalTo: leadingAnchor, constant: 16)
+            .trailingLayout(equalTo: trailingAnchor, constant: -16)
+            .bottomLayout(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16)
+            .heightLayout(50)
+        
+        imageDivider
+            .leadingLayout(equalTo: leadingAnchor, constant: 16)
+            .trailingLayout(equalTo: trailingAnchor, constant: -16)
+            .topLayout(equalTo: contentTextView.bottomAnchor, constant: 10)
+        
+        imageButton
+            .leadingLayout(equalTo: leadingAnchor, constant: 16)
+            .topLayout(equalTo: imageDivider.bottomAnchor, constant: 20)
+            .widthLayout(60)
+            .heightLayout(60)
+        
+        imageCollectionView
+            .leadingLayout(equalTo: imageButton.trailingAnchor, constant: 12)
+            .trailingLayout(equalTo: trailingAnchor, constant: -16)
+            .heightLayout(60)
+            .topLayout(equalTo: imageDivider.topAnchor, constant: 20)
     }
     
     // MARK: - 메소드
@@ -110,69 +179,9 @@ class CreateView: UIView {
         textView.text = text
         textView.textColor = placeholderColor
         textView.font = UIFont.systemFont(ofSize: 15)
+        textView.backgroundColor = .white
         textView.tag = tag
         return textView
-    }
-    
-    private func setupViews() {
-        titleTextView = createTextView(text: "제목을 입력해주세요.", tag: 1)
-        contentTextView = createTextView(text: "내용을 입력해주세요.", tag: 2)
-        
-        titleTextView.delegate = self
-        contentTextView.delegate = self
-        
-        [backButton, categoryLabel, categoryCollectionView, titleDivider, titleTextView, contentDivider, contentTextView, createButton, imageDivider, imageButton, imageCollectionView].forEach {
-            addSubview($0)
-        }
-    }
-    
-    private func setupConstraints() {
-        backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        backButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
-        backButton.setSize(width: 30, height: 30)
-        
-        categoryLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        categoryLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 45).isActive = true
-        
-        categoryCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.categoryPadding).isActive = true
-        categoryCollectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 80).isActive = true
-        categoryCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.categoryPadding).isActive = true
-        categoryCollectionView.heightAnchor.constraint(equalToConstant: getCagetoryHeight()).isActive = true
-        
-        titleDivider.topAnchor.constraint(equalTo: categoryCollectionView.bottomAnchor).isActive = true
-        titleDivider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        titleDivider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
-        
-        titleTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        titleTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
-        titleTextView.topAnchor.constraint(equalTo: categoryCollectionView.bottomAnchor, constant: 5).isActive = true
-        titleTextView.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        
-        contentDivider.topAnchor.constraint(equalTo: titleTextView.bottomAnchor, constant: 10).isActive = true
-        contentDivider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        contentDivider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
-        
-        contentTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        contentTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
-        contentTextView.topAnchor.constraint(equalTo: contentDivider.bottomAnchor, constant: 5).isActive = true
-        contentTextView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        
-        createButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        createButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
-        createButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
-        createButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        imageDivider.topAnchor.constraint(equalTo: contentTextView.bottomAnchor, constant: 10).isActive = true
-        imageDivider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        imageDivider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
-        
-        imageButton.topAnchor.constraint(equalTo: imageDivider.topAnchor, constant: 20).isActive = true
-        imageButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
-        
-        imageCollectionView.leadingAnchor.constraint(equalTo: imageButton.trailingAnchor, constant: 12).isActive = true
-        imageCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
-        imageCollectionView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        imageCollectionView.topAnchor.constraint(equalTo: imageDivider.topAnchor, constant: 20).isActive = true
     }
     
     private func getCagetoryHeight() -> CGFloat {
@@ -205,7 +214,7 @@ class CreateView: UIView {
     }
 }
 
-// MARK: - 익스텐션
+// MARK: - Extensions
 extension CreateView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == placeholderColor {

@@ -9,14 +9,69 @@ import UIKit
 import MapKit
 
 class MainMapView: UIView {
-    private let mapView: MKMapView = MKMapView()
-    private let searchButton: CustomButton = CustomButton()
-    private let createModeButton: CustomButton = CustomButton()
-    private let refeshButton: CustomButton = CustomButton()
-    private let myLocationButton: CustomButton = CustomButton()
-    private let cancelButton: CustomButton = CustomButton()
-    private let createButton: CustomButton = CustomButton()
-    private let centerPinImage: UIImageView = UIImageView()
+    // MARK: - Properties
+    private let mapView: MKMapView = {
+        let mapView = MKMapView()
+        mapView.showsUserLocation = true
+        mapView.setUserTrackingMode(.follow, animated: true)
+        if #available(iOS 16.0, *) {
+            mapView.preferredConfiguration = MKStandardMapConfiguration()
+        } else {
+            mapView.mapType = .standard
+        }
+        return mapView
+    }()
+    private let centerPinImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.isHidden = true
+        imageView.image = UIImage(resource: .pinsIcon)
+        imageView.tintColor = .systemBlue
+        return imageView
+    }()
+    private let createButton: CustomButton = {
+        let button = CustomButton()
+        button.isHidden = true
+        button.setShadow()
+        button.setTitle(title: "이 위치에 핀 만들기", color: .black)
+        return button
+    }()
+    private let cancelButton: CustomButton = {
+        let button = CustomButton()
+        button.isHidden = true
+        button.setShadow()
+        button.setImage(systemName: "xmark")
+        return button
+    }()
+    private let searchButton: CustomButton = {
+        let button = CustomButton()
+        button.setShadow()
+        button.setImage(systemName: "magnifyingglass")
+        return button
+    }()
+    private let createModeButton: CustomButton = {
+        let button = CustomButton()
+        button.setShadow()
+        button.setImage(systemName: "plus")
+        return button
+    }()
+    private let refeshButton: CustomButton = {
+        let button = CustomButton()
+        button.setShadow()
+        button.setImage(systemName: "arrow.clockwise")
+        return button
+    }()
+    private let myLocationButton: CustomButton = {
+        let button = CustomButton()
+        button.setShadow()
+        button.setImage(systemName: "location")
+        return button
+    }()
+    private let logoutButton: CustomButton = {
+        let button = CustomButton()
+        button.setShadow()
+        button.setImage(systemName: "door.right.hand.open")
+        return button
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,79 +83,66 @@ class MainMapView: UIView {
         fatalError("init(coder:) has not been implemented because this view is not designed to be initialized from a nib or storyboard.")
     }
     
+    // MARK: - Layouts
     private func setLayout() {
-        addSubview(mapView)
-        mapView.showsUserLocation = true
-        mapView.setUserTrackingMode(.follow, animated: true)
+        [mapView, centerPinImage, createButton, cancelButton, searchButton, createModeButton, refeshButton, myLocationButton, logoutButton].forEach { addSubview($0) }
         
-        if #available(iOS 16.0, *) {
-            mapView.preferredConfiguration = MKStandardMapConfiguration()
-        } else {
-            mapView.mapType = .standard
-        }
+        mapView
+            .leadingLayout(equalTo: leadingAnchor)
+            .topLayout(equalTo: topAnchor)
+            .trailingLayout(equalTo: trailingAnchor)
+            .bottomLayout(equalTo: bottomAnchor)
         
-        mapView.translatesAutoresizingMaskIntoConstraints = false
-        mapView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        mapView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        mapView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        mapView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        centerPinImage
+            .centerXLayout(equalTo: centerXAnchor)
+            .centerYLayout(equalTo: centerYAnchor)
+            .widthLayout(35)
+            .heightLayout(35)
         
-        addSubview(centerPinImage)
-        centerPinImage.isHidden = true
-        centerPinImage.translatesAutoresizingMaskIntoConstraints = false
-        centerPinImage.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        centerPinImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        centerPinImage.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        centerPinImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        centerPinImage.image = UIImage(systemName: "mappin")
-        centerPinImage.tintColor = .systemBlue
+        createButton
+            .leadingLayout(equalTo: leadingAnchor, constant: 16)
+            .trailingLayout(equalTo: trailingAnchor, constant: -16)
+            .bottomLayout(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16)
+            .heightLayout(50)
         
-        addSubview(createButton)
-        createButton.isHidden = true
-        createButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        createButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
-        createButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
-        createButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        createButton.setShadow()
-        createButton.setTitle(title: "이 위치에 핀 만들기", color: .black)
+        cancelButton
+            .trailingLayout(equalTo: trailingAnchor, constant: -16)
+            .topLayout(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16)
+            .widthLayout(45)
+            .heightLayout(45)
         
-        addSubview(cancelButton)
-        cancelButton.isHidden = true
-        cancelButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
-        cancelButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
-        cancelButton.setSize()
-        cancelButton.setShadow()
-        cancelButton.setImage(systemName: "xmark")
+        searchButton
+            .trailingLayout(equalTo: trailingAnchor, constant: -16)
+            .topLayout(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16)
+            .widthLayout(45)
+            .heightLayout(45)
         
-        addSubview(searchButton)
-        searchButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
-        searchButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
-        searchButton.setSize()
-        searchButton.setShadow()
-        searchButton.setImage(systemName: "magnifyingglass")
+        createModeButton
+            .centerXLayout(equalTo: centerXAnchor)
+            .bottomLayout(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16)
+            .widthLayout(45)
+            .heightLayout(45)
         
-        addSubview(createModeButton)
-        createModeButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        createModeButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
-        createModeButton.setSize(width: 45, height: 45)
-        createModeButton.setShadow()
-        createModeButton.setImage(systemName: "plus")
+        refeshButton
+            .leadingLayout(equalTo: leadingAnchor, constant: 16)
+            .bottomLayout(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16)
+            .widthLayout(45)
+            .heightLayout(45)
         
-        addSubview(refeshButton)
-        refeshButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        refeshButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
-        refeshButton.setSize()
-        refeshButton.setShadow()
-        refeshButton.setImage(systemName: "arrow.clockwise")
+        myLocationButton
+            .trailingLayout(equalTo: trailingAnchor, constant: -16)
+            .bottomLayout(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16)
+            .widthLayout(45)
+            .heightLayout(45)
         
-        addSubview(myLocationButton)
-        myLocationButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
-        myLocationButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
-        myLocationButton.setSize()
-        myLocationButton.setShadow()
-        myLocationButton.setImage(systemName: "location")
+        logoutButton
+            .leadingLayout(equalTo: leadingAnchor, constant: 16)
+            .topLayout(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16)
+            .widthLayout(45)
+            .heightLayout(45)
     }
     
+    // MARK: - Methods
     private func setAction() {
         cancelButton.addAction(UIAction(handler: { [weak self] _ in
             self?.presentCreateView(isPresented: false)
@@ -140,5 +182,9 @@ class MainMapView: UIView {
     
     func setCreateButtonAction(_ action: UIAction) {
         createButton.addAction(action, for: .touchUpInside)
+    }
+    
+    func setLogoutButtonAction(_ action: UIAction) {
+        logoutButton.addAction(action, for: .touchUpInside)
     }
 }
