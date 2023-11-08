@@ -9,6 +9,7 @@ import UIKit
 import AuthenticationServices
 
 class LoginView: UIView {
+    // MARK: - Properties
     private let icon: UIImageView = UIImageView(image: UIImage(resource: .pinsIcon))
     private let title: UIImageView = UIImageView(image: UIImage(resource: .pinsTitle))
     private let loginButton: ASAuthorizationAppleIDButton = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .whiteOutline)
@@ -23,6 +24,7 @@ class LoginView: UIView {
         fatalError("init(coder:) has not been implemented because this view is not designed to be initialized from a nib or storyboard.")
     }
     
+    // MARK: - Layouts
     private func setLayout() {
         [icon, title, loginButton].forEach { addSubview($0) }
         
@@ -42,6 +44,7 @@ class LoginView: UIView {
             .heightLayout(45)
     }
     
+    // MARK: - Methods
     func setLoginAction(_ action: UIAction) {
         loginButton.addAction(action, for: .touchUpInside)
     }
