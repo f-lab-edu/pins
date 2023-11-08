@@ -24,20 +24,19 @@ class LoginView: UIView {
     }
     
     private func setLayout() {
-        icon.initLayout(self)
-            .centerXLayout(equalTo: centerXAnchor)
+        [icon, title, loginButton].forEach { addSubview($0) }
+        
+        icon.centerXLayout(equalTo: centerXAnchor)
             .centerYLayout(equalTo: centerYAnchor)
             .widthLayout(100)
             .heightLayout(100)
         
-        title.initLayout(self)
-            .centerXLayout(equalTo: centerXAnchor)
+        title.centerXLayout(equalTo: centerXAnchor)
             .topLayout(equalTo: icon.bottomAnchor, constant: 20)
             .widthLayout(100)
             .heightLayout(50)
         
-        loginButton.initLayout(self)
-            .bottomLayout(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -30)
+        loginButton.bottomLayout(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -30)
             .leadingLayout(equalTo: leadingAnchor, constant: 16)
             .trailingLayout(equalTo: trailingAnchor, constant: -16)
             .heightLayout(45)
