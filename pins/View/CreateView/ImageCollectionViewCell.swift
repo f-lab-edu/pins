@@ -8,6 +8,7 @@
 import UIKit
 
 class ImageCollectionViewCell: UICollectionViewCell {
+    // MARK: - Properties
     var imageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -26,17 +27,22 @@ class ImageCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented because this view is not designed to be initialized from a nib or storyboard.")
     }
     
+    // MARK: - Layouts
     private func setLayout() {
         contentView.addSubview(imageView)
-        contentView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        contentView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
-        imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        contentView
+            .leadingLayout(equalTo: leadingAnchor)
+            .trailingLayout(equalTo: trailingAnchor)
+            .topLayout(equalTo: topAnchor)
+            .bottomLayout(equalTo: bottomAnchor)
+        
+        imageView
+            .widthLayout(60)
+            .heightLayout(60)
     }
     
+    // MARK: - Methods
     func setImage(image: UIImage) {
         imageView.image = image
     }

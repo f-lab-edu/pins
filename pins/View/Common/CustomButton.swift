@@ -13,16 +13,10 @@ class CustomButton: UIButton {
         self.tintColor = tintColor
         self.backgroundColor = backgroundColor
         layer.cornerRadius = cornerRadius
-        translatesAutoresizingMaskIntoConstraints = false
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented because this view is not designed to be initialized from a nib or storyboard.")
-    }
-    
-    func setSize(width: CGFloat = 40.0, height: CGFloat = 40.0) {
-        widthAnchor.constraint(equalToConstant: width).isActive = true
-        heightAnchor.constraint(equalToConstant: height).isActive = true
     }
     
     func setShadow() {
