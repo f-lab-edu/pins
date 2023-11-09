@@ -1,0 +1,20 @@
+//
+//  Localizable.strings
+//  pins
+//
+//  Created by 주동석 on 2023/11/09.
+//
+
+"카테고리" = "Category";
+"친목" = "Friendship";
+"산책" = "Walk";
+"게임" = "Game";
+"운동" = "Exercise";
+"스터디" = "Study";
+"아파트/이웃" = "Neighbor";
+"맛집탐방" = "Food";
+"문화생활" = "Culture";
+"기타" = "Etc";
+"제목을 입력해주세요." = "Please enter a title.";
+"내용을 입력해주세요." = "Please enter a description.";
+"핀 만들기" = "Create pin";

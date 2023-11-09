@@ -40,7 +40,7 @@ class CreateView: UIView {
     
     private let categoryLabel: UILabel = {
         let label = UILabel()
-        label.text = "카테고리"
+        label.text = NSLocalizedString("카테고리", comment: "")
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor = UIColor(resource: .text)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -176,7 +176,7 @@ class CreateView: UIView {
     private func createTextView(text: String, tag: Int) -> UITextView {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.text = text
+        textView.text = NSLocalizedString(text, comment: "")
         textView.textColor = placeholderColor
         textView.font = UIFont.systemFont(ofSize: 15)
         textView.backgroundColor = UIColor(resource: .background)
@@ -227,9 +227,9 @@ extension CreateView: UITextViewDelegate {
         if textView.text.isEmpty {
             switch textView.tag {
             case 1:
-                textView.text = "제목을 입력해주세요."
+                textView.text = NSLocalizedString("제목을 입력해주세요.", comment: "")
             case 2:
-                textView.text = "내용을 입력해주세요."
+                textView.text = NSLocalizedString("내용을 입력해주세요.", comment: "")
             default:
                 return
             }

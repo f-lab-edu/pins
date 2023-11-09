@@ -51,6 +51,6 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     }
     
     func setText(_ text: String) {
-        categoryLabel.text = text
+        categoryLabel.text = NSLocalizedString(text, comment: "")
     }
 }

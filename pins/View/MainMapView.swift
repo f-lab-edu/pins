@@ -120,8 +120,8 @@ class MainMapView: UIView {
         createModeButton
             .centerXLayout(equalTo: centerXAnchor)
             .bottomLayout(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16)
-            .widthLayout(45)
-            .heightLayout(45)
+            .widthLayout(50)
+            .heightLayout(50)
         
         refeshButton
             .leadingLayout(equalTo: leadingAnchor, constant: 16)
