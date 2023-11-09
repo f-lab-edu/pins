@@ -16,14 +16,6 @@ class CreateView: UIView {
         static let lineGap: CGFloat = 12
         static let itemHeight: CGFloat = 35
     }
-   
-    private let placeholderColor = UIColor(resource: .placeholderGray)
-    private let itemCount: Int
-    private let titleDivider = Divider()
-    private let contentDivider = Divider()
-    private let imageDivider = Divider()
-    var titleTextView = UITextView()
-    var contentTextView = UITextView()
 
     private let imageButton: CustomButton = {
         let button = CustomButton(cornerRadius: 10)
@@ -94,8 +86,8 @@ class CreateView: UIView {
     private let titleDivider = Divider()
     private let contentDivider = Divider()
     private let imageDivider = Divider()
-    private var titleTextView = UITextView()
-    private var contentTextView = UITextView()
+    var titleTextView = UITextView()
+    var contentTextView = UITextView()
     
     // MARK: - 생성자
     init(categoryCount: Int) {
