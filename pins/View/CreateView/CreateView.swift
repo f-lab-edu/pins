@@ -18,7 +18,7 @@ class CreateView: UIView {
     }
     
     private let imageButton: CustomButton = {
-        let button = CustomButton(cornerRadius: 10)
+        let button = CustomButton(backgroundColor: UIColor(resource: .background), cornerRadius: 10)
         button.setImageTitle(title: "0/5", systemName: "photo.badge.plus", titleColor: .gray, imageColor: .gray)
         button.setBorder(width: 1, color: UIColor.lightGray.withAlphaComponent(0.5).cgColor)
         return button
@@ -33,7 +33,7 @@ class CreateView: UIView {
     }()
     
     private let backButton: CustomButton = {
-        let button = CustomButton()
+        let button = CustomButton(backgroundColor: UIColor(resource: .background))
         button.setImage(systemName: "chevron.backward")
         return button
     }()
@@ -42,7 +42,7 @@ class CreateView: UIView {
         let label = UILabel()
         label.text = "카테고리"
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.textColor = .black
+        label.textColor = UIColor(resource: .text)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -63,7 +63,7 @@ class CreateView: UIView {
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: "categoryCell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.tag = 0
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = UIColor(resource: .background)
         return collectionView
     }()
     
@@ -77,7 +77,7 @@ class CreateView: UIView {
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "imageCell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.tag = 1
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = UIColor(resource: .background)
         return collectionView
     }()
 
@@ -93,7 +93,7 @@ class CreateView: UIView {
     init(categoryCount: Int) {
         itemCount = categoryCount
         super.init(frame: .zero)
-        backgroundColor = .white
+        backgroundColor = UIColor(resource: .background)
         titleTextView = createTextView(text: "제목을 입력해주세요.", tag: 1)
         contentTextView = createTextView(text: "내용을 입력해주세요.", tag: 2)
         titleTextView.delegate = self
@@ -179,7 +179,7 @@ class CreateView: UIView {
         textView.text = text
         textView.textColor = placeholderColor
         textView.font = UIFont.systemFont(ofSize: 15)
-        textView.backgroundColor = .white
+        textView.backgroundColor = UIColor(resource: .background)
         textView.tag = tag
         return textView
     }
@@ -219,7 +219,7 @@ extension CreateView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == placeholderColor {
             textView.text = nil
-            textView.textColor = UIColor.black
+            textView.textColor = UIColor.init(resource: .text)
         }
     }
     

@@ -12,7 +12,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     private var categoryLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        label.textColor = .gray
+        label.textColor = UIColor.systemGray
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -20,7 +20,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        contentView.backgroundColor = UIColor(resource: .extraLightGray)
+        contentView.backgroundColor = UIColor(resource: .categoryGray)
         contentView.layer.cornerRadius = 17.5
         setLayout()
     }
@@ -46,7 +46,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     }
     
     func isUnSelect() {
-        contentView.backgroundColor = UIColor(resource: .extraLightGray)
+        contentView.backgroundColor = UIColor(resource: .categoryGray)
         categoryLabel.textColor = .gray
     }
     
