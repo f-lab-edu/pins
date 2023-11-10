@@ -15,4 +15,5 @@ struct Pin: Codable {
     var latitude: Double
     var category: String
     var created: String
+    var urls: [String]
 }

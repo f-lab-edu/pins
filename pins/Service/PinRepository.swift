@@ -45,6 +45,7 @@ class PinRepository {
             "latitude": pin.latitude,
             "category": pin.category,
             "created": pin.created,
+            "urls": pin.urls,
         ] as [String : Any]
         
         FirebaseService.shared.db.collection("pins").document().setData(data)

@@ -8,6 +8,8 @@
 import FirebaseAuth
 import UIKit
 import CoreLocation
+import FirebaseStorage
+import OSLog
 
 class CreateViewModel {
     @Published var selectedImages: [UIImage] = []
@@ -62,14 +64,18 @@ class CreateViewModel {
     }
     
     func createPin() {
-        pinRepository.createPin(pin: Pin(
-            id: Auth.auth().currentUser?.uid ?? "",
-            title: title,
-            content: content,
-            longitude: longitude,
-            latitude: latitude,
-            category: category,
-            created: Date().now())
-        )
+        // image upload
+        FirestorageService.uploadImages(images: selectedImages) { [self] urls in
+            pinRepository.createPin(pin: Pin(
+                id: Auth.auth().currentUser?.uid ?? "",
+                title: title,
+                content: content,
+                longitude: longitude,
+                latitude: latitude,
+                category: category,
+                created: Date().now(),
+                urls: urls.map{ $0?.absoluteString ?? "" })
+            )
+        }
     }
 }
