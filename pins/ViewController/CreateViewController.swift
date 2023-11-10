@@ -69,8 +69,12 @@ class CreateViewController: UIViewController {
         }))
         
         createView.setCreateButtonAction(UIAction(handler: { [weak self] _ in
-            self?.viewModel.createPin()
-            self?.navigationController?.popViewController(animated: true)
+            LoadingIndicator.showLoading(with: "핀 생성 중입니다...")
+
+            self?.viewModel.createPin() {
+                LoadingIndicator.hideLoading()
+                self?.navigationController?.popViewController(animated: true)
+            }
         }))
     }
 

@@ -63,8 +63,7 @@ class CreateViewModel {
         CLLocation(latitude: longitude, longitude: latitude)
     }
     
-    func createPin() {
-        // image upload
+    func createPin(completion: @escaping () -> Void) {
         FirestorageService.uploadImages(images: selectedImages) { [self] urls in
             pinRepository.createPin(pin: Pin(
                 id: Auth.auth().currentUser?.uid ?? "",
@@ -75,7 +74,9 @@ class CreateViewModel {
                 category: category,
                 created: Date().now(),
                 urls: urls.map{ $0?.absoluteString ?? "" })
-            )
+            ) {
+                completion()
+            }
         }
     }
 }

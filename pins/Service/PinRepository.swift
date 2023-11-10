@@ -36,7 +36,7 @@ class PinRepository {
         }
     }
     
-    func createPin(pin: Pin) {
+    func createPin(pin: Pin, completion: @escaping () -> Void) {
         let data = [
             "id": pin.id,
             "title": pin.title,
@@ -48,6 +48,9 @@ class PinRepository {
             "urls": pin.urls,
         ] as [String : Any]
         
-        FirebaseService.shared.db.collection("pins").document().setData(data)
+        FirebaseService.shared.db.collection("pins").document().setData(data) { error in
+            guard error == nil else { return }
+            completion()
+        }
     }
 }
