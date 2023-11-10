@@ -27,6 +27,8 @@ class CreateView: UIView {
     private let createButton: CustomButton = {
         let button = CustomButton()
         button.setTitle(title: "핀 만들기", color: .white)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .body)
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
         button.backgroundColor = .systemBlue
         button.setShadow()
         return button
@@ -41,7 +43,8 @@ class CreateView: UIView {
     private let categoryLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("카테고리", comment: "")
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.font = .preferredFont(forTextStyle: .headline)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = UIColor(resource: .text)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -178,7 +181,8 @@ class CreateView: UIView {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.text = NSLocalizedString(text, comment: "")
         textView.textColor = placeholderColor
-        textView.font = UIFont.systemFont(ofSize: 15)
+        textView.font = .preferredFont(forTextStyle: .callout)
+        textView.adjustsFontForContentSizeCategory = true
         textView.backgroundColor = UIColor(resource: .background)
         textView.tag = tag
         return textView

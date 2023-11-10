@@ -11,7 +11,8 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     private var categoryLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        label.font = .preferredFont(forTextStyle: .callout)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = UIColor.systemGray
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
