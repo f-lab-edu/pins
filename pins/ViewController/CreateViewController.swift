@@ -16,9 +16,10 @@ class CreateViewController: UIViewController {
     }
     var viewModel: CreateViewModel = CreateViewModel()
     var cancellable: Set<AnyCancellable> = []
+    var loadingIndicator: LoadingIndicator = LoadingIndicator()
     var imagePicker: PHPickerViewController = {
         var configuration = PHPickerConfiguration()
-        configuration.selectionLimit = 5
+        configuration.selectionLimit = 3
         configuration.filter = .any(of: [.images])
         let picker = PHPickerViewController(configuration: configuration)
         return picker
@@ -69,10 +70,10 @@ class CreateViewController: UIViewController {
         }))
         
         createView.setCreateButtonAction(UIAction(handler: { [weak self] _ in
-            LoadingIndicator.showLoading(with: "핀 생성 중입니다...")
+            self?.loadingIndicator.showLoading(with: "핀 생성 중입니다...")
 
             self?.viewModel.createPin() {
-                LoadingIndicator.hideLoading()
+                self?.loadingIndicator.hideLoading()
                 self?.navigationController?.popViewController(animated: true)
             }
         }))
