@@ -32,7 +32,7 @@ class CustomButton: UIButton {
     }
     
     func setTitle(title: String, color: UIColor) {
-        setTitle(title, for: .normal)
+        setTitle(NSLocalizedString(title, comment: ""), for: .normal)
         setTitleColor(color, for: .normal)
     }
     

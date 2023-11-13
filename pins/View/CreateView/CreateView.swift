@@ -18,7 +18,7 @@ class CreateView: UIView {
     }
     
     private let imageButton: CustomButton = {
-        let button = CustomButton(cornerRadius: 10)
+        let button = CustomButton(backgroundColor: UIColor(resource: .background), cornerRadius: 10)
         button.setImageTitle(title: "0/5", systemName: "photo.badge.plus", titleColor: .gray, imageColor: .gray)
         button.setBorder(width: 1, color: UIColor.lightGray.withAlphaComponent(0.5).cgColor)
         return button
@@ -27,22 +27,25 @@ class CreateView: UIView {
     private let createButton: CustomButton = {
         let button = CustomButton()
         button.setTitle(title: "핀 만들기", color: .white)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .body)
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
         button.backgroundColor = .systemBlue
         button.setShadow()
         return button
     }()
     
     private let backButton: CustomButton = {
-        let button = CustomButton()
+        let button = CustomButton(backgroundColor: UIColor(resource: .background))
         button.setImage(systemName: "chevron.backward")
         return button
     }()
     
     private let categoryLabel: UILabel = {
         let label = UILabel()
-        label.text = "카테고리"
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.textColor = .black
+        label.text = NSLocalizedString("카테고리", comment: "")
+        label.font = .preferredFont(forTextStyle: .headline)
+        label.adjustsFontForContentSizeCategory = true
+        label.textColor = UIColor(resource: .text)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -63,7 +66,7 @@ class CreateView: UIView {
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: "categoryCell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.tag = 0
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = UIColor(resource: .background)
         return collectionView
     }()
     
@@ -77,7 +80,7 @@ class CreateView: UIView {
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "imageCell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.tag = 1
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = UIColor(resource: .background)
         return collectionView
     }()
 
@@ -93,7 +96,7 @@ class CreateView: UIView {
     init(categoryCount: Int) {
         itemCount = categoryCount
         super.init(frame: .zero)
-        backgroundColor = .white
+        backgroundColor = UIColor(resource: .background)
         titleTextView = createTextView(text: "제목을 입력해주세요.", tag: 1)
         contentTextView = createTextView(text: "내용을 입력해주세요.", tag: 2)
         titleTextView.delegate = self
@@ -176,10 +179,11 @@ class CreateView: UIView {
     private func createTextView(text: String, tag: Int) -> UITextView {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.text = text
+        textView.text = NSLocalizedString(text, comment: "")
         textView.textColor = placeholderColor
-        textView.font = UIFont.systemFont(ofSize: 15)
-        textView.backgroundColor = .white
+        textView.font = .preferredFont(forTextStyle: .callout)
+        textView.adjustsFontForContentSizeCategory = true
+        textView.backgroundColor = UIColor(resource: .background)
         textView.tag = tag
         return textView
     }
@@ -219,7 +223,7 @@ extension CreateView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == placeholderColor {
             textView.text = nil
-            textView.textColor = UIColor.black
+            textView.textColor = UIColor.init(resource: .text)
         }
     }
     
@@ -227,9 +231,9 @@ extension CreateView: UITextViewDelegate {
         if textView.text.isEmpty {
             switch textView.tag {
             case 1:
-                textView.text = "제목을 입력해주세요."
+                textView.text = NSLocalizedString("제목을 입력해주세요.", comment: "")
             case 2:
-                textView.text = "내용을 입력해주세요."
+                textView.text = NSLocalizedString("내용을 입력해주세요.", comment: "")
             default:
                 return
             }
