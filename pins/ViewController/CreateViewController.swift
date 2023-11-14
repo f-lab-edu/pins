@@ -80,6 +80,8 @@ class CreateViewController: UIViewController {
     }
 
     private func updateCategoryUIForSelection(in collectionView: UICollectionView, selected: Int, unselected: Int?) {
+        guard selected != unselected else { return }
+        
         if let cell = collectionView.cellForItem(at: IndexPath(row: selected, section: 0)) as? CategoryCollectionViewCell {
             cell.isSelect()
         }
