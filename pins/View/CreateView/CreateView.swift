@@ -15,11 +15,12 @@ class CreateView: UIView {
         static let categoryPadding: CGFloat = 16
         static let lineGap: CGFloat = 12
         static let itemHeight: CGFloat = 35
+        static let selectionLimitCount = 3
     }
-
+    
     private let imageButton: CustomButton = {
         let button = CustomButton(cornerRadius: 10)
-        button.setImageTitle(title: "0/5", systemName: "photo.badge.plus", titleColor: .gray, imageColor: .gray)
+        button.setImageTitle(title: "0/\(Constants.selectionLimitCount)", systemName: "photo.badge.plus", titleColor: .gray, imageColor: .gray)
         button.setBorder(width: 1, color: UIColor.lightGray.withAlphaComponent(0.5).cgColor)
         return button
     }()
@@ -214,7 +215,7 @@ class CreateView: UIView {
     }
     
     func setPhotoCount(count: Int) {
-        imageButton.setTitle(title: "\(count)/5", color: .gray)
+        imageButton.setTitle(title: "\(count)/\(Constants.selectionLimitCount)", color: .gray)
     }
 }
 
