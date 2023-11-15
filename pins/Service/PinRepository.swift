@@ -11,7 +11,7 @@ import Firebase
 
 class PinRepository {
     func getAllPins(completion: @escaping ([Pin]) -> Void) {
-        FirebaseService.shared.db.collection("pins").getDocuments { (snapshot, error) in
+        FirebaseFirestore.shared.db.collection("pins").getDocuments { (snapshot, error) in
             var pins = [Pin]()
             if let error = error {
                 os_log("Error getting documents: %@", log: .default, type: .error, error.localizedDescription)
@@ -48,7 +48,7 @@ class PinRepository {
             "urls": pin.urls,
         ] as [String : Any]
         
-        FirebaseService.shared.db.collection("pins").document().setData(data) { error in
+        FirebaseFirestore.shared.db.collection("pins").document().setData(data) { error in
             guard error == nil else { return }
             completion()
         }

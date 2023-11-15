@@ -60,7 +60,7 @@ class CreateViewModel {
     }
     
     func getPosition() -> CLLocation {
-        CLLocation(latitude: longitude, longitude: latitude)
+        CLLocation(latitude: latitude, longitude: longitude)
     }
     
     func createPin(completion: @escaping () -> Void) {
@@ -72,7 +72,7 @@ class CreateViewModel {
                 longitude: longitude,
                 latitude: latitude,
                 category: category,
-                created: Date().now(),
+                created: Date().currentDateTimeAsString(),
                 urls: urls.map{ $0?.absoluteString ?? "" })
             ) {
                 completion()

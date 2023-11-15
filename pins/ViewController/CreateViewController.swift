@@ -50,11 +50,11 @@ class CreateViewController: UIViewController {
             self?.createView.setPhotoCount(count: images.count)
         }.store(in: &cancellable)
         
-        createView.titleTextView.textPublisher
+        createView.titleTextView.textDidChangePublisher
             .assign(to: \.title, on: viewModel)
             .store(in: &cancellable)
         
-        createView.contentTextView.textPublisher
+        createView.contentTextView.textDidChangePublisher
             .assign(to: \.content, on: viewModel)
             .store(in: &cancellable)
     }

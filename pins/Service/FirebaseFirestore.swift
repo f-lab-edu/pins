@@ -7,8 +7,8 @@
 
 import FirebaseFirestore
 
-class FirebaseService {
-    static let shared = FirebaseService()
+class FirebaseFirestore {
+    static let shared = FirebaseFirestore()
     let db = Firestore.firestore()
     private init() { }
 }

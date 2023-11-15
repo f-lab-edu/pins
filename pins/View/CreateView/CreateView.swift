@@ -85,21 +85,18 @@ class CreateView: UIView {
         return collectionView
     }()
 
-    private let placeholderColor = UIColor(resource: .placeholderGray)
     private let itemCount: Int
     private let titleDivider = Divider()
     private let contentDivider = Divider()
     private let imageDivider = Divider()
-    var titleTextView = UITextView()
-    var contentTextView = UITextView()
+    var titleTextView: CustomTextView = CustomTextView(placeholder: "제목을 입력해주세요.", tag: 0)
+    var contentTextView: CustomTextView = CustomTextView(placeholder: "내용을 입력해주세요.", tag: 1)
     
     // MARK: - 생성자
     init(categoryCount: Int) {
         itemCount = categoryCount
         super.init(frame: .zero)
         backgroundColor = UIColor(resource: .background)
-        titleTextView = createTextView(text: "제목을 입력해주세요.", tag: 1)
-        contentTextView = createTextView(text: "내용을 입력해주세요.", tag: 2)
         titleTextView.delegate = self
         contentTextView.delegate = self
         setLayout()
@@ -177,17 +174,6 @@ class CreateView: UIView {
     }
     
     // MARK: - 메소드
-    private func createTextView(text: String, tag: Int) -> UITextView {
-        let textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.text = NSLocalizedString(text, comment: "")
-        textView.textColor = placeholderColor
-        textView.font = .preferredFont(forTextStyle: .callout)
-        textView.adjustsFontForContentSizeCategory = true
-        textView.backgroundColor = UIColor(resource: .background)
-        textView.tag = tag
-        return textView
-    }
     
     private func getCagetoryHeight() -> CGFloat {
         let rowsNeeded = (itemCount + Constants.categoryColumn - 1) / Constants.categoryColumn
@@ -226,7 +212,7 @@ class CreateView: UIView {
 // MARK: - Extensions
 extension CreateView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == placeholderColor {
+        if textView.textColor == UIColor(resource: .placeholderGray) {
             textView.text = nil
             textView.textColor = UIColor.init(resource: .text)
         }
@@ -242,7 +228,7 @@ extension CreateView: UITextViewDelegate {
             default:
                 return
             }
-            textView.textColor = placeholderColor
+            textView.textColor = UIColor(resource: .placeholderGray)
         }
     }
 }
