@@ -9,7 +9,7 @@ import OSLog
 import FirebaseFirestore
 import Firebase
 
-class PinRepository {
+final class PinRepository {
     func getAllPins(completion: @escaping ([Pin]) -> Void) {
         FirebaseFirestore.shared.db.collection("pins").getDocuments { (snapshot, error) in
             var pins = [Pin]()
@@ -36,7 +36,7 @@ class PinRepository {
         }
     }
     
-    func createPin(pin: Pin, completion: @escaping () -> Void) {
+    func createPin(pin: Pin) async {
         let data = [
             "id": pin.id,
             "title": pin.title,
@@ -46,11 +46,12 @@ class PinRepository {
             "category": pin.category,
             "created": pin.created,
             "urls": pin.urls,
-        ] as [String : Any]
-        
-        FirebaseFirestore.shared.db.collection("pins").document().setData(data) { error in
-            guard error == nil else { return }
-            completion()
+        ] as [String: Any]
+
+        let documentReference = FirebaseFirestore.shared.db.collection("pins").document()
+        await withCheckedContinuation { continuation in
+            documentReference.setData(data)
+            continuation.resume()
         }
     }
 }

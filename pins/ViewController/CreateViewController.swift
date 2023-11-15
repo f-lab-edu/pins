@@ -9,22 +9,22 @@ import UIKit
 import Combine
 import PhotosUI
 
-class CreateViewController: UIViewController {
+final class CreateViewController: UIViewController {
+    var viewModel: CreateViewModel = CreateViewModel()
     private enum CollectionViewType: Int {
         case categoryCollection
         case imageCollection
     }
-    var viewModel: CreateViewModel = CreateViewModel()
-    var cancellable: Set<AnyCancellable> = []
-    var loadingIndicator: LoadingIndicator = LoadingIndicator()
-    var imagePicker: PHPickerViewController = {
+    private var cancellable: Set<AnyCancellable> = []
+    private var loadingIndicator: LoadingIndicator = LoadingIndicator()
+    private var imagePicker: PHPickerViewController = {
         var configuration = PHPickerConfiguration()
         configuration.selectionLimit = 3
         configuration.filter = .any(of: [.images])
         let picker = PHPickerViewController(configuration: configuration)
         return picker
     }()
-    var createView: CreateView {
+    private var createView: CreateView {
         view as! CreateView
     }
     
@@ -72,7 +72,8 @@ class CreateViewController: UIViewController {
         createView.setCreateButtonAction(UIAction(handler: { [weak self] _ in
             self?.loadingIndicator.showLoading(with: "핀 생성 중입니다...")
 
-            self?.viewModel.createPin() {
+            Task {
+                await self?.viewModel.createPin()
                 self?.loadingIndicator.hideLoading()
                 self?.navigationController?.popViewController(animated: true)
             }
@@ -91,11 +92,13 @@ class CreateViewController: UIViewController {
         }
     }
     
-    private func loadUIImage(from itemProvider: NSItemProvider, completion: @escaping (UIImage) -> Void) {
-        if itemProvider.canLoadObject(ofClass: UIImage.self) {
-            itemProvider.loadObject(ofClass: UIImage.self) { (object, error) in
-                if let image = object as? UIImage {
-                    completion(image)
+    private func loadImage(from itemProvider: NSItemProvider) async -> UIImage? {
+        await withCheckedContinuation { continuation in
+            itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+                if let image = image as? UIImage {
+                    continuation.resume(returning: image)
+                } else {
+                    continuation.resume(returning: nil)
                 }
             }
         }
@@ -143,11 +146,13 @@ extension CreateViewController: UICollectionViewDelegate, UICollectionViewDataSo
 extension CreateViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
-        viewModel.resetSelectedImages()
-        results.forEach { result in
-            loadUIImage(from: result.itemProvider) { [weak self] image in
-                DispatchQueue.main.async {
-                    self?.viewModel.addSelectedImage(image)
+        Task {
+            viewModel.resetSelectedImages()
+            for result in results {
+                if let image = await loadImage(from: result.itemProvider) {
+                    await MainActor.run {
+                        viewModel.addSelectedImage(image)
+                    }
                 }
             }
         }

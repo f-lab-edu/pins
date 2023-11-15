@@ -7,7 +7,7 @@
 
 import FirebaseFirestore
 
-class FirebaseFirestore {
+final class FirebaseFirestore {
     static let shared = FirebaseFirestore()
     let db = Firestore.firestore()
     private init() { }

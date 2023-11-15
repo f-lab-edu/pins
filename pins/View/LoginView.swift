@@ -8,7 +8,7 @@
 import UIKit
 import AuthenticationServices
 
-class LoginView: UIView {
+final class LoginView: UIView {
     // MARK: - Properties
     private let icon: UIImageView = UIImageView(image: UIImage(resource: .pinsIcon))
     private let title: UIImageView = UIImageView(image: UIImage(resource: .pinsTitle))

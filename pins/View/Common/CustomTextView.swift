@@ -12,7 +12,7 @@ protocol TextPublisher {
     var textDidChangePublisher: AnyPublisher<String, Never> { get }
 }
 
-class CustomTextView: UITextView {
+final class CustomTextView: UITextView {
     private let placeholderColor = UIColor(resource: .placeholderGray)
     private var placeholderLabel: UILabel?
     

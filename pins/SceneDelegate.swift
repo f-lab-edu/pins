@@ -28,31 +28,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController()
         navigationController.isNavigationBarHidden = true
         
-        checkAuthorizationState { isAuthenticated in
-            let viewController: UIViewController
-            if isAuthenticated {
-                viewController = MainViewController()
-            } else {
-                viewController = LoginViewController()
-            }
-            navigationController.viewControllers = [viewController]
+        let isAuthenticated = checkAuthorizationState()
+        let viewController: UIViewController
+        if isAuthenticated {
+            viewController = MainViewController()
+        } else {
+            viewController = LoginViewController()
         }
+        navigationController.viewControllers = [viewController]
+        
         return navigationController
     }
 
-    private func checkAuthorizationState(completion: @escaping (Bool) -> Void) {
-        var isAuthenticated = false
-        Auth.auth().addStateDidChangeListener { (auth, user) in
-            if user != nil {
-                isAuthenticated = true
-            } else {
-                isAuthenticated = false
-            }
-        }
-        
-        DispatchQueue.main.async {
-            completion(isAuthenticated)
-        }
+    private func checkAuthorizationState() -> Bool {
+        return Auth.auth().currentUser != nil
     }
 }
 

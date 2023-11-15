@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CreateView: UIView {
+final class CreateView: UIView {
     // MARK: - Properties
     private enum Constants {
         static let categoryColumn: Int = 3
@@ -89,8 +89,8 @@ class CreateView: UIView {
     private let titleDivider = Divider()
     private let contentDivider = Divider()
     private let imageDivider = Divider()
-    var titleTextView: CustomTextView = CustomTextView(placeholder: "제목을 입력해주세요.", tag: 0)
-    var contentTextView: CustomTextView = CustomTextView(placeholder: "내용을 입력해주세요.", tag: 1)
+    var titleTextView: CustomTextView = CustomTextView(placeholder: "create.title.placeholder", tag: 1)
+    var contentTextView: CustomTextView = CustomTextView(placeholder: "create.content.placeholder", tag: 2)
     
     // MARK: - 생성자
     init(categoryCount: Int) {

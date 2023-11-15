@@ -10,8 +10,8 @@ import OSLog
 import AuthenticationServices
 import FirebaseAuth
 
-class LoginViewController: UIViewController {
-    let viewModel: LoginViewModel = LoginViewModel()
+final class LoginViewController: UIViewController {
+    private let viewModel: LoginViewModel = LoginViewModel()
     
     var loginView: LoginView {
         view as! LoginView

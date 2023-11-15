@@ -17,6 +17,6 @@
 "create.category.food" = "Food";
 "create.category.culture" = "Culture";
 "create.category.etc" = "Etc";
-"create.title.placeholder." = "Please enter a title.";
-"create.content.placeholder." = "Please enter a description.";
+"create.title.placeholder" = "Please enter a title.";
+"create.content.placeholder" = "Please enter a description.";
 "create.pin" = "Create pin";

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoadingIndicator {
+final class LoadingIndicator {
     private var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.3)

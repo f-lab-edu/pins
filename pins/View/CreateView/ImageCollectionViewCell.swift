@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ImageCollectionViewCell: UICollectionViewCell {
+final class ImageCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
-    var imageView: UIImageView = {
+    private var imageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill

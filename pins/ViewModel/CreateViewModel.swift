@@ -11,7 +11,7 @@ import CoreLocation
 import FirebaseStorage
 import OSLog
 
-class CreateViewModel {
+final class CreateViewModel {
     @Published var selectedImages: [UIImage] = []
     @Published var title: String = "제목을 입력해주세요."
     @Published var content: String = "내용을 입력해주세요."
@@ -63,20 +63,17 @@ class CreateViewModel {
         CLLocation(latitude: latitude, longitude: longitude)
     }
     
-    func createPin(completion: @escaping () -> Void) {
-        FirestorageService.uploadImages(images: selectedImages) { [self] urls in
-            pinRepository.createPin(pin: Pin(
-                id: Auth.auth().currentUser?.uid ?? "",
-                title: title,
-                content: content,
-                longitude: longitude,
-                latitude: latitude,
-                category: category,
-                created: Date().currentDateTimeAsString(),
-                urls: urls.map{ $0?.absoluteString ?? "" })
-            ) {
-                completion()
-            }
-        }
+    func createPin() async {
+        let urls = await FirestorageService.uploadImages(images: selectedImages)
+        await pinRepository.createPin(pin: Pin(
+            id: Auth.auth().currentUser?.uid ?? "",
+            title: title,
+            content: content,
+            longitude: longitude,
+            latitude: latitude,
+            category: category,
+            created: Date().currentDateTimeAsString(),
+            urls: urls.map{ $0?.absoluteString ?? "" })
+        )
     }
 }

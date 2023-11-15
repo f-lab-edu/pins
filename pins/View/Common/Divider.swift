@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Divider: UIView {
+final class Divider: UIView {
     init(backgroundColor: UIColor = .extraLightGray, thickness: CGFloat = 1) {
         super.init(frame: .zero)
         self.backgroundColor = backgroundColor

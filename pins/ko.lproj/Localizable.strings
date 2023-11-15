@@ -16,6 +16,6 @@
 "create.category.food" = "맛집탐방";
 "create.category.culture" = "문화생활";
 "create.category.etc" = "기타";
-"create.title.placeholder." = "제목을 입력해주세요.";
-"create.content.placeholder." = "내용을 입력해주세요.";
+"create.title.placeholder" = "제목을 입력해주세요.";
+"create.content.placeholder" = "내용을 입력해주세요.";
 "create.pin" = "핀 만들기";

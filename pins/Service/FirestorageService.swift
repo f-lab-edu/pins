@@ -27,35 +27,37 @@ enum FirestorageService {
         }
     }
     
-    static func uploadImage(image: UIImage, completion: @escaping (URL?) -> Void) {
-        guard let imageData = image.jpegData(compressionQuality: 0.6) else { return }
+    static func uploadImage(image: UIImage) async -> URL? {
+        guard let imageData = image.jpegData(compressionQuality: 0.6) else { return nil }
         
         let imageName = UUID().uuidString + String(Date().timeIntervalSince1970)
         let metaData = self.metaData(for: image)
 
         let firebaseReference = Storage.storage().reference().child("image/\(Auth.auth().currentUser?.uid ?? "")/\(imageName)")
-        firebaseReference.putData(imageData, metadata: metaData) { metaData, error in
-            firebaseReference.downloadURL { url, _ in
-                completion(url)
-            }
+        
+        do {
+            let _ = try await firebaseReference.putDataAsync(imageData, metadata: metaData)
+            return try await firebaseReference.downloadURL()
+        } catch {
+            os_log("Error uploading image: \(error)")
+            return nil
         }
     }
     
-    static func uploadImages(images: [UIImage], completion: @escaping ([URL?]) -> Void) {
+    static func uploadImages(images: [UIImage]) async -> [URL?] {
         var urls: [URL?] = []
-        let dispatchGroup = DispatchGroup()
 
-        for image in images {
-            dispatchGroup.enter()
-            uploadImage(image: image) { url in
+        await withTaskGroup(of: URL?.self) { group in
+            for image in images {
+                group.addTask {
+                    return await uploadImage(image: image)
+                }
+            }
+            for await url in group {
                 urls.append(url)
-                dispatchGroup.leave()
             }
         }
-
-        dispatchGroup.notify(queue: .main) {
-            completion(urls)
-        }
+        return urls
     }
     
     static func downloadImage(urlString: String, completion: @escaping (UIImage?) -> Void) {

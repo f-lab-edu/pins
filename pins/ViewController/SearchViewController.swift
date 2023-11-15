@@ -7,8 +7,8 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
-    var searchView: SearchView {
+final class SearchViewController: UIViewController {
+    private var searchView: SearchView {
         view as! SearchView
     }
     
