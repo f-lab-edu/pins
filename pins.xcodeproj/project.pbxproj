@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B7035B852AF8D1FF000F74ED /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7035B842AF8D1FF000F74ED /* UIView.swift */; };
-		B710588E2AEA2699003D6039 /* OSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B710588D2AEA2699003D6039 /* OSLog.swift */; };
+		B7035B852AF8D1FF000F74ED /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7035B842AF8D1FF000F74ED /* UIView+Extensions.swift */; };
+		B710588E2AEA2699003D6039 /* OSLog+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B710588D2AEA2699003D6039 /* OSLog+Extensions.swift */; };
 		B71058912AEA2974003D6039 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71058902AEA2974003D6039 /* MainViewModel.swift */; };
 		B71058932AEA2CB3003D6039 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71058922AEA2CB3003D6039 /* CustomButton.swift */; };
 		B71058952AEA42F8003D6039 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71058942AEA42F8003D6039 /* CategoryCollectionViewCell.swift */; };
@@ -40,7 +40,7 @@
 		B7B977642AFA0D270023718B /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B977632AFA0D270023718B /* Pin.swift */; };
 		B7B977662AFA0F550023718B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B7B977652AFA0F550023718B /* FirebaseFirestore */; };
 		B7B977682AFA10AE0023718B /* PinRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B977672AFA10AE0023718B /* PinRepository.swift */; };
-		B7B9776C2AFA20D80023718B /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B9776B2AFA20D80023718B /* Date.swift */; };
+		B7B9776C2AFA20D80023718B /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B9776B2AFA20D80023718B /* Date+Extensions.swift */; };
 		B7BC79172AF4AB8900BBE0A9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B7BC79162AF4AB8900BBE0A9 /* FirebaseAuth */; };
 		B7E050F12AE4FB3A007903C3 /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E050F02AE4FB3A007903C3 /* MainMapView.swift */; };
 		B7E8A46D2AEB83840026931D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7E8A46C2AEB83840026931D /* GoogleService-Info.plist */; };
@@ -67,8 +67,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B7035B842AF8D1FF000F74ED /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		B710588D2AEA2699003D6039 /* OSLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OSLog.swift; sourceTree = "<group>"; };
+		B7035B842AF8D1FF000F74ED /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		B710588D2AEA2699003D6039 /* OSLog+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OSLog+Extensions.swift"; sourceTree = "<group>"; };
 		B71058902AEA2974003D6039 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		B71058922AEA2CB3003D6039 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		B71058942AEA42F8003D6039 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -104,7 +104,7 @@
 		B7B977602AFA0A550023718B /* FirebaseFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestore.swift; sourceTree = "<group>"; };
 		B7B977632AFA0D270023718B /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		B7B977672AFA10AE0023718B /* PinRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinRepository.swift; sourceTree = "<group>"; };
-		B7B9776B2AFA20D80023718B /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		B7B9776B2AFA20D80023718B /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		B7E050F02AE4FB3A007903C3 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
 		B7E8A46C2AEB83840026931D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B7F6A8D92AE2B61500892215 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -143,9 +143,9 @@
 		B710588C2AEA2699003D6039 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				B710588D2AEA2699003D6039 /* OSLog.swift */,
-				B7035B842AF8D1FF000F74ED /* UIView.swift */,
-				B7B9776B2AFA20D80023718B /* Date.swift */,
+				B710588D2AEA2699003D6039 /* OSLog+Extensions.swift */,
+				B7035B842AF8D1FF000F74ED /* UIView+Extensions.swift */,
+				B7B9776B2AFA20D80023718B /* Date+Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -456,7 +456,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7B9776C2AFA20D80023718B /* Date.swift in Sources */,
+				B7B9776C2AFA20D80023718B /* Date+Extensions.swift in Sources */,
 				B7B977612AFA0A550023718B /* FirebaseFirestore.swift in Sources */,
 				B74A4FC12AE78BAE00226EA7 /* SearchViewController.swift in Sources */,
 				B7AF69352AE0FEDF00385632 /* MainViewController.swift in Sources */,
@@ -477,9 +477,9 @@
 				B7B977682AFA10AE0023718B /* PinRepository.swift in Sources */,
 				B7B977642AFA0D270023718B /* Pin.swift in Sources */,
 				B7AF69332AE0FEDF00385632 /* SceneDelegate.swift in Sources */,
-				B710588E2AEA2699003D6039 /* OSLog.swift in Sources */,
+				B710588E2AEA2699003D6039 /* OSLog+Extensions.swift in Sources */,
 				B76DD4622AFE0DB000DFE7E1 /* FirestorageService.swift in Sources */,
-				B7035B852AF8D1FF000F74ED /* UIView.swift in Sources */,
+				B7035B852AF8D1FF000F74ED /* UIView+Extensions.swift in Sources */,
 				B7226B162B01F6990034B451 /* LoginViewModel.swift in Sources */,
 				B7AEC0CC2B033419004BA42A /* AppleLoginService.swift in Sources */,
 				B71058952AEA42F8003D6039 /* CategoryCollectionViewCell.swift in Sources */,
