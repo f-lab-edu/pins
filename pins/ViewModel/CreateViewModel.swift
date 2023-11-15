@@ -21,15 +21,15 @@ class CreateViewModel {
     let pinRepository: PinRepository = PinRepository()
     var selectedCategoryIndex: Int?
     let categories: [String] = [
-        "친목",
-        "산책",
-        "게임",
-        "운동",
-        "스터디",
-        "아파트/이웃",
-        "맛집탐방",
-        "문화생활",
-        "기타",
+        "create.category.friendship",
+        "create.category.walk",
+        "create.category.game",
+        "create.category.exercise",
+        "create.category.study",
+        "create.category.neighbor",
+        "create.category.food",
+        "create.category.culture",
+        "create.category.etc",
     ]
     
     func getCategoriesCount() -> Int {

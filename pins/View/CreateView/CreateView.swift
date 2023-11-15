@@ -43,7 +43,7 @@ class CreateView: UIView {
     
     private let categoryLabel: UILabel = {
         let label = UILabel()
-        label.text = NSLocalizedString("카테고리", comment: "")
+        label.text = NSLocalizedString("create.category.title", comment: "")
         label.font = .preferredFont(forTextStyle: .headline)
         label.adjustsFontForContentSizeCategory = true
         label.textColor = UIColor(resource: .text)
@@ -222,9 +222,9 @@ extension CreateView: UITextViewDelegate {
         if textView.text.isEmpty {
             switch textView.tag {
             case 1:
-                textView.text = NSLocalizedString("제목을 입력해주세요.", comment: "")
+                textView.text = NSLocalizedString("create.title.placeholder", comment: "")
             case 2:
-                textView.text = NSLocalizedString("내용을 입력해주세요.", comment: "")
+                textView.text = NSLocalizedString("create.content.placeholder", comment: "")
             default:
                 return
             }
