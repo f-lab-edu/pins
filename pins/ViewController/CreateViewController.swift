@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 import PhotosUI
+import UniformTypeIdentifiers
 
 final class CreateViewController: UIViewController {
     var viewModel: CreateViewModel = CreateViewModel()
@@ -45,7 +46,7 @@ final class CreateViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel.$selectedImages.sink { [weak self] images in
+        viewModel.$selectedImageInfos.sink { [weak self] images in
             self?.createView.reloadImageCollectionView()
             self?.createView.setPhotoCount(count: images.count)
         }.store(in: &cancellable)
@@ -92,11 +93,38 @@ final class CreateViewController: UIViewController {
         }
     }
     
-    private func loadImage(from itemProvider: NSItemProvider) async -> UIImage? {
-        await withCheckedContinuation { continuation in
+    private func processPickerResult(_ index: Int, _ result: PHPickerResult) {
+        if result.itemProvider.canLoadObject(ofClass: UIImage.self) {
+            Task {
+                let image = await loadImageAsync(result.itemProvider)
+                let extensionType = await loadFileExtension(result.itemProvider)
+                if let image = image, let extensionType = extensionType {
+                    await MainActor.run {
+                        viewModel.addSelectedImage(ImageInfo(index: index, image: image, extensionType: extensionType))
+                    }
+                }
+            }
+        }
+    }
+
+    private func loadImageAsync(_ itemProvider: NSItemProvider) async -> UIImage? {
+        return await withCheckedContinuation { continuation in
             itemProvider.loadObject(ofClass: UIImage.self) { image, error in
                 if let image = image as? UIImage {
                     continuation.resume(returning: image)
+                } else {
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+
+    private func loadFileExtension(_ itemProvider: NSItemProvider) async -> String? {
+        return await withCheckedContinuation { continuation in
+            itemProvider.loadFileRepresentation(forTypeIdentifier: UTType.image.identifier) { url, error in
+                if let url = url {
+                    let fileExtension = url.pathExtension
+                    continuation.resume(returning: fileExtension)
                 } else {
                     continuation.resume(returning: nil)
                 }
@@ -135,7 +163,7 @@ extension CreateViewController: UICollectionViewDelegate, UICollectionViewDataSo
             return cell
         case .imageCollection:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
-            cell.setImage(image: viewModel.selectedImages[indexPath.row])
+            cell.setImage(image: viewModel.selectedImageInfos[indexPath.row].image)
             return cell
         default:
             fatalError("wrong collection view tag")
@@ -145,16 +173,10 @@ extension CreateViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 extension CreateViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: true)
-        Task {
-            viewModel.resetSelectedImages()
-            for result in results {
-                if let image = await loadImage(from: result.itemProvider) {
-                    await MainActor.run {
-                        viewModel.addSelectedImage(image)
-                    }
-                }
-            }
+        dismiss(animated: true)
+
+        for (index, result) in results.enumerated() {
+            processPickerResult(index, result)
         }
     }
 }

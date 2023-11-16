@@ -12,7 +12,7 @@ import FirebaseStorage
 import OSLog
 
 final class CreateViewModel {
-    @Published var selectedImages: [UIImage] = []
+    @Published var selectedImageInfos: [ImageInfo] = []
     @Published var title: String = "제목을 입력해주세요."
     @Published var content: String = "내용을 입력해주세요."
     private var longitude: Double = 0
@@ -43,15 +43,15 @@ final class CreateViewModel {
     }
     
     func getSelectedImagesCount() -> Int {
-        selectedImages.count
+        selectedImageInfos.count
     }
     
-    func addSelectedImage(_ image: UIImage) {
-        selectedImages.append(image)
+    func addSelectedImage(_ image: ImageInfo) {
+        selectedImageInfos.append(image)
     }
 
     func resetSelectedImages() {
-        selectedImages.removeAll()
+        selectedImageInfos.removeAll()
     }
     
     func setPosition(position: CLLocation) {
@@ -64,7 +64,7 @@ final class CreateViewModel {
     }
     
     func createPin() async {
-        let urls = await FirestorageService.uploadImages(images: selectedImages)
+        let urls = await FirestorageService.uploadImages(imageInfos: selectedImageInfos)
         await pinRepository.createPin(pin: Pin(
             id: Auth.auth().currentUser?.uid ?? "",
             title: title,
@@ -73,7 +73,7 @@ final class CreateViewModel {
             latitude: latitude,
             category: category,
             created: Date().currentDateTimeAsString(),
-            urls: urls.map{ $0?.absoluteString ?? "" })
+            urls: urls.sorted(by: { $0.index < $1.index }).map { $0.url.absoluteString })
         )
     }
 }
