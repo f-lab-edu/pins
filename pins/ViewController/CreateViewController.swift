@@ -8,7 +8,6 @@
 import UIKit
 import Combine
 import PhotosUI
-import UniformTypeIdentifiers
 
 final class CreateViewController: UIViewController {
     var viewModel: CreateViewModel = CreateViewModel()
