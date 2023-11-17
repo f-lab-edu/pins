@@ -162,6 +162,90 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		B71C38722B07510A0065A783 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				B7E050EF2AE4FB30007903C3 /* View */,
+				B74A4FBF2AE78B7600226EA7 /* ViewController */,
+				B710588F2AEA291E003D6039 /* ViewModel */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		B71C38732B0751140065A783 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				B71C38762B0751610065A783 /* Entity */,
+				B71C38752B0751580065A783 /* Usecase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		B71C38742B07511A0065A783 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B71C38782B0751860065A783 /* Repository */,
+				B71C38772B0751820065A783 /* Service */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		B71C38752B0751580065A783 /* Usecase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Usecase;
+			sourceTree = "<group>";
+		};
+		B71C38762B0751610065A783 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				B7B977632AFA0D270023718B /* Pin.swift */,
+				B78099422B06047400C01059 /* ImageInfo.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		B71C38772B0751820065A783 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				B7AEC0CB2B033419004BA42A /* AppleLoginService.swift */,
+				B7B977602AFA0A550023718B /* FirebaseFirestore.swift */,
+				B76DD4612AFE0DB000DFE7E1 /* FirestorageService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		B71C38782B0751860065A783 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				B7B977672AFA10AE0023718B /* PinRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		B71C38792B07522F0065A783 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				B7AF69302AE0FEDF00385632 /* AppDelegate.swift */,
+				B7AF69322AE0FEDF00385632 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		B71C387A2B0752780065A783 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B724F9302AFCBE4400722CE1 /* Localizable.strings */,
+				B7157E6B2AF392E4007CEF95 /* pins.entitlements */,
+				B79A28F02AF37DEB008FD3CE /* Secrets.xcconfig */,
+				B7E8A46C2AEB83840026931D /* GoogleService-Info.plist */,
+				B7F6A8D82AE2B61500892215 /* LaunchScreen.storyboard */,
+				B7AF69392AE0FEE000385632 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		B74A4FBF2AE78B7600226EA7 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,21 +302,13 @@
 		B7AF692F2AE0FEDF00385632 /* pins */ = {
 			isa = PBXGroup;
 			children = (
+				B71C387A2B0752780065A783 /* Resources */,
+				B71C38792B07522F0065A783 /* Application */,
+				B71C38722B07510A0065A783 /* Presentation */,
+				B71C38732B0751140065A783 /* Domain */,
+				B71C38742B07511A0065A783 /* Data */,
 				B710588C2AEA2699003D6039 /* Extension */,
-				B7E050EF2AE4FB30007903C3 /* View */,
-				B74A4FBF2AE78B7600226EA7 /* ViewController */,
-				B710588F2AEA291E003D6039 /* ViewModel */,
-				B7B977622AFA0ADC0023718B /* Model */,
-				B7B9775F2AFA0A4A0023718B /* Service */,
-				B7157E6B2AF392E4007CEF95 /* pins.entitlements */,
-				B79A28F02AF37DEB008FD3CE /* Secrets.xcconfig */,
-				B7E8A46C2AEB83840026931D /* GoogleService-Info.plist */,
-				B7F6A8D82AE2B61500892215 /* LaunchScreen.storyboard */,
-				B7AF69302AE0FEDF00385632 /* AppDelegate.swift */,
-				B7AF69322AE0FEDF00385632 /* SceneDelegate.swift */,
-				B7AF69392AE0FEE000385632 /* Assets.xcassets */,
 				B7AF693E2AE0FEE000385632 /* Info.plist */,
-				B724F9302AFCBE4400722CE1 /* Localizable.strings */,
 			);
 			path = pins;
 			sourceTree = "<group>";
@@ -252,26 +328,6 @@
 				B7AF69532AE0FEE000385632 /* pinsUITestsLaunchTests.swift */,
 			);
 			path = pinsUITests;
-			sourceTree = "<group>";
-		};
-		B7B9775F2AFA0A4A0023718B /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				B7AEC0CB2B033419004BA42A /* AppleLoginService.swift */,
-				B7B977602AFA0A550023718B /* FirebaseFirestore.swift */,
-				B7B977672AFA10AE0023718B /* PinRepository.swift */,
-				B76DD4612AFE0DB000DFE7E1 /* FirestorageService.swift */,
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
-		B7B977622AFA0ADC0023718B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				B7B977632AFA0D270023718B /* Pin.swift */,
-				B78099422B06047400C01059 /* ImageInfo.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		B7BC79152AF4AB8900BBE0A9 /* Frameworks */ = {
