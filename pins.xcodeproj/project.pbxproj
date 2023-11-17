@@ -13,6 +13,10 @@
 		B71058932AEA2CB3003D6039 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71058922AEA2CB3003D6039 /* CustomButton.swift */; };
 		B71058952AEA42F8003D6039 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71058942AEA42F8003D6039 /* CategoryCollectionViewCell.swift */; };
 		B7157E6A2AF384E2007CEF95 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7157E692AF384E2007CEF95 /* LoginView.swift */; };
+		B71C387C2B0753BB0065A783 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71C387B2B0753BB0065A783 /* LoginUseCase.swift */; };
+		B71C387E2B0754F90065A783 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71C387D2B0754F90065A783 /* User.swift */; };
+		B71C38802B07554B0065A783 /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71C387F2B07554B0065A783 /* FirebaseAuthService.swift */; };
+		B71C38832B075CC70065A783 /* CryptoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71C38822B075CC70065A783 /* CryptoUtils.swift */; };
 		B7226B162B01F6990034B451 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7226B152B01F6990034B451 /* LoginViewModel.swift */; };
 		B724F92E2AFCBE4400722CE1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B724F9302AFCBE4400722CE1 /* Localizable.strings */; };
 		B742C5782AEA5EE900E95E96 /* CreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B742C5772AEA5EE900E95E96 /* CreateViewModel.swift */; };
@@ -28,7 +32,6 @@
 		B79A28F12AF37DEF008FD3CE /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B79A28F02AF37DEB008FD3CE /* Secrets.xcconfig */; };
 		B79A28F32AF37F93008FD3CE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79A28F22AF37F93008FD3CE /* LoginViewController.swift */; };
 		B7ADFF722AEA8DF300D34CEA /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADFF712AEA8DF300D34CEA /* Divider.swift */; };
-		B7AEC0CC2B033419004BA42A /* AppleLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AEC0CB2B033419004BA42A /* AppleLoginService.swift */; };
 		B7AEC0CE2B034568004BA42A /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AEC0CD2B034568004BA42A /* CustomTextView.swift */; };
 		B7AF69312AE0FEDF00385632 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF69302AE0FEDF00385632 /* AppDelegate.swift */; };
 		B7AF69332AE0FEDF00385632 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF69322AE0FEDF00385632 /* SceneDelegate.swift */; };
@@ -75,6 +78,10 @@
 		B71058942AEA42F8003D6039 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		B7157E692AF384E2007CEF95 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		B7157E6B2AF392E4007CEF95 /* pins.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pins.entitlements; sourceTree = "<group>"; };
+		B71C387B2B0753BB0065A783 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		B71C387D2B0754F90065A783 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B71C387F2B07554B0065A783 /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
+		B71C38822B075CC70065A783 /* CryptoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoUtils.swift; sourceTree = "<group>"; };
 		B7226B152B01F6990034B451 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		B724F92F2AFCBE4400722CE1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B724F9312AFCBE7A00722CE1 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -90,7 +97,6 @@
 		B79A28F02AF37DEB008FD3CE /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		B79A28F22AF37F93008FD3CE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B7ADFF712AEA8DF300D34CEA /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
-		B7AEC0CB2B033419004BA42A /* AppleLoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleLoginService.swift; sourceTree = "<group>"; };
 		B7AEC0CD2B034568004BA42A /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		B7AF692D2AE0FEDF00385632 /* pins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pins.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7AF69302AE0FEDF00385632 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -176,7 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				B71C38762B0751610065A783 /* Entity */,
-				B71C38752B0751580065A783 /* Usecase */,
+				B71C38752B0751580065A783 /* UseCase */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -190,11 +196,12 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		B71C38752B0751580065A783 /* Usecase */ = {
+		B71C38752B0751580065A783 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				B71C387B2B0753BB0065A783 /* LoginUseCase.swift */,
 			);
-			path = Usecase;
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 		B71C38762B0751610065A783 /* Entity */ = {
@@ -202,6 +209,7 @@
 			children = (
 				B7B977632AFA0D270023718B /* Pin.swift */,
 				B78099422B06047400C01059 /* ImageInfo.swift */,
+				B71C387D2B0754F90065A783 /* User.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -209,9 +217,9 @@
 		B71C38772B0751820065A783 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				B7AEC0CB2B033419004BA42A /* AppleLoginService.swift */,
 				B7B977602AFA0A550023718B /* FirebaseFirestore.swift */,
 				B76DD4612AFE0DB000DFE7E1 /* FirestorageService.swift */,
+				B71C387F2B07554B0065A783 /* FirebaseAuthService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -244,6 +252,14 @@
 				B7AF69392AE0FEE000385632 /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		B71C38812B075CB90065A783 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				B71C38822B075CC70065A783 /* CryptoUtils.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		B74A4FBF2AE78B7600226EA7 /* ViewController */ = {
@@ -302,6 +318,7 @@
 		B7AF692F2AE0FEDF00385632 /* pins */ = {
 			isa = PBXGroup;
 			children = (
+				B71C38812B075CB90065A783 /* Utils */,
 				B71C387A2B0752780065A783 /* Resources */,
 				B71C38792B07522F0065A783 /* Application */,
 				B71C38722B07510A0065A783 /* Presentation */,
@@ -506,7 +523,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# xcconfig에서 API_KEY 값을 읽기\nAPI_KEY=${GOOGLE_API_KEY}\nGCM_SENDER_ID=${GCM_SENDER_ID}\nGOOGLE_APP_ID=${GOOGLE_APP_ID}\n# 커스텀 plist 파일 경로\nPLIST=${SRCROOT}/pins/GoogleService-Info.plist\n\n# plist 파일에 API_KEY 값 설정\n/usr/libexec/PlistBuddy -c \"Set :API_KEY $API_KEY\" \"$PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :GCM_SENDER_ID $GCM_SENDER_ID\" \"$PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :GOOGLE_APP_ID $GOOGLE_APP_ID\" \"$PLIST\"\n";
+			shellScript = "# xcconfig에서 API_KEY 값을 읽기\nAPI_KEY=${GOOGLE_API_KEY}\nGCM_SENDER_ID=${GCM_SENDER_ID}\nGOOGLE_APP_ID=${GOOGLE_APP_ID}\n# 커스텀 plist 파일 경로\nPLIST=${SRCROOT}/pins/Resources/GoogleService-Info.plist\n\n# plist 파일에 API_KEY 값 설정\n/usr/libexec/PlistBuddy -c \"Set :API_KEY $API_KEY\" \"$PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :GCM_SENDER_ID $GCM_SENDER_ID\" \"$PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :GOOGLE_APP_ID $GOOGLE_APP_ID\" \"$PLIST\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -523,6 +540,7 @@
 				B7ADFF722AEA8DF300D34CEA /* Divider.swift in Sources */,
 				B74A4FC52AE7905500226EA7 /* CreateViewController.swift in Sources */,
 				B742C5782AEA5EE900E95E96 /* CreateViewModel.swift in Sources */,
+				B71C387E2B0754F90065A783 /* User.swift in Sources */,
 				B7614C0F2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift in Sources */,
 				B7AF69312AE0FEDF00385632 /* AppDelegate.swift in Sources */,
 				B71058912AEA2974003D6039 /* MainViewModel.swift in Sources */,
@@ -533,15 +551,17 @@
 				B74A4FC32AE78BE700226EA7 /* SearchView.swift in Sources */,
 				B79A28F32AF37F93008FD3CE /* LoginViewController.swift in Sources */,
 				B78099432B06047400C01059 /* ImageInfo.swift in Sources */,
+				B71C387C2B0753BB0065A783 /* LoginUseCase.swift in Sources */,
+				B71C38802B07554B0065A783 /* FirebaseAuthService.swift in Sources */,
 				B7AEC0CE2B034568004BA42A /* CustomTextView.swift in Sources */,
 				B7B977682AFA10AE0023718B /* PinRepository.swift in Sources */,
 				B7B977642AFA0D270023718B /* Pin.swift in Sources */,
 				B7AF69332AE0FEDF00385632 /* SceneDelegate.swift in Sources */,
+				B71C38832B075CC70065A783 /* CryptoUtils.swift in Sources */,
 				B710588E2AEA2699003D6039 /* OSLog+Extensions.swift in Sources */,
 				B76DD4622AFE0DB000DFE7E1 /* FirestorageService.swift in Sources */,
 				B7035B852AF8D1FF000F74ED /* UIView+Extensions.swift in Sources */,
 				B7226B162B01F6990034B451 /* LoginViewModel.swift in Sources */,
-				B7AEC0CC2B033419004BA42A /* AppleLoginService.swift in Sources */,
 				B71058952AEA42F8003D6039 /* CategoryCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -726,7 +746,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = pins/pins.entitlements;
+				CODE_SIGN_ENTITLEMENTS = pins/Resources/pins.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X843D4L2C2;
@@ -758,7 +778,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = pins/pins.entitlements;
+				CODE_SIGN_ENTITLEMENTS = pins/Resources/pins.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X843D4L2C2;
