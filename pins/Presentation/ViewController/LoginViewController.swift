@@ -12,7 +12,7 @@ import FirebaseAuth
 import AuthenticationServices
 
 final class LoginViewController: UIViewController {
-    private let viewModel = LoginViewModel(loginUseCase: LoginUseCase(authService: FirebaseAuthService()))
+    private let viewModel = LoginViewModel()
     private var cancellables = Set<AnyCancellable>()
 
     var loginView: LoginView {

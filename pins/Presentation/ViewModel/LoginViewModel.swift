@@ -10,22 +10,18 @@ import FirebaseAuth
 import AuthenticationServices
 
 final class LoginViewModel {
+    @Dependency var loginUseCase: LoginUseCaseProtocol
     @Published var loginState: Result<User, Error>?
     private var currentNonce: String?
-    private let loginUseCase: LoginUseCaseProtocol
-    
-    init(loginUseCase: LoginUseCaseProtocol) {
-        self.loginUseCase = loginUseCase
-    }
     
     func performGoogleLogin(delegate: UIViewController) {
-        loginUseCase.googleAuthorization(delegate: delegate) { [weak self] result in
+        loginUseCase.googleLogin(delegate: delegate) { [weak self] result in
             self?.loginState = result
         }
     }
     
     func performAppleLogin(credential: ASAuthorizationAppleIDCredential) {
-        loginUseCase.appleAuthorization(credential: credential, nonce: currentNonce) { [weak self] result in
+        loginUseCase.appleLogin(credential: credential, nonce: currentNonce) { [weak self] result in
             self?.loginState = result
         }
     }

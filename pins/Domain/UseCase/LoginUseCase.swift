@@ -10,18 +10,14 @@ import FirebaseAuth
 import AuthenticationServices
 
 protocol LoginUseCaseProtocol {
-    func googleAuthorization(delegate: UIViewController, completion: @escaping (Result<User, Error>) -> Void)
-    func appleAuthorization(credential: ASAuthorizationAppleIDCredential, nonce: String?, completion: @escaping (Result<User, Error>) -> Void)
+    func googleLogin(delegate: UIViewController, completion: @escaping (Result<User, Error>) -> Void)
+    func appleLogin(credential: ASAuthorizationAppleIDCredential, nonce: String?, completion: @escaping (Result<User, Error>) -> Void)
 }
 
 final class LoginUseCase: LoginUseCaseProtocol {
-    private let authService: FirebaseAuthServiceProtocol
-
-    init(authService: FirebaseAuthServiceProtocol) {
-        self.authService = authService
-    }
+    @Dependency var authService: FirebaseAuthServiceProtocol
     
-    func googleAuthorization(delegate: UIViewController, completion: @escaping (Result<User, Error>) -> Void) {
+    func googleLogin(delegate: UIViewController, completion: @escaping (Result<User, Error>) -> Void) {
         authService.getFirebaseCredentialFromGoogle(presentView: delegate) { [weak self] credential in
             guard let self = self else { return }
             self.authService.signInWithGoogle(credential: credential) { result in
@@ -30,7 +26,7 @@ final class LoginUseCase: LoginUseCaseProtocol {
         }
     }
     
-    func appleAuthorization(credential: ASAuthorizationAppleIDCredential, nonce: String?, completion: @escaping (Result<User, Error>) -> Void) {
+    func appleLogin(credential: ASAuthorizationAppleIDCredential, nonce: String?, completion: @escaping (Result<User, Error>) -> Void) {
         authService.getFirebaseCredentialFromApple(with: credential, nonce: nonce) { [weak self] credential in
             guard let self = self else { return }
             self.authService.signInWithApple(credential: credential) { result in
