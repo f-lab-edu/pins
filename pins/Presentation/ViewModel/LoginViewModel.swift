@@ -9,14 +9,18 @@ import FirebaseAuth
 import AuthenticationServices
 
 final class LoginViewModel {
-    private let loginUseCaseProtocol: LoginUseCaseProtocol = LoginUseCase()
+    private let loginUseCase: LoginUseCaseProtocol
     
-    func openAuthorizationController(delegate: ASAuthorizationControllerDelegate & ASAuthorizationControllerPresentationContextProviding) {
-        loginUseCaseProtocol.authorization(delegate: delegate)
+    init(loginUseCase: LoginUseCaseProtocol) {
+        self.loginUseCase = loginUseCase
     }
     
-    func login(credential: AuthCredential) {
-        loginUseCaseProtocol.login(credential: credential) { result in
+    func openAuthorizationController(delegate: ASAuthorizationControllerDelegate & ASAuthorizationControllerPresentationContextProviding) {
+        loginUseCase.authorization(delegate: delegate)
+    }
+    
+    func loginWithApple(credential: AuthCredential) {
+        loginUseCase.login(method: .apple, credential: credential) { result in
             switch result {
             case .success(let user):
                 print("Success login with \(user)")
@@ -27,6 +31,6 @@ final class LoginViewModel {
     }
     
     func getNonce() -> String? {
-        loginUseCaseProtocol.getNonce()
+        loginUseCase.getNonce()
     }
 }

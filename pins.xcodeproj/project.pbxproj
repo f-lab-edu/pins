@@ -46,8 +46,9 @@
 		B7B977682AFA10AE0023718B /* PinRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B977672AFA10AE0023718B /* PinRepository.swift */; };
 		B7B9776C2AFA20D80023718B /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B9776B2AFA20D80023718B /* Date+Extensions.swift */; };
 		B7BC79172AF4AB8900BBE0A9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B7BC79162AF4AB8900BBE0A9 /* FirebaseAuth */; };
+		B7DE80632B08965D007A7AEF /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DE80622B08965D007A7AEF /* DIContainer.swift */; };
+		B7DE80652B08A771007A7AEF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7DE80642B08A771007A7AEF /* GoogleService-Info.plist */; };
 		B7E050F12AE4FB3A007903C3 /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E050F02AE4FB3A007903C3 /* MainMapView.swift */; };
-		B7E8A46D2AEB83840026931D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7E8A46C2AEB83840026931D /* GoogleService-Info.plist */; };
 		B7E8A4702AEB84420026931D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A46F2AEB84420026931D /* FirebaseAnalytics */; };
 		B7E8A4722AEB84420026931D /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A4712AEB84420026931D /* FirebaseCrashlytics */; };
 		B7F6A8DA2AE2B61500892215 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F6A8D82AE2B61500892215 /* LaunchScreen.storyboard */; };
@@ -113,8 +114,9 @@
 		B7B977632AFA0D270023718B /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		B7B977672AFA10AE0023718B /* PinRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinRepository.swift; sourceTree = "<group>"; };
 		B7B9776B2AFA20D80023718B /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		B7DE80622B08965D007A7AEF /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
+		B7DE80642B08A771007A7AEF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B7E050F02AE4FB3A007903C3 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
-		B7E8A46C2AEB83840026931D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B7F6A8D92AE2B61500892215 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -237,6 +239,7 @@
 			children = (
 				B7AF69302AE0FEDF00385632 /* AppDelegate.swift */,
 				B7AF69322AE0FEDF00385632 /* SceneDelegate.swift */,
+				B7DE80622B08965D007A7AEF /* DIContainer.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -244,12 +247,13 @@
 		B71C387A2B0752780065A783 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B7DE80642B08A771007A7AEF /* GoogleService-Info.plist */,
+				B7AF69392AE0FEE000385632 /* Assets.xcassets */,
+				B7AF693E2AE0FEE000385632 /* Info.plist */,
 				B724F9302AFCBE4400722CE1 /* Localizable.strings */,
 				B7157E6B2AF392E4007CEF95 /* pins.entitlements */,
 				B79A28F02AF37DEB008FD3CE /* Secrets.xcconfig */,
-				B7E8A46C2AEB83840026931D /* GoogleService-Info.plist */,
 				B7F6A8D82AE2B61500892215 /* LaunchScreen.storyboard */,
-				B7AF69392AE0FEE000385632 /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -319,13 +323,12 @@
 			isa = PBXGroup;
 			children = (
 				B71C38812B075CB90065A783 /* Utils */,
-				B71C387A2B0752780065A783 /* Resources */,
 				B71C38792B07522F0065A783 /* Application */,
 				B71C38722B07510A0065A783 /* Presentation */,
 				B71C38732B0751140065A783 /* Domain */,
 				B71C38742B07511A0065A783 /* Data */,
+				B71C387A2B0752780065A783 /* Resources */,
 				B710588C2AEA2699003D6039 /* Extension */,
-				B7AF693E2AE0FEE000385632 /* Info.plist */,
 			);
 			path = pins;
 			sourceTree = "<group>";
@@ -484,9 +487,9 @@
 			files = (
 				B724F92E2AFCBE4400722CE1 /* Localizable.strings in Resources */,
 				B79A28F12AF37DEF008FD3CE /* Secrets.xcconfig in Resources */,
+				B7DE80652B08A771007A7AEF /* GoogleService-Info.plist in Resources */,
 				B7F6A8DA2AE2B61500892215 /* LaunchScreen.storyboard in Resources */,
 				B7AF693A2AE0FEE000385632 /* Assets.xcassets in Resources */,
-				B7E8A46D2AEB83840026931D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,7 +526,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# xcconfig에서 API_KEY 값을 읽기\nAPI_KEY=${GOOGLE_API_KEY}\nGCM_SENDER_ID=${GCM_SENDER_ID}\nGOOGLE_APP_ID=${GOOGLE_APP_ID}\n# 커스텀 plist 파일 경로\nPLIST=${SRCROOT}/pins/Resources/GoogleService-Info.plist\n\n# plist 파일에 API_KEY 값 설정\n/usr/libexec/PlistBuddy -c \"Set :API_KEY $API_KEY\" \"$PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :GCM_SENDER_ID $GCM_SENDER_ID\" \"$PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :GOOGLE_APP_ID $GOOGLE_APP_ID\" \"$PLIST\"\n";
+			shellScript = "# xcconfig에서 API_KEY 값을 읽기\nAPI_KEY=${GOOGLE_API_KEY}\nGCM_SENDER_ID=${GCM_SENDER_ID}\nGOOGLE_APP_ID=${GOOGLE_APP_ID}\nREVERSED_CLIENT_ID=${REVERSED_CLIENT_ID}\n# 커스텀 plist 파일 경로\nPLIST=${SRCROOT}/pins/Resources/GoogleService-Info.plist\n\n# plist 파일에 API_KEY 값 설정\n/usr/libexec/PlistBuddy -c \"Set :API_KEY $API_KEY\" \"$PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :GCM_SENDER_ID $GCM_SENDER_ID\" \"$PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :GOOGLE_APP_ID $GOOGLE_APP_ID\" \"$PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :REVERSED_CLIENT_ID $REVERSED_CLIENT_ID\" \"$PLIST\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -560,6 +563,7 @@
 				B71C38832B075CC70065A783 /* CryptoUtils.swift in Sources */,
 				B710588E2AEA2699003D6039 /* OSLog+Extensions.swift in Sources */,
 				B76DD4622AFE0DB000DFE7E1 /* FirestorageService.swift in Sources */,
+				B7DE80632B08965D007A7AEF /* DIContainer.swift in Sources */,
 				B7035B852AF8D1FF000F74ED /* UIView+Extensions.swift in Sources */,
 				B7226B162B01F6990034B451 /* LoginViewModel.swift in Sources */,
 				B71058952AEA42F8003D6039 /* CategoryCollectionViewCell.swift in Sources */,
@@ -752,7 +756,7 @@
 				DEVELOPMENT_TEAM = X843D4L2C2;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = pins/Info.plist;
+				INFOPLIST_FILE = pins/Resources/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "근처 핀을 검색하거나 현재 내 위치를 확인하기 위해 위치 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "근처 핀을 검색하거나 현재 내 위치를 확인하기 위해 위치 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "핀을 생성할 때 사진을 첨부하려면 사진 접근 권한이 필요합니다.";
@@ -784,7 +788,7 @@
 				DEVELOPMENT_TEAM = X843D4L2C2;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = pins/Info.plist;
+				INFOPLIST_FILE = pins/Resources/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "근처 핀을 검색하거나 현재 내 위치를 확인하기 위해 위치 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "근처 핀을 검색하거나 현재 내 위치를 확인하기 위해 위치 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "핀을 생성할 때 사진을 첨부하려면 사진 접근 권한이 필요합니다.";

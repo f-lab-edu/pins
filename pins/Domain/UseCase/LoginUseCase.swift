@@ -8,28 +8,31 @@
 import FirebaseAuth
 import AuthenticationServices
 
+enum LoginMethod {
+    case apple
+}
+
 protocol LoginUseCaseProtocol {
-    func login(credential: AuthCredential, completion: @escaping (Result<User, Error>) -> Void)
+    func login(method: LoginMethod, credential: AuthCredential, completion: @escaping (Result<User, Error>) -> Void)
     func authorization(delegate: ASAuthorizationControllerDelegate & ASAuthorizationControllerPresentationContextProviding)
     func getNonce() -> String?
 }
 
-class LoginUseCase: LoginUseCaseProtocol {
-    private let authService: FirebaseAuthServiceProtocol = FirebaseAuthService()
+final class LoginUseCase: LoginUseCaseProtocol {
+    private let authService: FirebaseAuthServiceProtocol
 
+    init(authService: FirebaseAuthServiceProtocol) {
+        self.authService = authService
+    }
+    
     func authorization(delegate: ASAuthorizationControllerDelegate & ASAuthorizationControllerPresentationContextProviding) {
         authService.openAuthorizationController(delegate: delegate)
     }
     
-    func login(credential: AuthCredential, completion: @escaping (Result<User, Error>) -> Void) {
-        authService.signInWithApple(credential: credential) { result in
-            switch result {
-            case .success(let authDataResult):
-                let user = User(id: authDataResult.user.uid, name: authDataResult.user.displayName, email: authDataResult.user.email)
-                completion(.success(user))
-            case .failure(let error):
-                completion(.failure(error))
-            }
+    func login(method: LoginMethod, credential: AuthCredential, completion: @escaping (Result<User, Error>) -> Void) {
+        switch method {
+        case .apple:
+            authService.signInWithApple(credential: credential, completion: completion)
         }
     }
     

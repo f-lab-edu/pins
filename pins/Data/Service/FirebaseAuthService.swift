@@ -10,7 +10,7 @@ import FirebaseAuth
 import AuthenticationServices
 
 protocol FirebaseAuthServiceProtocol {
-    func signInWithApple(credential: AuthCredential, completion: @escaping (Result<AuthDataResult, Error>) -> Void)
+    func signInWithApple(credential: AuthCredential, completion: @escaping (Result<User, Error>) -> Void)
     func openAuthorizationController(delegate: ASAuthorizationControllerDelegate & ASAuthorizationControllerPresentationContextProviding)
     func getNonce() -> String?
 }
@@ -18,14 +18,15 @@ protocol FirebaseAuthServiceProtocol {
 final class FirebaseAuthService: FirebaseAuthServiceProtocol {
     private var currentNonce: String?
     
-    func signInWithApple(credential: AuthCredential, completion: @escaping (Result<AuthDataResult, Error>) -> Void) {
+    func signInWithApple(credential: AuthCredential, completion: @escaping (Result<User, Error>) -> Void) {
         Auth.auth().signIn(with: credential) { authResult, error in
             if let error = error  {
                 os_log("Error Apple sign in: %@", log: .ui, type: .error, error.localizedDescription)
                 completion(.failure(error))
             }
             if let authResult = authResult {
-                completion(.success(authResult))
+                let user = User(id: authResult.user.uid, name: authResult.user.displayName, email: authResult.user.email)
+                completion(.success(user))
             }
         }
     }

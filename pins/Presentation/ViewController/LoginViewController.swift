@@ -11,7 +11,7 @@ import AuthenticationServices
 import FirebaseAuth
 
 final class LoginViewController: UIViewController {
-    private let viewModel: LoginViewModel = LoginViewModel()
+    private let viewModel: LoginViewModel = LoginViewModel(loginUseCase: LoginUseCase(authService: FirebaseAuthService()))
     
     var loginView: LoginView {
         view as! LoginView
@@ -27,9 +27,14 @@ final class LoginViewController: UIViewController {
     }
     
     private func setAction() {
-        loginView.setLoginAction(UIAction(handler: { [weak self] _ in
+        loginView.setAppleLoginAction(UIAction(handler: { [weak self] _ in
             guard let self = self else { return }
             self.viewModel.openAuthorizationController(delegate: self)
+        }))
+        
+        loginView.setGoogleLoginAction(UIAction(handler: { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.
         }))
     }
 }
@@ -55,7 +60,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
             
             let credential = OAuthProvider.appleCredential(withIDToken: idTokenString, rawNonce: nonce, fullName: appleIDCredential.fullName)
             
-            viewModel.login(credential: credential)
+            viewModel.loginWithApple(credential: credential)
         }
     }
     

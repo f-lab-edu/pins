@@ -12,7 +12,18 @@ final class LoginView: UIView {
     // MARK: - Properties
     private let icon: UIImageView = UIImageView(image: UIImage(resource: .pinsIcon))
     private let title: UIImageView = UIImageView(image: UIImage(resource: .pinsTitle))
-    private let loginButton: ASAuthorizationAppleIDButton = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .whiteOutline)
+    private let appleLoginButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.setImage(UIImage(resource: .appleLogin), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        return button
+    }()
+    private let googleLoginButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.setImage(UIImage(resource: .googleLogin), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        return button
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,7 +37,7 @@ final class LoginView: UIView {
     
     // MARK: - Layouts
     private func setLayout() {
-        [icon, title, loginButton].forEach { addSubview($0) }
+        [icon, title, appleLoginButton, googleLoginButton].forEach { addSubview($0) }
         
         icon.centerXLayout(equalTo: centerXAnchor)
             .centerYLayout(equalTo: centerYAnchor)
@@ -38,14 +49,21 @@ final class LoginView: UIView {
             .widthLayout(100)
             .heightLayout(50)
         
-        loginButton.bottomLayout(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -30)
-            .leadingLayout(equalTo: leadingAnchor, constant: 16)
-            .trailingLayout(equalTo: trailingAnchor, constant: -16)
-            .heightLayout(45)
+        appleLoginButton.bottomLayout(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -30)
+            .centerXLayout(equalTo: centerXAnchor)
+            .heightLayout(50)
+        
+        googleLoginButton.bottomLayout(equalTo: appleLoginButton.topAnchor, constant: -10)
+            .centerXLayout(equalTo: centerXAnchor)
+            .heightLayout(50)
     }
     
     // MARK: - Methods
-    func setLoginAction(_ action: UIAction) {
-        loginButton.addAction(action, for: .touchUpInside)
+    func setAppleLoginAction(_ action: UIAction) {
+        appleLoginButton.addAction(action, for: .touchUpInside)
+    }
+    
+    func setGoogleLoginAction(_ action: UIAction) {
+        googleLoginButton.addAction(action, for: .touchUpInside)
     }
 }
