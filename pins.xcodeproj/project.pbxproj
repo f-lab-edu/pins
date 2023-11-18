@@ -48,6 +48,7 @@
 		B7BC79172AF4AB8900BBE0A9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B7BC79162AF4AB8900BBE0A9 /* FirebaseAuth */; };
 		B7DE80632B08965D007A7AEF /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DE80622B08965D007A7AEF /* DIContainer.swift */; };
 		B7DE80652B08A771007A7AEF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7DE80642B08A771007A7AEF /* GoogleService-Info.plist */; };
+		B7DE80682B08A979007A7AEF /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = B7DE80672B08A979007A7AEF /* GoogleSignIn */; };
 		B7E050F12AE4FB3A007903C3 /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E050F02AE4FB3A007903C3 /* MainMapView.swift */; };
 		B7E8A4702AEB84420026931D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A46F2AEB84420026931D /* FirebaseAnalytics */; };
 		B7E8A4722AEB84420026931D /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A4712AEB84420026931D /* FirebaseCrashlytics */; };
@@ -130,6 +131,7 @@
 				B7BC79172AF4AB8900BBE0A9 /* FirebaseAuth in Frameworks */,
 				B76DD4642AFE0E4B00DFE7E1 /* FirebaseStorage in Frameworks */,
 				B7E8A4722AEB84420026931D /* FirebaseCrashlytics in Frameworks */,
+				B7DE80682B08A979007A7AEF /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +394,7 @@
 				B7BC79162AF4AB8900BBE0A9 /* FirebaseAuth */,
 				B7B977652AFA0F550023718B /* FirebaseFirestore */,
 				B76DD4632AFE0E4B00DFE7E1 /* FirebaseStorage */,
+				B7DE80672B08A979007A7AEF /* GoogleSignIn */,
 			);
 			productName = pins;
 			productReference = B7AF692D2AE0FEDF00385632 /* pins.app */;
@@ -468,6 +471,7 @@
 			mainGroup = B7AF69242AE0FEDF00385632;
 			packageReferences = (
 				B7E8A46E2AEB84420026931D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				B7DE80662B08A979007A7AEF /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = B7AF692E2AE0FEDF00385632 /* Products */;
 			projectDirPath = "";
@@ -513,7 +517,7 @@
 		B745F0D72AF28A6600224EC9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -747,6 +751,7 @@
 		};
 		B7AF69582AE0FEE000385632 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B79A28F02AF37DEB008FD3CE /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -927,6 +932,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B7DE80662B08A979007A7AEF /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		B7E8A46E2AEB84420026931D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -952,6 +965,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B7E8A46E2AEB84420026931D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		B7DE80672B08A979007A7AEF /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B7DE80662B08A979007A7AEF /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
 		};
 		B7E8A46F2AEB84420026931D /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

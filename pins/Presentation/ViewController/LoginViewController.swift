@@ -7,12 +7,14 @@
 
 import UIKit
 import OSLog
-import AuthenticationServices
+import Combine
 import FirebaseAuth
+import AuthenticationServices
 
 final class LoginViewController: UIViewController {
-    private let viewModel: LoginViewModel = LoginViewModel(loginUseCase: LoginUseCase(authService: FirebaseAuthService()))
-    
+    private let viewModel = LoginViewModel(loginUseCase: LoginUseCase(authService: FirebaseAuthService()))
+    private var cancellables = Set<AnyCancellable>()
+
     var loginView: LoginView {
         view as! LoginView
     }
@@ -20,21 +22,39 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setAction()
+        setBindings()
+
     }
     
     override func loadView() {
         view = LoginView()
     }
+        
+    private func setBindings() {
+        viewModel.$loginState
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] result in
+                switch result {
+                case .success(_):
+                    self?.navigationController?.pushViewController(MainViewController(), animated: true)
+                case .failure(let error):
+                    os_log("Login Error: %@", log: .default, type: .error, error.localizedDescription)
+                case .none:
+                    break
+                }
+            }
+            .store(in: &cancellables)
+    }
     
     private func setAction() {
         loginView.setAppleLoginAction(UIAction(handler: { [weak self] _ in
             guard let self = self else { return }
-            self.viewModel.openAuthorizationController(delegate: self)
+            self.viewModel.openAppleAuthorizationController(delegate: self)
         }))
         
-        loginView.setGoogleLoginAction(UIAction(handler: { [weak self] in
+        loginView.setGoogleLoginAction(UIAction(handler: { [weak self] _ in
             guard let self = self else { return }
-            self.viewModel.
+            self.viewModel.performGoogleLogin(delegate: self)
         }))
     }
 }
@@ -46,21 +66,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
-            guard let nonce = viewModel.getNonce() else {
-                fatalError("Invalid state: A login callback was received, but no login request was sent.")
-            }
-            guard let appleIDToken = appleIDCredential.identityToken else {
-                os_log("Unable to fetch identity token", log: .ui, type: .error)
-                return
-            }
-            guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
-                os_log("Unable to serialize token string from data: %@", log: .ui, type: .error, appleIDToken.debugDescription)
-                return
-            }
-            
-            let credential = OAuthProvider.appleCredential(withIDToken: idTokenString, rawNonce: nonce, fullName: appleIDCredential.fullName)
-            
-            viewModel.loginWithApple(credential: credential)
+            viewModel.performAppleLogin(credential: appleIDCredential)
         }
     }
     

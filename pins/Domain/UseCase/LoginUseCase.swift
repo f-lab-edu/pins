@@ -5,17 +5,13 @@
 //  Created by 주동석 on 2023/11/17.
 //
 
+import OSLog
 import FirebaseAuth
 import AuthenticationServices
 
-enum LoginMethod {
-    case apple
-}
-
 protocol LoginUseCaseProtocol {
-    func login(method: LoginMethod, credential: AuthCredential, completion: @escaping (Result<User, Error>) -> Void)
-    func authorization(delegate: ASAuthorizationControllerDelegate & ASAuthorizationControllerPresentationContextProviding)
-    func getNonce() -> String?
+    func googleAuthorization(delegate: UIViewController, completion: @escaping (Result<User, Error>) -> Void)
+    func appleAuthorization(credential: ASAuthorizationAppleIDCredential, nonce: String?, completion: @escaping (Result<User, Error>) -> Void)
 }
 
 final class LoginUseCase: LoginUseCaseProtocol {
@@ -25,18 +21,33 @@ final class LoginUseCase: LoginUseCaseProtocol {
         self.authService = authService
     }
     
-    func authorization(delegate: ASAuthorizationControllerDelegate & ASAuthorizationControllerPresentationContextProviding) {
-        authService.openAuthorizationController(delegate: delegate)
-    }
-    
-    func login(method: LoginMethod, credential: AuthCredential, completion: @escaping (Result<User, Error>) -> Void) {
-        switch method {
-        case .apple:
-            authService.signInWithApple(credential: credential, completion: completion)
+    func googleAuthorization(delegate: UIViewController, completion: @escaping (Result<User, Error>) -> Void) {
+        authService.getFirebaseCredentialFromGoogle(presentView: delegate) { [weak self] credential in
+            guard let self = self else { return }
+            self.authService.signInWithGoogle(credential: credential) { result in
+                self.handleLoginResult(result, completion: completion)
+            }
         }
     }
     
-    func getNonce() -> String? {
-        return authService.getNonce()
+    func appleAuthorization(credential: ASAuthorizationAppleIDCredential, nonce: String?, completion: @escaping (Result<User, Error>) -> Void) {
+        authService.getFirebaseCredentialFromApple(with: credential, nonce: nonce) { [weak self] credential in
+            guard let self = self else { return }
+            self.authService.signInWithApple(credential: credential) { result in
+                self.handleLoginResult(result, completion: completion)
+            }
+        }
+    }
+    
+    private func handleLoginResult(_ result: Result<AuthDataResult, Error>, completion: @escaping (Result<User, Error>) -> Void) {
+        switch result {
+        case .success(let user):
+            // 추가적인 성공 처리 로직이 필요한 경우 여기에 구현
+            let user = User(id: user.user.uid, name: user.user.displayName, email: user.user.email)
+            completion(.success(user))
+        case .failure(let error):
+            // 에러 핸들링 로직
+            completion(.failure(error))
+        }
     }
 }

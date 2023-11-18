@@ -5,32 +5,42 @@
 //  Created by 주동석 on 2023/11/13.
 //
 
+import OSLog
 import FirebaseAuth
 import AuthenticationServices
 
 final class LoginViewModel {
+    @Published var loginState: Result<User, Error>?
+    private var currentNonce: String?
     private let loginUseCase: LoginUseCaseProtocol
     
     init(loginUseCase: LoginUseCaseProtocol) {
         self.loginUseCase = loginUseCase
     }
     
-    func openAuthorizationController(delegate: ASAuthorizationControllerDelegate & ASAuthorizationControllerPresentationContextProviding) {
-        loginUseCase.authorization(delegate: delegate)
-    }
-    
-    func loginWithApple(credential: AuthCredential) {
-        loginUseCase.login(method: .apple, credential: credential) { result in
-            switch result {
-            case .success(let user):
-                print("Success login with \(user)")
-            case .failure(let error):
-                print("Error login with \(error)")
-            }
+    func performGoogleLogin(delegate: UIViewController) {
+        loginUseCase.googleAuthorization(delegate: delegate) { [weak self] result in
+            self?.loginState = result
         }
     }
     
-    func getNonce() -> String? {
-        loginUseCase.getNonce()
+    func performAppleLogin(credential: ASAuthorizationAppleIDCredential) {
+        loginUseCase.appleAuthorization(credential: credential, nonce: currentNonce) { [weak self] result in
+            self?.loginState = result
+        }
+    }
+    
+    func openAppleAuthorizationController(delegate: ASAuthorizationControllerDelegate & ASAuthorizationControllerPresentationContextProviding) {
+        let nonce = CryptoUtils.randomNonceString()
+        currentNonce = nonce
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        request.nonce = CryptoUtils.sha256(nonce)
+
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = delegate
+        authorizationController.presentationContextProvider = delegate
+        authorizationController.performRequests()
     }
 }
