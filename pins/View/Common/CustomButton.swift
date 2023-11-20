@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomButton: UIButton {
+final class CustomButton: UIButton {
     init(backgroundColor: UIColor = .white, tintColor: UIColor = .gray, cornerRadius: CGFloat = 15) {
         super.init(frame: .zero)
         self.tintColor = tintColor

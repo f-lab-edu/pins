@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MainViewModel {
+final class MainViewModel {
     @Published var createViewIsPresented: Bool = false
     
     func setCreateViewIsPresented(isPresented: Bool) {

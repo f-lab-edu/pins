@@ -9,7 +9,7 @@ import AuthenticationServices
 import CryptoKit
 import FirebaseAuth
 
-class AppleLoginService {
+final class AppleLoginService {
     private var currentNonce: String?
     
     func getNonce() -> String? {

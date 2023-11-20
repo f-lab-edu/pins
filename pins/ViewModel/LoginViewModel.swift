@@ -7,7 +7,7 @@
 
 import AuthenticationServices
 
-class LoginViewModel {
+final class LoginViewModel {
     private let appleLoginService: AppleLoginService = AppleLoginService()
     
     func getAppleNonce() -> String? {

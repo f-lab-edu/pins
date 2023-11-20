@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchView: UIView {
+final class SearchView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white

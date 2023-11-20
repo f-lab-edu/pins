@@ -11,15 +11,15 @@ import MapKit
 import Combine
 import FirebaseAuth
 
-class MainViewController: UIViewController {
-    let viewModel: MainViewModel = MainViewModel()
+final class MainViewController: UIViewController {
+    private let viewModel: MainViewModel = MainViewModel()
     
-    var mainMapView: MainMapView {
+    private var mainMapView: MainMapView {
         view as! MainMapView
     }
     
-    var locationManager: CLLocationManager = CLLocationManager()
-    var cancellable = Set<AnyCancellable>()
+    private var locationManager: CLLocationManager = CLLocationManager()
+    private var cancellable = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +80,8 @@ class MainViewController: UIViewController {
         
         mainMapView.setCreateButtonAction(UIAction(handler: { [weak self] _ in
             let createViewController: CreateViewController = CreateViewController()
+            guard let position = self?.locationManager.location else { return }
+            createViewController.viewModel.setPosition(position: position)
             self?.navigationController?.pushViewController(createViewController, animated: true)
             
             self?.viewModel.setCreateViewIsPresented(isPresented: false)

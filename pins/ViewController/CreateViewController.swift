@@ -9,34 +9,31 @@ import UIKit
 import Combine
 import PhotosUI
 
-class CreateViewController: UIViewController {
-    private enum CollectionViewType: Int {
-        case CategoryCollection
-        case ImageCollection
-    }
+final class CreateViewController: UIViewController {
     var viewModel: CreateViewModel = CreateViewModel()
-    var cancellable: Set<AnyCancellable> = []
-    var imagePicker: PHPickerViewController = {
+    private enum CollectionViewType: Int {
+        case categoryCollection
+        case imageCollection
+    }
+    private var cancellable: Set<AnyCancellable> = []
+    private var loadingIndicator: LoadingIndicator = LoadingIndicator()
+    private var imagePicker: PHPickerViewController = {
         var configuration = PHPickerConfiguration()
-        configuration.selectionLimit = 5
+        configuration.selectionLimit = 3
         configuration.filter = .any(of: [.images])
         let picker = PHPickerViewController(configuration: configuration)
         return picker
     }()
-    var createView: CreateView {
+    private var createView: CreateView {
         view as! CreateView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setAction()
+        bindViewModel()
         createView.configureCategoryCollectionView(delegate: self, dataSource: self)
         imagePicker.delegate = self
-        
-        viewModel.$selectedImages.sink { [weak self] images in
-            self?.createView.reloadImageCollectionView()
-            self?.createView.setPhotoCount(count: images.count)
-        }.store(in: &cancellable)
     }
     
     override func loadView() {
@@ -47,7 +44,22 @@ class CreateViewController: UIViewController {
         view.endEditing(true)
     }
     
-    func setAction() {
+    private func bindViewModel() {
+        viewModel.$selectedImageInfos.sink { [weak self] images in
+            self?.createView.reloadImageCollectionView()
+            self?.createView.setPhotoCount(count: images.count)
+        }.store(in: &cancellable)
+        
+        createView.titleTextView.textDidChangePublisher
+            .assign(to: \.title, on: viewModel)
+            .store(in: &cancellable)
+        
+        createView.contentTextView.textDidChangePublisher
+            .assign(to: \.content, on: viewModel)
+            .store(in: &cancellable)
+    }
+    
+    private func setAction() {
         createView.setBackButtonAction(UIAction(handler: { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
         }))
@@ -55,6 +67,16 @@ class CreateViewController: UIViewController {
         createView.setImageButtonAction(UIAction(handler: { [weak self] _ in
             guard let imagePicker = self?.imagePicker else { return }
             self?.present(imagePicker, animated: true, completion: nil)
+        }))
+        
+        createView.setCreateButtonAction(UIAction(handler: { [weak self] _ in
+            self?.loadingIndicator.showLoading(with: "핀 생성 중입니다...")
+
+            Task {
+                await self?.viewModel.createPin()
+                self?.loadingIndicator.hideLoading()
+                self?.navigationController?.popViewController(animated: true)
+            }
         }))
     }
 
@@ -70,11 +92,40 @@ class CreateViewController: UIViewController {
         }
     }
     
-    private func loadUIImage(from itemProvider: NSItemProvider, completion: @escaping (UIImage) -> Void) {
-        if itemProvider.canLoadObject(ofClass: UIImage.self) {
-            itemProvider.loadObject(ofClass: UIImage.self) { (object, error) in
-                if let image = object as? UIImage {
-                    completion(image)
+    private func processPickerResult(_ index: Int, _ result: PHPickerResult) {
+        if result.itemProvider.canLoadObject(ofClass: UIImage.self) {
+            Task {
+                let image = await loadImageAsync(result.itemProvider)
+                let extensionType = await loadFileExtension(result.itemProvider)
+                if let image = image, let extensionType = extensionType {
+                    await MainActor.run {
+                        viewModel.addSelectedImage(ImageInfo(index: index, image: image, extensionType: extensionType))
+                    }
+                }
+            }
+        }
+    }
+
+    private func loadImageAsync(_ itemProvider: NSItemProvider) async -> UIImage? {
+        return await withCheckedContinuation { continuation in
+            itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+                if let image = image as? UIImage {
+                    continuation.resume(returning: image)
+                } else {
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+
+    private func loadFileExtension(_ itemProvider: NSItemProvider) async -> String? {
+        return await withCheckedContinuation { continuation in
+            itemProvider.loadFileRepresentation(forTypeIdentifier: UTType.image.identifier) { url, error in
+                if let url = url {
+                    let fileExtension = url.pathExtension
+                    continuation.resume(returning: fileExtension)
+                } else {
+                    continuation.resume(returning: nil)
                 }
             }
         }
@@ -84,7 +135,7 @@ class CreateViewController: UIViewController {
 extension CreateViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch CollectionViewType(rawValue: collectionView.tag) {
-        case .CategoryCollection:
+        case .categoryCollection:
             let (selected, unselected) = viewModel.didSelectCategory(at: indexPath.row, previouslySelected: viewModel.selectedCategoryIndex)
             updateCategoryUIForSelection(in: collectionView, selected: selected, unselected: unselected)
         default:
@@ -94,9 +145,9 @@ extension CreateViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch CollectionViewType(rawValue: collectionView.tag) {
-        case .CategoryCollection:
+        case .categoryCollection:
             return viewModel.getCategoriesCount()
-        case .ImageCollection:
+        case .imageCollection:
             return viewModel.getSelectedImagesCount()
         default:
             fatalError("wrong collection view tag")
@@ -105,13 +156,13 @@ extension CreateViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch CollectionViewType(rawValue: collectionView.tag) {
-        case .CategoryCollection:
+        case .categoryCollection:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
             cell.setText(viewModel.categories[indexPath.row])
             return cell
-        case .ImageCollection:
+        case .imageCollection:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
-            cell.setImage(image: viewModel.selectedImages[indexPath.row])
+            cell.setImage(image: viewModel.selectedImageInfos[indexPath.row].image)
             return cell
         default:
             fatalError("wrong collection view tag")
@@ -121,14 +172,10 @@ extension CreateViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 extension CreateViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: true)
-        viewModel.resetSelectedImages()
-        results.forEach { result in
-            loadUIImage(from: result.itemProvider) { [weak self] image in
-                DispatchQueue.main.async {
-                    self?.viewModel.addSelectedImage(image)
-                }
-            }
+        dismiss(animated: true)
+
+        for (index, result) in results.enumerated() {
+            processPickerResult(index, result)
         }
     }
 }

@@ -5,16 +5,17 @@
 //  Created by 주동석 on 2023/11/09.
 //
 
-"카테고리" = "카테고리";
-"친목" = "친목";
-"산책" = "산책";
-"게임" = "게임";
-"운동" = "운동";
-"스터디" = "스터디";
-"아파트/이웃" = "아파트/이웃";
-"맛집탐방" = "맛집탐방";
-"문화생활" = "문화생활";
-"기타" = "기타";
-"제목을 입력해주세요." = "제목을 입력해주세요.";
-"내용을 입력해주세요." = "내용을 입력해주세요.";
-"핀 만들기" = "핀 만들기";
+// Createview.swift
+"create.category.title" = "카테고리";
+"create.category.friendship" = "친목";
+"create.category.walk" = "산책";
+"create.category.game" = "게임";
+"create.category.exercise" = "운동";
+"create.category.study" = "스터디";
+"create.category.neighbor" = "아파트/이웃";
+"create.category.food" = "맛집탐방";
+"create.category.culture" = "문화생활";
+"create.category.etc" = "기타";
+"create.title.placeholder" = "제목을 입력해주세요.";
+"create.content.placeholder" = "내용을 입력해주세요.";
+"create.pin" = "핀 만들기";

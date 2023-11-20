@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CreateView: UIView {
+final class CreateView: UIView {
     // MARK: - Properties
     private enum Constants {
         static let categoryColumn: Int = 3
@@ -15,11 +15,12 @@ class CreateView: UIView {
         static let categoryPadding: CGFloat = 16
         static let lineGap: CGFloat = 12
         static let itemHeight: CGFloat = 35
+        static let selectionLimitCount = 3
     }
     
     private let imageButton: CustomButton = {
         let button = CustomButton(backgroundColor: UIColor(resource: .background), cornerRadius: 10)
-        button.setImageTitle(title: "0/5", systemName: "photo.badge.plus", titleColor: .gray, imageColor: .gray)
+        button.setImageTitle(title: "0/\(Constants.selectionLimitCount)", systemName: "photo.badge.plus", titleColor: .gray, imageColor: .gray)
         button.setBorder(width: 1, color: UIColor.lightGray.withAlphaComponent(0.5).cgColor)
         return button
     }()
@@ -42,7 +43,7 @@ class CreateView: UIView {
     
     private let categoryLabel: UILabel = {
         let label = UILabel()
-        label.text = NSLocalizedString("카테고리", comment: "")
+        label.text = NSLocalizedString("create.category.title", comment: "")
         label.font = .preferredFont(forTextStyle: .headline)
         label.adjustsFontForContentSizeCategory = true
         label.textColor = UIColor(resource: .text)
@@ -84,21 +85,18 @@ class CreateView: UIView {
         return collectionView
     }()
 
-    private let placeholderColor = UIColor(resource: .placeholderGray)
     private let itemCount: Int
     private let titleDivider = Divider()
     private let contentDivider = Divider()
     private let imageDivider = Divider()
-    private var titleTextView = UITextView()
-    private var contentTextView = UITextView()
+    var titleTextView: CustomTextView = CustomTextView(placeholder: "create.title.placeholder", tag: 1)
+    var contentTextView: CustomTextView = CustomTextView(placeholder: "create.content.placeholder", tag: 2)
     
     // MARK: - 생성자
     init(categoryCount: Int) {
         itemCount = categoryCount
         super.init(frame: .zero)
         backgroundColor = UIColor(resource: .background)
-        titleTextView = createTextView(text: "제목을 입력해주세요.", tag: 1)
-        contentTextView = createTextView(text: "내용을 입력해주세요.", tag: 2)
         titleTextView.delegate = self
         contentTextView.delegate = self
         setLayout()
@@ -176,17 +174,6 @@ class CreateView: UIView {
     }
     
     // MARK: - 메소드
-    private func createTextView(text: String, tag: Int) -> UITextView {
-        let textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.text = NSLocalizedString(text, comment: "")
-        textView.textColor = placeholderColor
-        textView.font = .preferredFont(forTextStyle: .callout)
-        textView.adjustsFontForContentSizeCategory = true
-        textView.backgroundColor = UIColor(resource: .background)
-        textView.tag = tag
-        return textView
-    }
     
     private func getCagetoryHeight() -> CGFloat {
         let rowsNeeded = (itemCount + Constants.categoryColumn - 1) / Constants.categoryColumn
@@ -199,6 +186,10 @@ class CreateView: UIView {
     
     func setImageButtonAction(_ action: UIAction) {
         imageButton.addAction(action, for: .touchUpInside)
+    }
+    
+    func setCreateButtonAction(_ action: UIAction) {
+        createButton.addAction(action, for: .touchUpInside)
     }
     
     func configureCategoryCollectionView(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
@@ -214,14 +205,14 @@ class CreateView: UIView {
     }
     
     func setPhotoCount(count: Int) {
-        imageButton.setTitle(title: "\(count)/5", color: .gray)
+        imageButton.setTitle(title: "\(count)/\(Constants.selectionLimitCount)", color: .gray)
     }
 }
 
 // MARK: - Extensions
 extension CreateView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == placeholderColor {
+        if textView.textColor == UIColor(resource: .placeholderGray) {
             textView.text = nil
             textView.textColor = UIColor.init(resource: .text)
         }
@@ -231,13 +222,13 @@ extension CreateView: UITextViewDelegate {
         if textView.text.isEmpty {
             switch textView.tag {
             case 1:
-                textView.text = NSLocalizedString("제목을 입력해주세요.", comment: "")
+                textView.text = NSLocalizedString("create.title.placeholder", comment: "")
             case 2:
-                textView.text = NSLocalizedString("내용을 입력해주세요.", comment: "")
+                textView.text = NSLocalizedString("create.content.placeholder", comment: "")
             default:
                 return
             }
-            textView.textColor = placeholderColor
+            textView.textColor = UIColor(resource: .placeholderGray)
         }
     }
 }
