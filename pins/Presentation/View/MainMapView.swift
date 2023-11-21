@@ -26,6 +26,7 @@ final class MainMapView: UIView {
         imageView.isHidden = true
         imageView.image = UIImage(resource: .pinsIcon)
         imageView.tintColor = .systemBlue
+        imageView.layer.add(AnimationManager.shakingAnimation(), forKey: "shake")
         return imageView
     }()
     private let createButton: CustomButton = {
