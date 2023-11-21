@@ -12,7 +12,9 @@ import FirebaseAuth
 import AuthenticationServices
 
 final class LoginViewController: UIViewController {
-    private let viewModel = LoginViewModel()
+    private lazy var authService: FirebaseAuthServiceProtocol = FirebaseAuthService()
+    private lazy var loginUseCase: LoginUseCaseProtocol = LoginUseCase(authService: authService)
+    private lazy var viewModel: LoginViewModel = LoginViewModel(loginUseCase: loginUseCase)
     private var cancellables = Set<AnyCancellable>()
 
     var loginView: LoginView {
@@ -23,7 +25,6 @@ final class LoginViewController: UIViewController {
         super.viewDidLoad()
         setAction()
         setBindings()
-
     }
     
     override func loadView() {

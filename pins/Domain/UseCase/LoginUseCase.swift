@@ -15,7 +15,11 @@ protocol LoginUseCaseProtocol {
 }
 
 final class LoginUseCase: LoginUseCaseProtocol {
-    @Dependency var authService: FirebaseAuthServiceProtocol
+    private var authService: FirebaseAuthServiceProtocol
+    
+    init(authService: FirebaseAuthServiceProtocol) {
+        self.authService = authService
+    }
     
     func googleLogin(delegate: UIViewController, completion: @escaping (Result<User, Error>) -> Void) {
         authService.getFirebaseCredentialFromGoogle(presentView: delegate) { [weak self] credential in
