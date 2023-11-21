@@ -27,7 +27,7 @@ final class CreateView: UIView {
     
     private let createButton: CustomButton = {
         let button = CustomButton()
-        button.setTitle(title: "핀 만들기", color: .white)
+        button.setTitle(title: NSLocalizedString("create.pin", comment: ""), color: .white)
         button.titleLabel?.font = .preferredFont(forTextStyle: .body)
         button.titleLabel?.adjustsFontForContentSizeCategory = true
         button.backgroundColor = .systemBlue
