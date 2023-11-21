@@ -46,11 +46,10 @@
 		B7B977682AFA10AE0023718B /* PinRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B977672AFA10AE0023718B /* PinRepository.swift */; };
 		B7B9776C2AFA20D80023718B /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B9776B2AFA20D80023718B /* Date+Extensions.swift */; };
 		B7BC79172AF4AB8900BBE0A9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B7BC79162AF4AB8900BBE0A9 /* FirebaseAuth */; };
-		B7DE80632B08965D007A7AEF /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DE80622B08965D007A7AEF /* DIContainer.swift */; };
 		B7DE80652B08A771007A7AEF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7DE80642B08A771007A7AEF /* GoogleService-Info.plist */; };
 		B7DE80682B08A979007A7AEF /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = B7DE80672B08A979007A7AEF /* GoogleSignIn */; };
 		B7E050F12AE4FB3A007903C3 /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E050F02AE4FB3A007903C3 /* MainMapView.swift */; };
-		B7E33B762B08F670006A32FF /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E33B752B08F670006A32FF /* DependencyContainer.swift */; };
+		B7E0D5912B0CB59D0090A465 /* AnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */; };
 		B7E8A4702AEB84420026931D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A46F2AEB84420026931D /* FirebaseAnalytics */; };
 		B7E8A4722AEB84420026931D /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A4712AEB84420026931D /* FirebaseCrashlytics */; };
 		B7F6A8DA2AE2B61500892215 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F6A8D82AE2B61500892215 /* LaunchScreen.storyboard */; };
@@ -116,10 +115,9 @@
 		B7B977632AFA0D270023718B /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		B7B977672AFA10AE0023718B /* PinRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinRepository.swift; sourceTree = "<group>"; };
 		B7B9776B2AFA20D80023718B /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
-		B7DE80622B08965D007A7AEF /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		B7DE80642B08A771007A7AEF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B7E050F02AE4FB3A007903C3 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
-		B7E33B752B08F670006A32FF /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
+		B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
 		B7F6A8D92AE2B61500892215 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -177,6 +175,7 @@
 		B71C38722B07510A0065A783 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				B7E0D58F2B0CB5920090A465 /* Animation */,
 				B7E050EF2AE4FB30007903C3 /* View */,
 				B74A4FBF2AE78B7600226EA7 /* ViewController */,
 				B710588F2AEA291E003D6039 /* ViewModel */,
@@ -243,8 +242,6 @@
 			children = (
 				B7AF69302AE0FEDF00385632 /* AppDelegate.swift */,
 				B7AF69322AE0FEDF00385632 /* SceneDelegate.swift */,
-				B7DE80622B08965D007A7AEF /* DIContainer.swift */,
-				B7E33B752B08F670006A32FF /* DependencyContainer.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -372,6 +369,14 @@
 				B7157E692AF384E2007CEF95 /* LoginView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		B7E0D58F2B0CB5920090A465 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */,
+			);
+			path = Animation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -542,6 +547,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7E0D5912B0CB59D0090A465 /* AnimationManager.swift in Sources */,
 				B7B9776C2AFA20D80023718B /* Date+Extensions.swift in Sources */,
 				B7B977612AFA0A550023718B /* FirebaseFirestore.swift in Sources */,
 				B74A4FC12AE78BAE00226EA7 /* SearchViewController.swift in Sources */,
@@ -558,7 +564,6 @@
 				B7E050F12AE4FB3A007903C3 /* MainMapView.swift in Sources */,
 				B7157E6A2AF384E2007CEF95 /* LoginView.swift in Sources */,
 				B71058932AEA2CB3003D6039 /* CustomButton.swift in Sources */,
-				B7E33B762B08F670006A32FF /* DependencyContainer.swift in Sources */,
 				B74A4FC32AE78BE700226EA7 /* SearchView.swift in Sources */,
 				B79A28F32AF37F93008FD3CE /* LoginViewController.swift in Sources */,
 				B78099432B06047400C01059 /* ImageInfo.swift in Sources */,
@@ -571,7 +576,6 @@
 				B71C38832B075CC70065A783 /* CryptoUtils.swift in Sources */,
 				B710588E2AEA2699003D6039 /* OSLog+Extensions.swift in Sources */,
 				B76DD4622AFE0DB000DFE7E1 /* FirestorageService.swift in Sources */,
-				B7DE80632B08965D007A7AEF /* DIContainer.swift in Sources */,
 				B7035B852AF8D1FF000F74ED /* UIView+Extensions.swift in Sources */,
 				B7226B162B01F6990034B451 /* LoginViewModel.swift in Sources */,
 				B71058952AEA42F8003D6039 /* CategoryCollectionViewCell.swift in Sources */,
