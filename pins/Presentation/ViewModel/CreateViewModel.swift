@@ -12,13 +12,14 @@ import FirebaseStorage
 import OSLog
 
 final class CreateViewModel {
+    private var createUsecase: CreateUseCaseProtocol
     @Published var selectedImageInfos: [ImageInfo] = []
     @Published var title: String = "제목을 입력해주세요."
     @Published var content: String = "내용을 입력해주세요."
     private var longitude: Double = 0
     private var latitude: Double = 0
     private var category: String = ""
-    let pinRepository: PinRepository = PinRepository()
+    let pinRepository: FirebaseRepository = FirebaseRepository()
     var selectedCategoryIndex: Int?
     let categories: [String] = [
         "create.category.friendship",
@@ -31,6 +32,10 @@ final class CreateViewModel {
         "create.category.culture",
         "create.category.etc",
     ]
+    
+    init(createUsecase: CreateUseCaseProtocol) {
+        self.createUsecase = createUsecase
+    }
     
     func getCategoriesCount() -> Int {
         categories.count
@@ -64,16 +69,15 @@ final class CreateViewModel {
     }
     
     func createPin() async {
-        let urls = await FirestorageService.uploadImages(imageInfos: selectedImageInfos)
-        await pinRepository.createPin(pin: Pin(
-            id: Auth.auth().currentUser?.uid ?? "",
-            title: title,
-            content: content,
+        let pin = Pin(
+            id: title,
+            title: content,
+            content: category,
             longitude: longitude,
             latitude: latitude,
             category: category,
-            created: Date().currentDateTimeAsString(),
-            urls: urls.sorted(by: { $0.index < $1.index }).map { $0.url.absoluteString })
+            created: Date().currentDateTimeAsString()
         )
+        await createUsecase.createPin(pin: pin, imageInfos: selectedImageInfos)
     }
 }

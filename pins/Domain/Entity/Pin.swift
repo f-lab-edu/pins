@@ -15,5 +15,24 @@ struct Pin: Codable {
     var latitude: Double
     var category: String
     var created: String
-    var urls: [String]
+    var urls: [String] = []
+    
+    func withUrls(urls: [String]) -> Pin {
+        var newPin = self
+        newPin.urls = urls
+        return newPin
+    }
+    
+    func toDictionary() -> [String: Any] {
+        return [
+            "id": id,
+            "title": title,
+            "content": content,
+            "longitude": longitude,
+            "latitude": latitude,
+            "category": category,
+            "created": created,
+            "urls": urls,
+        ]
+    }
 }
