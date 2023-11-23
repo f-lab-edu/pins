@@ -12,7 +12,10 @@ import Combine
 import FirebaseAuth
 
 final class MainViewController: UIViewController {
-    private let viewModel: MainViewModel = MainViewModel()
+    private lazy var firebaseRepository: FirebaseRepository = FirebaseRepository()
+    private lazy var firestoreService: FirestorageServiceProtocol = FirestorageService(firebaseRepository: firebaseRepository)
+    private lazy var mainUseCase: MainUseCaseProtocol = MainUseCase(firestorageService: firestoreService)
+    private lazy var viewModel: MainViewModel = MainViewModel(mainUseCase: mainUseCase)
     
     private var mainMapView: MainMapView {
         view as! MainMapView
@@ -32,10 +35,19 @@ final class MainViewController: UIViewController {
         viewModel.$createViewIsPresented.sink { [weak self] isPresented in
             self?.mainMapView.presentCreateView(isPresented: isPresented)
         }.store(in: &cancellable)
+        
+        loadPins()
     }
     
     override func loadView() {
         view = MainMapView()
+    }
+    
+    private func loadPins() {
+        Task {
+            let pins = await viewModel.getPins()
+            mainMapView.drawPins(pins: pins)
+        }
     }
     
     private func setLocationManager() {
@@ -80,7 +92,7 @@ final class MainViewController: UIViewController {
         
         mainMapView.setCreateButtonAction(UIAction(handler: { [weak self] _ in
             let createViewController: CreateViewController = CreateViewController()
-            guard let position = self?.locationManager.location else { return }
+            guard let position = self?.mainMapView.getCenterCoordinate() else { return }
             createViewController.setPosition(position)
             self?.navigationController?.pushViewController(createViewController, animated: true)
             

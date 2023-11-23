@@ -23,6 +23,19 @@ struct Pin: Codable {
         return newPin
     }
     
+    static func toData(_ data: [String: Any]) -> Pin {
+        return Pin(
+            id: data["id"] as! String,
+            title: data["title"] as! String,
+            content: data["content"] as! String,
+            longitude: data["longitude"] as! Double,
+            latitude: data["latitude"] as! Double,
+            category: data["category"] as! String,
+            created: data["created"] as! String,
+            urls: data["urls"] as! [String]
+        )
+    }
+    
     func toDictionary() -> [String: Any] {
         return [
             "id": id,

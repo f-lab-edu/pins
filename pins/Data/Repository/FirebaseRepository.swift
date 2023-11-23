@@ -13,9 +13,26 @@ import FirebaseFirestore
 protocol FirebaseRepositoryProtocol {
     func uploadImage(imageData: Data, imageName: String, metaData: StorageMetadata) async -> URL
     func createPin(pin: [String: Any]) async
+    func getPins() async -> Result<[[String: Any]], Error>
 }
 
 final class FirebaseRepository: FirebaseRepositoryProtocol {
+    func getPins() async -> Result<[[String: Any]], Error>{
+        let db = FirebaseFirestore.shared.db
+        let pinsRef = db.collection("pins")
+        do {
+            let result = try await pinsRef.getDocuments()
+            var pins = [[String: Any]]()
+            for document in result.documents {
+                pins.append(document.data())
+            }
+            return .success(pins)
+        } catch {
+            os_log(.error, log: .default, "Error getting documents: %@", error.localizedDescription)
+            return .failure(error)
+        }
+    }
+    
     func uploadImage(imageData: Data, imageName: String, metaData: StorageMetadata) async -> URL {
         let firebaseReference = Storage.storage().reference().child("image/\(Auth.auth().currentUser?.uid ?? "")/\(imageName)")
         

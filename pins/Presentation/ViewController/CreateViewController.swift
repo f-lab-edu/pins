@@ -134,7 +134,7 @@ final class CreateViewController: UIViewController {
         }
     }
     
-    func setPosition(_ position :CLLocation) {
+    func setPosition(_ position :CLLocationCoordinate2D) {
         viewModel.setPosition(position: position)
     }
 }

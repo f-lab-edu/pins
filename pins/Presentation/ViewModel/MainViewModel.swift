@@ -8,7 +8,17 @@
 import Foundation
 
 final class MainViewModel {
+    @Published var currentPins: [Pin] = []
     @Published var createViewIsPresented: Bool = false
+    private var mainUseCase: MainUseCaseProtocol
+    
+    init(mainUseCase: MainUseCaseProtocol) {
+        self.mainUseCase = mainUseCase
+    }
+    
+    func getPins() async -> [Pin] {
+        return await mainUseCase.getPins()
+    }
     
     func setCreateViewIsPresented(isPresented: Bool) {
         createViewIsPresented = isPresented

@@ -59,9 +59,9 @@ final class CreateViewModel {
         selectedImageInfos.removeAll()
     }
     
-    func setPosition(position: CLLocation) {
-        self.longitude = position.coordinate.longitude
-        self.latitude = position.coordinate.latitude
+    func setPosition(position: CLLocationCoordinate2D) {
+        self.longitude = position.longitude
+        self.latitude = position.latitude
     }
     
     func getPosition() -> CLLocation {

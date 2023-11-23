@@ -161,6 +161,22 @@ final class MainMapView: UIView {
         centerPinImage.isHidden = !isPresented
     }
     
+    func drawPins(pins: [Pin]) {
+        mapView.removeAnnotations(mapView.annotations)
+        
+        for pin in pins {
+            let annotation = MKPointAnnotation()
+            print("\(pin.longitude)  \(pin.latitude)")
+            annotation.coordinate = CLLocationCoordinate2D(latitude: pin.latitude, longitude: pin.longitude)
+            annotation.title = pin.title
+            mapView.addAnnotation(annotation)
+        }
+    }
+    
+    func getCenterCoordinate() -> CLLocationCoordinate2D {
+        return mapView.centerCoordinate
+    }
+    
     func setDelegate(_ delegate: MKMapViewDelegate) {
         mapView.delegate = delegate
     }

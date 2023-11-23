@@ -46,6 +46,7 @@
 		B7B977682AFA10AE0023718B /* FirebaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B977672AFA10AE0023718B /* FirebaseRepository.swift */; };
 		B7B9776C2AFA20D80023718B /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B9776B2AFA20D80023718B /* Date+Extensions.swift */; };
 		B7BB20242B0E0745003EED3A /* CreateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BB20232B0E0745003EED3A /* CreateUseCase.swift */; };
+		B7BB20262B0F1696003EED3A /* MainUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BB20252B0F1696003EED3A /* MainUseCase.swift */; };
 		B7BC79172AF4AB8900BBE0A9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B7BC79162AF4AB8900BBE0A9 /* FirebaseAuth */; };
 		B7DE80652B08A771007A7AEF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7DE80642B08A771007A7AEF /* GoogleService-Info.plist */; };
 		B7DE80682B08A979007A7AEF /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = B7DE80672B08A979007A7AEF /* GoogleSignIn */; };
@@ -117,6 +118,7 @@
 		B7B977672AFA10AE0023718B /* FirebaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRepository.swift; sourceTree = "<group>"; };
 		B7B9776B2AFA20D80023718B /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		B7BB20232B0E0745003EED3A /* CreateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUseCase.swift; sourceTree = "<group>"; };
+		B7BB20252B0F1696003EED3A /* MainUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUseCase.swift; sourceTree = "<group>"; };
 		B7DE80642B08A771007A7AEF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B7E050F02AE4FB3A007903C3 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
 		B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 			children = (
 				B71C387B2B0753BB0065A783 /* LoginUseCase.swift */,
 				B7BB20232B0E0745003EED3A /* CreateUseCase.swift */,
+				B7BB20252B0F1696003EED3A /* MainUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -564,6 +567,7 @@
 				B7AF69312AE0FEDF00385632 /* AppDelegate.swift in Sources */,
 				B71058912AEA2974003D6039 /* MainViewModel.swift in Sources */,
 				B76DD4662AFE238F00DFE7E1 /* LoadingIndicator.swift in Sources */,
+				B7BB20262B0F1696003EED3A /* MainUseCase.swift in Sources */,
 				B7E050F12AE4FB3A007903C3 /* MainMapView.swift in Sources */,
 				B7157E6A2AF384E2007CEF95 /* LoginView.swift in Sources */,
 				B71058932AEA2CB3003D6039 /* CustomButton.swift in Sources */,
