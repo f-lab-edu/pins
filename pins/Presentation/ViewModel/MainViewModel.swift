@@ -18,8 +18,7 @@ final class MainViewModel {
     
     func getPins() {
         Task {
-            let pins = await mainUseCase.getPins()
-            currentPins = pins
+            currentPins = await mainUseCase.getPins()
         }
     }
     

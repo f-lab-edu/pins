@@ -19,15 +19,25 @@ final class MainViewModelTests: XCTestCase {
     }
     
     func testGetPins() async {
-        // 예상되는 Pins 데이터 설정
-        let expectedPins: [Pin] = [/* ... 여기에 Pin 배열 초기화 ... */]
-        mockMainUseCase.mockPins = expectedPins
+        let expectation = XCTestExpectation(description: "getPins completes")
+        let expectedPins: [Pin] = [
+            Pin(id: "1", title: "title", content: "content", longitude: 1, latitude: 2, category: "category", created: "created")
+        ]
+        mockMainUseCase.pinsToReturn = expectedPins
 
-        // getPins 메소드 실행
         viewModel.getPins()
+        
+        var receivedPins: [Pin] = []
+        let cancellable = viewModel.$currentPins.sink { pins in
+            receivedPins = pins
+            expectation.fulfill()
+        }
 
-        // 결과 검증
-        XCTAssertEqual(viewModel.currentPins, expectedPins, "getPins 메소드가 올바르게 Pins를 가져오지 못함")
+        await fulfillment(of: [expectation], timeout: 1)
+
+        XCTAssertEqual(receivedPins, expectedPins)
+
+        cancellable.cancel()
     }
 
     func testSetCreateViewIsPresented() {
@@ -50,9 +60,9 @@ final class MainViewModelTests: XCTestCase {
 }
 
 class MockMainUseCase: MainUseCaseProtocol {
-    var mockPins: [Pin] = []
+    var pinsToReturn: [Pin] = []
 
     func getPins() async -> [Pin] {
-        return mockPins
+        return pinsToReturn
     }
 }

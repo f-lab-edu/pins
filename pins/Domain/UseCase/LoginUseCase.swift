@@ -25,7 +25,7 @@ final class LoginUseCase: LoginUseCaseProtocol {
         let result = await authService.getFirebaseCredentialFromGoogle(presentView: delegate)
         switch result {
         case .success(let credential):
-            let result = await authService.signInWithGoogle(credential: credential)
+            let result = await authService.signIn(with: credential)
             return handleLoginResult(result)
         case .failure(_):
             return .failure(NSError(domain: "LoginError", code: -1, userInfo: nil))
@@ -36,7 +36,7 @@ final class LoginUseCase: LoginUseCaseProtocol {
         let result = await authService.getFirebaseCredentialFromApple(with: credential, nonce: nonce)
         switch result {
         case .success(let credential):
-            let result = await authService.signInWithApple(credential: credential)
+            let result = await authService.signIn(with: credential)
             return handleLoginResult(result)
         case .failure(_):
             return .failure(NSError(domain: "LoginError", code: -1, userInfo: nil))

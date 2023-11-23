@@ -12,8 +12,7 @@ import FirebaseCore
 import GoogleSignIn
 
 protocol FirebaseAuthServiceProtocol {
-    func signInWithApple(credential: AuthCredential) async -> Result<AuthDataResult, Error>
-    func signInWithGoogle(credential: AuthCredential) async -> Result<AuthDataResult, Error>
+    func signIn(with credential: AuthCredential) async -> Result<AuthDataResult, Error>
     func getFirebaseCredentialFromApple(with credential: ASAuthorizationAppleIDCredential, nonce: String?) async -> Result<AuthCredential, Error>
     func getFirebaseCredentialFromGoogle(presentView: UIViewController) async -> Result<AuthCredential, Error>
 }
@@ -21,19 +20,7 @@ protocol FirebaseAuthServiceProtocol {
 final class FirebaseAuthService: FirebaseAuthServiceProtocol {
     private var currentNonce: String?
     
-    func signInWithApple(credential: AuthCredential) async -> Result<AuthDataResult, Error> {
-        await withCheckedContinuation { continuation in
-            Auth.auth().signIn(with: credential) { authResult, error in
-                if let error = error {
-                    continuation.resume(returning: .failure(error))
-                } else if let authResult = authResult {
-                    continuation.resume(returning: .success(authResult))
-                }
-            }
-        }
-    }
-    
-    func signInWithGoogle(credential: AuthCredential) async -> Result<AuthDataResult, Error> {
+    func signIn(with credential: AuthCredential) async -> Result<AuthDataResult, Error> {
         await withCheckedContinuation { continuation in
             Auth.auth().signIn(with: credential) { authResult, error in
                 if let error = error {
