@@ -19,6 +19,7 @@ final class MainMapView: UIView {
         } else {
             mapView.mapType = .standard
         }
+        mapView.register(PinAnnotationView.self, forAnnotationViewWithReuseIdentifier: PinAnnotationView.identifier)
         return mapView
     }()
     private let centerPinImage: UIImageView = {
@@ -165,10 +166,7 @@ final class MainMapView: UIView {
         mapView.removeAnnotations(mapView.annotations)
         
         for pin in pins {
-            let annotation = MKPointAnnotation()
-            print("\(pin.longitude)  \(pin.latitude)")
-            annotation.coordinate = CLLocationCoordinate2D(latitude: pin.latitude, longitude: pin.longitude)
-            annotation.title = pin.title
+            let annotation: PinAnnotation = PinAnnotation(pin: pin)
             mapView.addAnnotation(annotation)
         }
     }

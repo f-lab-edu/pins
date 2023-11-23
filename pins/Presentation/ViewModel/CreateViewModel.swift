@@ -21,29 +21,18 @@ final class CreateViewModel {
     private var category: String = ""
     let pinRepository: FirebaseRepository = FirebaseRepository()
     var selectedCategoryIndex: Int?
-    let categories: [String] = [
-        "create.category.friendship",
-        "create.category.walk",
-        "create.category.game",
-        "create.category.exercise",
-        "create.category.study",
-        "create.category.neighbor",
-        "create.category.food",
-        "create.category.culture",
-        "create.category.etc",
-    ]
     
     init(createUsecase: CreateUseCaseProtocol) {
         self.createUsecase = createUsecase
     }
     
     func getCategoriesCount() -> Int {
-        categories.count
+        Category.types.count
     }
     
     func didSelectCategory(at index: Int, previouslySelected: Int?) -> (selected: Int, unselected: Int?) {
         selectedCategoryIndex = index
-        category = categories[index]
+        category = Category.types[index]
         return (index, previouslySelected)
     }
     

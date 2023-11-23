@@ -35,7 +35,9 @@ final class MainViewController: UIViewController {
         viewModel.$createViewIsPresented.sink { [weak self] isPresented in
             self?.mainMapView.presentCreateView(isPresented: isPresented)
         }.store(in: &cancellable)
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         loadPins()
     }
     
@@ -111,7 +113,31 @@ final class MainViewController: UIViewController {
 }
 
 extension MainViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let identifier = "PinAnnotaion"
+        
+        if annotation is MKUserLocation {
+            return nil
+        }
+
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? PinAnnotationView
+        
+        if annotationView == nil {
+            annotationView = PinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+        } else {
+            annotationView?.annotation = annotation
+        }
+        annotationView?.setPinImage()
+        return annotationView
+    }
     
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let pinAnnotation = view.annotation as? PinAnnotation else { return }
+        print(pinAnnotation.pin.content)
+//        let detailViewController: DetailViewController = DetailViewController()
+//        detailViewController.setPin(pinAnnotation)
+//        navigationController?.pushViewController(detailViewController, animated: true)
+    }
 }
 
 extension MainViewController: CLLocationManagerDelegate {
