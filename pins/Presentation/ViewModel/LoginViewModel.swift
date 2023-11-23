@@ -19,14 +19,16 @@ final class LoginViewModel {
     }
     
     func performGoogleLogin(delegate: UIViewController) {
-        loginUseCase.googleLogin(delegate: delegate) { [weak self] result in
-            self?.loginState = result
+        Task {
+            let result = await loginUseCase.googleLogin(delegate: delegate)
+            loginState = result
         }
     }
     
     func performAppleLogin(credential: ASAuthorizationAppleIDCredential) {
-        loginUseCase.appleLogin(credential: credential, nonce: currentNonce) { [weak self] result in
-            self?.loginState = result
+        Task {
+            let result = await loginUseCase.appleLogin(credential: credential, nonce: currentNonce)
+            loginState = result
         }
     }
     

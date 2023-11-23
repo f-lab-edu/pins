@@ -10,8 +10,8 @@ import FirebaseAuth
 import AuthenticationServices
 
 protocol LoginUseCaseProtocol {
-    func googleLogin(delegate: UIViewController, completion: @escaping (Result<User, Error>) -> Void)
-    func appleLogin(credential: ASAuthorizationAppleIDCredential, nonce: String?, completion: @escaping (Result<User, Error>) -> Void)
+    func googleLogin(delegate: UIViewController) async -> Result<User, Error>
+    func appleLogin(credential: ASAuthorizationAppleIDCredential, nonce: String?) async -> Result<User, Error>
 }
 
 final class LoginUseCase: LoginUseCaseProtocol {
@@ -21,33 +21,35 @@ final class LoginUseCase: LoginUseCaseProtocol {
         self.authService = authService
     }
     
-    func googleLogin(delegate: UIViewController, completion: @escaping (Result<User, Error>) -> Void) {
-        authService.getFirebaseCredentialFromGoogle(presentView: delegate) { [weak self] credential in
-            guard let self = self else { return }
-            self.authService.signInWithGoogle(credential: credential) { result in
-                self.handleLoginResult(result, completion: completion)
-            }
-        }
-    }
-    
-    func appleLogin(credential: ASAuthorizationAppleIDCredential, nonce: String?, completion: @escaping (Result<User, Error>) -> Void) {
-        authService.getFirebaseCredentialFromApple(with: credential, nonce: nonce) { [weak self] credential in
-            guard let self = self else { return }
-            self.authService.signInWithApple(credential: credential) { result in
-                self.handleLoginResult(result, completion: completion)
-            }
-        }
-    }
-    
-    private func handleLoginResult(_ result: Result<AuthDataResult, Error>, completion: @escaping (Result<User, Error>) -> Void) {
+    func googleLogin(delegate: UIViewController) async -> Result<User, Error> {
+        let result = await authService.getFirebaseCredentialFromGoogle(presentView: delegate)
         switch result {
-        case .success(let user):
-            // 추가적인 성공 처리 로직이 필요한 경우 여기에 구현
-            let user = User(id: user.user.uid, name: user.user.displayName, email: user.user.email)
-            completion(.success(user))
+        case .success(let credential):
+            let result = await authService.signInWithGoogle(credential: credential)
+            return handleLoginResult(result)
+        case .failure(_):
+            return .failure(NSError(domain: "LoginError", code: -1, userInfo: nil))
+        }
+    }
+    
+    func appleLogin(credential: ASAuthorizationAppleIDCredential, nonce: String?) async -> Result<User, Error> {
+        let result = await authService.getFirebaseCredentialFromApple(with: credential, nonce: nonce)
+        switch result {
+        case .success(let credential):
+            let result = await authService.signInWithApple(credential: credential)
+            return handleLoginResult(result)
+        case .failure(_):
+            return .failure(NSError(domain: "LoginError", code: -1, userInfo: nil))
+        }
+    }
+    
+    private func handleLoginResult(_ result: Result<AuthDataResult, Error>) -> Result<User, Error> {
+        switch result {
+        case .success(let authResult):
+            let user = authResult.user
+            return .success(User(id: user.uid, name: user.displayName, email: user.email))
         case .failure(let error):
-            // 에러 핸들링 로직
-            completion(.failure(error))
+            return .failure(error)
         }
     }
 }
