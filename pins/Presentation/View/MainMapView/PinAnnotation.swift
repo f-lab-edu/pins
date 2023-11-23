@@ -17,6 +17,6 @@ final class PinAnnotation: NSObject, MKAnnotation {
     
     init(pin: Pin) {
         self.pin = pin
-        self.imageName = Category.convertToImageName(category: pin.category)
+        self.imageName = Category(rawValue: pin.category)?.imageName ?? ""
     }
 }

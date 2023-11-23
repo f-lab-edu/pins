@@ -35,6 +35,12 @@ final class MainViewController: UIViewController {
         viewModel.$createViewIsPresented.sink { [weak self] isPresented in
             self?.mainMapView.presentCreateView(isPresented: isPresented)
         }.store(in: &cancellable)
+        
+        viewModel.$currentPins
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] pins in
+            self?.mainMapView.drawPins(pins: pins)
+        }.store(in: &cancellable)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,10 +52,7 @@ final class MainViewController: UIViewController {
     }
     
     private func loadPins() {
-        Task {
-            let pins = await viewModel.getPins()
-            mainMapView.drawPins(pins: pins)
-        }
+        viewModel.getPins()
     }
     
     private func setLocationManager() {

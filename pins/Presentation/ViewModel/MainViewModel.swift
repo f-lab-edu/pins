@@ -16,8 +16,11 @@ final class MainViewModel {
         self.mainUseCase = mainUseCase
     }
     
-    func getPins() async -> [Pin] {
-        return await mainUseCase.getPins()
+    func getPins() {
+        Task {
+            let pins = await mainUseCase.getPins()
+            currentPins = pins
+        }
     }
     
     func setCreateViewIsPresented(isPresented: Bool) {

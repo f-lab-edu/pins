@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Pin: Codable {
+struct Pin: Codable, Equatable {
     var id: String
     var title: String
     var content: String
