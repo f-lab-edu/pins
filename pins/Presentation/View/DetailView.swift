@@ -127,6 +127,7 @@ final class DetailView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
+        inputTextView.delegate = self
         setLayout()
     }
     
@@ -222,5 +223,22 @@ final class DetailView: UIView {
         submitButton
             .trailingLayout(equalTo: trailingAnchor, constant: -30)
             .centerYLayout(equalTo: inputTextView.centerYAnchor)
+    }
+}
+
+// MARK: - Extensions
+extension DetailView: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor(resource: .placeholderGray) {
+            textView.text = nil
+            textView.textColor = UIColor.init(resource: .text)
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "댓글을 입력해주세요."
+            textView.textColor = UIColor(resource: .placeholderGray)
+        }
     }
 }
