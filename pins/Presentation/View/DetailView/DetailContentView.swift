@@ -1,27 +1,14 @@
 //
-//  DetailView.swift
+//  DetailContentView.swift
 //  pins
 //
-//  Created by 주동석 on 2023/11/24.
+//  Created by 주동석 on 11/24/23.
 //
 
 import UIKit
 
-final class DetailView: UIView {
-    private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.backgroundColor = .background
-        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 2000)
-        scrollView.contentInsetAdjustmentBehavior = .never
-        return scrollView
-    }()
-    
-    private let backButton: CustomButton = {
-        let button = CustomButton(backgroundColor: .clear, tintColor: .white)
-        button.setImage(systemName: "chevron.backward")
-        return button
-    }()
-    
+final class DetailContentView: UIView {
+    // MARK: - Properties
     private let mainImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(resource: .test)
@@ -93,72 +80,33 @@ final class DetailView: UIView {
         return label
     }()
     
-    private let myProfileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(resource: .test)
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 20
-        imageView.clipsToBounds = true
-        return imageView
-    }()
-    
-    private let inputTextView: CustomTextView = {
-        let textView = CustomTextView(placeholder: "댓글을 입력해주세요", tag: 0)
-        textView.font = .systemFont(ofSize: 15, weight: .regular)
-        textView.layer.cornerRadius = 20
-        textView.clipsToBounds = true
-        textView.backgroundColor = .systemGray6
-        textView.adjustForKeyboard()
-        return textView
-    }()
-    
-    private let submitButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("등록", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
-        button.setTitleColor(.systemBlue, for: .normal)
-        return button
-    }()
-    
     private let navigationDivderView: Divider = Divider()
     private let contentDivederView: Divider = Divider()
-    private let commentDivderView: Divider = Divider()
     
+    // MARK: - Initializer
     override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .systemBackground
-        inputTextView.delegate = self
+        super.init(frame: .zero)
         setLayout()
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented because this view is not designed to be initialized from a nib or storyboard.")
+        super.init(coder: coder)
     }
     
+    // MARK: - UI
     private func setLayout() {
-        addSubview(scrollView)
-        [mainImageView, backButton, personalInfo, profileImageView, nameLabel, categoryLabel, navigationDivderView, titleLabel, dateLabel, contentLabel, commentDivderView, commentLabel, contentDivederView, inputTextView, submitButton, myProfileImageView].forEach { scrollView.addSubview($0) }
-        
-        scrollView
-            .leadingLayout(equalTo: leadingAnchor)
-            .topLayout(equalTo: topAnchor)
-            .trailingLayout(equalTo: trailingAnchor)
-            .bottomLayout(equalTo: bottomAnchor)
-        
-        backButton
-            .leadingLayout(equalTo: leadingAnchor, constant: 16)
-            .topLayout(equalTo: safeAreaLayoutGuide.topAnchor)
-            .widthLayout(30)
-            .heightLayout(30)
+        [mainImageView, profileImageView, nameLabel, personalInfo, categoryLabel, titleLabel, dateLabel, contentLabel, commentLabel, navigationDivderView, contentDivederView].forEach {
+            addSubview($0)
+        }
         
         mainImageView
             .leadingLayout(equalTo: leadingAnchor)
             .trailingLayout(equalTo: trailingAnchor)
-            .topLayout(equalTo: scrollView.topAnchor)
+            .topLayout(equalTo: topAnchor)
             .heightLayout(300)
         
         profileImageView
-            .leadingLayout(equalTo: scrollView.leadingAnchor, constant: 20)
+            .leadingLayout(equalTo: leadingAnchor, constant: 20)
             .topLayout(equalTo: mainImageView.bottomAnchor, constant: 16)
             .widthLayout(40)
             .heightLayout(40)
@@ -202,43 +150,7 @@ final class DetailView: UIView {
             .leadingLayout(equalTo: leadingAnchor)
             .trailingLayout(equalTo: trailingAnchor)
             .topLayout(equalTo: commentLabel.bottomAnchor, constant: 16)
-        
-        commentDivderView
-            .leadingLayout(equalTo: leadingAnchor)
-            .trailingLayout(equalTo: trailingAnchor)
-            .bottomLayout(equalTo: bottomAnchor, constant: -110)
-        
-        myProfileImageView
-            .leadingLayout(equalTo: leadingAnchor, constant: 20)
-            .topLayout(equalTo: commentDivderView.bottomAnchor, constant: 16)
-            .widthLayout(40)
-            .heightLayout(40)
-        
-        inputTextView
-            .leadingLayout(equalTo: myProfileImageView.trailingAnchor, constant: 8)
-            .trailingLayout(equalTo: trailingAnchor, constant: -20)
-            .topLayout(equalTo: commentDivderView.bottomAnchor, constant: 16)
-            .heightLayout(40)
-        
-        submitButton
-            .trailingLayout(equalTo: trailingAnchor, constant: -30)
-            .centerYLayout(equalTo: inputTextView.centerYAnchor)
-    }
-}
-
-// MARK: - Extensions
-extension DetailView: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor(resource: .placeholderGray) {
-            textView.text = nil
-            textView.textColor = UIColor.init(resource: .text)
-        }
     }
     
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.text = "댓글을 입력해주세요."
-            textView.textColor = UIColor(resource: .placeholderGray)
-        }
-    }
+    // MARK: - Methods
 }

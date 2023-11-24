@@ -19,9 +19,7 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad() 
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("??")
-        view.endEditing(true)
-    }
+}
+
+extension DetailViewController: UITextFieldDelegate {
 }
