@@ -38,4 +38,15 @@ final class DetailNavigationView: UIView {
             .widthLayout(30)
             .heightLayout(30)
     }
+    
+    // MARK: - Method
+    func changeBackgroundColor(as offset: CGFloat) {
+        if offset > 100 {
+            backgroundColor = .white
+            backButton.tintColor = .black
+        } else {
+            backgroundColor = .clear
+            backButton.tintColor = .white
+        }
+    }
 }

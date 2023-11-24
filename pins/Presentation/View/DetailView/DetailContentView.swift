@@ -153,4 +153,12 @@ final class DetailContentView: UIView {
     }
     
     // MARK: - Methods
+    func updateMainImageHeight(_ offset: CGFloat, scrollView: UIScrollView, topAnchor: NSLayoutYAxisAnchor) {
+        if offset < 0 {
+            mainImageView.heightLayout(300 - offset)
+            mainImageView.topLayout(equalTo: topAnchor)
+        } else {
+            mainImageView.topLayout(equalTo: scrollView.topAnchor)
+        }
+    }
 }

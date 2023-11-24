@@ -8,8 +8,8 @@
 import UIKit
 
 final class DetailView: UIView {
-    private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
+    private let scrollView: DetailScrollView = {
+        let scrollView = DetailScrollView()
         scrollView.backgroundColor = .background
         scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 2000)
         scrollView.contentInsetAdjustmentBehavior = .never
@@ -50,7 +50,7 @@ final class DetailView: UIView {
             .leadingLayout(equalTo: leadingAnchor)
             .topLayout(equalTo: topAnchor)
             .trailingLayout(equalTo: trailingAnchor)
-            .heightLayout(60)
+            .heightLayout(100)
         
         detailContentView
             .leadingLayout(equalTo: leadingAnchor)
@@ -91,10 +91,6 @@ final class DetailView: UIView {
             }, completion: nil)
         }
     }
-    
-    func chagneCommentViewHeight(to: CGFloat) {
-        scrollView.setContentOffset(CGPoint(x: 0, y: to), animated: true)
-    }
 }
 
 // MARK: - Extensions
@@ -115,7 +111,9 @@ extension DetailView: UITextViewDelegate {
 }
 
 extension DetailView: UIScrollViewDelegate {
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        endEditing(true)
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let yOffset = scrollView.contentOffset.y
+        detailNavigationView.changeBackgroundColor(as: yOffset)
+        detailContentView.updateMainImageHeight(yOffset, scrollView: scrollView, topAnchor: topAnchor)
     }
 }
