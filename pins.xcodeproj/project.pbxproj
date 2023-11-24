@@ -32,6 +32,10 @@
 		B7781B332B0F4D4B006372CF /* PinAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7781B322B0F4D4B006372CF /* PinAnnotationView.swift */; };
 		B7781B352B0F4F91006372CF /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7781B342B0F4F91006372CF /* PinAnnotation.swift */; };
 		B78099432B06047400C01059 /* ImageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78099422B06047400C01059 /* ImageInfo.swift */; };
+		B785A77C2B10742E00DC2E88 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B785A77B2B10742E00DC2E88 /* DetailView.swift */; };
+		B785A77E2B10743600DC2E88 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B785A77D2B10743600DC2E88 /* DetailViewController.swift */; };
+		B785A7822B108A0A00DC2E88 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B785A7812B108A0A00DC2E88 /* PaddingLabel.swift */; };
+		B785A7842B1091BC00DC2E88 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B785A7832B1091BC00DC2E88 /* UILabel+Extensions.swift */; };
 		B79A28F12AF37DEF008FD3CE /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B79A28F02AF37DEB008FD3CE /* Secrets.xcconfig */; };
 		B79A28F32AF37F93008FD3CE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79A28F22AF37F93008FD3CE /* LoginViewController.swift */; };
 		B7ADFF722AEA8DF300D34CEA /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADFF712AEA8DF300D34CEA /* Divider.swift */; };
@@ -104,6 +108,10 @@
 		B7781B322B0F4D4B006372CF /* PinAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotationView.swift; sourceTree = "<group>"; };
 		B7781B342B0F4F91006372CF /* PinAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotation.swift; sourceTree = "<group>"; };
 		B78099422B06047400C01059 /* ImageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInfo.swift; sourceTree = "<group>"; };
+		B785A77B2B10742E00DC2E88 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		B785A77D2B10743600DC2E88 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		B785A7812B108A0A00DC2E88 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		B785A7832B1091BC00DC2E88 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		B79A28F02AF37DEB008FD3CE /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		B79A28F22AF37F93008FD3CE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B7ADFF712AEA8DF300D34CEA /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
@@ -168,6 +176,7 @@
 				B710588D2AEA2699003D6039 /* OSLog+Extensions.swift */,
 				B7035B842AF8D1FF000F74ED /* UIView+Extensions.swift */,
 				B7B9776B2AFA20D80023718B /* Date+Extensions.swift */,
+				B785A7832B1091BC00DC2E88 /* UILabel+Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -288,6 +297,7 @@
 				B74A4FC02AE78BAE00226EA7 /* SearchViewController.swift */,
 				B74A4FC42AE7905500226EA7 /* CreateViewController.swift */,
 				B79A28F22AF37F93008FD3CE /* LoginViewController.swift */,
+				B785A77D2B10743600DC2E88 /* DetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -309,6 +319,7 @@
 				B71058922AEA2CB3003D6039 /* CustomButton.swift */,
 				B7ADFF712AEA8DF300D34CEA /* Divider.swift */,
 				B76DD4652AFE238F00DFE7E1 /* LoadingIndicator.swift */,
+				B785A7812B108A0A00DC2E88 /* PaddingLabel.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -390,6 +401,7 @@
 				B7614C102AEE085F00CAB8F0 /* CreateView */,
 				B74A4FC22AE78BE700226EA7 /* SearchView.swift */,
 				B7157E692AF384E2007CEF95 /* LoginView.swift */,
+				B785A77B2B10742E00DC2E88 /* DetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -570,6 +582,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B785A77E2B10743600DC2E88 /* DetailViewController.swift in Sources */,
 				B7E0D5912B0CB59D0090A465 /* AnimationManager.swift in Sources */,
 				B7B9776C2AFA20D80023718B /* Date+Extensions.swift in Sources */,
 				B7B977612AFA0A550023718B /* FirebaseFirestore.swift in Sources */,
@@ -594,10 +607,12 @@
 				B79A28F32AF37F93008FD3CE /* LoginViewController.swift in Sources */,
 				B78099432B06047400C01059 /* ImageInfo.swift in Sources */,
 				B71C387C2B0753BB0065A783 /* LoginUseCase.swift in Sources */,
+				B785A7842B1091BC00DC2E88 /* UILabel+Extensions.swift in Sources */,
 				B7BB20242B0E0745003EED3A /* CreateUseCase.swift in Sources */,
 				B71C38802B07554B0065A783 /* FirebaseAuthService.swift in Sources */,
 				B7AEC0CE2B034568004BA42A /* CustomTextView.swift in Sources */,
 				B7B977682AFA10AE0023718B /* FirebaseRepository.swift in Sources */,
+				B785A7822B108A0A00DC2E88 /* PaddingLabel.swift in Sources */,
 				B7B977642AFA0D270023718B /* Pin.swift in Sources */,
 				B7AF69332AE0FEDF00385632 /* SceneDelegate.swift in Sources */,
 				B71C38832B075CC70065A783 /* CryptoUtils.swift in Sources */,
@@ -605,6 +620,7 @@
 				B76DD4622AFE0DB000DFE7E1 /* FirestorageService.swift in Sources */,
 				B7035B852AF8D1FF000F74ED /* UIView+Extensions.swift in Sources */,
 				B7226B162B01F6990034B451 /* LoginViewModel.swift in Sources */,
+				B785A77C2B10742E00DC2E88 /* DetailView.swift in Sources */,
 				B71058952AEA42F8003D6039 /* CategoryCollectionViewCell.swift in Sources */,
 				B7781B352B0F4F91006372CF /* PinAnnotation.swift in Sources */,
 			);
