@@ -9,10 +9,11 @@ import UIKit
 
 final class DetailContentView: UIView {
     // MARK: - Properties
-    private let mainImageView: UIImageView = {
+    let mainImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(resource: .test)
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -160,5 +161,13 @@ final class DetailContentView: UIView {
         } else {
             mainImageView.topLayout(equalTo: scrollView.topAnchor)
         }
+    }
+    
+    func setPinContent(title: String, content: String, date: String, image: UIImage?, category: String) {
+        titleLabel.text = title
+        contentLabel.text = content
+        dateLabel.text = date
+        mainImageView.image = image
+        categoryLabel.text = NSLocalizedString(category, comment: "")
     }
 }

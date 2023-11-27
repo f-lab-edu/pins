@@ -15,9 +15,9 @@ typealias URLWithIndex = (index: Int, url: URL)
 protocol FirestorageServiceProtocol {
     func uploadImage(imageInfo: ImageInfo) async -> URLWithIndex
     func uploadImages(imageInfos: [ImageInfo]) async -> [URLWithIndex]
+    func createPin(pin: PinRequest, images: [ImageInfo]) async
+    func getPins() async -> [PinRequest]
     func downloadImage(urlString: String) async -> UIImage?
-    func createPin(pin: Pin, images: [ImageInfo]) async
-    func getPins() async -> [Pin]
 }
 
 final class FirestorageService: FirestorageServiceProtocol {
@@ -31,6 +31,24 @@ final class FirestorageService: FirestorageServiceProtocol {
         let metaData = StorageMetadata()
         metaData.contentType = imageInfo.extensionType
         return metaData
+    }
+    
+    func downloadImage(urlString: String) async -> UIImage? {
+        let storageReference = Storage.storage().reference(forURL: urlString)
+        let megaByte = Int64(1 * 1024 * 1024)
+        
+        return await withCheckedContinuation { continuation in
+            storageReference.getData(maxSize: megaByte) { data, error in
+                if let error = error {
+                    os_log("Error downloading image: \(error)")
+                    continuation.resume(returning: nil)
+                } else if let data = data, let image = UIImage(data: data) {
+                    continuation.resume(returning: image)
+                } else {
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
     }
     
     func uploadImage(imageInfo: ImageInfo) async -> URLWithIndex {
@@ -53,36 +71,18 @@ final class FirestorageService: FirestorageServiceProtocol {
         return urls
     }
     
-    func downloadImage(urlString: String) async -> UIImage? {
-        let storageReference = Storage.storage().reference(forURL: urlString)
-        let megaByte = Int64(1 * 1024 * 1024)
-        
-        return await withCheckedContinuation { continuation in
-            storageReference.getData(maxSize: megaByte) { data, error in
-                if let error = error {
-                    os_log("Error downloading image: \(error)")
-                    continuation.resume(returning: nil)
-                } else if let data = data, let image = UIImage(data: data) {
-                    continuation.resume(returning: image)
-                } else {
-                    continuation.resume(returning: nil)
-                }
-            }
-        }
-    }
-    
-    func createPin(pin: Pin, images: [ImageInfo]) async {
+    func createPin(pin: PinRequest, images: [ImageInfo]) async {
         let urls = await uploadImages(imageInfos: images)
         let urlsString = urls.map { $0.url.absoluteString }
         let pin = pin.withUrls(urls: urlsString)
         await firebaseRepository.createPin(pin: pin.toDictionary())
     }
     
-    func getPins() async -> [Pin] {
+    func getPins() async -> [PinRequest] {
         let result = await firebaseRepository.getPins()
         switch result {
         case .success(let pins):
-            return pins.map { Pin.toData($0) }
+            return pins.map { PinRequest.toData($0) }
         case .failure(let error):
             os_log("Error getting pins: %@", error.localizedDescription)
             return []

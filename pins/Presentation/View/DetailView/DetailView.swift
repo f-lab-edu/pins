@@ -8,23 +8,22 @@
 import UIKit
 
 final class DetailView: UIView {
-    private let scrollView: DetailScrollView = {
+    let scrollView: DetailScrollView = {
         let scrollView = DetailScrollView()
         scrollView.backgroundColor = .background
-        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 2000)
+        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height + 130)
         scrollView.contentInsetAdjustmentBehavior = .never
         return scrollView
     }()
     
-    private let detailNavigationView: DetailNavigationView = DetailNavigationView()
-    private let detailContentView: DetailContentView = DetailContentView()
-    private let detailCommentView: DetailCommentView = DetailCommentView()
+    let navigationView: DetailNavigationView = DetailNavigationView()
+    let contentView: DetailContentView = DetailContentView()
+    private let commentView: DetailCommentView = DetailCommentView()
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
-        scrollView.delegate = self
         setLayout()
         setKeyboardObserver()
     }
@@ -36,7 +35,7 @@ final class DetailView: UIView {
     private func setLayout() {
         addSubview(scrollView)
         
-        [detailContentView, detailCommentView, detailNavigationView].forEach {
+        [contentView, commentView, navigationView].forEach {
             scrollView.addSubview($0)
         }
         
@@ -46,18 +45,18 @@ final class DetailView: UIView {
             .trailingLayout(equalTo: trailingAnchor)
             .bottomLayout(equalTo: bottomAnchor)
         
-        detailNavigationView
+        navigationView
             .leadingLayout(equalTo: leadingAnchor)
             .topLayout(equalTo: topAnchor)
             .trailingLayout(equalTo: trailingAnchor)
             .heightLayout(100)
         
-        detailContentView
+        contentView
             .leadingLayout(equalTo: leadingAnchor)
             .trailingLayout(equalTo: trailingAnchor)
             .topLayout(equalTo: scrollView.topAnchor)
         
-        detailCommentView
+        commentView
             .leadingLayout(equalTo: leadingAnchor)
             .trailingLayout(equalTo: trailingAnchor)
             .bottomLayout(equalTo: bottomAnchor)
@@ -73,7 +72,7 @@ final class DetailView: UIView {
 
                 let (duration, options) = AnimationManager.keyboardAnimation(notification: notification)
                 UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
-                    self.detailCommentView
+                    self.commentView
                         .bottomLayout(equalTo: self.bottomAnchor, constant: -keyboardHeight)
                         .heightLayout(70)
                     self.layoutIfNeeded()
@@ -84,12 +83,23 @@ final class DetailView: UIView {
             guard let self = self else { return }
             let (duration, options) = AnimationManager.keyboardAnimation(notification: notification)
             UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
-                self.detailCommentView
+                self.commentView
                     .bottomLayout(equalTo: self.bottomAnchor, constant: 0)
                     .heightLayout(100)
                 self.layoutIfNeeded()
             }, completion: nil)
         }
+    }
+    
+    func setPinInfo(pin: PinResponse) {
+        let image = pin.images.first
+        if image == nil {
+            navigationView.backButton.tintColor = .black
+            contentView.mainImageView.isHidden = true
+            contentView.mainImageView.heightLayout(0)
+            contentView.topLayout(equalTo: scrollView.topAnchor, constant: 100)
+        }
+        contentView.setPinContent(title: pin.title, content: pin.content, date: pin.created, image: image, category: pin.category)
     }
 }
 
@@ -107,13 +117,5 @@ extension DetailView: UITextViewDelegate {
             textView.text = "댓글을 입력해주세요."
             textView.textColor = UIColor(resource: .placeholderGray)
         }
-    }
-}
-
-extension DetailView: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let yOffset = scrollView.contentOffset.y
-        detailNavigationView.changeBackgroundColor(as: yOffset)
-        detailContentView.updateMainImageHeight(yOffset, scrollView: scrollView, topAnchor: topAnchor)
     }
 }

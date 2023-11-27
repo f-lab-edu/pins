@@ -162,7 +162,7 @@ final class MainMapView: UIView {
         centerPinImage.isHidden = !isPresented
     }
     
-    func drawPins(pins: [Pin]) {
+    func drawPins(pins: [PinRequest]) {
         mapView.removeAnnotations(mapView.annotations)
         
         for pin in pins {
