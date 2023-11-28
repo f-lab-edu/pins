@@ -8,8 +8,8 @@
 import UIKit
 import QuartzCore
 
-enum AnimationManager {
-    static func shakingAnimation() -> CABasicAnimation {
+class AnimationManager {
+    func shakeAnimation() -> CABasicAnimation {
         let shakeAnimation = CABasicAnimation(keyPath: "transform.rotation")
         shakeAnimation.fromValue = -0.15
         shakeAnimation.toValue = 0.15
@@ -20,7 +20,19 @@ enum AnimationManager {
         return shakeAnimation
     }
     
-    static func keyboardAnimation(notification: Notification) -> (duration: TimeInterval, options: UIView.AnimationOptions) {
+    func scaleAnimation() -> CABasicAnimation {
+        let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
+        scaleAnimation.fromValue = 2.0
+        scaleAnimation.toValue = 1.0
+        scaleAnimation.duration = 0.5
+
+        scaleAnimation.fillMode = .forwards
+        scaleAnimation.isRemovedOnCompletion = false
+        
+        return scaleAnimation
+    }
+    
+    func keyboardAnimation(notification: Notification) -> (duration: TimeInterval, options: UIView.AnimationOptions) {
         let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval ?? 0.3
         let curveRawNSN = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
         let curveRaw = curveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
