@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B7035B852AF8D1FF000F74ED /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7035B842AF8D1FF000F74ED /* UIView+Extensions.swift */; };
+		B70EE5BD2B15D7DD00BCCACF /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70EE5BC2B15D7DD00BCCACF /* String+Extensions.swift */; };
 		B710588E2AEA2699003D6039 /* OSLog+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B710588D2AEA2699003D6039 /* OSLog+Extensions.swift */; };
 		B71058912AEA2974003D6039 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71058902AEA2974003D6039 /* MainViewModel.swift */; };
 		B71058932AEA2CB3003D6039 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71058922AEA2CB3003D6039 /* CustomButton.swift */; };
@@ -90,6 +91,7 @@
 
 /* Begin PBXFileReference section */
 		B7035B842AF8D1FF000F74ED /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		B70EE5BC2B15D7DD00BCCACF /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		B710588D2AEA2699003D6039 /* OSLog+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OSLog+Extensions.swift"; sourceTree = "<group>"; };
 		B71058902AEA2974003D6039 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		B71058922AEA2CB3003D6039 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				B7B9776B2AFA20D80023718B /* Date+Extensions.swift */,
 				B785A7832B1091BC00DC2E88 /* UILabel+Extensions.swift */,
 				B7D0514C2B10AC9C00D86183 /* UITextField+Extensions.swift */,
+				B70EE5BC2B15D7DD00BCCACF /* String+Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -647,6 +650,7 @@
 				B7BB20242B0E0745003EED3A /* CreateUseCase.swift in Sources */,
 				B71C38802B07554B0065A783 /* FirebaseAuthService.swift in Sources */,
 				B7AEC0CE2B034568004BA42A /* CustomTextView.swift in Sources */,
+				B70EE5BD2B15D7DD00BCCACF /* String+Extensions.swift in Sources */,
 				B7B977682AFA10AE0023718B /* FirebaseRepository.swift in Sources */,
 				B785A7822B108A0A00DC2E88 /* PaddingLabel.swift in Sources */,
 				B7B977642AFA0D270023718B /* PinRequest.swift in Sources */,

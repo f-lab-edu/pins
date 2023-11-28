@@ -96,9 +96,8 @@ final class DetailView: UIView {
         let image = pin.images.first
         if image == nil {
             navigationView.backButton.tintColor = .black
-            contentView.mainImageView.isHidden = true
-            contentView.mainImageView.heightLayout(0)
             contentView.topLayout(equalTo: scrollView.topAnchor, constant: 100)
+            contentView.setLayoutDependingOnImage(isImage: false)
         }
         contentView.setPinContent(title: pin.title, content: pin.content, date: pin.created, image: image, category: pin.category)
     }

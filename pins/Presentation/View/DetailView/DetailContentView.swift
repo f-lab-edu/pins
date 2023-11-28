@@ -9,7 +9,19 @@ import UIKit
 
 final class DetailContentView: UIView {
     // MARK: - Properties
-    let mainImageView: UIImageView = {
+    private let bannerCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .white
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.register(UIImage.self, forCellWithReuseIdentifier: "ImageBanner")
+        return collectionView
+    }()
+    
+    private let mainImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(resource: .test)
         imageView.contentMode = .scaleAspectFill
@@ -42,7 +54,6 @@ final class DetailContentView: UIView {
     
     private let categoryLabel: PaddingLabel = {
         let label = PaddingLabel(topInset: 4, bottomInset: 4, leftInset: 8, rightInset: 8)
-        label.text = "반려동물"
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.backgroundColor = .systemBlue
         label.setCornerRadius(offset: 12)
@@ -50,23 +61,31 @@ final class DetailContentView: UIView {
         return label
     }()
     
+    private let imageCountLabel: PaddingLabel = {
+        let label = PaddingLabel(topInset: 4, bottomInset: 4, leftInset: 8, rightInset: 8)
+        label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.backgroundColor = .black.withAlphaComponent(0.5)
+        label.textColor = .white
+        label.setCornerRadius(offset: 12)
+        label.text = "1/2"
+        return label
+    }()
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "웰시코기가 제일 좋아 ~"
         label.font = .systemFont(ofSize: 18, weight: .semibold)
         return label
     }()
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.text = "6일 전"
+        label.text = "0일 전"
         label.font = .systemFont(ofSize: 12, weight: .thin)
         return label
     }()
     
     private let contentLabel: UILabel = {
         let label = UILabel()
-        label.text = "웰시코기가 세상에서 제일 좋은데 어떡하면 좋나요? 저는 고양이는 처다도 안 본답니다. 강아지가 충성심도 있고 집도 잘 지키고 훨씬 귀여운거 같아요."
         label.numberOfLines = 0
         label.lineBreakMode = .byCharWrapping
         label.setLineHeight(lineHeight: 4)
@@ -76,7 +95,7 @@ final class DetailContentView: UIView {
     
     private let commentLabel: UILabel = {
         let label = UILabel()
-        label.text = "댓글 3개"
+        label.text = "댓글 0개"
         label.font = .systemFont(ofSize: 12, weight: .thin)
         return label
     }()
@@ -96,7 +115,7 @@ final class DetailContentView: UIView {
     
     // MARK: - UI
     private func setLayout() {
-        [mainImageView, profileImageView, nameLabel, personalInfo, categoryLabel, titleLabel, dateLabel, contentLabel, commentLabel, navigationDivderView, contentDivederView].forEach {
+        [mainImageView, profileImageView, nameLabel, personalInfo, categoryLabel, titleLabel, dateLabel, contentLabel, commentLabel, navigationDivderView, contentDivederView, imageCountLabel].forEach {
             addSubview($0)
         }
         
@@ -105,6 +124,10 @@ final class DetailContentView: UIView {
             .trailingLayout(equalTo: trailingAnchor)
             .topLayout(equalTo: topAnchor)
             .heightLayout(300)
+        
+        imageCountLabel
+            .topLayout(equalTo: topAnchor, constant: 265)
+            .trailingLayout(equalTo: trailingAnchor, constant: -15)
         
         profileImageView
             .leadingLayout(equalTo: leadingAnchor, constant: 20)
@@ -166,8 +189,16 @@ final class DetailContentView: UIView {
     func setPinContent(title: String, content: String, date: String, image: UIImage?, category: String) {
         titleLabel.text = title
         contentLabel.text = content
-        dateLabel.text = date
+        dateLabel.text = date.convertDaysAgo()
         mainImageView.image = image
         categoryLabel.text = NSLocalizedString(category, comment: "")
+    }
+    
+    func setLayoutDependingOnImage(isImage: Bool) {
+        if !isImage {
+            mainImageView.isHidden = true
+            mainImageView.heightLayout(0)
+            imageCountLabel.isHidden = true
+        }
     }
 }

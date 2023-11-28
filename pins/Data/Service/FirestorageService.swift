@@ -35,7 +35,7 @@ final class FirestorageService: FirestorageServiceProtocol {
     
     func downloadImage(urlString: String) async -> UIImage? {
         let storageReference = Storage.storage().reference(forURL: urlString)
-        let megaByte = Int64(1 * 1024 * 1024)
+        let megaByte = Int64(2 * 1024 * 1024)
         
         return await withCheckedContinuation { continuation in
             storageReference.getData(maxSize: megaByte) { data, error in
