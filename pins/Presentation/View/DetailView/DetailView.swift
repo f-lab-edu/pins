@@ -46,6 +46,12 @@ final class DetailView: UIView {
             .trailingLayout(equalTo: trailingAnchor)
             .bottomLayout(equalTo: bottomAnchor)
         
+        bannerCollectionView
+            .topLayout(equalTo: topAnchor)
+            .leadingLayout(equalTo: leadingAnchor)
+            .trailingLayout(equalTo: trailingAnchor)
+            .heightLayout(300)
+        
         navigationView
             .leadingLayout(equalTo: leadingAnchor)
             .topLayout(equalTo: topAnchor)
