@@ -10,7 +10,10 @@ import Combine
 import PhotosUI
 
 final class CreateViewController: UIViewController {
-    var viewModel: CreateViewModel = CreateViewModel()
+    private lazy var firebaseRepository: FirebaseRepositoryProtocol = FirebaseRepository()
+    private lazy var firebaseStorageService: FirestorageServiceProtocol = FirestorageService(firebaseRepository: firebaseRepository)
+    private lazy var createUseCase: CreateUseCaseProtocol = CreateUseCase(firestorageService: firebaseStorageService)
+    private lazy var viewModel: CreateViewModel = CreateViewModel(createUsecase: createUseCase)
     private enum CollectionViewType: Int {
         case categoryCollection
         case imageCollection
@@ -129,6 +132,10 @@ final class CreateViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func setPosition(_ position :CLLocation) {
+        viewModel.setPosition(position: position)
     }
 }
 

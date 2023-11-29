@@ -12,68 +12,78 @@ import FirebaseCore
 import GoogleSignIn
 
 protocol FirebaseAuthServiceProtocol {
-    func signInWithApple(credential: AuthCredential, completion: @escaping (Result<AuthDataResult, Error>) -> Void)
-    func signInWithGoogle(credential: AuthCredential, completion: @escaping (Result<AuthDataResult, Error>) -> Void)
-    func getFirebaseCredentialFromApple(with credential: ASAuthorizationAppleIDCredential, nonce: String?, completion: @escaping (AuthCredential) -> Void)
-    func getFirebaseCredentialFromGoogle(presentView: UIViewController, completion: @escaping (AuthCredential) -> Void)
+    func signInWithApple(credential: AuthCredential) async -> Result<AuthDataResult, Error>
+    func signInWithGoogle(credential: AuthCredential) async -> Result<AuthDataResult, Error>
+    func getFirebaseCredentialFromApple(with credential: ASAuthorizationAppleIDCredential, nonce: String?) async -> Result<AuthCredential, Error>
+    func getFirebaseCredentialFromGoogle(presentView: UIViewController) async -> Result<AuthCredential, Error>
 }
 
 final class FirebaseAuthService: FirebaseAuthServiceProtocol {
     private var currentNonce: String?
     
-    func signInWithApple(credential: AuthCredential, completion: @escaping (Result<AuthDataResult, Error>) -> Void) {
-        Auth.auth().signIn(with: credential) { authResult, error in
-           if let error = error {
-               completion(.failure(error))
-           } else if let authResult = authResult {
-               completion(.success(authResult))
-           }
-       }
-    }
-    
-    func signInWithGoogle(credential: AuthCredential, completion: @escaping (Result<AuthDataResult, Error>) -> Void) {
-        Auth.auth().signIn(with: credential) { authResult, error in
-            if let error = error {
-                completion(.failure(error))
-            } else if let authResult = authResult {
-                completion(.success(authResult))
+    func signInWithApple(credential: AuthCredential) async -> Result<AuthDataResult, Error> {
+        await withCheckedContinuation { continuation in
+            Auth.auth().signIn(with: credential) { authResult, error in
+                if let error = error {
+                    continuation.resume(returning: .failure(error))
+                } else if let authResult = authResult {
+                    continuation.resume(returning: .success(authResult))
+                }
             }
         }
     }
     
-    func getFirebaseCredentialFromApple(with credential: ASAuthorizationAppleIDCredential, nonce: String?, completion: @escaping (AuthCredential) -> Void) {
+    func signInWithGoogle(credential: AuthCredential) async -> Result<AuthDataResult, Error> {
+        await withCheckedContinuation { continuation in
+            Auth.auth().signIn(with: credential) { authResult, error in
+                if let error = error {
+                    continuation.resume(returning: .failure(error))
+                } else if let authResult = authResult {
+                    continuation.resume(returning: .success(authResult))
+                }
+            }
+        }
+    }
+    
+    func getFirebaseCredentialFromApple(with credential: ASAuthorizationAppleIDCredential, nonce: String?) async -> Result<AuthCredential, Error> {
         guard let nonce = nonce else {
             fatalError("Invalid state: A login callback was received, but no login request was sent.")
         }
         guard let appleIDToken = credential.identityToken else {
             os_log("Unable to fetch identity token", log: .ui, type: .error)
-            return
+            return .failure(NSError(domain: "TokenError", code: -1, userInfo: nil))
         }
         guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
             os_log("Unable to serialize token string from data: %@", log: .ui, type: .error, appleIDToken.debugDescription)
-            return
+            return .failure(NSError(domain: "TokenError", code: -1, userInfo: nil))
         }
         
-        let credential = OAuthProvider.appleCredential(withIDToken: idTokenString, rawNonce: nonce, fullName: credential.fullName)
-        completion(credential)
+        let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
+        return .success(credential)
     }
     
-    func getFirebaseCredentialFromGoogle(presentView: UIViewController, completion: @escaping (AuthCredential) -> Void) {
-        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-        let config = GIDConfiguration(clientID: clientID)
-        GIDSignIn.sharedInstance.configuration = config
+    @MainActor
+    func getFirebaseCredentialFromGoogle(presentView: UIViewController) async -> Result<AuthCredential, Error> {
+        await withCheckedContinuation { continuation in
+            guard let clientID = FirebaseApp.app()?.options.clientID else {
+                os_log("Error Google sign in: %@", log: .ui, type: .error, "FirebaseApp.app()?.options.clientID is nil")
+                return continuation.resume(returning: .failure(NSError(domain: "SignInError", code: -1, userInfo: nil)))
+            }
+            let config = GIDConfiguration(clientID: clientID)
+            GIDSignIn.sharedInstance.configuration = config
 
-        GIDSignIn.sharedInstance.signIn(withPresenting: presentView) { result, error in
-            guard error == nil else {
-                os_log("Error Google sign in: %@", log: .ui, type: .error, error!.localizedDescription)
-                return
+            GIDSignIn.sharedInstance.signIn(withPresenting: presentView) { result, error in
+                guard error == nil else {
+                    os_log("Error Google sign in: %@", log: .ui, type: .error, error!.localizedDescription)
+                    return continuation.resume(returning: .failure(error!))
+                }
+                guard let user = result?.user, let idToken = user.idToken?.tokenString else {
+                    os_log("Error Google sign in: %@", log: .ui, type: .error, "User or idToken is nil")
+                    return continuation.resume(returning: .failure(NSError(domain: "SignInError", code: -1, userInfo: nil)))
+                }
+                let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
+                continuation.resume(returning: .success(credential))
             }
-            guard let user = result?.user, let idToken = user.idToken?.tokenString else {
-                os_log("Error Google sign in: %@", log: .ui, type: .error, "User or idToken is nil")
-                return
-            }
-            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
-            completion(credential)
         }
     }
 }

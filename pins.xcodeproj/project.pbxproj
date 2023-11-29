@@ -43,8 +43,9 @@
 		B7B977612AFA0A550023718B /* FirebaseFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B977602AFA0A550023718B /* FirebaseFirestore.swift */; };
 		B7B977642AFA0D270023718B /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B977632AFA0D270023718B /* Pin.swift */; };
 		B7B977662AFA0F550023718B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B7B977652AFA0F550023718B /* FirebaseFirestore */; };
-		B7B977682AFA10AE0023718B /* PinRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B977672AFA10AE0023718B /* PinRepository.swift */; };
+		B7B977682AFA10AE0023718B /* FirebaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B977672AFA10AE0023718B /* FirebaseRepository.swift */; };
 		B7B9776C2AFA20D80023718B /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B9776B2AFA20D80023718B /* Date+Extensions.swift */; };
+		B7BB20242B0E0745003EED3A /* CreateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BB20232B0E0745003EED3A /* CreateUseCase.swift */; };
 		B7BC79172AF4AB8900BBE0A9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B7BC79162AF4AB8900BBE0A9 /* FirebaseAuth */; };
 		B7DE80652B08A771007A7AEF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7DE80642B08A771007A7AEF /* GoogleService-Info.plist */; };
 		B7DE80682B08A979007A7AEF /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = B7DE80672B08A979007A7AEF /* GoogleSignIn */; };
@@ -113,8 +114,9 @@
 		B7AF69532AE0FEE000385632 /* pinsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pinsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B7B977602AFA0A550023718B /* FirebaseFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestore.swift; sourceTree = "<group>"; };
 		B7B977632AFA0D270023718B /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
-		B7B977672AFA10AE0023718B /* PinRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinRepository.swift; sourceTree = "<group>"; };
+		B7B977672AFA10AE0023718B /* FirebaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRepository.swift; sourceTree = "<group>"; };
 		B7B9776B2AFA20D80023718B /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		B7BB20232B0E0745003EED3A /* CreateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUseCase.swift; sourceTree = "<group>"; };
 		B7DE80642B08A771007A7AEF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B7E050F02AE4FB3A007903C3 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
 		B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				B71C387B2B0753BB0065A783 /* LoginUseCase.swift */,
+				B7BB20232B0E0745003EED3A /* CreateUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -232,7 +235,7 @@
 		B71C38782B0751860065A783 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				B7B977672AFA10AE0023718B /* PinRepository.swift */,
+				B7B977672AFA10AE0023718B /* FirebaseRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -568,9 +571,10 @@
 				B79A28F32AF37F93008FD3CE /* LoginViewController.swift in Sources */,
 				B78099432B06047400C01059 /* ImageInfo.swift in Sources */,
 				B71C387C2B0753BB0065A783 /* LoginUseCase.swift in Sources */,
+				B7BB20242B0E0745003EED3A /* CreateUseCase.swift in Sources */,
 				B71C38802B07554B0065A783 /* FirebaseAuthService.swift in Sources */,
 				B7AEC0CE2B034568004BA42A /* CustomTextView.swift in Sources */,
-				B7B977682AFA10AE0023718B /* PinRepository.swift in Sources */,
+				B7B977682AFA10AE0023718B /* FirebaseRepository.swift in Sources */,
 				B7B977642AFA0D270023718B /* Pin.swift in Sources */,
 				B7AF69332AE0FEDF00385632 /* SceneDelegate.swift in Sources */,
 				B71C38832B075CC70065A783 /* CryptoUtils.swift in Sources */,

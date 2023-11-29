@@ -10,60 +10,70 @@ import OSLog
 import FirebaseAuth
 import FirebaseStorage
 
-typealias UrlWithIndex = (index: Int, url: URL)
+typealias URLWithIndex = (index: Int, url: URL)
 
-enum FirestorageService {
-    private static func metaData(for imageInfo: ImageInfo) -> StorageMetadata {
+protocol FirestorageServiceProtocol {
+    func uploadImage(imageInfo: ImageInfo) async -> URLWithIndex
+    func uploadImages(imageInfos: [ImageInfo]) async -> [URLWithIndex]
+    func downloadImage(urlString: String) async -> UIImage?
+    func createPin(pin: Pin, images: [ImageInfo]) async
+}
+
+final class FirestorageService: FirestorageServiceProtocol {
+    private var firebaseRepository: FirebaseRepositoryProtocol
+    
+    init(firebaseRepository: FirebaseRepositoryProtocol) {
+        self.firebaseRepository = firebaseRepository
+    }
+    
+    private func metaData(for imageInfo: ImageInfo) -> StorageMetadata {
         let metaData = StorageMetadata()
         metaData.contentType = imageInfo.extensionType
         return metaData
     }
     
-    static func uploadImage(imageInfo: ImageInfo) async -> UrlWithIndex {
-        guard let imageData = imageInfo.image.jpegData(compressionQuality: 0.6) else { 
+    func uploadImage(imageInfo: ImageInfo) async -> URLWithIndex {
+        let metaData = self.metaData(for: imageInfo)
+        guard let imageData = imageInfo.image.jpegData(compressionQuality: 0.6) else {
             fatalError("Image data is nil")
         }
         
         let imageName = UUID().uuidString + String(Date().timeIntervalSince1970)
-        let metaData = self.metaData(for: imageInfo)
-
-        let firebaseReference = Storage.storage().reference().child("image/\(Auth.auth().currentUser?.uid ?? "")/\(imageName)")
-        
-        do {
-            let _ = try await firebaseReference.putDataAsync(imageData, metadata: metaData)
-            return try await (imageInfo.index, firebaseReference.downloadURL())
-        } catch {
-            os_log("Error uploading image: \(error)")
-            fatalError("Error uploading image: \(error)")
-        }
+        let url = await firebaseRepository.uploadImage(imageData: imageData, imageName: imageName, metaData: metaData)
+        return (imageInfo.index, url)
     }
     
-    static func uploadImages(imageInfos: [ImageInfo]) async -> [UrlWithIndex] {
-        var urls: [UrlWithIndex] = []
-
-        await withTaskGroup(of: UrlWithIndex.self) { group in
-            for image in imageInfos {
-                group.addTask {
-                    return await uploadImage(imageInfo: image)
-                }
-            }
-            for await url in group {
-                urls.append(url)
-            }
+    func uploadImages(imageInfos: [ImageInfo]) async -> [URLWithIndex] {
+        var urls: [URLWithIndex] = []
+        for imageInfo in imageInfos {
+            let url = await uploadImage(imageInfo: imageInfo)
+            urls.append(url)
         }
         return urls
     }
     
-    static func downloadImage(urlString: String, completion: @escaping (UIImage?) -> Void) {
+    func downloadImage(urlString: String) async -> UIImage? {
         let storageReference = Storage.storage().reference(forURL: urlString)
         let megaByte = Int64(1 * 1024 * 1024)
         
-        storageReference.getData(maxSize: megaByte) { data, error in
-            guard let imageData = data else {
-                completion(nil)
-                return
+        return await withCheckedContinuation { continuation in
+            storageReference.getData(maxSize: megaByte) { data, error in
+                if let error = error {
+                    os_log("Error downloading image: \(error)")
+                    continuation.resume(returning: nil)
+                } else if let data = data, let image = UIImage(data: data) {
+                    continuation.resume(returning: image)
+                } else {
+                    continuation.resume(returning: nil)
+                }
             }
-            completion(UIImage(data: imageData))
         }
+    }
+    
+    func createPin(pin: Pin, images: [ImageInfo]) async {
+        let urls = await uploadImages(imageInfos: images)
+        let urlsString = urls.map { $0.url.absoluteString }
+        let pin = pin.withUrls(urls: urlsString)
+        await firebaseRepository.createPin(pin: pin.toDictionary())
     }
 }
