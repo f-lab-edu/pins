@@ -9,26 +9,6 @@ import UIKit
 
 final class DetailContentView: UIView {
     // MARK: - Properties
-    private let bannerCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 0
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(UIImage.self, forCellWithReuseIdentifier: "ImageBanner")
-        return collectionView
-    }()
-    
-    private let mainImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(resource: .test)
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        return imageView
-    }()
-    
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(resource: .test)
@@ -58,16 +38,6 @@ final class DetailContentView: UIView {
         label.backgroundColor = .systemBlue
         label.setCornerRadius(offset: 12)
         label.textColor = .white
-        return label
-    }()
-    
-    private let imageCountLabel: PaddingLabel = {
-        let label = PaddingLabel(topInset: 4, bottomInset: 4, leftInset: 8, rightInset: 8)
-        label.font = .systemFont(ofSize: 12, weight: .medium)
-        label.backgroundColor = .black.withAlphaComponent(0.5)
-        label.textColor = .white
-        label.setCornerRadius(offset: 12)
-        label.text = "1/2"
         return label
     }()
     
@@ -104,34 +74,24 @@ final class DetailContentView: UIView {
     private let contentDivederView: Divider = Divider()
     
     // MARK: - Initializer
-    override init(frame: CGRect) {
+    init() {
         super.init(frame: .zero)
         setLayout()
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - UI
     private func setLayout() {
-        [mainImageView, profileImageView, nameLabel, personalInfo, categoryLabel, titleLabel, dateLabel, contentLabel, commentLabel, navigationDivderView, contentDivederView, imageCountLabel].forEach {
+        [profileImageView, nameLabel, personalInfo, categoryLabel, titleLabel, dateLabel, contentLabel, commentLabel, navigationDivderView, contentDivederView].forEach {
             addSubview($0)
         }
         
-        mainImageView
-            .leadingLayout(equalTo: leadingAnchor)
-            .trailingLayout(equalTo: trailingAnchor)
-            .topLayout(equalTo: topAnchor)
-            .heightLayout(300)
-        
-        imageCountLabel
-            .topLayout(equalTo: topAnchor, constant: 265)
-            .trailingLayout(equalTo: trailingAnchor, constant: -15)
-        
         profileImageView
             .leadingLayout(equalTo: leadingAnchor, constant: 20)
-            .topLayout(equalTo: mainImageView.bottomAnchor, constant: 16)
+            .topLayout(equalTo: topAnchor, constant: 20)
             .widthLayout(40)
             .heightLayout(40)
         
@@ -142,7 +102,7 @@ final class DetailContentView: UIView {
         personalInfo
             .leadingLayout(equalTo: profileImageView.trailingAnchor, constant: 8)
             .topLayout(equalTo: nameLabel.bottomAnchor, constant: 2)
-        
+
         categoryLabel
             .trailingLayout(equalTo: trailingAnchor, constant: -20)
             .centerYLayout(equalTo: profileImageView.centerYAnchor)
@@ -177,28 +137,10 @@ final class DetailContentView: UIView {
     }
     
     // MARK: - Methods
-    func updateMainImageHeight(_ offset: CGFloat, scrollView: UIScrollView, topAnchor: NSLayoutYAxisAnchor) {
-        if offset < 0 {
-            mainImageView.heightLayout(300 - offset)
-            mainImageView.topLayout(equalTo: topAnchor)
-        } else {
-            mainImageView.topLayout(equalTo: scrollView.topAnchor)
-        }
-    }
-    
-    func setPinContent(title: String, content: String, date: String, image: UIImage?, category: String) {
+    func setPinContent(title: String, content: String, date: String, category: String) {
         titleLabel.text = title
         contentLabel.text = content
         dateLabel.text = date.convertDaysAgo()
-        mainImageView.image = image
         categoryLabel.text = NSLocalizedString(category, comment: "")
-    }
-    
-    func setLayoutDependingOnImage(isImage: Bool) {
-        if !isImage {
-            mainImageView.isHidden = true
-            mainImageView.heightLayout(0)
-            imageCountLabel.isHidden = true
-        }
     }
 }

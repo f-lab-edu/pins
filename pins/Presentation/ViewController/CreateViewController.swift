@@ -112,7 +112,8 @@ final class CreateViewController: UIViewController {
     private func loadImageAsync(_ itemProvider: NSItemProvider) async -> UIImage? {
         return await withCheckedContinuation { continuation in
             itemProvider.loadObject(ofClass: UIImage.self) { image, error in
-                if let image = image as? UIImage {
+                if var image = image as? UIImage {
+                    image = image.resizeImageTo40Percent()
                     continuation.resume(returning: image)
                 } else {
                     continuation.resume(returning: nil)
