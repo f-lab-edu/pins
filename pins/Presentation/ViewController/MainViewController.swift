@@ -12,7 +12,10 @@ import Combine
 import FirebaseAuth
 
 final class MainViewController: UIViewController {
-    private let viewModel: MainViewModel = MainViewModel()
+    private lazy var firebaseRepository: FirebaseRepository = FirebaseRepository()
+    private lazy var firestoreService: FirestorageServiceProtocol = FirestorageService(firebaseRepository: firebaseRepository)
+    private lazy var mainUseCase: MainUseCaseProtocol = MainUseCase(firestorageService: firestoreService)
+    private lazy var viewModel: MainViewModel = MainViewModel(mainUseCase: mainUseCase)
     
     private var mainMapView: MainMapView {
         view as! MainMapView
@@ -32,10 +35,24 @@ final class MainViewController: UIViewController {
         viewModel.$createViewIsPresented.sink { [weak self] isPresented in
             self?.mainMapView.presentCreateView(isPresented: isPresented)
         }.store(in: &cancellable)
+        
+        viewModel.$currentPins
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] pins in
+            self?.mainMapView.drawPins(pins: pins)
+        }.store(in: &cancellable)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        loadPins()
     }
     
     override func loadView() {
         view = MainMapView()
+    }
+    
+    private func loadPins() {
+        viewModel.getPins()
     }
     
     private func setLocationManager() {
@@ -80,7 +97,7 @@ final class MainViewController: UIViewController {
         
         mainMapView.setCreateButtonAction(UIAction(handler: { [weak self] _ in
             let createViewController: CreateViewController = CreateViewController()
-            guard let position = self?.locationManager.location else { return }
+            guard let position = self?.mainMapView.getCenterCoordinate() else { return }
             createViewController.setPosition(position)
             self?.navigationController?.pushViewController(createViewController, animated: true)
             
@@ -99,7 +116,31 @@ final class MainViewController: UIViewController {
 }
 
 extension MainViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let identifier = "PinAnnotaion"
+        
+        if annotation is MKUserLocation {
+            return nil
+        }
+
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? PinAnnotationView
+        
+        if annotationView == nil {
+            annotationView = PinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+        } else {
+            annotationView?.annotation = annotation
+        }
+        annotationView?.setPinImage()
+        return annotationView
+    }
     
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let pinAnnotation = view.annotation as? PinAnnotation else { return }
+        print(pinAnnotation.pin.content)
+//        let detailViewController: DetailViewController = DetailViewController()
+//        detailViewController.setPin(pinAnnotation)
+//        navigationController?.pushViewController(detailViewController, animated: true)
+    }
 }
 
 extension MainViewController: CLLocationManagerDelegate {
