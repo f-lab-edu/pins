@@ -93,6 +93,7 @@ final class MainViewController: UIViewController {
         
         mainMapView.setCreateModeButtonAction(UIAction(handler: { [weak self] _ in
             self?.viewModel.setCreateViewIsPresented(isPresented: true)
+            self?.mainMapView.setAnimation()
         }))
         
         mainMapView.setCreateButtonAction(UIAction(handler: { [weak self] _ in

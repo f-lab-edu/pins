@@ -8,6 +8,7 @@
 import UIKit
 
 final class DetailView: UIView {
+    private let animationManager: AnimationManager = AnimationManager()
     let scrollView: DetailScrollView = {
         let scrollView = DetailScrollView()
         scrollView.backgroundColor = .background
@@ -70,7 +71,7 @@ final class DetailView: UIView {
                 let keyboardRectangle = keyboardFrame.cgRectValue
                 let keyboardHeight = keyboardRectangle.height
 
-                let (duration, options) = AnimationManager.keyboardAnimation(notification: notification)
+                let (duration, options) = animationManager.keyboardAnimation(notification: notification)
                 UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
                     self.commentView
                         .bottomLayout(equalTo: self.bottomAnchor, constant: -keyboardHeight)
@@ -81,7 +82,7 @@ final class DetailView: UIView {
         }
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { [weak self] notification in
             guard let self = self else { return }
-            let (duration, options) = AnimationManager.keyboardAnimation(notification: notification)
+            let (duration, options) = animationManager.keyboardAnimation(notification: notification)
             UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
                 self.commentView
                     .bottomLayout(equalTo: self.bottomAnchor, constant: 0)
