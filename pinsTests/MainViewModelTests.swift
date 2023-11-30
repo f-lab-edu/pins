@@ -20,14 +20,14 @@ final class MainViewModelTests: XCTestCase {
     
     func testGetPins() async {
         let expectation = XCTestExpectation(description: "getPins completes")
-        let expectedPins: [Pin] = [
-            Pin(id: "1", title: "title", content: "content", longitude: 1, latitude: 2, category: "category", created: "created")
+        let expectedPins: [PinRequest] = [
+            PinRequest(id: "1", title: "title", content: "content", longitude: 1, latitude: 2, category: "category", created: "created")
         ]
         mockMainUseCase.pinsToReturn = expectedPins
 
         viewModel.getPins()
         
-        var receivedPins: [Pin] = []
+        var receivedPins: [PinRequest] = []
         let cancellable = viewModel.$currentPins.sink { pins in
             receivedPins = pins
             expectation.fulfill()
@@ -60,9 +60,9 @@ final class MainViewModelTests: XCTestCase {
 }
 
 class MockMainUseCase: MainUseCaseProtocol {
-    var pinsToReturn: [Pin] = []
+    var pinsToReturn: [PinRequest] = []
 
-    func getPins() async -> [Pin] {
+    func getPins() async -> [PinRequest] {
         return pinsToReturn
     }
 }

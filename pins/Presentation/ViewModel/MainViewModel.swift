@@ -8,7 +8,7 @@
 import Foundation
 
 final class MainViewModel {
-    @Published var currentPins: [Pin] = []
+    @Published var currentPins: [PinRequest] = []
     @Published var createViewIsPresented: Bool = false
     private var mainUseCase: MainUseCaseProtocol
     
@@ -20,6 +20,10 @@ final class MainViewModel {
         Task {
             currentPins = await mainUseCase.getPins()
         }
+    }
+    
+    func loadPin(pin: PinRequest) async -> PinResponse {
+        return await mainUseCase.loadPin(pin: pin)
     }
     
     func setCreateViewIsPresented(isPresented: Bool) {
