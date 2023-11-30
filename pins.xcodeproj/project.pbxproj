@@ -63,6 +63,7 @@
 		B7D051502B10AD1A00D86183 /* DetailNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D0514F2B10AD1A00D86183 /* DetailNavigationView.swift */; };
 		B7D051522B10AD2100D86183 /* DetailContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D051512B10AD2100D86183 /* DetailContentView.swift */; };
 		B7D051542B10AD2B00D86183 /* DetailCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D051532B10AD2B00D86183 /* DetailCommentView.swift */; };
+		B7D99EC82B18640F00250399 /* UIScreenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D99EC72B18640F00250399 /* UIScreenUtils.swift */; };
 		B7DE80652B08A771007A7AEF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7DE80642B08A771007A7AEF /* GoogleService-Info.plist */; };
 		B7DE80682B08A979007A7AEF /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = B7DE80672B08A979007A7AEF /* GoogleSignIn */; };
 		B7E050F12AE4FB3A007903C3 /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E050F02AE4FB3A007903C3 /* MainMapView.swift */; };
@@ -151,6 +152,7 @@
 		B7D0514F2B10AD1A00D86183 /* DetailNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNavigationView.swift; sourceTree = "<group>"; };
 		B7D051512B10AD2100D86183 /* DetailContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentView.swift; sourceTree = "<group>"; };
 		B7D051532B10AD2B00D86183 /* DetailCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCommentView.swift; sourceTree = "<group>"; };
+		B7D99EC72B18640F00250399 /* UIScreenUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenUtils.swift; sourceTree = "<group>"; };
 		B7DE80642B08A771007A7AEF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B7E050F02AE4FB3A007903C3 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
 		B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				B71C38822B075CC70065A783 /* CryptoUtils.swift */,
+				B7D99EC72B18640F00250399 /* UIScreenUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -653,6 +656,7 @@
 				B79A28F32AF37F93008FD3CE /* LoginViewController.swift in Sources */,
 				B78099432B06047400C01059 /* ImageInfo.swift in Sources */,
 				B71C387C2B0753BB0065A783 /* LoginUseCase.swift in Sources */,
+				B7D99EC82B18640F00250399 /* UIScreenUtils.swift in Sources */,
 				B785A7842B1091BC00DC2E88 /* UILabel+Extensions.swift in Sources */,
 				B7BB20242B0E0745003EED3A /* CreateUseCase.swift in Sources */,
 				B71C38802B07554B0065A783 /* FirebaseAuthService.swift in Sources */,

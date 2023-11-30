@@ -33,7 +33,7 @@ final class DetailContentView: UIView {
     }()
     
     private let categoryLabel: PaddingLabel = {
-        let label = PaddingLabel(topInset: 4, bottomInset: 4, leftInset: 8, rightInset: 8)
+        let label = PaddingLabel(inset: UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8))
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.backgroundColor = .systemBlue
         label.setCornerRadius(offset: 12)

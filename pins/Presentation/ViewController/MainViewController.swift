@@ -93,7 +93,7 @@ final class MainViewController: UIViewController {
         
         mainMapView.setCreateModeButtonAction(UIAction(handler: { [weak self] _ in
             self?.viewModel.setCreateViewIsPresented(isPresented: true)
-            self?.mainMapView.setAnimation()
+            self?.mainMapView.addPinAnimations()
         }))
         
         mainMapView.setCreateButtonAction(UIAction(handler: { [weak self] _ in
@@ -118,16 +118,14 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let identifier = "PinAnnotaion"
-        
         if annotation is MKUserLocation {
             return nil
         }
 
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? PinAnnotationView
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: PinAnnotationView.identifier) as? PinAnnotationView
         
         if annotationView == nil {
-            annotationView = PinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView = PinAnnotationView(annotation: annotation, reuseIdentifier: PinAnnotationView.identifier)
         } else {
             annotationView?.annotation = annotation
         }

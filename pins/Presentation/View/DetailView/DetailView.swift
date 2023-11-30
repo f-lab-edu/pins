@@ -10,43 +10,54 @@ import Combine
 
 final class DetailView: UIView {
     // MARK: - UI Property
+    private enum ScrollViewType: Int {
+        case totalScroll
+        case imageBannerScroll
+    }
+    private struct UIConstants {
+        static let bannerHeight: CGFloat = 300
+        static let navigationHeight: CGFloat = 100
+        static let commentHeight: CGFloat = 100
+        static let extendedScreenHeight: CGFloat = UIScreenUtils.getScreenHeight() + 130
+        static let labelCornerRadius: CGFloat = 12
+        static let labelFontSize: CGFloat = 12
+        static let labelInsets: UIEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+        static let initialImageCountText: String = "0/0"
+    }
     private let scrollView: DetailScrollView = {
         let scrollView = DetailScrollView()
         scrollView.backgroundColor = .background
-        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height + 130)
+        scrollView.contentSize = CGSize(width: UIScreenUtils.getScreenWidth(), height: UIConstants.extendedScreenHeight)
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.tag = 0
         return scrollView
     }()
-    
     private let bannerCollectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 0
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 300)
+        layout.itemSize = CGSize(width: UIScreenUtils.getScreenWidth(), height: UIConstants.bannerHeight)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(DetailBannerCell.self, forCellWithReuseIdentifier: DetailBannerCell.identifier)
         collectionView.isPagingEnabled = true
         collectionView.tag = 1
         return collectionView
     }()
-    
     private let imageCountLabel: PaddingLabel = {
-        let label = PaddingLabel(topInset: 4, bottomInset: 4, leftInset: 8, rightInset: 8)
-        label.font = .systemFont(ofSize: 12, weight: .medium)
+        let label = PaddingLabel(inset: UIConstants.labelInsets)
+        label.font = .systemFont(ofSize: UIConstants.labelFontSize, weight: .medium)
         label.backgroundColor = .black.withAlphaComponent(0.5)
         label.textColor = .white
-        label.setCornerRadius(offset: 12)
-        label.text = "0/0"
+        label.setCornerRadius(offset: UIConstants.labelCornerRadius)
+        label.text = UIConstants.initialImageCountText
         return label
     }()
-    
     private let contentView: DetailContentView = DetailContentView()
     private let commentView: DetailCommentView = DetailCommentView()
     let navigationView: DetailNavigationView = DetailNavigationView()
     // MARK: - Property
     private let animationManager: AnimationManager = AnimationManager()
-    private var viewModel: DetailViewModel!
+    private var viewModel: DetailViewModel
     private var cancellable = Set<AnyCancellable>()
     // MARK: - Initializer
     init(viewModel: DetailViewModel) {
@@ -89,26 +100,26 @@ final class DetailView: UIView {
         contentView
             .leadingLayout(equalTo: leadingAnchor)
             .trailingLayout(equalTo: trailingAnchor)
-            .heightLayout(UIScreen.main.bounds.height - 400)
-            .topLayout(equalTo: scrollView.topAnchor, constant: 300)
+            .topLayout(equalTo: scrollView.topAnchor, constant: UIConstants.bannerHeight)
+            .heightLayout(UIScreenUtils.getScreenWidth() - UIConstants.bannerHeight - UIConstants.commentHeight)
     
         bannerCollectionView
             .topLayout(equalTo: scrollView.topAnchor)
             .leadingLayout(equalTo: leadingAnchor)
             .trailingLayout(equalTo: trailingAnchor)
-            .heightLayout(300)
+            .heightLayout(UIConstants.bannerHeight)
         
         navigationView
             .leadingLayout(equalTo: leadingAnchor)
             .topLayout(equalTo: topAnchor)
             .trailingLayout(equalTo: trailingAnchor)
-            .heightLayout(100)
+            .heightLayout(UIConstants.navigationHeight)
         
         commentView
             .leadingLayout(equalTo: leadingAnchor)
             .trailingLayout(equalTo: trailingAnchor)
             .bottomLayout(equalTo: bottomAnchor)
-            .heightLayout(100)
+            .heightLayout(UIConstants.commentHeight)
         
         imageCountLabel
             .bottomLayout(equalTo: contentView.topAnchor, constant: -20)
@@ -126,7 +137,7 @@ final class DetailView: UIView {
                 UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
                     self.commentView
                         .bottomLayout(equalTo: self.bottomAnchor, constant: -keyboardHeight)
-                        .heightLayout(70)
+                        .heightLayout(UIConstants.commentHeight * 0.7)
                     self.layoutIfNeeded()
                 }, completion: nil)
             }
@@ -137,7 +148,7 @@ final class DetailView: UIView {
             UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
                 self.commentView
                     .bottomLayout(equalTo: self.bottomAnchor, constant: 0)
-                    .heightLayout(100)
+                    .heightLayout(UIConstants.commentHeight)
                 self.layoutIfNeeded()
             }, completion: nil)
         }
@@ -148,31 +159,38 @@ final class DetailView: UIView {
             imageCountLabel.removeFromSuperview()
             bannerCollectionView.removeFromSuperview()
             navigationView.backButton.tintColor = .black
-            contentView.topLayout(equalTo: scrollView.topAnchor, constant: 100)
+            contentView.topLayout(equalTo: scrollView.topAnchor, constant: UIConstants.navigationHeight)
         } else {
-            contentView.topLayout(equalTo: scrollView.topAnchor, constant: 300)
+            contentView.topLayout(equalTo: scrollView.topAnchor, constant: UIConstants.bannerHeight)
         }
         contentView.setPinContent(title: pin.title, content: pin.content, date: pin.created, category: pin.category)
     }
     
-    func updateImageScale(_ offset: CGFloat) {
+    private func updateImageScale(_ offset: CGFloat) {
         if offset < 0 {
             bannerCollectionView.isScrollEnabled = false
             bannerCollectionView.topLayout(equalTo: topAnchor)
-            bannerCollectionView.heightLayout(300 - offset)
-            let scale = 1 - offset / 300
-            let scaleTransform = CGAffineTransform(scaleX: scale, y: scale)
-            for cell in bannerCollectionView.visibleCells {
-                guard let bannerCell = cell as? DetailBannerCell else { continue }
-                bannerCell.bannerImageView.transform = scaleTransform
-            }
+            bannerCollectionView.heightLayout(UIConstants.bannerHeight - offset)
+            updateForNegativeOffset(offset)
         } else {
-            bannerCollectionView.topLayout(equalTo: scrollView.topAnchor)
             bannerCollectionView.isScrollEnabled = true
-            bannerCollectionView.contentOffset = .zero
-            bannerCollectionView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 300)
-            bannerCollectionView.contentSize = CGSize(width: UIScreen.main.bounds.width * CGFloat(viewModel.getImages().count), height: 300)
+            bannerCollectionView.topLayout(equalTo: scrollView.topAnchor)
+            updateForPositiveOffset()
         }
+    }
+    
+    private func updateForNegativeOffset(_ offset: CGFloat) {
+        let scale = 1 - offset / UIConstants.bannerHeight
+        let scaleTransform = CGAffineTransform(scaleX: scale, y: scale)
+        bannerCollectionView.visibleCells.forEach { cell in
+            guard let bannerCell = cell as? DetailBannerCell else { return }
+            bannerCell.bannerImageView.transform = scaleTransform
+        }
+    }
+
+    private func updateForPositiveOffset() {
+        bannerCollectionView.frame = CGRect(x: 0, y: 0, width: UIScreenUtils.getScreenWidth(), height: UIConstants.bannerHeight)
+        bannerCollectionView.contentSize = CGSize(width: UIScreenUtils.getScreenWidth() * CGFloat(viewModel.getImages().count), height: UIConstants.bannerHeight)
     }
 }
 
@@ -217,17 +235,25 @@ extension DetailView: UICollectionViewDelegateFlowLayout {
 
 extension DetailView: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        viewModel.setPage(value: Int(scrollView.contentOffset.x) / Int(scrollView.frame.width) + 1)
+        switch ScrollViewType(rawValue: scrollView.tag) {
+        case .imageBannerScroll:
+            viewModel.setPage(value: Int(scrollView.contentOffset.x) / Int(scrollView.frame.width) + 1)
+        default:
+            break
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.tag == 0 {
+        switch ScrollViewType(rawValue: scrollView.tag) {
+        case .totalScroll:
             let yOffset = scrollView.contentOffset.y
             navigationView.changeBackgroundColor(as: yOffset)
             if viewModel.isImage {
                 navigationView.changeButtonTintColor(as: yOffset)
                 updateImageScale(yOffset)
             }
+        default:
+            break
         }
     }
 }

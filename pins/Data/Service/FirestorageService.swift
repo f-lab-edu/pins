@@ -80,9 +80,19 @@ final class FirestorageService: FirestorageServiceProtocol {
     
     func getPins() async -> [PinRequest] {
         let result = await firebaseRepository.getPins()
+        var returnPins: [PinRequest] = []
         switch result {
         case .success(let pins):
-            return pins.map { PinRequest.toData($0) }
+            for jsonData in pins {
+                let decoder = JSONDecoder()
+                do {
+                    let pin = try decoder.decode(PinRequest.self, from: JSONSerialization.data(withJSONObject: jsonData))
+                    returnPins.append(pin)
+                } catch {
+                    os_log("Error decoding pin: %@", error.localizedDescription)
+                }
+            }
+            return returnPins
         case .failure(let error):
             os_log("Error getting pins: %@", error.localizedDescription)
             return []

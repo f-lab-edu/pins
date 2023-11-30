@@ -152,7 +152,7 @@ final class MainMapView: UIView {
         }), for: .touchUpInside)
     }
     
-    func setAnimation() {
+    func addPinAnimations() {
         let shakeAnimation = animationManager.shakeAnimation()
         let scaleAnimation = animationManager.scaleAnimation()
 
