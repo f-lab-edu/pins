@@ -17,6 +17,7 @@ protocol FirestorageServiceProtocol {
     func uploadImages(imageInfos: [ImageInfo]) async -> [URLWithIndex]
     func downloadImage(urlString: String) async -> UIImage?
     func createPin(pin: Pin, images: [ImageInfo]) async
+    func getPins() async -> [Pin]
 }
 
 final class FirestorageService: FirestorageServiceProtocol {
@@ -75,5 +76,16 @@ final class FirestorageService: FirestorageServiceProtocol {
         let urlsString = urls.map { $0.url.absoluteString }
         let pin = pin.withUrls(urls: urlsString)
         await firebaseRepository.createPin(pin: pin.toDictionary())
+    }
+    
+    func getPins() async -> [Pin] {
+        let result = await firebaseRepository.getPins()
+        switch result {
+        case .success(let pins):
+            return pins.map { Pin.toData($0) }
+        case .failure(let error):
+            os_log("Error getting pins: %@", error.localizedDescription)
+            return []
+        }
     }
 }

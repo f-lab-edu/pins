@@ -134,7 +134,7 @@ final class CreateViewController: UIViewController {
         }
     }
     
-    func setPosition(_ position :CLLocation) {
+    func setPosition(_ position :CLLocationCoordinate2D) {
         viewModel.setPosition(position: position)
     }
 }
@@ -165,7 +165,7 @@ extension CreateViewController: UICollectionViewDelegate, UICollectionViewDataSo
         switch CollectionViewType(rawValue: collectionView.tag) {
         case .categoryCollection:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
-            cell.setText(viewModel.categories[indexPath.row])
+            cell.setText(Category.types[indexPath.row])
             return cell
         case .imageCollection:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }

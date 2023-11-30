@@ -19,6 +19,7 @@ final class MainMapView: UIView {
         } else {
             mapView.mapType = .standard
         }
+        mapView.register(PinAnnotationView.self, forAnnotationViewWithReuseIdentifier: PinAnnotationView.identifier)
         return mapView
     }()
     private let centerPinImage: UIImageView = {
@@ -159,6 +160,19 @@ final class MainMapView: UIView {
         cancelButton.isHidden = !isPresented
         createButton.isHidden = !isPresented
         centerPinImage.isHidden = !isPresented
+    }
+    
+    func drawPins(pins: [Pin]) {
+        mapView.removeAnnotations(mapView.annotations)
+        
+        for pin in pins {
+            let annotation: PinAnnotation = PinAnnotation(pin: pin)
+            mapView.addAnnotation(annotation)
+        }
+    }
+    
+    func getCenterCoordinate() -> CLLocationCoordinate2D {
+        return mapView.centerCoordinate
     }
     
     func setDelegate(_ delegate: MKMapViewDelegate) {
