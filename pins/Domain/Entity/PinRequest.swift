@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Pin: Codable, Equatable {
+struct PinRequest: Codable, Equatable {
     var id: String
     var title: String
     var content: String
@@ -17,14 +17,14 @@ struct Pin: Codable, Equatable {
     var created: String
     var urls: [String] = []
     
-    func withUrls(urls: [String]) -> Pin {
+    func withUrls(urls: [String]) -> PinRequest {
         var newPin = self
         newPin.urls = urls
         return newPin
     }
     
-    static func toData(_ data: [String: Any]) -> Pin {
-        return Pin(
+    static func toData(_ data: [String: Any]) -> PinRequest {
+        return PinRequest(
             id: data["id"] as! String,
             title: data["title"] as! String,
             content: data["content"] as! String,
