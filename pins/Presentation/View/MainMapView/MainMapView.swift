@@ -10,6 +10,8 @@ import MapKit
 
 final class MainMapView: UIView {
     // MARK: - Properties
+    private let animationManager = AnimationManager()
+    
     private let mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.showsUserLocation = true
@@ -27,7 +29,6 @@ final class MainMapView: UIView {
         imageView.isHidden = true
         imageView.image = UIImage(resource: .pinsIcon)
         imageView.tintColor = .systemBlue
-        imageView.layer.add(AnimationManager.shakingAnimation(), forKey: "shake")
         return imageView
     }()
     private let createButton: CustomButton = {
@@ -151,6 +152,19 @@ final class MainMapView: UIView {
         }), for: .touchUpInside)
     }
     
+    func setAnimation() {
+        let shakeAnimation = animationManager.shakeAnimation()
+        let scaleAnimation = animationManager.scaleAnimation()
+
+        CATransaction.begin()
+        CATransaction.setCompletionBlock { [weak self] in
+            self?.centerPinImage.layer.add(shakeAnimation, forKey: "shaking")
+        }
+
+        centerPinImage.layer.add(scaleAnimation, forKey: "scaleUp")
+        CATransaction.commit()
+    }
+    
     func presentCreateView(isPresented: Bool) {
         searchButton.isHidden = isPresented
         refeshButton.isHidden = isPresented
@@ -162,7 +176,7 @@ final class MainMapView: UIView {
         centerPinImage.isHidden = !isPresented
     }
     
-    func drawPins(pins: [Pin]) {
+    func drawPins(pins: [PinRequest]) {
         mapView.removeAnnotations(mapView.annotations)
         
         for pin in pins {

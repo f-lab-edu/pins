@@ -58,10 +58,10 @@ final class CreateViewModel {
     }
     
     func createPin() async {
-        let pin = Pin(
+        let pin = PinRequest(
             id: title,
-            title: content,
-            content: category,
+            title: title,
+            content: content,
             longitude: longitude,
             latitude: latitude,
             category: category,

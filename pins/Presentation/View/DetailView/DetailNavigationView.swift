@@ -9,7 +9,7 @@ import UIKit
 
 final class DetailNavigationView: UIView {
     // MARK: - Properties
-    private let backButton: CustomButton = {
+    let backButton: CustomButton = {
         let button = CustomButton(backgroundColor: .clear, tintColor: .white)
         button.setImage(systemName: "chevron.backward")
         return button
@@ -41,12 +41,21 @@ final class DetailNavigationView: UIView {
     
     // MARK: - Method
     func changeBackgroundColor(as offset: CGFloat) {
-        if offset > 100 {
+        if offset > 10 {
             backgroundColor = .white
-            backButton.tintColor = .black
         } else {
             backgroundColor = .clear
+        }
+    }
+    func changeButtonTintColor(as offset: CGFloat) {
+        if offset > 10 {
+            backButton.tintColor = .black
+        } else {
             backButton.tintColor = .white
         }
+    }
+    
+    func setBackButtonAction(_ action: UIAction) {
+        backButton.addAction(action, for: .touchUpInside)
     }
 }
