@@ -20,8 +20,11 @@ final class DetailBannerCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        backgroundColor = .blue
         setLayout()
+    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.contentView.transform = CGAffineTransform.identity
     }
 
     required init?(coder: NSCoder) {
@@ -38,9 +41,9 @@ final class DetailBannerCell: UICollectionViewCell {
             .bottomLayout(equalTo: bottomAnchor)
         
         bannerImageView
+            .leadingLayout(equalTo: leadingAnchor)
+            .trailingLayout(equalTo: trailingAnchor)
             .topLayout(equalTo: contentView.topAnchor)
-            .leadingLayout(equalTo: contentView.leadingAnchor)
-            .widthLayout(UIScreen.main.bounds.width)
-            .heightLayout(300)
+            .bottomLayout(equalTo: bottomAnchor)
     }
 }

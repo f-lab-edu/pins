@@ -113,7 +113,7 @@ final class CreateViewController: UIViewController {
         return await withCheckedContinuation { continuation in
             itemProvider.loadObject(ofClass: UIImage.self) { image, error in
                 if var image = image as? UIImage {
-                    image = image.resizeImageTo40Percent()
+                    image = image.resizeImage(width: 720)
                     continuation.resume(returning: image)
                 } else {
                     continuation.resume(returning: nil)

@@ -32,17 +32,14 @@ final class DetailView: UIView {
         scrollView.tag = 0
         return scrollView
     }()
-    private let bannerCollectionView: UICollectionView = {
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 0
-        layout.itemSize = CGSize(width: UIScreenUtils.getScreenWidth(), height: UIConstants.bannerHeight)
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(DetailBannerCell.self, forCellWithReuseIdentifier: DetailBannerCell.identifier)
-        collectionView.isPagingEnabled = true
-        collectionView.tag = 1
-        return collectionView
+    private let bannerScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.isPagingEnabled = true
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.tag = 1
+        return scrollView
     }()
+    private var imageViews: [UIImageView] = []
     private let imageCountLabel: PaddingLabel = {
         let label = PaddingLabel(inset: UIConstants.labelInsets)
         label.font = .systemFont(ofSize: UIConstants.labelFontSize, weight: .medium)
@@ -50,6 +47,7 @@ final class DetailView: UIView {
         label.textColor = .white
         label.setCornerRadius(offset: UIConstants.labelCornerRadius)
         label.text = UIConstants.initialImageCountText
+        label.layer.zPosition = 2
         return label
     }()
     private let contentView: DetailContentView = DetailContentView()
@@ -63,14 +61,11 @@ final class DetailView: UIView {
     init(viewModel: DetailViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
-        backgroundColor = .systemBackground
         setLayout()
         setKeyboardObserver()
         setBinding()
-        
-        bannerCollectionView.delegate = self
-        bannerCollectionView.dataSource = self
         scrollView.delegate = self
+        bannerScrollView.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -83,13 +78,14 @@ final class DetailView: UIView {
             self.imageCountLabel.text = "\(value)/\(self.viewModel.getImages().count)"
         }.store(in: &cancellable)
     }
-    
+
     private func setLayout() {
         addSubview(scrollView)
-        [bannerCollectionView, contentView, commentView, navigationView].forEach {
+        [bannerScrollView, contentView, commentView, navigationView].forEach {
             scrollView.addSubview($0)
         }
-        bannerCollectionView.addSubview(imageCountLabel)
+        setupBannerScrollView()
+        bannerScrollView.addSubview(imageCountLabel)
         
         scrollView
             .leadingLayout(equalTo: leadingAnchor)
@@ -101,9 +97,9 @@ final class DetailView: UIView {
             .leadingLayout(equalTo: leadingAnchor)
             .trailingLayout(equalTo: trailingAnchor)
             .topLayout(equalTo: scrollView.topAnchor, constant: UIConstants.bannerHeight)
-            .heightLayout(UIScreenUtils.getScreenWidth() - UIConstants.bannerHeight - UIConstants.commentHeight)
+            .heightLayout(UIScreenUtils.getScreenHeight() - UIConstants.bannerHeight - UIConstants.commentHeight)
     
-        bannerCollectionView
+        bannerScrollView
             .topLayout(equalTo: scrollView.topAnchor)
             .leadingLayout(equalTo: leadingAnchor)
             .trailingLayout(equalTo: trailingAnchor)
@@ -124,6 +120,30 @@ final class DetailView: UIView {
         imageCountLabel
             .bottomLayout(equalTo: contentView.topAnchor, constant: -20)
             .trailingLayout(equalTo: trailingAnchor, constant: -15)
+    }
+
+    private func setupBannerScrollView() {
+        for image in viewModel.getImages() {
+            let imageView = UIImageView(image: image)
+            imageView.contentMode = .scaleAspectFill
+            imageView.clipsToBounds = true
+            imageViews.append(imageView)
+            bannerScrollView.addSubview(imageView)
+        }
+
+        updateBannerScrollViewLayout()
+        updateImageZIndex(page: 0)
+    }
+    
+    private func updateBannerScrollViewLayout() {
+        for (index, imageView) in imageViews.enumerated() {
+            imageView
+                .leadingLayout(equalTo: bannerScrollView.leadingAnchor, constant: UIScreenUtils.getScreenWidth() * CGFloat(index))
+                .topLayout(equalTo: bannerScrollView.topAnchor)
+                .widthLayout(UIScreenUtils.getScreenWidth())
+                .heightLayout(UIConstants.bannerHeight)
+        }
+        bannerScrollView.contentSize = CGSize(width: UIScreenUtils.getScreenWidth() * CGFloat(imageViews.count), height: UIConstants.bannerHeight)
     }
     
     private func setKeyboardObserver() {
@@ -157,7 +177,7 @@ final class DetailView: UIView {
     func setPinInfoDepondingOnImageExistence(pin: PinResponse) {
         if pin.images.isEmpty {
             imageCountLabel.removeFromSuperview()
-            bannerCollectionView.removeFromSuperview()
+            bannerScrollView.removeFromSuperview()
             navigationView.backButton.tintColor = .black
             contentView.topLayout(equalTo: scrollView.topAnchor, constant: UIConstants.navigationHeight)
         } else {
@@ -168,29 +188,37 @@ final class DetailView: UIView {
     
     private func updateImageScale(_ offset: CGFloat) {
         if offset < 0 {
-            bannerCollectionView.isScrollEnabled = false
-            bannerCollectionView.topLayout(equalTo: topAnchor)
-            bannerCollectionView.heightLayout(UIConstants.bannerHeight - offset)
-            updateForNegativeOffset(offset)
+            bannerScrollView.isScrollEnabled = false
+            bannerScrollView.topLayout(equalTo: topAnchor)
+            bannerScrollView.heightLayout(UIConstants.bannerHeight - offset)
+            let scale = 1 - offset / UIConstants.bannerHeight * 2
+            let scaleTransform = CGAffineTransform(scaleX: scale, y: scale)
+            
+            for imageView in imageViews {
+                imageView.transform = scaleTransform
+            }
         } else {
-            bannerCollectionView.isScrollEnabled = true
-            bannerCollectionView.topLayout(equalTo: scrollView.topAnchor)
-            updateForPositiveOffset()
-        }
-    }
-    
-    private func updateForNegativeOffset(_ offset: CGFloat) {
-        let scale = 1 - offset / UIConstants.bannerHeight
-        let scaleTransform = CGAffineTransform(scaleX: scale, y: scale)
-        bannerCollectionView.visibleCells.forEach { cell in
-            guard let bannerCell = cell as? DetailBannerCell else { return }
-            bannerCell.bannerImageView.transform = scaleTransform
+            bannerScrollView.isScrollEnabled = true
+            bannerScrollView.topLayout(equalTo: scrollView.topAnchor)
+            bannerScrollView.heightLayout(UIConstants.bannerHeight)
+            resetImageScale()
         }
     }
 
-    private func updateForPositiveOffset() {
-        bannerCollectionView.frame = CGRect(x: 0, y: 0, width: UIScreenUtils.getScreenWidth(), height: UIConstants.bannerHeight)
-        bannerCollectionView.contentSize = CGSize(width: UIScreenUtils.getScreenWidth() * CGFloat(viewModel.getImages().count), height: UIConstants.bannerHeight)
+    private func resetImageScale() {
+        for imageView in imageViews {
+            imageView.transform = .identity
+        }
+    }
+    
+    private func updateImageZIndex(page: Int) {
+        for (index, imageView) in imageViews.enumerated() {
+            if index == page {
+                imageView.layer.zPosition = 1
+            } else {
+                imageView.layer.zPosition = 0
+            }
+        }
     }
 }
 
@@ -237,7 +265,9 @@ extension DetailView: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         switch ScrollViewType(rawValue: scrollView.tag) {
         case .imageBannerScroll:
-            viewModel.setPage(value: Int(scrollView.contentOffset.x) / Int(scrollView.frame.width) + 1)
+            let page = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+            viewModel.setPage(value: page + 1)
+            updateImageZIndex(page: page)
         default:
             break
         }
