@@ -16,6 +16,10 @@
 		B71058932AEA2CB3003D6039 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71058922AEA2CB3003D6039 /* CustomButton.swift */; };
 		B71058952AEA42F8003D6039 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71058942AEA42F8003D6039 /* CategoryCollectionViewCell.swift */; };
 		B7157E6A2AF384E2007CEF95 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7157E692AF384E2007CEF95 /* LoginView.swift */; };
+		B7194A422B1B4F3300642FDA /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7194A412B1B4F3300642FDA /* SigninViewController.swift */; };
+		B7194A442B1B4F4600642FDA /* SigninView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7194A432B1B4F4600642FDA /* SigninView.swift */; };
+		B7194A462B1B573800642FDA /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7194A452B1B573800642FDA /* CALayer+Extensions.swift */; };
+		B7194A482B1B596F00642FDA /* SigninViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7194A472B1B596F00642FDA /* SigninViewModel.swift */; };
 		B71C387C2B0753BB0065A783 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71C387B2B0753BB0065A783 /* LoginUseCase.swift */; };
 		B71C387E2B0754F90065A783 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71C387D2B0754F90065A783 /* User.swift */; };
 		B71C38802B07554B0065A783 /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71C387F2B07554B0065A783 /* FirebaseAuthService.swift */; };
@@ -103,6 +107,10 @@
 		B71058942AEA42F8003D6039 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		B7157E692AF384E2007CEF95 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		B7157E6B2AF392E4007CEF95 /* pins.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pins.entitlements; sourceTree = "<group>"; };
+		B7194A412B1B4F3300642FDA /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
+		B7194A432B1B4F4600642FDA /* SigninView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninView.swift; sourceTree = "<group>"; };
+		B7194A452B1B573800642FDA /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
+		B7194A472B1B596F00642FDA /* SigninViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewModel.swift; sourceTree = "<group>"; };
 		B71C387B2B0753BB0065A783 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		B71C387D2B0754F90065A783 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B71C387F2B07554B0065A783 /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
@@ -202,6 +210,7 @@
 				B7D0514C2B10AC9C00D86183 /* UITextField+Extensions.swift */,
 				B70EE5BC2B15D7DD00BCCACF /* String+Extensions.swift */,
 				B70BBA522B1703C700F0F9A6 /* UIImage+Extensions.swift */,
+				B7194A452B1B573800642FDA /* CALayer+Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -213,6 +222,7 @@
 				B742C5772AEA5EE900E95E96 /* CreateViewModel.swift */,
 				B7226B152B01F6990034B451 /* LoginViewModel.swift */,
 				B7F071B62B14855000BB5AB9 /* DetailViewModel.swift */,
+				B7194A472B1B596F00642FDA /* SigninViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -326,6 +336,7 @@
 				B74A4FC42AE7905500226EA7 /* CreateViewController.swift */,
 				B79A28F22AF37F93008FD3CE /* LoginViewController.swift */,
 				B785A77D2B10743600DC2E88 /* DetailViewController.swift */,
+				B7194A412B1B4F3300642FDA /* SigninViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -443,6 +454,7 @@
 				B7D0514E2B10ACEF00D86183 /* DetailView */,
 				B74A4FC22AE78BE700226EA7 /* SearchView.swift */,
 				B7157E692AF384E2007CEF95 /* LoginView.swift */,
+				B7194A432B1B4F4600642FDA /* SigninView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -630,6 +642,7 @@
 				B7E0D5912B0CB59D0090A465 /* AnimationManager.swift in Sources */,
 				B7B9776C2AFA20D80023718B /* Date+Extensions.swift in Sources */,
 				B7D051522B10AD2100D86183 /* DetailContentView.swift in Sources */,
+				B7194A462B1B573800642FDA /* CALayer+Extensions.swift in Sources */,
 				B7B977612AFA0A550023718B /* FirebaseFirestore.swift in Sources */,
 				B74A4FC12AE78BAE00226EA7 /* SearchViewController.swift in Sources */,
 				B7AF69352AE0FEDF00385632 /* MainViewController.swift in Sources */,
@@ -637,6 +650,7 @@
 				B7781B302B0F47C8006372CF /* Category.swift in Sources */,
 				B7ADFF722AEA8DF300D34CEA /* Divider.swift in Sources */,
 				B74A4FC52AE7905500226EA7 /* CreateViewController.swift in Sources */,
+				B7194A422B1B4F3300642FDA /* SigninViewController.swift in Sources */,
 				B742C5782AEA5EE900E95E96 /* CreateViewModel.swift in Sources */,
 				B7D051502B10AD1A00D86183 /* DetailNavigationView.swift in Sources */,
 				B71C387E2B0754F90065A783 /* User.swift in Sources */,
@@ -660,6 +674,7 @@
 				B785A7842B1091BC00DC2E88 /* UILabel+Extensions.swift in Sources */,
 				B7BB20242B0E0745003EED3A /* CreateUseCase.swift in Sources */,
 				B71C38802B07554B0065A783 /* FirebaseAuthService.swift in Sources */,
+				B7194A442B1B4F4600642FDA /* SigninView.swift in Sources */,
 				B7AEC0CE2B034568004BA42A /* CustomTextView.swift in Sources */,
 				B70EE5BD2B15D7DD00BCCACF /* String+Extensions.swift in Sources */,
 				B7B977682AFA10AE0023718B /* FirebaseRepository.swift in Sources */,
@@ -672,6 +687,7 @@
 				B7035B852AF8D1FF000F74ED /* UIView+Extensions.swift in Sources */,
 				B7226B162B01F6990034B451 /* LoginViewModel.swift in Sources */,
 				B785A77C2B10742E00DC2E88 /* DetailView.swift in Sources */,
+				B7194A482B1B596F00642FDA /* SigninViewModel.swift in Sources */,
 				B71058952AEA42F8003D6039 /* CategoryCollectionViewCell.swift in Sources */,
 				B7781B352B0F4F91006372CF /* PinAnnotation.swift in Sources */,
 				B70BBA552B17059900F0F9A6 /* DetailBannerCell.swift in Sources */,

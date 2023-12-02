@@ -46,8 +46,18 @@ final class LoginUseCase: LoginUseCaseProtocol {
     private func handleLoginResult(_ result: Result<AuthDataResult, Error>) -> Result<User, Error> {
         switch result {
         case .success(let authResult):
+            let creationDate = authResult.user.metadata.creationDate
+            let lastSignInDate = authResult.user.metadata.lastSignInDate
             let user = authResult.user
-            return .success(User(id: user.uid, name: user.displayName, email: user.email))
+
+            guard let creationDate = creationDate, let lastSignInDate = lastSignInDate else {
+                return .failure(NSError(domain: "LoginError", code: -1, userInfo: nil))
+            }
+            if Calendar.current.isDate(creationDate, inSameDayAs: lastSignInDate) {
+                return .success(User(id: user.uid, name: user.displayName, email: user.email, firstTime: true))
+            } else {
+                return .success(User(id: user.uid, name: user.displayName, email: user.email, firstTime: false))
+            }
         case .failure(let error):
             return .failure(error)
         }

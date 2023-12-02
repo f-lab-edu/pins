@@ -36,8 +36,12 @@ final class LoginViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 switch result {
-                case .success(_):
-                    self?.navigationController?.pushViewController(MainViewController(), animated: true)
+                case .success(let user):
+                    if user.firstTime {
+                        self?.navigationController?.pushViewController(SigninViewController(), animated: true)
+                    } else {
+                        self?.navigationController?.pushViewController(MainViewController(), animated: true)
+                    }
                 case .failure(let error):
                     os_log("Login Error: %@", log: .default, type: .error, error.localizedDescription)
                 case .none:
