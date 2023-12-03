@@ -24,6 +24,11 @@ final class SigninViewModel {
     @Published var nickName: String = ""
     @Published var birthDate: String = ""
     @Published var description: String = ""
+    private let signinUsecase: SigninUseCaseProtocol
+    
+    init(signinUsecase: SigninUseCaseProtocol) {
+        self.signinUsecase = signinUsecase
+    }
     
     func setInputButtonStyle(_ style: InputButtonStype) {
         inputButtonStyle = style
@@ -46,9 +51,6 @@ final class SigninViewModel {
     }
     
     func saveUserInfo() {
-        print("save user info")
-        print("nickName: \(nickName)")
-        print("birthDate: \(birthDate)")
-        print("description: \(description)")
+        signinUsecase.saveUserInfo(nickName: nickName, description: description, birthDate: birthDate)
     }
 }

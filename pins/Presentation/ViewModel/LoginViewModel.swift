@@ -45,4 +45,10 @@ final class LoginViewModel {
         authorizationController.presentationContextProvider = delegate
         authorizationController.performRequests()
     }
+    
+    func saveUserData(user: User) {
+        if let userData = try? JSONEncoder().encode(user) {
+            _ = KeychainManager.save(key: "currentUser", data: userData)
+        }
+    }
 }

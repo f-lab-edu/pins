@@ -16,9 +16,11 @@ protocol LoginUseCaseProtocol {
 
 final class LoginUseCase: LoginUseCaseProtocol {
     private var authService: FirebaseAuthServiceProtocol
+    private var userService: UserServiceProtocol
     
-    init(authService: FirebaseAuthServiceProtocol) {
+    init(authService: FirebaseAuthServiceProtocol, userService: UserServiceProtocol) {
         self.authService = authService
+        self.userService = userService
     }
     
     func googleLogin(delegate: UIViewController) async -> Result<User, Error> {
@@ -26,7 +28,7 @@ final class LoginUseCase: LoginUseCaseProtocol {
         switch result {
         case .success(let credential):
             let result = await authService.signIn(with: credential)
-            return handleLoginResult(result)
+            return await handleLoginResult(result)
         case .failure(_):
             return .failure(NSError(domain: "LoginError", code: -1, userInfo: nil))
         }
@@ -37,19 +39,22 @@ final class LoginUseCase: LoginUseCaseProtocol {
         switch result {
         case .success(let credential):
             let result = await authService.signIn(with: credential)
-            return handleLoginResult(result)
+            return await handleLoginResult(result)
         case .failure(_):
             return .failure(NSError(domain: "LoginError", code: -1, userInfo: nil))
         }
     }
     
-    private func handleLoginResult(_ result: Result<AuthDataResult, Error>) -> Result<User, Error> {
+    private func handleLoginResult(_ result: Result<AuthDataResult, Error>) async -> Result<User, Error> {
         switch result {
         case .success(let authResult):
             let creationDate = authResult.user.metadata.creationDate
             let lastSignInDate = authResult.user.metadata.lastSignInDate
             let user = authResult.user
-
+            let userResult = await userService.getUser(id: user.uid)
+            if let userResult = userResult {
+                return .success(userResult)
+            }
             guard let creationDate = creationDate, let lastSignInDate = lastSignInDate else {
                 return .failure(NSError(domain: "LoginError", code: -1, userInfo: nil))
             }

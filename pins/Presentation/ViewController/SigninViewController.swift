@@ -10,7 +10,10 @@ import UIKit
 import Combine
 
 final class SigninViewController: UIViewController {
-    let viewModel: SigninViewModel = SigninViewModel()
+    private lazy var userRepository: UserRepositoryProtocol = UserRepository()
+    private lazy var userService: UserServiceProtocol = UserService(userRepository: userRepository)
+    private lazy var signinUsecase: SigninUseCaseProtocol = SigninUseCase(userService: userService)
+    private lazy var viewModel: SigninViewModel = SigninViewModel(signinUsecase: signinUsecase)
     private var cancellables: Set<AnyCancellable> = []
     private var signinView: SigninView {
         view as! SigninView
@@ -47,6 +50,8 @@ final class SigninViewController: UIViewController {
                 self?.viewModel.setBirthDate(self?.signinView.birthDateInput.text ?? "")
                 self?.viewModel.setDescription(self?.signinView.descriptionInput.text ?? "")
                 self?.viewModel.saveUserInfo()
+                let mainViewController = MainViewController()
+                self?.navigationController?.pushViewController(mainViewController, animated: true)
             default:
                 break
             }

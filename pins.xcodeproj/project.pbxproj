@@ -54,6 +54,10 @@
 		B7AF69482AE0FEE000385632 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF69472AE0FEE000385632 /* MainViewModelTests.swift */; };
 		B7AF69522AE0FEE000385632 /* pinsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF69512AE0FEE000385632 /* pinsUITests.swift */; };
 		B7AF69542AE0FEE000385632 /* pinsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF69532AE0FEE000385632 /* pinsUITestsLaunchTests.swift */; };
+		B7B20E1B2B1CB92100C8304B /* SigninUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B20E1A2B1CB92100C8304B /* SigninUseCase.swift */; };
+		B7B20E1D2B1CBAC700C8304B /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B20E1C2B1CBAC700C8304B /* UserRepository.swift */; };
+		B7B20E1F2B1CC02500C8304B /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B20E1E2B1CC02500C8304B /* UserService.swift */; };
+		B7B20E242B1CCDB800C8304B /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B20E232B1CCDB800C8304B /* KeychainManager.swift */; };
 		B7B6781F2B10F012005F819D /* DetailScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B6781E2B10F012005F819D /* DetailScrollView.swift */; };
 		B7B977612AFA0A550023718B /* FirebaseFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B977602AFA0A550023718B /* FirebaseFirestore.swift */; };
 		B7B977642AFA0D270023718B /* PinRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B977632AFA0D270023718B /* PinRequest.swift */; };
@@ -149,6 +153,10 @@
 		B7AF694D2AE0FEE000385632 /* pinsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pinsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7AF69512AE0FEE000385632 /* pinsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pinsUITests.swift; sourceTree = "<group>"; };
 		B7AF69532AE0FEE000385632 /* pinsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pinsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B7B20E1A2B1CB92100C8304B /* SigninUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninUseCase.swift; sourceTree = "<group>"; };
+		B7B20E1C2B1CBAC700C8304B /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		B7B20E1E2B1CC02500C8304B /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		B7B20E232B1CCDB800C8304B /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		B7B6781E2B10F012005F819D /* DetailScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScrollView.swift; sourceTree = "<group>"; };
 		B7B977602AFA0A550023718B /* FirebaseFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestore.swift; sourceTree = "<group>"; };
 		B7B977632AFA0D270023718B /* PinRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinRequest.swift; sourceTree = "<group>"; };
@@ -262,6 +270,7 @@
 				B71C387B2B0753BB0065A783 /* LoginUseCase.swift */,
 				B7BB20232B0E0745003EED3A /* CreateUseCase.swift */,
 				B7BB20252B0F1696003EED3A /* MainUseCase.swift */,
+				B7B20E1A2B1CB92100C8304B /* SigninUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -284,6 +293,7 @@
 				B7B977602AFA0A550023718B /* FirebaseFirestore.swift */,
 				B76DD4612AFE0DB000DFE7E1 /* FirestorageService.swift */,
 				B71C387F2B07554B0065A783 /* FirebaseAuthService.swift */,
+				B7B20E1E2B1CC02500C8304B /* UserService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -292,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				B7B977672AFA10AE0023718B /* FirebaseRepository.swift */,
+				B7B20E1C2B1CBAC700C8304B /* UserRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -324,6 +335,7 @@
 			children = (
 				B71C38822B075CC70065A783 /* CryptoUtils.swift */,
 				B7D99EC72B18640F00250399 /* UIScreenUtils.swift */,
+				B7B20E232B1CCDB800C8304B /* KeychainManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -654,6 +666,7 @@
 				B742C5782AEA5EE900E95E96 /* CreateViewModel.swift in Sources */,
 				B7D051502B10AD1A00D86183 /* DetailNavigationView.swift in Sources */,
 				B71C387E2B0754F90065A783 /* User.swift in Sources */,
+				B7B20E242B1CCDB800C8304B /* KeychainManager.swift in Sources */,
 				B7F071B72B14855000BB5AB9 /* DetailViewModel.swift in Sources */,
 				B7614C0F2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift in Sources */,
 				B7AF69312AE0FEDF00385632 /* AppDelegate.swift in Sources */,
@@ -670,6 +683,7 @@
 				B79A28F32AF37F93008FD3CE /* LoginViewController.swift in Sources */,
 				B78099432B06047400C01059 /* ImageInfo.swift in Sources */,
 				B71C387C2B0753BB0065A783 /* LoginUseCase.swift in Sources */,
+				B7B20E1F2B1CC02500C8304B /* UserService.swift in Sources */,
 				B7D99EC82B18640F00250399 /* UIScreenUtils.swift in Sources */,
 				B785A7842B1091BC00DC2E88 /* UILabel+Extensions.swift in Sources */,
 				B7BB20242B0E0745003EED3A /* CreateUseCase.swift in Sources */,
@@ -678,10 +692,12 @@
 				B7AEC0CE2B034568004BA42A /* CustomTextView.swift in Sources */,
 				B70EE5BD2B15D7DD00BCCACF /* String+Extensions.swift in Sources */,
 				B7B977682AFA10AE0023718B /* FirebaseRepository.swift in Sources */,
+				B7B20E1B2B1CB92100C8304B /* SigninUseCase.swift in Sources */,
 				B785A7822B108A0A00DC2E88 /* PaddingLabel.swift in Sources */,
 				B7B977642AFA0D270023718B /* PinRequest.swift in Sources */,
 				B7AF69332AE0FEDF00385632 /* SceneDelegate.swift in Sources */,
 				B71C38832B075CC70065A783 /* CryptoUtils.swift in Sources */,
+				B7B20E1D2B1CBAC700C8304B /* UserRepository.swift in Sources */,
 				B710588E2AEA2699003D6039 /* OSLog+Extensions.swift in Sources */,
 				B76DD4622AFE0DB000DFE7E1 /* FirestorageService.swift in Sources */,
 				B7035B852AF8D1FF000F74ED /* UIView+Extensions.swift in Sources */,
