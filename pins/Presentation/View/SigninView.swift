@@ -11,51 +11,80 @@ import Combine
 
 final class SigninView: UIView {
     // MARK: - Properties
-    private enum UIConstants {
+    private let animationManager: AnimationManager = AnimationManager()
+    enum UIConstants {
         static let submitButtonHeight: CGFloat = 50
         static let padding: CGFloat = 20
+        static let inputPadding: CGFloat = 50
     }
     private let viewModel: SigninViewModel
-    private let animationManager: AnimationManager = AnimationManager()
-    private var cancellables: Set<AnyCancellable> = []
-    private let descriptionLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.text = "만나서 반가워요!"
+        label.textColor = .text
         label.numberOfLines = 0
         label.font = .boldSystemFont(ofSize: 20)
+        label.setLineHeight(lineHeight: 10)
         return label
     }()
-    private let submitButton: UIButton = {
+    let submitButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         button.setTitle("확인", for: .normal)
         return button
     }()
-    private let nickNameInput: UITextField = {
+    let nickNameInput: UITextField = {
         let textField = UITextField()
         textField.placeholder = "닉네임을 입력해주세요."
         textField.font = .systemFont(ofSize: 16)
         textField.frame.size = CGSize(width: UIScreenUtils.getScreenWidth() - 40, height: 30)
         textField.layer.addBorder(edge: .bottom, color: .systemGray, thickness: 1)
+        textField.isHidden = true
         return textField
     }()
-    private let birthDateInput: UITextField = {
+    let birthDateInput: UITextField = {
         let textField = UITextField()
         textField.placeholder = "ex) 000101"
         textField.font = .systemFont(ofSize: 16)
         textField.keyboardType = .numberPad
         textField.frame.size = CGSize(width: UIScreenUtils.getScreenWidth() - 40, height: 30)
         textField.layer.addBorder(edge: .bottom, color: .systemGray, thickness: 1)
+        textField.isHidden = true
         return textField
     }()
-    private let descriptionInput: UITextField = {
+    let descriptionInput: UITextField = {
         let textField = UITextField()
         textField.placeholder = "자기소개를 입력해주세요."
         textField.font = .systemFont(ofSize: 16)
         textField.frame.size = CGSize(width: UIScreenUtils.getScreenWidth() - 40, height: 30)
         textField.layer.addBorder(edge: .bottom, color: .systemGray, thickness: 1)
+        textField.isHidden = true
         return textField
+    }()
+    private let nicknameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "닉네임"
+        label.font = .systemFont(ofSize: 12)
+        label.textColor = .systemGray
+        label.isHidden = true
+        return label
+    }()
+    private let birthDateLabel: UILabel = {
+        let label = UILabel()
+        label.text = "생년월일"
+        label.font = .systemFont(ofSize: 12)
+        label.textColor = .systemGray
+        label.isHidden = true
+        return label
+    }()
+    private let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "자기소개"
+        label.font = .systemFont(ofSize: 12)
+        label.textColor = .systemGray
+        label.isHidden = true
+        return label
     }()
     
     // MARK: - Lifecycle
@@ -65,12 +94,6 @@ final class SigninView: UIView {
         backgroundColor = .background
         setLayout()
         setKeyboardObserver()
-        birthDateInput.delegate = self
-        nickNameInput.delegate = self
-        descriptionInput.delegate = self
-        viewModel.$inputStep.sink { [weak self] step in
-            self?.remakeLayout(step: step)
-        }.store(in: &cancellables)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -81,24 +104,24 @@ final class SigninView: UIView {
     
     // MARK: - Methods
     private func setLayout() {
-        [descriptionLabel, birthDateInput, nickNameInput, descriptionInput, submitButton].forEach {
+        [titleLabel, birthDateInput, nickNameInput, descriptionInput, submitButton, nicknameLabel, descriptionLabel, birthDateLabel].forEach {
             addSubview($0)
         }
         
-        descriptionLabel
+        titleLabel
             .topLayout(equalTo: safeAreaLayoutGuide.topAnchor, constant: UIConstants.padding)
             .leadingLayout(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: UIConstants.padding)
         
         nickNameInput
-            .topLayout(equalTo: descriptionLabel.bottomAnchor, constant: 40)
+            .topLayout(equalTo: titleLabel.bottomAnchor, constant: UIConstants.inputPadding)
             .leadingLayout(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: UIConstants.padding)
         
         birthDateInput
-            .topLayout(equalTo: descriptionLabel.bottomAnchor, constant: 40)
+            .topLayout(equalTo: titleLabel.bottomAnchor, constant: UIConstants.inputPadding)
             .leadingLayout(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: UIConstants.padding)
         
         descriptionInput
-            .topLayout(equalTo: descriptionLabel.bottomAnchor, constant: 40)
+            .topLayout(equalTo: titleLabel.bottomAnchor, constant: UIConstants.inputPadding)
             .leadingLayout(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: UIConstants.padding)
         
         submitButton
@@ -106,6 +129,52 @@ final class SigninView: UIView {
             .trailingLayout(equalTo: safeAreaLayoutGuide.trailingAnchor)
             .bottomLayout(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -UIConstants.padding)
             .heightLayout(UIConstants.submitButtonHeight)
+        
+        nicknameLabel
+            .topLayout(equalTo: nickNameInput.topAnchor, constant: -20)
+            .leadingLayout(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: UIConstants.padding)
+        
+        birthDateLabel
+            .topLayout(equalTo: birthDateInput.topAnchor, constant: -20)
+            .leadingLayout(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: UIConstants.padding)
+        
+        descriptionLabel
+            .topLayout(equalTo: descriptionInput.topAnchor, constant: -20)
+            .leadingLayout(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: UIConstants.padding)
+    }
+    
+    private func inputNickNameLayout() {
+        nickNameInput.isHidden = false
+        submitButton.isHidden = false
+        nicknameLabel.isHidden = false
+        titleLabel.text = "만나서 반가워요! \n닉네임을 입력해주세요."
+        nickNameInput.becomeFirstResponder()
+    }
+    
+    private func inputBirthDateLayout() {
+        birthDateInput.isHidden = false
+        birthDateLabel.isHidden = false
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.layoutIfNeeded()
+        }
+        nickNameInput
+            .topLayout(equalTo: birthDateInput.bottomAnchor, constant: UIConstants.inputPadding)
+            .leadingLayout(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: UIConstants.padding)
+        titleLabel.text = "생년월일을 \n6글자로 입력해주세요."
+        birthDateInput.becomeFirstResponder()
+    }
+    
+    private func inputDescriptionLayout() {
+        descriptionInput.isHidden = false
+        descriptionLabel.isHidden = false
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.layoutIfNeeded()
+        }
+        birthDateInput
+            .topLayout(equalTo: descriptionInput.bottomAnchor, constant: UIConstants.inputPadding)
+            .leadingLayout(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: UIConstants.padding)
+        titleLabel.text = "다섯 글자로 \n자신을 소개해주세요."
+        descriptionInput.becomeFirstResponder()
     }
     
     private func setKeyboardObserver() {
@@ -119,7 +188,7 @@ final class SigninView: UIView {
                 UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
                     self.submitButton
                         .bottomLayout(equalTo: self.bottomAnchor, constant: -keyboardHeight)
-                        .heightLayout(UIConstants.submitButtonHeight)
+                        .heightLayout(SigninView.UIConstants.submitButtonHeight)
                     self.layoutIfNeeded()
                 }, completion: nil)
             }
@@ -130,14 +199,28 @@ final class SigninView: UIView {
             UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
                 self.submitButton
                     .bottomLayout(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 0)
-                    .heightLayout(UIConstants.submitButtonHeight)
+                    .heightLayout(SigninView.UIConstants.submitButtonHeight)
                 self.layoutIfNeeded()
             }, completion: nil)
         }
     }
     
-    private func remakeLayout(step inputStep: InputStep) {
-        viewModel.setInputStep(inputStep)
+    func setSubmitButtonTitle(_ title: String) {
+        submitButton.setTitle(title, for: .normal)
+    }
+    
+    func setSubmitButton(type: InputButtonStype) {
+        switch type {
+        case .enabled:
+            submitButton.backgroundColor = .systemBlue
+            submitButton.isEnabled = true
+        case .disabled:
+            submitButton.isEnabled = false
+            submitButton.backgroundColor = .systemGray
+        }
+    }
+    
+    func remakeLayout(step inputStep: InputStep) {
         switch inputStep {
         case .nickName:
             inputNickNameLayout()
@@ -148,81 +231,7 @@ final class SigninView: UIView {
         }
     }
     
-    private func inputNickNameLayout() {
-        descriptionLabel.text = "만나서 반가워요! \n닉네임을 입력해주세요."
-        descriptionLabel.setLineHeight(lineHeight: 10)
-        birthDateInput.isHidden = true
-        descriptionInput.isHidden = true
-        nickNameInput.isHidden = false
-        
-        nickNameInput
-            .topLayout(equalTo: descriptionLabel.bottomAnchor, constant: 40)
-            .leadingLayout(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: UIConstants.padding)
-    }
-    
-    private func inputBirthDateLayout() {
-        nickNameInput
-            .topLayout(equalTo: birthDateInput.bottomAnchor, constant: 40)
-            .leadingLayout(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: UIConstants.padding)
-        birthDateInput.isHidden = false
-        submitButton.isHidden = true
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            self?.layoutIfNeeded()
-        }
-        descriptionLabel.text = "생년월일을 \n6글자로 입력해주세요."
-        birthDateInput.becomeFirstResponder()
-    }
-    
-    private func inputDescriptionLayout() {
-        birthDateInput
-            .topLayout(equalTo: descriptionInput.bottomAnchor, constant: 40)
-            .leadingLayout(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: UIConstants.padding)
-        descriptionInput.isHidden = false
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            self?.layoutIfNeeded()
-        }
-        submitButton.isHidden = false
-        descriptionLabel.text = "다섯 글자로 \n자신을 소개해주세요."
-        descriptionInput.becomeFirstResponder()
-    }
-    
     func setSubmitButtonAction(_ action: UIAction) {
         submitButton.addAction(action, for: .touchUpInside)
-    }
-}
-
-extension SigninView: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.frame.size = CGSize(width: UIScreenUtils.getScreenWidth() - 40, height: 30)
-        textField.layer.addBorder(edge: .bottom, color: .systemBlue, thickness: 1)
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.frame.size = CGSize(width: UIScreenUtils.getScreenWidth() - 40, height: 30)
-        textField.layer.addBorder(edge: .bottom, color: .systemGray, thickness: 1)
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == birthDateInput {
-            let currentText = textField.text ?? ""
-            guard let stringRange = Range(range, in: currentText) else { return false }
-            let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-            if updatedText.count == 6 {
-                if isValidBirthDate(dateString: updatedText) {
-                    birthDateInput.text = updatedText
-                    remakeLayout(step: .description)
-                } else {
-                    os_log("invalid birth date", log: .ui, type: .error)
-                }
-            }
-            return updatedText.count <= 6
-        }
-        return true
-    }
-
-    func isValidBirthDate(dateString: String) -> Bool {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyMMdd"
-        return dateFormatter.date(from: dateString) != nil
     }
 }
