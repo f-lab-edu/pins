@@ -22,7 +22,7 @@ final class SigninUseCase: SigninUseCaseProtocol {
     func saveUserInfo(nickName: String, description: String, birthDate: String) {
         if let userData = KeychainManager.load(key: "currentUser"),
            let loadedUser = try? JSONDecoder().decode(User.self, from: userData) {
-            let user = User(id: loadedUser.id, name: nickName, email: loadedUser.email, birthDate: birthDate, description: description, firstTime: false)
+            let user = User(id: loadedUser.id, nickName: nickName, email: loadedUser.email, birthDate: birthDate, description: description, firstTime: false)
             userService.putUser(user: user)
         }
     }

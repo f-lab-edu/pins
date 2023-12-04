@@ -137,10 +137,12 @@ final class DetailContentView: UIView {
     }
     
     // MARK: - Methods
-    func setPinContent(title: String, content: String, date: String, category: String) {
+    func setPinContent(title: String, content: String, date: String, category: String, name: String, age: Int, description: String) {
         titleLabel.text = title
         contentLabel.text = content
         dateLabel.text = date.convertDaysAgo()
         categoryLabel.text = NSLocalizedString(category, comment: "")
+        nameLabel.text = name
+        personalInfo.text = "\(description) ∙ \(age)세"
     }
 }

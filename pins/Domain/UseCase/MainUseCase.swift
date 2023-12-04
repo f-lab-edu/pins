@@ -35,7 +35,10 @@ final class MainUseCase: MainUseCaseProtocol {
                 images.append(image)
             }
         }
-        return PinResponse(pin: pin, images: images)
+        let user = await userService.getUser(id: pin.userId)
+        guard let user = user else { fatalError("Error fetching user") }
+        let userAge = birthDateToAge(birthDate: user.birthDate ?? "")
+        return PinResponse(pin: pin, images: images, id: user.id, name: user.nickName, age: userAge, description: user.description ?? "")
     }
     
     func fetchUserInfo() async -> User {
@@ -43,5 +46,15 @@ final class MainUseCase: MainUseCaseProtocol {
         let user = await userService.getUser(id: id)
         guard let user = user else { fatalError("Error fetching user") }
         return user
+    }
+    
+    private func birthDateToAge(birthDate: String) -> Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyMMdd"
+        let birthDate = dateFormatter.date(from: birthDate)
+        let calendar = Calendar.current
+        let ageComponents = calendar.dateComponents([.year], from: birthDate!, to: Date())
+        let age = ageComponents.year!
+        return age
     }
 }

@@ -15,24 +15,12 @@ struct PinRequest: Codable, Equatable {
     var latitude: Double
     var category: String
     var created: String
+    var userId: String
     var urls: [String] = []
     
     func withUrls(urls: [String]) -> PinRequest {
         var newPin = self
         newPin.urls = urls
         return newPin
-    }
-    
-    func toDictionary() -> [String: Any] {
-        return [
-            "id": id,
-            "title": title,
-            "content": content,
-            "longitude": longitude,
-            "latitude": latitude,
-            "category": category,
-            "created": created,
-            "urls": urls,
-        ]
     }
 }

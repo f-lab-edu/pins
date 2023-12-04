@@ -59,9 +59,9 @@ final class LoginUseCase: LoginUseCaseProtocol {
                 return .failure(NSError(domain: "LoginError", code: -1, userInfo: nil))
             }
             if Calendar.current.isDate(creationDate, inSameDayAs: lastSignInDate) {
-                return .success(User(id: user.uid, name: user.displayName, email: user.email, firstTime: true))
+                return .success(User(id: user.uid, nickName: user.displayName ?? "", email: user.email, firstTime: true))
             } else {
-                return .success(User(id: user.uid, name: user.displayName, email: user.email, firstTime: false))
+                return .success(User(id: user.uid, nickName: user.displayName ?? "", email: user.email, firstTime: false))
             }
         case .failure(let error):
             return .failure(error)

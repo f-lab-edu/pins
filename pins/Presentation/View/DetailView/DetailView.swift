@@ -183,7 +183,7 @@ final class DetailView: UIView {
         } else {
             contentView.topLayout(equalTo: scrollView.topAnchor, constant: UIConstants.bannerHeight)
         }
-        contentView.setPinContent(title: pin.title, content: pin.content, date: pin.created, category: pin.category)
+        contentView.setPinContent(title: pin.title, content: pin.content, date: pin.created, category: pin.category, name: pin.userName, age: pin.userAge, description: pin.userDescription)
     }
     
     private func updateImageScale(_ offset: CGFloat) {
