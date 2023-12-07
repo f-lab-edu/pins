@@ -8,12 +8,20 @@
 import OSLog
 import UIKit
 import Combine
+import PhotosUI
 
 final class SigninViewController: UIViewController {
     private lazy var userRepository: UserRepositoryProtocol = UserRepository()
     private lazy var userService: UserServiceProtocol = UserService(userRepository: userRepository)
     private lazy var signinUsecase: SigninUseCaseProtocol = SigninUseCase(userService: userService)
     private lazy var viewModel: SigninViewModel = SigninViewModel(signinUsecase: signinUsecase)
+    private var imagePicker: PHPickerViewController = {
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 1
+        configuration.filter = .any(of: [.images])
+        let picker = PHPickerViewController(configuration: configuration)
+        return picker
+    }()
     private var cancellables: Set<AnyCancellable> = []
     private var signinView: SigninView {
         view as! SigninView
@@ -29,6 +37,7 @@ final class SigninViewController: UIViewController {
         signinView.birthDateInput.delegate = self
         signinView.nickNameInput.delegate = self
         signinView.descriptionInput.delegate = self
+        imagePicker.delegate = self
         viewModel.$inputStep.sink { [weak self] step in
             self?.signinView.remakeLayout(step: step)
         }.store(in: &cancellables)
@@ -107,6 +116,20 @@ final class SigninViewController: UIViewController {
         dateFormatter.dateFormat = "yyMMdd"
         return dateFormatter.date(from: dateString) != nil
     }
+    
+    private func processPickerResult(_ index: Int, _ result: PHPickerResult) {
+        if result.itemProvider.canLoadObject(ofClass: UIImage.self) {
+            Task {
+                let image = await ImagePickerManager.loadImageAsync(result.itemProvider)
+                let extensionType = await ImagePickerManager.loadFileExtension(result.itemProvider)
+                if let image = image, let extensionType = extensionType {
+                    await MainActor.run {
+                        viewModel.setProfileImage(image, type: extensionType)
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension SigninViewController: UITextFieldDelegate {
@@ -136,5 +159,13 @@ extension SigninViewController: UITextFieldDelegate {
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
         updateInputBasedOnTextField(textField, with: updatedText)
         return true
+    }
+}
+
+extension SigninViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        dismiss(animated: true)
+        guard let result = results.first else { return }
+        processPickerResult(0, result)
     }
 }

@@ -5,7 +5,7 @@
 //  Created by 주동석 on 12/2/23.
 //
 
-import Foundation
+import UIKit
 
 enum InputStep: Int {
     case nickName
@@ -24,6 +24,7 @@ final class SigninViewModel {
     @Published var nickName: String = ""
     @Published var birthDate: String = ""
     @Published var description: String = ""
+    private var profileImage: ImageInfo?
     private let signinUsecase: SigninUseCaseProtocol
     
     init(signinUsecase: SigninUseCaseProtocol) {
@@ -52,5 +53,9 @@ final class SigninViewModel {
     
     func saveUserInfo() {
         signinUsecase.saveUserInfo(nickName: nickName, description: description, birthDate: birthDate)
+    }
+    
+    func setProfileImage(_ image: UIImage, type: String) {
+        profileImage = ImageInfo(index: 0, image: image, extensionType: type)
     }
 }
