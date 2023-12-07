@@ -9,7 +9,7 @@ import UIKit
 import FirebaseAuth
 
 protocol SigninUseCaseProtocol {
-    func saveUserInfo(nickName: String, description: String, birthDate: String, image: ImageInfo) async
+    func saveUserInfo(nickName: String, description: String, birthDate: String, imageInfo: ImageInfo) async
 }
 
 final class SigninUseCase: SigninUseCaseProtocol {
@@ -21,10 +21,11 @@ final class SigninUseCase: SigninUseCaseProtocol {
         self.firestorageService = firestorageService
     }
     
-    func saveUserInfo(nickName: String, description: String, birthDate: String, image: ImageInfo) async {
-        let imageUrl = await firestorageService.uploadImage(imageInfo: image)
+    func saveUserInfo(nickName: String, description: String, birthDate: String, imageInfo: ImageInfo) async {
+        let imageUrl = await firestorageService.uploadImage(imageInfo: imageInfo)
         let userId = KeychainManager.load(key: "userId")
         let userEmail = KeychainManager.load(key: "userEmail")
+        KeychainManager.saveImage(image: imageInfo.image, forKey: "userProfile")
         
         guard let userId, let userEmail else { return }
         
