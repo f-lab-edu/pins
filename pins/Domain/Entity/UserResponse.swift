@@ -28,6 +28,7 @@ struct UserResponse {
         self.nickName = user.nickName
         self.email = user.email
         self.description = user.description
+        self.birthDate = user.birthDate
         self.firstTime = firstTime
         self.profileImage = image
     }
