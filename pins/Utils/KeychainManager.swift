@@ -11,14 +11,14 @@ import Security
 final class KeychainManager {
     static func saveImage(image: UIImage, forKey key: String) {
         if let imageData = image.pngData() {
-            let query: [String: Any] = [
+            let query: NSDictionary = [
                 kSecValueData as String: imageData,
                 kSecClass as String: kSecClassGenericPassword,
                 kSecAttrAccount as String: key,
                 kSecAttrAccessible as String: kSecAttrAccessibleWhenUnlocked
             ]
-
-            let status = SecItemAdd(query as CFDictionary, nil)
+            SecItemDelete(query)
+            let status = SecItemAdd(query, nil)
             if status != errSecSuccess {
                 os_log("Failed to save image to keychain")
             }
