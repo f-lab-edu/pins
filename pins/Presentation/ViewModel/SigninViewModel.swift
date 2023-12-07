@@ -11,6 +11,7 @@ enum InputStep: Int {
     case nickName
     case birthDate
     case description
+    case profileImage
 }
 
 enum InputButtonStype {
@@ -24,7 +25,7 @@ final class SigninViewModel {
     @Published var nickName: String = ""
     @Published var birthDate: String = ""
     @Published var description: String = ""
-    private var profileImage: ImageInfo?
+    @Published var profileImage: ImageInfo = ImageInfo(index: 0, image: UIImage(resource: .person), extensionType: "png")
     private let signinUsecase: SigninUseCaseProtocol
     
     init(signinUsecase: SigninUseCaseProtocol) {
@@ -51,8 +52,8 @@ final class SigninViewModel {
         self.description = description
     }
     
-    func saveUserInfo() {
-        signinUsecase.saveUserInfo(nickName: nickName, description: description, birthDate: birthDate)
+    func saveUserInfo() async {
+        await signinUsecase.saveUserInfo(nickName: nickName, description: description, birthDate: birthDate, image: profileImage)
     }
     
     func setProfileImage(_ image: UIImage, type: String) {

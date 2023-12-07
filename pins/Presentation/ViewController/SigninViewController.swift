@@ -13,7 +13,9 @@ import PhotosUI
 final class SigninViewController: UIViewController {
     private lazy var userRepository: UserRepositoryProtocol = UserRepository()
     private lazy var userService: UserServiceProtocol = UserService(userRepository: userRepository)
-    private lazy var signinUsecase: SigninUseCaseProtocol = SigninUseCase(userService: userService)
+    private lazy var fireRepository: FirebaseRepositoryProtocol = FirebaseRepository()
+    private lazy var firestorageService: FirestorageServiceProtocol = FirestorageService(firebaseRepository: fireRepository)
+    private lazy var signinUsecase: SigninUseCaseProtocol = SigninUseCase(userService: userService, firestorageService: firestorageService)
     private lazy var viewModel: SigninViewModel = SigninViewModel(signinUsecase: signinUsecase)
     private var imagePicker: PHPickerViewController = {
         var configuration = PHPickerConfiguration()
@@ -45,6 +47,10 @@ final class SigninViewController: UIViewController {
         viewModel.$inputButtonStyle.sink { [weak self] style in
             self?.signinView.setSubmitButton(type: style)
         }.store(in: &cancellables)
+        
+        viewModel.$profileImage.sink { [weak self] imageInfo in
+            self?.signinView.setProfileImage(imageInfo)
+        }.store(in: &cancellables)
     }
     
     private func setActions() {
@@ -55,15 +61,23 @@ final class SigninViewController: UIViewController {
             case .birthDate:
                 self?.viewModel.setInputStep(.description)
             case .description:
+                self?.viewModel.setInputStep(.profileImage)
+            case .profileImage:
                 self?.viewModel.setNickName(self?.signinView.nickNameInput.text ?? "")
                 self?.viewModel.setBirthDate(self?.signinView.birthDateInput.text ?? "")
                 self?.viewModel.setDescription(self?.signinView.descriptionInput.text ?? "")
-                self?.viewModel.saveUserInfo()
-                let mainViewController = MainViewController()
-                self?.navigationController?.pushViewController(mainViewController, animated: true)
+                Task {
+                    await self?.viewModel.saveUserInfo()
+                    let mainViewController = MainViewController()
+                    self?.navigationController?.pushViewController(mainViewController, animated: true)
+                }
             default:
                 break
             }
+        }))
+        signinView.setProfileImageButtonAction(UIAction(handler: { [weak self] _ in
+            guard let imagePicker = self?.imagePicker else { return }
+            self?.present(imagePicker, animated: true, completion: nil)
         }))
     }
     
@@ -88,7 +102,7 @@ final class SigninViewController: UIViewController {
     }
 
     private func updateDescriptionInput(_ text: String) {
-        signinView.setSubmitButtonTitle("완료")
+        signinView.setSubmitButtonTitle("다음")
         let nickname = signinView.nickNameInput.text ?? ""
         let birthDate = signinView.birthDateInput.text ?? ""
         if nickname.count > 5 || nickname.count < 1  || birthDate.count != 6 || !isValidBirthDate(dateString: birthDate) {

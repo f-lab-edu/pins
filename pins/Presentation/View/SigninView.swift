@@ -86,6 +86,16 @@ final class SigninView: UIView {
         label.isHidden = true
         return label
     }()
+    private let profileImage: UIButton = {
+        let button = UIButton()
+        button.isHidden = true
+        button.clipsToBounds = true
+        button.imageView?.contentMode = .scaleAspectFill
+        button.layer.cornerRadius = 8
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.gray.cgColor
+        return button
+    }()
     
     // MARK: - Lifecycle
     init(viewModel: SigninViewModel) {
@@ -104,7 +114,7 @@ final class SigninView: UIView {
     
     // MARK: - Methods
     private func setLayout() {
-        [titleLabel, birthDateInput, nickNameInput, descriptionInput, submitButton, nicknameLabel, descriptionLabel, birthDateLabel].forEach {
+        [titleLabel, birthDateInput, nickNameInput, descriptionInput, submitButton, nicknameLabel, descriptionLabel, birthDateLabel, profileImage].forEach {
             addSubview($0)
         }
         
@@ -141,6 +151,12 @@ final class SigninView: UIView {
         descriptionLabel
             .topLayout(equalTo: descriptionInput.topAnchor, constant: -20)
             .leadingLayout(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: UIConstants.padding)
+        
+        profileImage
+            .topLayout(equalTo: titleLabel.bottomAnchor, constant: UIConstants.inputPadding)
+            .centerXLayout(equalTo: centerXAnchor)
+            .widthLayout(100)
+            .heightLayout(100)
     }
     
     private func inputNickNameLayout() {
@@ -175,6 +191,19 @@ final class SigninView: UIView {
             .leadingLayout(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: UIConstants.padding)
         titleLabel.text = "다섯 글자로 \n자신을 소개해주세요."
         descriptionInput.becomeFirstResponder()
+    }
+    
+    private func profileImageLayout() {
+        endEditing(true)
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.layoutIfNeeded()
+        }
+        profileImage.isHidden = false
+        descriptionInput
+            .topLayout(equalTo: profileImage.bottomAnchor, constant: UIConstants.inputPadding)
+            .leadingLayout(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: UIConstants.padding)
+        titleLabel.text = "핀즈에서 사용하실 \n프로필을 선택해주세요."
+        setSubmitButtonTitle("완료")
     }
     
     private func setKeyboardObserver() {
@@ -228,7 +257,17 @@ final class SigninView: UIView {
             inputBirthDateLayout()
         case .description:
             inputDescriptionLayout()
+        case .profileImage:
+            profileImageLayout()
         }
+    }
+    
+    func setProfileImage(_ imageInfo: ImageInfo) {
+        profileImage.setImage(imageInfo.image, for: .normal)
+    }
+    
+    func setProfileImageButtonAction(_ action: UIAction) {
+        profileImage.addAction(action, for: .touchUpInside)
     }
     
     func setSubmitButtonAction(_ action: UIAction) {
