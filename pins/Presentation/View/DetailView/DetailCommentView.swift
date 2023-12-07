@@ -45,6 +45,7 @@ final class DetailCommentView: UIView {
         super.init(frame: frame)
         backgroundColor = .background
         setLayout()
+        setProfileImage()
     }
     
     required init?(coder: NSCoder) {
@@ -77,6 +78,12 @@ final class DetailCommentView: UIView {
         submitButton
             .trailingLayout(equalTo: trailingAnchor, constant: -30)
             .centerYLayout(equalTo: inputTextView.centerYAnchor)
+    }
+    
+    private func setProfileImage() {
+        let image = KeychainManager.loadImage(forKey: "userProfile")
+        guard let image else { return }
+        myProfileImageView.image = image
     }
     
     // MARK: - Methods
