@@ -9,8 +9,8 @@ import Foundation
 import OSLog
 
 protocol UserServiceProtocol {
-    func getUser(id: String) async -> User?
-    func putUser(user: User)
+    func getUser(id: String) async -> UserRequest?
+    func putUser(user: UserRequest)
 }
 
 final class UserService: UserServiceProtocol {
@@ -20,11 +20,11 @@ final class UserService: UserServiceProtocol {
         self.userRepository = userRepository
     }
     
-    func getUser(id: String) async -> User? {
+    func getUser(id: String) async -> UserRequest? {
         let userData = await userRepository.getUser(id: id)
         let decoder = JSONDecoder()
         do {
-            let user = try decoder.decode(User.self, from: JSONSerialization.data(withJSONObject: userData))
+            let user = try decoder.decode(UserRequest.self, from: JSONSerialization.data(withJSONObject: userData))
             return user
         } catch {
             os_log(.error, log: .default, "Error decoding user: %@", error.localizedDescription)
@@ -32,7 +32,7 @@ final class UserService: UserServiceProtocol {
         }
     }
     
-    func putUser(user: User) {
+    func putUser(user: UserRequest) {
         let encoder = JSONEncoder()
         do {
             let userData = try encoder.encode(user)

@@ -14,8 +14,10 @@ import AuthenticationServices
 final class LoginViewController: UIViewController {
     private lazy var authService: FirebaseAuthServiceProtocol = FirebaseAuthService()
     private lazy var userRepository: UserRepositoryProtocol = UserRepository()
+    private lazy var firebaseRepository: FirebaseRepositoryProtocol = FirebaseRepository()
+    private lazy var firestorageService: FirestorageServiceProtocol = FirestorageService(firebaseRepository: firebaseRepository)
     private lazy var userService: UserServiceProtocol = UserService(userRepository: userRepository)
-    private lazy var loginUseCase: LoginUseCaseProtocol = LoginUseCase(authService: authService, userService: userService)
+    private lazy var loginUseCase: LoginUseCaseProtocol = LoginUseCase(authService: authService, userService: userService, firestorageService: firestorageService)
     private lazy var viewModel: LoginViewModel = LoginViewModel(loginUseCase: loginUseCase)
     private var cancellables = Set<AnyCancellable>()
 

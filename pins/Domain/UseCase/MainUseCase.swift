@@ -11,7 +11,7 @@ import FirebaseAuth
 protocol MainUseCaseProtocol {
     func getPins() async -> [PinRequest]
     func loadPin(pin: PinRequest) async -> PinResponse
-    func fetchUserInfo() async -> User
+    func fetchUserInfo() async -> UserRequest
 }
 
 final class MainUseCase: MainUseCaseProtocol {
@@ -41,7 +41,7 @@ final class MainUseCase: MainUseCaseProtocol {
         return PinResponse(pin: pin, images: images, id: user.id, name: user.nickName, age: userAge, description: user.description ?? "")
     }
     
-    func fetchUserInfo() async -> User {
+    func fetchUserInfo() async -> UserRequest {
         let id = Auth.auth().currentUser!.uid
         let user = await userService.getUser(id: id)
         guard let user = user else { fatalError("Error fetching user") }
