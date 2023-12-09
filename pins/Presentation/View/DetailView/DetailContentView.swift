@@ -77,6 +77,7 @@ final class DetailContentView: UIView {
     init() {
         super.init(frame: .zero)
         setLayout()
+        setupAcceesibilityLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -134,6 +135,20 @@ final class DetailContentView: UIView {
             .leadingLayout(equalTo: leadingAnchor)
             .trailingLayout(equalTo: trailingAnchor)
             .topLayout(equalTo: commentLabel.bottomAnchor, constant: 16)
+    }
+    
+    private func setupAcceesibilityLabel() {
+        var elements = [Any]()
+        
+        elements.append(nameLabel)
+        elements.append(personalInfo)
+        elements.append(categoryLabel)
+        elements.append(titleLabel)
+        elements.append(dateLabel)
+        elements.append(contentLabel)
+        elements.append(commentLabel)
+        
+        accessibilityElements = elements
     }
     
     // MARK: - Methods
