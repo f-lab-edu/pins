@@ -22,6 +22,7 @@ final class DetailContentView: UIView {
         let label = UILabel()
         label.text = "웰시코기"
         label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.accessibilityIdentifier = "nameLabel"
         return label
     }()
     
@@ -29,6 +30,7 @@ final class DetailContentView: UIView {
         let label = UILabel()
         label.text = "ENTJ ∙ 26세"
         label.font = .systemFont(ofSize: 12, weight: .light)
+        label.accessibilityIdentifier = "personalInfo"
         return label
     }()
     
@@ -38,12 +40,14 @@ final class DetailContentView: UIView {
         label.backgroundColor = .systemBlue
         label.setCornerRadius(offset: 12)
         label.textColor = .white
+        label.accessibilityIdentifier = "categoryLabel"
         return label
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .semibold)
+        label.accessibilityIdentifier = "titleLabel"
         return label
     }()
     
@@ -51,6 +55,7 @@ final class DetailContentView: UIView {
         let label = UILabel()
         label.text = "0일 전"
         label.font = .systemFont(ofSize: 12, weight: .thin)
+        label.accessibilityIdentifier = "dateLabel"
         return label
     }()
     
@@ -60,6 +65,7 @@ final class DetailContentView: UIView {
         label.lineBreakMode = .byCharWrapping
         label.setLineHeight(lineHeight: 4)
         label.font = .systemFont(ofSize: 15, weight: .regular)
+        label.accessibilityIdentifier = "contentLabel"
         return label
     }()
     
@@ -67,6 +73,7 @@ final class DetailContentView: UIView {
         let label = UILabel()
         label.text = "댓글 0개"
         label.font = .systemFont(ofSize: 12, weight: .thin)
+        label.accessibilityIdentifier = "commentLabel"
         return label
     }()
     
