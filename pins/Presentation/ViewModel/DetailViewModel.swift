@@ -12,6 +12,13 @@ final class DetailViewModel {
     @Published var isImage: Bool = false
     @Published var page: Int = 1
     
+    @Published var comments: [CommentResponse] = []
+    private let detailUseCase: DetailUseCaseProtocol
+    
+    init(detailUseCase: DetailUseCaseProtocol) {
+        self.detailUseCase = detailUseCase
+    }
+    
     func setIsImage(value: Bool) {
         isImage = value
     }
@@ -23,5 +30,15 @@ final class DetailViewModel {
     func getImages() -> [UIImage] {
         guard let currentPin = currentPin else { return [] }
         return currentPin.images
+    }
+    
+    func uploadComment(_ text: String) {
+        guard let currentPin else { return }
+        detailUseCase.uploadComment(text, pinId: currentPin.id)
+    }
+    
+    func getComments() async {
+        guard let currentPin else { return }
+        comments = await detailUseCase.getComments(pinId: currentPin.id)
     }
 }
