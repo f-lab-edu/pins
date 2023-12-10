@@ -81,9 +81,10 @@ final class MainViewModelTests: XCTestCase {
         let mockFirestorageService = MockFirestorageService()
         let mockUserService = MockUserService()
         let useCase = MainUseCase(firestorageService: mockFirestorageService, userService: mockUserService)
-
+        let viewModel = MainViewModel(mainUseCase: useCase)
+       
         // When
-        let userInfo = await useCase.fetchUserInfo()
+        let userInfo = await viewModel.getUserInfo()
 
         // Then
         XCTAssertEqual(userInfo, mockUserService.mockUser, "fetchUserInfo should return the user from the mock service")

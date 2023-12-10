@@ -325,6 +325,7 @@
 		B71C387A2B0752780065A783 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B7DC98E32B25BE4B006DD8F7 /* pins.xctestplan */,
 				B7DE80642B08A771007A7AEF /* GoogleService-Info.plist */,
 				B7AF69392AE0FEE000385632 /* Assets.xcassets */,
 				B7AF693E2AE0FEE000385632 /* Info.plist */,
@@ -395,7 +396,6 @@
 		B7AF69242AE0FEDF00385632 = {
 			isa = PBXGroup;
 			children = (
-				B7DC98E32B25BE4B006DD8F7 /* pins.xctestplan */,
 				B7AF692F2AE0FEDF00385632 /* pins */,
 				B7AF69462AE0FEE000385632 /* pinsTests */,
 				B7AF69502AE0FEE000385632 /* pinsUITests */,
