@@ -18,7 +18,7 @@ final class DetailCommentView: UIView {
         return imageView
     }()
     
-    private let inputTextView: UITextField = {
+    let inputTextView: UITextField = {
         let textView = UITextField()
         textView.font = .systemFont(ofSize: 15, weight: .regular)
         textView.layer.cornerRadius = 20
@@ -29,7 +29,7 @@ final class DetailCommentView: UIView {
         return textView
     }()
     
-    private let submitButton: UIButton = {
+    let submitButton: UIButton = {
         let button = UIButton()
         button.setTitle("등록", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
@@ -86,5 +86,8 @@ final class DetailCommentView: UIView {
         myProfileImageView.image = image
     }
     
+    func setSubmitButtonAction(_ action: UIAction) {
+        submitButton.addAction(action, for: .touchUpInside)
+    }
     // MARK: - Methods
 }
