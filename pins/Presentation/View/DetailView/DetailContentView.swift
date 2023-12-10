@@ -77,8 +77,9 @@ final class DetailContentView: UIView {
         return label
     }()
     
+    private var commentViews: [CommentView] = []
     private let navigationDivderView: Divider = Divider()
-    private let contentDivederView: Divider = Divider()
+    private let contentDividerView: Divider = Divider()
     
     // MARK: - Initializer
     init() {
@@ -93,7 +94,7 @@ final class DetailContentView: UIView {
     
     // MARK: - UI
     private func setLayout() {
-        [profileImageView, nameLabel, personalInfo, categoryLabel, titleLabel, dateLabel, contentLabel, commentLabel, navigationDivderView, contentDivederView].forEach {
+        [profileImageView, nameLabel, personalInfo, categoryLabel, titleLabel, dateLabel, contentLabel, commentLabel, navigationDivderView, contentDividerView].forEach {
             addSubview($0)
         }
         
@@ -138,7 +139,7 @@ final class DetailContentView: UIView {
             .leadingLayout(equalTo: leadingAnchor, constant: 20)
             .topLayout(equalTo: contentLabel.bottomAnchor, constant: 20)
         
-        contentDivederView
+        contentDividerView
             .leadingLayout(equalTo: leadingAnchor)
             .trailingLayout(equalTo: trailingAnchor)
             .topLayout(equalTo: commentLabel.bottomAnchor, constant: 16)
@@ -167,5 +168,24 @@ final class DetailContentView: UIView {
         nameLabel.text = pin.userName
         personalInfo.text = "\(pin.userDescription) ∙ \(pin.userAge)세"
         profileImageView.image = pin.userProfile
+    }
+    
+    func setComments(comments: [CommentResponse]) {
+        commentLabel.text = "댓글 \(comments.count)개"
+        
+        for (index, comment) in comments.enumerated() {
+            let commentView = CommentView()
+            addSubview(commentView)
+            commentView.setCommentView(comment)
+            commentViews.append(commentView)
+            
+            if index == 0 {
+                commentView.topLayout(equalTo: contentDividerView.bottomAnchor)
+            } else {
+                commentView.topLayout(equalTo: commentViews[index - 1].contentLabel.bottomAnchor)
+            }
+            commentView.leadingLayout(equalTo: leadingAnchor)
+            commentView.trailingLayout(equalTo: trailingAnchor)
+        }
     }
 }
