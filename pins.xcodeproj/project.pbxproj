@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B7035B852AF8D1FF000F74ED /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7035B842AF8D1FF000F74ED /* UIView+Extensions.swift */; };
+		B70BBA532B1703C700F0F9A6 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70BBA522B1703C700F0F9A6 /* UIImage+Extensions.swift */; };
+		B70BBA552B17059900F0F9A6 /* DetailBannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70BBA542B17059900F0F9A6 /* DetailBannerCell.swift */; };
+		B70EE5BD2B15D7DD00BCCACF /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70EE5BC2B15D7DD00BCCACF /* String+Extensions.swift */; };
 		B710588E2AEA2699003D6039 /* OSLog+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B710588D2AEA2699003D6039 /* OSLog+Extensions.swift */; };
 		B71058912AEA2974003D6039 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71058902AEA2974003D6039 /* MainViewModel.swift */; };
 		B71058932AEA2CB3003D6039 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71058922AEA2CB3003D6039 /* CustomButton.swift */; };
@@ -60,6 +63,7 @@
 		B7D051502B10AD1A00D86183 /* DetailNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D0514F2B10AD1A00D86183 /* DetailNavigationView.swift */; };
 		B7D051522B10AD2100D86183 /* DetailContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D051512B10AD2100D86183 /* DetailContentView.swift */; };
 		B7D051542B10AD2B00D86183 /* DetailCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D051532B10AD2B00D86183 /* DetailCommentView.swift */; };
+		B7D99EC82B18640F00250399 /* UIScreenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D99EC72B18640F00250399 /* UIScreenUtils.swift */; };
 		B7DE80652B08A771007A7AEF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7DE80642B08A771007A7AEF /* GoogleService-Info.plist */; };
 		B7DE80682B08A979007A7AEF /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = B7DE80672B08A979007A7AEF /* GoogleSignIn */; };
 		B7E050F12AE4FB3A007903C3 /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E050F02AE4FB3A007903C3 /* MainMapView.swift */; };
@@ -90,6 +94,9 @@
 
 /* Begin PBXFileReference section */
 		B7035B842AF8D1FF000F74ED /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		B70BBA522B1703C700F0F9A6 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		B70BBA542B17059900F0F9A6 /* DetailBannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBannerCell.swift; sourceTree = "<group>"; };
+		B70EE5BC2B15D7DD00BCCACF /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		B710588D2AEA2699003D6039 /* OSLog+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OSLog+Extensions.swift"; sourceTree = "<group>"; };
 		B71058902AEA2974003D6039 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		B71058922AEA2CB3003D6039 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -145,6 +152,7 @@
 		B7D0514F2B10AD1A00D86183 /* DetailNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNavigationView.swift; sourceTree = "<group>"; };
 		B7D051512B10AD2100D86183 /* DetailContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentView.swift; sourceTree = "<group>"; };
 		B7D051532B10AD2B00D86183 /* DetailCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCommentView.swift; sourceTree = "<group>"; };
+		B7D99EC72B18640F00250399 /* UIScreenUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenUtils.swift; sourceTree = "<group>"; };
 		B7DE80642B08A771007A7AEF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B7E050F02AE4FB3A007903C3 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
 		B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
@@ -192,6 +200,8 @@
 				B7B9776B2AFA20D80023718B /* Date+Extensions.swift */,
 				B785A7832B1091BC00DC2E88 /* UILabel+Extensions.swift */,
 				B7D0514C2B10AC9C00D86183 /* UITextField+Extensions.swift */,
+				B70EE5BC2B15D7DD00BCCACF /* String+Extensions.swift */,
+				B70BBA522B1703C700F0F9A6 /* UIImage+Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -303,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				B71C38822B075CC70065A783 /* CryptoUtils.swift */,
+				B7D99EC72B18640F00250399 /* UIScreenUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -418,6 +429,7 @@
 				B7D051512B10AD2100D86183 /* DetailContentView.swift */,
 				B7D051532B10AD2B00D86183 /* DetailCommentView.swift */,
 				B7B6781E2B10F012005F819D /* DetailScrollView.swift */,
+				B70BBA542B17059900F0F9A6 /* DetailBannerCell.swift */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -612,6 +624,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7B6781F2B10F012005F819D /* DetailScrollView.swift in Sources */,
+				B70BBA532B1703C700F0F9A6 /* UIImage+Extensions.swift in Sources */,
 				B785A77E2B10743600DC2E88 /* DetailViewController.swift in Sources */,
 				B7F071B92B14876C00BB5AB9 /* PinResponse.swift in Sources */,
 				B7E0D5912B0CB59D0090A465 /* AnimationManager.swift in Sources */,
@@ -643,10 +656,12 @@
 				B79A28F32AF37F93008FD3CE /* LoginViewController.swift in Sources */,
 				B78099432B06047400C01059 /* ImageInfo.swift in Sources */,
 				B71C387C2B0753BB0065A783 /* LoginUseCase.swift in Sources */,
+				B7D99EC82B18640F00250399 /* UIScreenUtils.swift in Sources */,
 				B785A7842B1091BC00DC2E88 /* UILabel+Extensions.swift in Sources */,
 				B7BB20242B0E0745003EED3A /* CreateUseCase.swift in Sources */,
 				B71C38802B07554B0065A783 /* FirebaseAuthService.swift in Sources */,
 				B7AEC0CE2B034568004BA42A /* CustomTextView.swift in Sources */,
+				B70EE5BD2B15D7DD00BCCACF /* String+Extensions.swift in Sources */,
 				B7B977682AFA10AE0023718B /* FirebaseRepository.swift in Sources */,
 				B785A7822B108A0A00DC2E88 /* PaddingLabel.swift in Sources */,
 				B7B977642AFA0D270023718B /* PinRequest.swift in Sources */,
@@ -659,6 +674,7 @@
 				B785A77C2B10742E00DC2E88 /* DetailView.swift in Sources */,
 				B71058952AEA42F8003D6039 /* CategoryCollectionViewCell.swift in Sources */,
 				B7781B352B0F4F91006372CF /* PinAnnotation.swift in Sources */,
+				B70BBA552B17059900F0F9A6 /* DetailBannerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,12 +13,12 @@ final class PaddingLabel: UILabel {
     private var leftInset: CGFloat = 0.0
     private var rightInset: CGFloat = 0.0
     
-    init(topInset: CGFloat, bottomInset: CGFloat, leftInset: CGFloat, rightInset: CGFloat) {
+    init(inset: UIEdgeInsets) {
         super.init(frame: .zero)
-        self.topInset = topInset
-        self.bottomInset = bottomInset
-        self.leftInset = leftInset
-        self.rightInset = rightInset
+        self.topInset = inset.top
+        self.bottomInset = inset.bottom
+        self.leftInset = inset.left
+        self.rightInset = inset.right
     }
     
     required init?(coder: NSCoder) {

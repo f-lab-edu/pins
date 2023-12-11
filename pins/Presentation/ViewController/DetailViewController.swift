@@ -17,7 +17,7 @@ final class DetailViewController: UIViewController {
     }
     
     override func loadView() {
-        view = DetailView()
+        view = DetailView(viewModel: viewModel)
     }
     
     override func viewDidLoad() {
@@ -25,10 +25,8 @@ final class DetailViewController: UIViewController {
         
         viewModel.$currentPin.sink { [weak self] pin in
             guard let pin = pin else { return }
-            self?.detailView.setPinInfo(pin: pin)
+            self?.detailView.setPinInfoDepondingOnImageExistence(pin: pin)
         }.store(in: &cancellable)
-        
-        detailView.scrollView.delegate = self
         
         setAction()
     }
@@ -46,15 +44,4 @@ final class DetailViewController: UIViewController {
 }
 
 extension DetailViewController: UITextFieldDelegate {
-}
-
-extension DetailViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let yOffset = scrollView.contentOffset.y
-        detailView.navigationView.changeBackgroundColor(as: yOffset)
-        if viewModel.isImage {
-            detailView.navigationView.changeButtonTintColor(as: yOffset)
-            detailView.contentView.updateMainImageHeight(yOffset, scrollView: scrollView, topAnchor: detailView.topAnchor)
-        }
-    }
 }
