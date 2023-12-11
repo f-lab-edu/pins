@@ -47,9 +47,9 @@ final class LoginViewModel {
     }
     
     func saveUserData(user: UserResponse) {
-        KeychainManager.save(key: "userId", string: user.id)
-        KeychainManager.save(key: "userEmail", string: user.email ?? "")
+        KeychainManager.save(key: .userId, string: user.id)
+        KeychainManager.save(key: .userEmail, string: user.email ?? "")
         guard let profileImage = user.profileImage else { return }
-        KeychainManager.saveImage(image: profileImage, forKey: "userProfile")
+        KeychainManager.saveImage(image: profileImage, forKey: .userProfile)
     }
 }
