@@ -137,10 +137,13 @@ final class DetailContentView: UIView {
     }
     
     // MARK: - Methods
-    func setPinContent(title: String, content: String, date: String, category: String) {
-        titleLabel.text = title
-        contentLabel.text = content
-        dateLabel.text = date.convertDaysAgo()
-        categoryLabel.text = NSLocalizedString(category, comment: "")
+    func setPinContent(pin: PinResponse) {
+        titleLabel.text = pin.title
+        contentLabel.text = pin.content
+        dateLabel.text = pin.created.convertDaysAgo()
+        categoryLabel.text = NSLocalizedString(pin.category, comment: "")
+        nameLabel.text = pin.userName
+        personalInfo.text = "\(pin.userDescription) ∙ \(pin.userAge)세"
+        profileImageView.image = pin.userProfile
     }
 }

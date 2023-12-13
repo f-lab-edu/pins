@@ -59,13 +59,14 @@ final class CreateViewModel {
     
     func createPin() async {
         let pin = PinRequest(
-            id: title,
+            id: UUID().uuidString,
             title: title,
             content: content,
             longitude: longitude,
             latitude: latitude,
             category: category,
-            created: Date().currentDateTimeAsString()
+            created: Date().currentDateTimeAsString(), 
+            userId: Auth.auth().currentUser?.uid ?? ""
         )
         await createUsecase.createPin(pin: pin, imageInfos: selectedImageInfos)
     }

@@ -13,7 +13,11 @@ import AuthenticationServices
 
 final class LoginViewController: UIViewController {
     private lazy var authService: FirebaseAuthServiceProtocol = FirebaseAuthService()
-    private lazy var loginUseCase: LoginUseCaseProtocol = LoginUseCase(authService: authService)
+    private lazy var userRepository: UserRepositoryProtocol = UserRepository()
+    private lazy var firebaseRepository: FirebaseRepositoryProtocol = FirebaseRepository()
+    private lazy var firestorageService: FirestorageServiceProtocol = FirestorageService(firebaseRepository: firebaseRepository)
+    private lazy var userService: UserServiceProtocol = UserService(userRepository: userRepository)
+    private lazy var loginUseCase: LoginUseCaseProtocol = LoginUseCase(authService: authService, userService: userService, firestorageService: firestorageService)
     private lazy var viewModel: LoginViewModel = LoginViewModel(loginUseCase: loginUseCase)
     private var cancellables = Set<AnyCancellable>()
 
@@ -36,8 +40,13 @@ final class LoginViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 switch result {
-                case .success(_):
-                    self?.navigationController?.pushViewController(MainViewController(), animated: true)
+                case .success(let user):
+                    self?.viewModel.saveUserData(user: user)
+                    if user.firstTime {
+                        self?.navigationController?.pushViewController(SigninViewController(), animated: true)
+                    } else {
+                        self?.navigationController?.pushViewController(MainViewController(), animated: true)
+                    }
                 case .failure(let error):
                     os_log("Login Error: %@", log: .default, type: .error, error.localizedDescription)
                 case .none:
