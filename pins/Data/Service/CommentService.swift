@@ -15,11 +15,9 @@ protocol CommentServiceProtocol {
 
 final class CommentService: CommentServiceProtocol {
     private let commentRepository: CommentRepositoryProtocol
-    
     init(commentRepository: CommentRepositoryProtocol) {
         self.commentRepository = commentRepository
     }
-    
     func getComments(pinId: String) async -> [CommentRequest] {
         let jsonData = await commentRepository.getComments(pinId: pinId)
         let decoder = JSONDecoder()

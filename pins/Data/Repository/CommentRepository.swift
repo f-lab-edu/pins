@@ -19,7 +19,9 @@ final class CommentRepository: CommentRepositoryProtocol {
         let commentRef = db.collection("comment")
         
         do {
-            let result = try await commentRef.whereField("pinId", isEqualTo: pinId).getDocuments()
+            let result = try await commentRef.whereField("pinId", isEqualTo: pinId)
+                                                      .order(by: "createdAt")
+                                                      .getDocuments()
             var comments = [[String: Any]]()
             for document in result.documents {
                 comments.append(document.data())

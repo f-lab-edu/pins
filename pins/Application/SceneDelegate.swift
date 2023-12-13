@@ -52,4 +52,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return Auth.auth().currentUser != nil
     }
 }
-

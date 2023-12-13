@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class pinsUITests: XCTestCase {
+final class PinsUITests: XCTestCase {
 
     override func setUpWithError() throws {
         continueAfterFailure = false

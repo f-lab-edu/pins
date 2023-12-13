@@ -45,4 +45,3 @@ final class PaddingLabel: UILabel {
         layer.masksToBounds = true
     }
 }
-

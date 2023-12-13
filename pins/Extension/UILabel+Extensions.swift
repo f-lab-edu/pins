@@ -20,7 +20,7 @@ extension UILabel {
         } else {
             attributedString = NSMutableAttributedString(string: text)
         }
-        attributedString.addAttribute(.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
+        attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
 
         attributedText = attributedString
     }

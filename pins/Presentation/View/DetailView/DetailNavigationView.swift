@@ -15,7 +15,6 @@ final class DetailNavigationView: UIView {
         return button
     }()
     
-    
     // MARK: - Initializer
     override init(frame: CGRect) {
         super.init(frame: frame)

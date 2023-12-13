@@ -45,7 +45,7 @@ final class MainUseCase: MainUseCaseProtocol {
     
     func fetchUserInfo() async -> UserRequest {
         let id = KeychainManager.load(key: "userId")
-        guard let id else { assert(false, "userId is nil") }
+        guard let id else { fatalError("userId is nil") }
         let user = await userService.getUser(id: id)
         guard let user = user else { fatalError("Error fetching user") }
         return user
