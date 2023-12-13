@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1510"
+   LastUpgradeVersion = "1500"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,46 +15,22 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B7AF692C2AE0FEDF00385632"
-               BuildableName = "pins.app"
-               BlueprintName = "pins"
+               BuildableName = "Pins.app"
+               BlueprintName = "Pins"
                ReferencedContainer = "container:pins.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Sandbox"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
-      <Testables>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B7AF69422AE0FEE000385632"
-               BuildableName = "pinsTests.xctest"
-               BlueprintName = "pinsTests"
-               ReferencedContainer = "container:pins.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B7AF694C2AE0FEE000385632"
-               BuildableName = "pinsUITests.xctest"
-               BlueprintName = "pinsUITests"
-               ReferencedContainer = "container:pins.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Sandbox"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -68,14 +44,14 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B7AF692C2AE0FEDF00385632"
-            BuildableName = "pins.app"
-            BlueprintName = "pins"
+            BuildableName = "Pins.app"
+            BlueprintName = "Pins"
             ReferencedContainer = "container:pins.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Sandbox"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -85,17 +61,17 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B7AF692C2AE0FEDF00385632"
-            BuildableName = "pins.app"
-            BlueprintName = "pins"
+            BuildableName = "Pins.app"
+            BlueprintName = "Pins"
             ReferencedContainer = "container:pins.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Debug">
+      buildConfiguration = "Sandbox">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Sandbox"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

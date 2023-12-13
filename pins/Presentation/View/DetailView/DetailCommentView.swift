@@ -81,7 +81,7 @@ final class DetailCommentView: UIView {
     }
     
     private func setProfileImage() {
-        let image = KeychainManager.loadImage(forKey: "userProfile")
+        let image = KeychainManager.loadImage(forKey: .userProfile)
         guard let image else { return }
         myProfileImageView.image = image
     }
