@@ -38,7 +38,7 @@ final class MainViewModel {
         createViewIsPresented.toggle()
     }
     
-    func getUserInfo() async -> User {
+    func getUserInfo() async -> UserRequest {
         return await mainUseCase.fetchUserInfo()
     }
 }

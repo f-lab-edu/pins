@@ -10,20 +10,22 @@ import FirebaseAuth
 import AuthenticationServices
 
 protocol LoginUseCaseProtocol {
-    func googleLogin(delegate: UIViewController) async -> Result<User, Error>
-    func appleLogin(credential: ASAuthorizationAppleIDCredential, nonce: String?) async -> Result<User, Error>
+    func googleLogin(delegate: UIViewController) async -> Result<UserResponse, Error>
+    func appleLogin(credential: ASAuthorizationAppleIDCredential, nonce: String?) async -> Result<UserResponse, Error>
 }
 
 final class LoginUseCase: LoginUseCaseProtocol {
     private var authService: FirebaseAuthServiceProtocol
+    private var firestorageService: FirestorageServiceProtocol
     private var userService: UserServiceProtocol
     
-    init(authService: FirebaseAuthServiceProtocol, userService: UserServiceProtocol) {
+    init(authService: FirebaseAuthServiceProtocol, userService: UserServiceProtocol, firestorageService: FirestorageServiceProtocol) {
         self.authService = authService
         self.userService = userService
+        self.firestorageService = firestorageService
     }
     
-    func googleLogin(delegate: UIViewController) async -> Result<User, Error> {
+    func googleLogin(delegate: UIViewController) async -> Result<UserResponse, Error> {
         let result = await authService.getFirebaseCredentialFromGoogle(presentView: delegate)
         switch result {
         case .success(let credential):
@@ -34,7 +36,7 @@ final class LoginUseCase: LoginUseCaseProtocol {
         }
     }
     
-    func appleLogin(credential: ASAuthorizationAppleIDCredential, nonce: String?) async -> Result<User, Error> {
+    func appleLogin(credential: ASAuthorizationAppleIDCredential, nonce: String?) async -> Result<UserResponse, Error> {
         let result = await authService.getFirebaseCredentialFromApple(with: credential, nonce: nonce)
         switch result {
         case .success(let credential):
@@ -45,24 +47,17 @@ final class LoginUseCase: LoginUseCaseProtocol {
         }
     }
     
-    private func handleLoginResult(_ result: Result<AuthDataResult, Error>) async -> Result<User, Error> {
+    private func handleLoginResult(_ result: Result<AuthDataResult, Error>) async -> Result<UserResponse, Error> {
         switch result {
         case .success(let authResult):
-            let creationDate = authResult.user.metadata.creationDate
-            let lastSignInDate = authResult.user.metadata.lastSignInDate
             let user = authResult.user
             let userResult = await userService.getUser(id: user.uid)
-            if let userResult = userResult {
-                return .success(userResult)
+            if let userResult {
+                let profileImage = await firestorageService.downloadImage(urlString: userResult.profileImage)
+                guard let profileImage else { return .failure(NSError(domain: "LoginError", code: -1, userInfo: nil)) }
+                return .success(UserResponse(user: userResult, image: profileImage, firstTime: false))
             }
-            guard let creationDate = creationDate, let lastSignInDate = lastSignInDate else {
-                return .failure(NSError(domain: "LoginError", code: -1, userInfo: nil))
-            }
-            if Calendar.current.isDate(creationDate, inSameDayAs: lastSignInDate) {
-                return .success(User(id: user.uid, nickName: user.displayName ?? "", email: user.email, firstTime: true))
-            } else {
-                return .success(User(id: user.uid, nickName: user.displayName ?? "", email: user.email, firstTime: false))
-            }
+            return .success(UserResponse(id: user.uid, nickName: user.displayName ?? "", email: user.email ?? "", firstTime: true))
         case .failure(let error):
             return .failure(error)
         }

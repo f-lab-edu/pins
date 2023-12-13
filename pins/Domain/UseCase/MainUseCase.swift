@@ -11,7 +11,7 @@ import FirebaseAuth
 protocol MainUseCaseProtocol {
     func getPins() async -> [PinRequest]
     func loadPin(pin: PinRequest) async -> PinResponse
-    func fetchUserInfo() async -> User
+    func fetchUserInfo() async -> UserRequest
 }
 
 final class MainUseCase: MainUseCaseProtocol {
@@ -37,11 +37,13 @@ final class MainUseCase: MainUseCaseProtocol {
         }
         let user = await userService.getUser(id: pin.userId)
         guard let user = user else { fatalError("Error fetching user") }
+        let profile = await firestorageService.downloadImage(urlString: user.profileImage)
+        guard let profile else { fatalError("Error feching profile") }
         let userAge = birthDateToAge(birthDate: user.birthDate ?? "")
-        return PinResponse(pin: pin, images: images, id: user.id, name: user.nickName, age: userAge, description: user.description ?? "")
+        return PinResponse(pin: pin, images: images, id: user.id, name: user.nickName, age: userAge, description: user.description ?? "", profile: profile)
     }
     
-    func fetchUserInfo() async -> User {
+    func fetchUserInfo() async -> UserRequest {
         let id = Auth.auth().currentUser!.uid
         let user = await userService.getUser(id: id)
         guard let user = user else { fatalError("Error fetching user") }

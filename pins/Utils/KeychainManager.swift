@@ -4,35 +4,79 @@
 //
 //  Created by 주동석 on 12/3/23.
 //
-import Foundation
+import UIKit
+import OSLog
 import Security
 
-final class KeychainManager {
-    static func save(key: String, data: Data) -> OSStatus {
-        let query = [
-            kSecClass as String: kSecClassGenericPassword as String,
-            kSecAttrAccount as String: key,
-            kSecValueData as String: data
-        ] as [String: Any]
-
-        SecItemDelete(query as CFDictionary)
-        return SecItemAdd(query as CFDictionary, nil)
+enum KeychainManager: String {
+    case userId = "userId"
+    case userEmail = "userEmail"
+    case userProfile = "userProfile"
+    
+    static func saveImage(image: UIImage, forKey key: KeychainManager) {
+        if let imageData = image.pngData() {
+            let query: NSDictionary = [
+                kSecValueData as String: imageData,
+                kSecClass as String: kSecClassGenericPassword,
+                kSecAttrAccount as String: key.rawValue,
+                kSecAttrAccessible as String: kSecAttrAccessibleWhenUnlocked
+            ]
+            SecItemDelete(query)
+            let status = SecItemAdd(query, nil)
+            if status != errSecSuccess {
+                os_log("Failed to save image to keychain")
+            }
+        }
     }
-
-    static func load(key: String) -> Data? {
-        let query = [
+    
+    static func loadImage(forKey key: KeychainManager) -> UIImage? {
+        let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: key,
+            kSecAttrAccount as String: key.rawValue,
             kSecReturnData as String: kCFBooleanTrue!,
             kSecMatchLimit as String: kSecMatchLimitOne
-        ] as [String: Any]
-
-        var dataTypeRef: AnyObject? = nil
-        let status: OSStatus = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
-        if status == noErr {
-            return dataTypeRef as? Data
-        } else {
-            return nil
+        ]
+        
+        var result: AnyObject?
+        let status = SecItemCopyMatching(query as CFDictionary, &result)
+        if status == errSecSuccess {
+            if let imageData = result as? Data {
+                return UIImage(data: imageData)
+            }
         }
+        
+        return nil
+    }
+    
+    static func save(key: KeychainManager, string: String) {
+        let query: NSDictionary = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: key.rawValue,
+            kSecValueData: string.data(using: .utf8, allowLossyConversion: false) as Any
+        ]
+        SecItemDelete(query)
+        let status = SecItemAdd(query, nil)
+        assert(status == noErr, "failed to save Token")
+    }
+
+    static func load(key: KeychainManager) -> String? {
+        let query: NSDictionary = [
+           kSecClass: kSecClassGenericPassword,
+           kSecAttrAccount: key.rawValue,
+           kSecReturnData: kCFBooleanTrue as Any,
+           kSecMatchLimit: kSecMatchLimitOne
+       ]
+       
+       var dataTypeRef: AnyObject?
+       let status = SecItemCopyMatching(query, &dataTypeRef)
+       
+       if status == errSecSuccess {
+           let retrievedData = dataTypeRef as! Data
+           let value = String(data: retrievedData, encoding: String.Encoding.utf8)
+           return value
+       } else {
+           os_log("failed to loading, status code = \(status)")
+           return nil
+       }
     }
 }

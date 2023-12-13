@@ -98,38 +98,12 @@ final class CreateViewController: UIViewController {
     private func processPickerResult(_ index: Int, _ result: PHPickerResult) {
         if result.itemProvider.canLoadObject(ofClass: UIImage.self) {
             Task {
-                let image = await loadImageAsync(result.itemProvider)
-                let extensionType = await loadFileExtension(result.itemProvider)
+                let image = await ImagePickerManager.loadImageAsync(result.itemProvider)
+                let extensionType = await ImagePickerManager.loadFileExtension(result.itemProvider)
                 if let image = image, let extensionType = extensionType {
                     await MainActor.run {
                         viewModel.addSelectedImage(ImageInfo(index: index, image: image, extensionType: extensionType))
                     }
-                }
-            }
-        }
-    }
-
-    private func loadImageAsync(_ itemProvider: NSItemProvider) async -> UIImage? {
-        return await withCheckedContinuation { continuation in
-            itemProvider.loadObject(ofClass: UIImage.self) { image, error in
-                if var image = image as? UIImage {
-                    image = image.resizeImage(width: 720)
-                    continuation.resume(returning: image)
-                } else {
-                    continuation.resume(returning: nil)
-                }
-            }
-        }
-    }
-
-    private func loadFileExtension(_ itemProvider: NSItemProvider) async -> String? {
-        return await withCheckedContinuation { continuation in
-            itemProvider.loadFileRepresentation(forTypeIdentifier: UTType.image.identifier) { url, error in
-                if let url = url {
-                    let fileExtension = url.pathExtension
-                    continuation.resume(returning: fileExtension)
-                } else {
-                    continuation.resume(returning: nil)
                 }
             }
         }
