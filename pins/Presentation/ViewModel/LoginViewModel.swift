@@ -10,7 +10,7 @@ import FirebaseAuth
 import AuthenticationServices
 
 final class LoginViewModel {
-    @Published var loginState: Result<User, Error>?
+    @Published var loginState: Result<UserResponse, Error>?
     private var currentNonce: String?
     private var loginUseCase: LoginUseCaseProtocol
     
@@ -44,5 +44,12 @@ final class LoginViewModel {
         authorizationController.delegate = delegate
         authorizationController.presentationContextProvider = delegate
         authorizationController.performRequests()
+    }
+    
+    func saveUserData(user: UserResponse) {
+        KeychainManager.save(key: .userId, string: user.id)
+        KeychainManager.save(key: .userEmail, string: user.email ?? "")
+        guard let profileImage = user.profileImage else { return }
+        KeychainManager.saveImage(image: profileImage, forKey: .userProfile)
     }
 }

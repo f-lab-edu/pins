@@ -75,7 +75,14 @@ final class FirestorageService: FirestorageServiceProtocol {
         let urls = await uploadImages(imageInfos: images)
         let urlsString = urls.map { $0.url.absoluteString }
         let pin = pin.withUrls(urls: urlsString)
-        await firebaseRepository.createPin(pin: pin.toDictionary())
+        let encoder = JSONEncoder()
+        do {
+            let pinData = try encoder.encode(pin)
+            let pinDict = try JSONSerialization.jsonObject(with: pinData) as? [String: Any]
+            await firebaseRepository.createPin(pin: pinDict!)
+        } catch {
+            os_log("Error encoding pin: %@", error.localizedDescription)
+        }
     }
     
     func getPins() async -> [PinRequest] {

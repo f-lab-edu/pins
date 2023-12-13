@@ -14,7 +14,9 @@ import FirebaseAuth
 final class MainViewController: UIViewController {
     private lazy var firebaseRepository: FirebaseRepository = FirebaseRepository()
     private lazy var firestoreService: FirestorageServiceProtocol = FirestorageService(firebaseRepository: firebaseRepository)
-    private lazy var mainUseCase: MainUseCaseProtocol = MainUseCase(firestorageService: firestoreService)
+    private lazy var userRepository: UserRepository = UserRepository()
+    private lazy var userService: UserServiceProtocol = UserService(userRepository: userRepository)
+    private lazy var mainUseCase: MainUseCaseProtocol = MainUseCase(firestorageService: firestoreService, userService: userService)
     private lazy var viewModel: MainViewModel = MainViewModel(mainUseCase: mainUseCase)
     
     private var mainMapView: MainMapView {
@@ -41,6 +43,10 @@ final class MainViewController: UIViewController {
             .sink { [weak self] pins in
             self?.mainMapView.drawPins(pins: pins)
         }.store(in: &cancellable)
+        
+        Task {
+            await viewModel.getUserInfo()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
