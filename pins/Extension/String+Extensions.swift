@@ -10,8 +10,9 @@ import Foundation
 extension String {
     func convertDaysAgo() -> String {
         let dateFormatsWithLocale = [
-            ("yyyy년 MM월 dd일 a hh:mm:ss", "ko_KR"), // 한국 형식
-            ("MMMM dd, yyyy 'at' h:mm:ss a", "en_US_POSIX") // 미국 형식
+            ("yyyy년 MM월 dd일 a hh:mm:ss", "ko_KR"),
+            ("yyyy년 MM월 dd일 HH:mm:ss", "ko_KR"),
+            ("MMMM dd, yyyy 'at' h:mm:ss a", "en_US_POSIX")
         ]
 
         let dateFormatter = DateFormatter()
