@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserRequest: Codable {
+struct UserRequest: Codable, Equatable {
     var id: String
     var nickName: String
     var email: String?

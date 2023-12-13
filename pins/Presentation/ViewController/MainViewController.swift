@@ -58,7 +58,9 @@ final class MainViewController: UIViewController {
     }
     
     private func loadPins() {
-        viewModel.getPins()
+        Task {
+            await viewModel.setCurrentPins()
+        }
     }
     
     private func setLocationManager() {
