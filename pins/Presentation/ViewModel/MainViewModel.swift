@@ -16,10 +16,9 @@ final class MainViewModel {
         self.mainUseCase = mainUseCase
     }
     
-    func getPins() {
-        Task {
-            currentPins = await mainUseCase.getPins()
-        }
+    func setCurrentPins() async {
+        let pins = await mainUseCase.getPins()
+        currentPins = pins
     }
     
     func loadPin(pin: PinRequest) async -> PinResponse {

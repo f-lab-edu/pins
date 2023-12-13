@@ -39,24 +39,15 @@ final class MainUseCase: MainUseCaseProtocol {
         guard let user = user else { fatalError("Error fetching user") }
         let profile = await firestorageService.downloadImage(urlString: user.profileImage)
         guard let profile else { fatalError("Error feching profile") }
-        let userAge = birthDateToAge(birthDate: user.birthDate ?? "")
+        let userAge = user.birthDate?.birthDateToAge() ?? 0
         return PinResponse(pin: pin, images: images, id: user.id, name: user.nickName, age: userAge, description: user.description ?? "", profile: profile)
     }
     
     func fetchUserInfo() async -> UserRequest {
-        let id = Auth.auth().currentUser!.uid
+        let id = KeychainManager.load(key: "userId")
+        guard let id else { assert(false, "userId is nil") }
         let user = await userService.getUser(id: id)
         guard let user = user else { fatalError("Error fetching user") }
         return user
-    }
-    
-    private func birthDateToAge(birthDate: String) -> Int {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyMMdd"
-        let birthDate = dateFormatter.date(from: birthDate)
-        let calendar = Calendar.current
-        let ageComponents = calendar.dateComponents([.year], from: birthDate!, to: Date())
-        let age = ageComponents.year!
-        return age
     }
 }

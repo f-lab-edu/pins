@@ -10,32 +10,40 @@ import XCTest
 final class pinsUITests: XCTestCase {
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    
+    func testDetailView() throws {
         let app = XCUIApplication()
         app.launch()
+        
+        let pins = app.otherElements["지도 핀"]
+        pins.firstMatch.tap()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
+        let nameLabel = app.staticTexts["nameLabel"]
+        let personalInfo = app.staticTexts["personalInfo"]
+        let categoryLabel = app.staticTexts["categoryLabel"]
+        let titleLabel = app.staticTexts["titleLabel"]
+        let dateLabel = app.staticTexts["dateLabel"]
+        let contentLabel = app.staticTexts["contentLabel"]
+        let commentLabel = app.staticTexts["commentLabel"]
+        
+        let exists = NSPredicate(format: "exists == 1")
+        
+        expectation(for: exists, evaluatedWith: nameLabel, handler: nil)
+        expectation(for: exists, evaluatedWith: personalInfo, handler: nil)
+        expectation(for: exists, evaluatedWith: categoryLabel, handler: nil)
+        expectation(for: exists, evaluatedWith: titleLabel, handler: nil)
+        expectation(for: exists, evaluatedWith: dateLabel, handler: nil)
+        expectation(for: exists, evaluatedWith: contentLabel, handler: nil)
+        expectation(for: exists, evaluatedWith: commentLabel, handler: nil)
+        
+        waitForExpectations(timeout: 5, handler: nil)
+        
+        let elements = [nameLabel, personalInfo, categoryLabel, titleLabel, dateLabel, contentLabel, commentLabel]
+        
+        for element in elements {
+            XCTAssertTrue(element.exists, "Element \(element) does not exist")
         }
     }
 }

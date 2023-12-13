@@ -51,7 +51,7 @@ final class DetailView: UIView {
         return label
     }()
     private let contentView: DetailContentView = DetailContentView()
-    private let commentView: DetailCommentView = DetailCommentView()
+    let commentView: DetailCommentView = DetailCommentView()
     let navigationView: DetailNavigationView = DetailNavigationView()
     // MARK: - Property
     private let animationManager: AnimationManager = AnimationManager()
@@ -74,8 +74,14 @@ final class DetailView: UIView {
     // MARK: - Method
     private func setBinding() {
         viewModel.$page.sink { [weak self] value in
-            guard let self = self else { return }
+            guard let self else { return }
             self.imageCountLabel.text = "\(value)/\(self.viewModel.getImages().count)"
+        }.store(in: &cancellable)
+        
+        viewModel.$comments.receive(on: DispatchQueue.main)
+            .sink { [weak self] comments in
+            guard let self else { return }
+            self.contentView.setComments(comments: comments)
         }.store(in: &cancellable)
     }
 
@@ -121,7 +127,7 @@ final class DetailView: UIView {
             .bottomLayout(equalTo: contentView.topAnchor, constant: -20)
             .trailingLayout(equalTo: trailingAnchor, constant: -15)
     }
-
+    
     private func setupBannerScrollView() {
         for image in viewModel.getImages() {
             let imageView = UIImageView(image: image)

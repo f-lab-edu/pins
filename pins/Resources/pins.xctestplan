@@ -1,0 +1,46 @@
+{
+  "configurations" : [
+    {
+      "id" : "FAA25BFD-F6A5-42D4-9304-1956FA9CB551",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:pins.xcodeproj",
+          "identifier" : "B7AF692C2AE0FEDF00385632",
+          "name" : "pins"
+        }
+      ]
+    },
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:pins.xcodeproj",
+      "identifier" : "B7AF692C2AE0FEDF00385632",
+      "name" : "pins"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:pins.xcodeproj",
+        "identifier" : "B7AF69422AE0FEE000385632",
+        "name" : "pinsTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:pins.xcodeproj",
+        "identifier" : "B7AF694C2AE0FEE000385632",
+        "name" : "pinsUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

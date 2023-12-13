@@ -9,7 +9,16 @@ import UIKit
 import Combine
 
 final class DetailViewController: UIViewController {
-    private var viewModel: DetailViewModel = DetailViewModel()
+    private lazy var userRepository: UserRepositoryProtocol = UserRepository()
+    private lazy var firebaseRepository: FirebaseRepositoryProtocol = FirebaseRepository()
+    private lazy var commentRepository: CommentRepositoryProtocol = CommentRepository()
+    
+    private lazy var firestorageService: FirestorageServiceProtocol = FirestorageService(firebaseRepository: firebaseRepository)
+    private lazy var userService: UserServiceProtocol = UserService(userRepository: userRepository)
+    private lazy var commentService: CommentServiceProtocol = CommentService(commentRepository: commentRepository)
+    
+    private lazy var detailUseCase: DetailUseCaseProtocol = DetailUseCase(commentService: commentService, userService: userService, firestorageSerive: firestorageService)
+    private lazy var viewModel: DetailViewModel = DetailViewModel(detailUseCase: detailUseCase)
     private var cancellable = Set<AnyCancellable>()
     
     private var detailView: DetailView {
@@ -29,17 +38,33 @@ final class DetailViewController: UIViewController {
         }.store(in: &cancellable)
         
         setAction()
+        getComments()
     }
     
     func setAction() {
         detailView.navigationView.setBackButtonAction(UIAction(handler: { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
         }))
+        
+        detailView.commentView.setSubmitButtonAction(UIAction(handler: { [weak self] _ in
+            let comment = self?.detailView.commentView.inputTextView.text
+            guard let comment else { return }
+            guard !comment.isEmpty else { return }
+            self?.viewModel.uploadComment(comment)
+            self?.detailView.commentView.inputTextView.text = ""
+            self?.getComments()
+        }))
     }
     
     func setPin(pin: PinResponse) {
         viewModel.currentPin = pin
         viewModel.setIsImage(value: !pin.images.isEmpty)
+    }
+    
+    func getComments() {
+        Task {
+            await viewModel.getComments()
+        }
     }
 }
 

@@ -74,6 +74,12 @@
 		B7D051522B10AD2100D86183 /* DetailContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D051512B10AD2100D86183 /* DetailContentView.swift */; };
 		B7D051542B10AD2B00D86183 /* DetailCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D051532B10AD2B00D86183 /* DetailCommentView.swift */; };
 		B7D99EC82B18640F00250399 /* UIScreenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D99EC72B18640F00250399 /* UIScreenUtils.swift */; };
+		B7DC98E52B260BD9006DD8F7 /* CommentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC98E42B260BD9006DD8F7 /* CommentRequest.swift */; };
+		B7DC98E72B260C17006DD8F7 /* CommentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC98E62B260C17006DD8F7 /* CommentResponse.swift */; };
+		B7DC98E92B260FCF006DD8F7 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC98E82B260FCF006DD8F7 /* CommentView.swift */; };
+		B7DC98EB2B26179A006DD8F7 /* DetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC98EA2B26179A006DD8F7 /* DetailUseCase.swift */; };
+		B7DC98ED2B261977006DD8F7 /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC98EC2B261977006DD8F7 /* CommentService.swift */; };
+		B7DC98EF2B2619F3006DD8F7 /* CommentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC98EE2B2619F3006DD8F7 /* CommentRepository.swift */; };
 		B7DE80652B08A771007A7AEF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7DE80642B08A771007A7AEF /* GoogleService-Info.plist */; };
 		B7DE80682B08A979007A7AEF /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = B7DE80672B08A979007A7AEF /* GoogleSignIn */; };
 		B7E050F12AE4FB3A007903C3 /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E050F02AE4FB3A007903C3 /* MainMapView.swift */; };
@@ -173,6 +179,13 @@
 		B7D051512B10AD2100D86183 /* DetailContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentView.swift; sourceTree = "<group>"; };
 		B7D051532B10AD2B00D86183 /* DetailCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCommentView.swift; sourceTree = "<group>"; };
 		B7D99EC72B18640F00250399 /* UIScreenUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenUtils.swift; sourceTree = "<group>"; };
+		B7DC98E32B25BE4B006DD8F7 /* pins.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = pins.xctestplan; sourceTree = "<group>"; };
+		B7DC98E42B260BD9006DD8F7 /* CommentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRequest.swift; sourceTree = "<group>"; };
+		B7DC98E62B260C17006DD8F7 /* CommentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentResponse.swift; sourceTree = "<group>"; };
+		B7DC98E82B260FCF006DD8F7 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		B7DC98EA2B26179A006DD8F7 /* DetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailUseCase.swift; sourceTree = "<group>"; };
+		B7DC98EC2B261977006DD8F7 /* CommentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
+		B7DC98EE2B2619F3006DD8F7 /* CommentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRepository.swift; sourceTree = "<group>"; };
 		B7DE80642B08A771007A7AEF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B7E050F02AE4FB3A007903C3 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
 		B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
@@ -275,6 +288,7 @@
 				B7BB20232B0E0745003EED3A /* CreateUseCase.swift */,
 				B7BB20252B0F1696003EED3A /* MainUseCase.swift */,
 				B7B20E1A2B1CB92100C8304B /* SigninUseCase.swift */,
+				B7DC98EA2B26179A006DD8F7 /* DetailUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -288,6 +302,8 @@
 				B711B6AB2B21C55600C661E3 /* UserResponse.swift */,
 				B78099422B06047400C01059 /* ImageInfo.swift */,
 				B7781B2F2B0F47C8006372CF /* Category.swift */,
+				B7DC98E42B260BD9006DD8F7 /* CommentRequest.swift */,
+				B7DC98E62B260C17006DD8F7 /* CommentResponse.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -299,6 +315,7 @@
 				B76DD4612AFE0DB000DFE7E1 /* FirestorageService.swift */,
 				B71C387F2B07554B0065A783 /* FirebaseAuthService.swift */,
 				B7B20E1E2B1CC02500C8304B /* UserService.swift */,
+				B7DC98EC2B261977006DD8F7 /* CommentService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -308,6 +325,7 @@
 			children = (
 				B7B977672AFA10AE0023718B /* FirebaseRepository.swift */,
 				B7B20E1C2B1CBAC700C8304B /* UserRepository.swift */,
+				B7DC98EE2B2619F3006DD8F7 /* CommentRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -324,6 +342,7 @@
 		B71C387A2B0752780065A783 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B7DC98E32B25BE4B006DD8F7 /* pins.xctestplan */,
 				B7DE80642B08A771007A7AEF /* GoogleService-Info.plist */,
 				B7AF69392AE0FEE000385632 /* Assets.xcassets */,
 				B7AF693E2AE0FEE000385632 /* Info.plist */,
@@ -459,6 +478,7 @@
 				B7D051532B10AD2B00D86183 /* DetailCommentView.swift */,
 				B7B6781E2B10F012005F819D /* DetailScrollView.swift */,
 				B70BBA542B17059900F0F9A6 /* DetailBannerCell.swift */,
+				B7DC98E82B260FCF006DD8F7 /* CommentView.swift */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -666,11 +686,14 @@
 				B711B6AA2B21C08D00C661E3 /* ImagePickerManager.swift in Sources */,
 				B7AF69352AE0FEDF00385632 /* MainViewController.swift in Sources */,
 				B74A4FC72AE790BE00226EA7 /* CreateView.swift in Sources */,
+				B7DC98EF2B2619F3006DD8F7 /* CommentRepository.swift in Sources */,
 				B7781B302B0F47C8006372CF /* Category.swift in Sources */,
 				B7ADFF722AEA8DF300D34CEA /* Divider.swift in Sources */,
 				B74A4FC52AE7905500226EA7 /* CreateViewController.swift in Sources */,
 				B7194A422B1B4F3300642FDA /* SigninViewController.swift in Sources */,
+				B7DC98EB2B26179A006DD8F7 /* DetailUseCase.swift in Sources */,
 				B742C5782AEA5EE900E95E96 /* CreateViewModel.swift in Sources */,
+				B7DC98E72B260C17006DD8F7 /* CommentResponse.swift in Sources */,
 				B7D051502B10AD1A00D86183 /* DetailNavigationView.swift in Sources */,
 				B71C387E2B0754F90065A783 /* UserRequest.swift in Sources */,
 				B7B20E242B1CCDB800C8304B /* KeychainManager.swift in Sources */,
@@ -692,6 +715,7 @@
 				B71C387C2B0753BB0065A783 /* LoginUseCase.swift in Sources */,
 				B7B20E1F2B1CC02500C8304B /* UserService.swift in Sources */,
 				B7D99EC82B18640F00250399 /* UIScreenUtils.swift in Sources */,
+				B7DC98ED2B261977006DD8F7 /* CommentService.swift in Sources */,
 				B785A7842B1091BC00DC2E88 /* UILabel+Extensions.swift in Sources */,
 				B7BB20242B0E0745003EED3A /* CreateUseCase.swift in Sources */,
 				B71C38802B07554B0065A783 /* FirebaseAuthService.swift in Sources */,
@@ -705,6 +729,8 @@
 				B7AF69332AE0FEDF00385632 /* SceneDelegate.swift in Sources */,
 				B71C38832B075CC70065A783 /* CryptoUtils.swift in Sources */,
 				B7B20E1D2B1CBAC700C8304B /* UserRepository.swift in Sources */,
+				B7DC98E92B260FCF006DD8F7 /* CommentView.swift in Sources */,
+				B7DC98E52B260BD9006DD8F7 /* CommentRequest.swift in Sources */,
 				B710588E2AEA2699003D6039 /* OSLog+Extensions.swift in Sources */,
 				B76DD4622AFE0DB000DFE7E1 /* FirestorageService.swift in Sources */,
 				B7035B852AF8D1FF000F74ED /* UIView+Extensions.swift in Sources */,

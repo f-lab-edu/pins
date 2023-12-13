@@ -55,6 +55,7 @@ final class MainMapView: UIView {
         let button = CustomButton()
         button.setShadow()
         button.setImage(systemName: "plus")
+        button.accessibilityLabel = "핀 생성"
         return button
     }()
     private let refeshButton: CustomButton = {
@@ -67,12 +68,14 @@ final class MainMapView: UIView {
         let button = CustomButton()
         button.setShadow()
         button.setImage(systemName: "location")
+        button.accessibilityLabel = "내 위치로"
         return button
     }()
     private let logoutButton: CustomButton = {
         let button = CustomButton()
         button.setShadow()
         button.setImage(systemName: "door.right.hand.open")
+        button.accessibilityLabel = "로그아웃"
         return button
     }()
 

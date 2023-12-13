@@ -46,4 +46,14 @@ extension String {
             return "방금 전"
         }
     }
+    
+    func birthDateToAge() -> Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyMMdd"
+        let birthDate = dateFormatter.date(from: self)
+        let calendar = Calendar.current
+        let ageComponents = calendar.dateComponents([.year], from: birthDate!, to: Date())
+        let age = ageComponents.year!
+        return age
+    }
 }
