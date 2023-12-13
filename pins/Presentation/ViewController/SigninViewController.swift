@@ -55,24 +55,25 @@ final class SigninViewController: UIViewController {
     
     private func setActions() {
         signinView.setSubmitButtonAction(UIAction(handler: { [weak self] _ in
-            switch self?.viewModel.inputStep {
+            guard let self else { return }
+            switch self.viewModel.inputStep {
             case .nickName:
-                self?.viewModel.setInputStep(.birthDate)
+                self.viewModel.setInputStep(.birthDate)
             case .birthDate:
-                self?.viewModel.setInputStep(.description)
+                self.viewModel.setInputStep(.description)
             case .description:
-                self?.viewModel.setInputStep(.profileImage)
+                self.viewModel.setInputStep(.profileImage)
+                let validAll = self.isValidAll()
+                self.updateInputState(isValid: validAll)
             case .profileImage:
-                self?.viewModel.setNickName(self?.signinView.nickNameInput.text ?? "")
-                self?.viewModel.setBirthDate(self?.signinView.birthDateInput.text ?? "")
-                self?.viewModel.setDescription(self?.signinView.descriptionInput.text ?? "")
+                self.viewModel.setNickName(self.signinView.nickNameInput.text ?? "")
+                self.viewModel.setBirthDate(self.signinView.birthDateInput.text ?? "")
+                self.viewModel.setDescription(self.signinView.descriptionInput.text ?? "")
                 Task {
-                    await self?.viewModel.saveUserInfo()
+                    await self.viewModel.saveUserInfo()
                     let mainViewController = MainViewController()
-                    self?.navigationController?.pushViewController(mainViewController, animated: true)
+                    self.navigationController?.pushViewController(mainViewController, animated: true)
                 }
-            default:
-                break
             }
         }))
         signinView.setProfileImageButtonAction(UIAction(handler: { [weak self] _ in
@@ -92,24 +93,47 @@ final class SigninViewController: UIViewController {
     }
     
     private func updateNicknameInput(_ text: String) {
-        viewModel.setInputButtonStyle(text.count > 5 || text.count < 1 ? .disabled : .enabled)
+        let isNicknameValid = isValidNickname(nickname: text)
+        updateInputState(isValid: isNicknameValid)
         signinView.setSubmitButtonTitle("다음")
     }
 
     private func updateBirthDateInput(_ text: String) {
-        viewModel.setInputButtonStyle((text.count == 6 && isValidBirthDate(dateString: text)) ? .enabled : .disabled)
+        let isBirthDateValid = isValidBirthDate(dateString: text)
+        updateInputState(isValid: isBirthDateValid)
         signinView.setSubmitButtonTitle("다음")
+
     }
 
     private func updateDescriptionInput(_ text: String) {
+        let isDescriptionValid = isValidDescription(description: text)
+        updateInputState(isValid: isDescriptionValid)
         signinView.setSubmitButtonTitle("다음")
-        let nickname = signinView.nickNameInput.text ?? ""
+    }
+    
+    private func isValidAll() -> Bool {
+        let nickName = signinView.nickNameInput.text ?? ""
         let birthDate = signinView.birthDateInput.text ?? ""
-        if nickname.count > 5 || nickname.count < 1  || birthDate.count != 6 || !isValidBirthDate(dateString: birthDate) {
-            viewModel.setInputButtonStyle(.disabled)
-            return
-        }
-        viewModel.setInputButtonStyle(text.count > 5 || text.count < 1 ? .disabled : .enabled)
+        let description = signinView.descriptionInput.text ?? ""
+        return isValidNickname(nickname: nickName) && isValidBirthDate(dateString: birthDate) && isValidDescription(description: description)
+    }
+    
+    private func isValidBirthDate(dateString: String) -> Bool {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyMMdd"
+        return dateFormatter.date(from: dateString) != nil && dateString.count == 6
+    }
+    
+    private func isValidNickname(nickname: String) -> Bool {
+        return nickname.count <= 5 && nickname.count >= 1
+    }
+    
+    private func isValidDescription(description: String) -> Bool {
+        return description.count <= 5 && description.count >= 1
+    }
+
+    private func updateInputState(isValid: Bool) {
+        viewModel.setInputButtonStyle(isValid ? .enabled : .disabled)
     }
     
     private func updateButtonState(for textField: UITextField) {
@@ -124,11 +148,6 @@ final class SigninViewController: UIViewController {
         default:
             break
         }
-    }
-    private func isValidBirthDate(dateString: String) -> Bool {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyMMdd"
-        return dateFormatter.date(from: dateString) != nil
     }
     
     private func processPickerResult(_ index: Int, _ result: PHPickerResult) {

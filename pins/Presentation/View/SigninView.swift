@@ -194,14 +194,15 @@ final class SigninView: UIView {
     }
     
     private func profileImageLayout() {
-        endEditing(true)
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            self?.layoutIfNeeded()
-        }
         profileImage.isHidden = false
-        descriptionInput
-            .topLayout(equalTo: profileImage.bottomAnchor, constant: UIConstants.inputPadding)
-            .leadingLayout(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: UIConstants.padding)
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self = self else { return }
+            self.descriptionInput
+                .topLayout(equalTo: self.profileImage.bottomAnchor, constant: UIConstants.inputPadding)
+                .leadingLayout(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: UIConstants.padding)
+            self.layoutIfNeeded()
+        }
+        endEditing(true)
         titleLabel.text = "핀즈에서 사용하실 \n프로필을 선택해주세요."
         setSubmitButtonTitle("완료")
     }
