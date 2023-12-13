@@ -53,7 +53,7 @@ final class SigninViewModel {
     }
     
     func saveUserInfo() async {
-        await signinUsecase.saveUserInfo(nickName: nickName, description: description, birthDate: birthDate, image: profileImage)
+        await signinUsecase.saveUserInfo(nickName: nickName, description: description, birthDate: birthDate, imageInfo: profileImage)
     }
     
     func setProfileImage(_ image: UIImage, type: String) {

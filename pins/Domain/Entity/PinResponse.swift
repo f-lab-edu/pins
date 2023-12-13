@@ -12,6 +12,7 @@ struct PinResponse {
     var userId: String
     var userName: String
     var userAge: Int
+    var userProfile: UIImage
     var userDescription: String
     var title: String
     var content: String
@@ -21,7 +22,7 @@ struct PinResponse {
     var created: String
     var images: [UIImage] = []
     
-    init (pin: PinRequest, images: [UIImage], id: String, name: String, age: Int, description: String) {
+    init (pin: PinRequest, images: [UIImage], id: String, name: String, age: Int, description: String, profile: UIImage) {
         self.id = pin.id
         self.title = pin.title
         self.content = pin.content
@@ -34,5 +35,6 @@ struct PinResponse {
         self.userName = name
         self.userAge = age
         self.userDescription = description
+        self.userProfile = profile
     }
 }

@@ -55,7 +55,7 @@ final class LoginUseCase: LoginUseCaseProtocol {
             if let userResult {
                 let profileImage = await firestorageService.downloadImage(urlString: userResult.profileImage)
                 guard let profileImage else { return .failure(NSError(domain: "LoginError", code: -1, userInfo: nil)) }
-                return .success(UserResponse(user: userResult, image: profileImage, firstTime: true))
+                return .success(UserResponse(user: userResult, image: profileImage, firstTime: false))
             }
             return .success(UserResponse(id: user.uid, nickName: user.displayName ?? "", email: user.email ?? "", firstTime: true))
         case .failure(let error):
