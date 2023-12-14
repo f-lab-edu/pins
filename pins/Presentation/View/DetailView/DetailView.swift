@@ -10,10 +10,6 @@ import Combine
 
 final class DetailView: UIView {
     // MARK: - UI Property
-    private enum ScrollViewType: Int {
-        case totalScroll
-        case imageBannerScroll
-    }
     private struct UIConstants {
         static let bannerHeight: CGFloat = 300
         static let navigationHeight: CGFloat = 100
@@ -24,7 +20,7 @@ final class DetailView: UIView {
         static let labelInsets: UIEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         static let initialImageCountText: String = "0/0"
     }
-    private let scrollView: DetailScrollView = {
+    let scrollView: DetailScrollView = {
         let scrollView = DetailScrollView()
         scrollView.backgroundColor = .background
         scrollView.contentSize = CGSize(width: UIScreenUtils.getScreenWidth(), height: UIConstants.extendedScreenHeight)
@@ -32,7 +28,7 @@ final class DetailView: UIView {
         scrollView.tag = 0
         return scrollView
     }()
-    private let bannerScrollView: UIScrollView = {
+    let bannerScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
@@ -40,7 +36,7 @@ final class DetailView: UIView {
         return scrollView
     }()
     private var imageViews: [UIImageView] = []
-    private let imageCountLabel: PaddingLabel = {
+    let imageCountLabel: PaddingLabel = {
         let label = PaddingLabel(inset: UIConstants.labelInsets)
         label.font = .systemFont(ofSize: UIConstants.labelFontSize, weight: .medium)
         label.backgroundColor = .black.withAlphaComponent(0.5)
@@ -50,41 +46,22 @@ final class DetailView: UIView {
         label.layer.zPosition = 2
         return label
     }()
-    private let contentView: DetailContentView = DetailContentView()
+    let contentView: DetailContentView = DetailContentView()
     let commentView: DetailCommentView = DetailCommentView()
     let navigationView: DetailNavigationView = DetailNavigationView()
-    // MARK: - Property
-    private let animationManager: AnimationManager = AnimationManager()
     private var viewModel: DetailViewModel
-    private var cancellable = Set<AnyCancellable>()
     // MARK: - Initializer
     init(viewModel: DetailViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         setLayout()
         setKeyboardObserver()
-        setBinding()
-        scrollView.delegate = self
-        bannerScrollView.delegate = self
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented because this view is not designed to be initialized from a nib or storyboard.")
     }
     // MARK: - Method
-    private func setBinding() {
-        viewModel.$page.sink { [weak self] value in
-            guard let self else { return }
-            self.imageCountLabel.text = "\(value)/\(self.viewModel.getImages().count)"
-        }.store(in: &cancellable)
-        
-        viewModel.$comments.receive(on: DispatchQueue.main)
-            .sink { [weak self] comments in
-            guard let self else { return }
-            self.contentView.setComments(comments: comments)
-        }.store(in: &cancellable)
-    }
-
     private func setLayout() {
         addSubview(scrollView)
         [bannerScrollView, contentView, commentView, navigationView].forEach {
@@ -166,6 +143,12 @@ final class DetailView: UIView {
         }
     }
     
+    private func resetImageScale() {
+        for imageView in imageViews {
+            imageView.transform = .identity
+        }
+    }
+    
     func setPinInfoDepondingOnImageExistence(pin: PinResponse) {
         if pin.images.isEmpty {
             imageCountLabel.removeFromSuperview()
@@ -178,7 +161,7 @@ final class DetailView: UIView {
         contentView.setPinContent(pin: pin)
     }
     
-    private func updateImageScale(_ offset: CGFloat) {
+    func updateImageScale(_ offset: CGFloat) {
         if offset < 0 {
             bannerScrollView.isScrollEnabled = false
             bannerScrollView.topLayout(equalTo: topAnchor)
@@ -196,64 +179,14 @@ final class DetailView: UIView {
             resetImageScale()
         }
     }
-
-    private func resetImageScale() {
-        for imageView in imageViews {
-            imageView.transform = .identity
-        }
-    }
     
-    private func updateImageZIndex(page: Int) {
+    func updateImageZIndex(page: Int) {
         for (index, imageView) in imageViews.enumerated() {
             if index == page {
                 imageView.layer.zPosition = 1
             } else {
                 imageView.layer.zPosition = 0
             }
-        }
-    }
-}
-
-// MARK: - Extensions
-extension DetailView: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor(resource: .placeholderGray) {
-            textView.text = nil
-            textView.textColor = UIColor.init(resource: .text)
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.text = "댓글을 입력해주세요."
-            textView.textColor = UIColor(resource: .placeholderGray)
-        }
-    }
-}
-
-extension DetailView: UIScrollViewDelegate {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        switch ScrollViewType(rawValue: scrollView.tag) {
-        case .imageBannerScroll:
-            let page = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
-            viewModel.setPage(value: page + 1)
-            updateImageZIndex(page: page)
-        default:
-            break
-        }
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        switch ScrollViewType(rawValue: scrollView.tag) {
-        case .totalScroll:
-            let yOffset = scrollView.contentOffset.y
-            navigationView.changeBackgroundColor(as: yOffset)
-            if viewModel.isImage {
-                navigationView.changeButtonTintColor(as: yOffset)
-                updateImageScale(yOffset)
-            }
-        default:
-            break
         }
     }
 }

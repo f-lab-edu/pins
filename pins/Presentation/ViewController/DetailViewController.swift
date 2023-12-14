@@ -21,6 +21,11 @@ final class DetailViewController: UIViewController {
     private lazy var viewModel: DetailViewModel = DetailViewModel(detailUseCase: detailUseCase)
     private var cancellable = Set<AnyCancellable>()
     
+    enum ScrollViewType: Int {
+        case totalScroll
+        case imageBannerScroll
+    }
+    
     private var detailView: DetailView {
         view as! DetailView
     }
@@ -32,16 +37,34 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setDelegate()
+        setAction()
+        setBinding()
+        getComments()
+    }
+    
+    private func setDelegate() {
+        detailView.scrollView.delegate = self
+        detailView.bannerScrollView.delegate = self
+    }
+    
+    private func setBinding() {
         viewModel.$currentPin.sink { [weak self] pin in
             guard let pin = pin else { return }
             self?.detailView.setPinInfoDepondingOnImageExistence(pin: pin)
         }.store(in: &cancellable)
         
-        setAction()
-        getComments()
+        viewModel.$page.sink { [weak self] value in
+            self?.detailView.imageCountLabel.text = "\(value)/\(self?.viewModel.getImages().count ?? 0))"
+        }.store(in: &cancellable)
+        
+        viewModel.$comments.receive(on: DispatchQueue.main)
+            .sink { [weak self] comments in
+                self?.detailView.contentView.setComments(comments: comments)
+        }.store(in: &cancellable)
     }
     
-    func setAction() {
+    private func setAction() {
         detailView.navigationView.setBackButtonAction(UIAction(handler: { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
         }))
@@ -68,5 +91,46 @@ final class DetailViewController: UIViewController {
     }
 }
 
-extension DetailViewController: UITextFieldDelegate {
+// MARK: - Extensions
+extension DetailViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor(resource: .placeholderGray) {
+            textView.text = nil
+            textView.textColor = UIColor.init(resource: .text)
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "댓글을 입력해주세요."
+            textView.textColor = UIColor(resource: .placeholderGray)
+        }
+    }
+}
+
+extension DetailViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        switch ScrollViewType(rawValue: scrollView.tag) {
+        case .imageBannerScroll:
+            let page = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+            viewModel.setPage(value: page + 1)
+            detailView.updateImageZIndex(page: page)
+        default:
+            break
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        switch ScrollViewType(rawValue: scrollView.tag) {
+        case .totalScroll:
+            let yOffset = scrollView.contentOffset.y
+            detailView.navigationView.changeBackgroundColor(as: yOffset)
+            if viewModel.isImage {
+                detailView.navigationView.changeButtonTintColor(as: yOffset)
+                detailView.updateImageScale(yOffset)
+            }
+        default:
+            break
+        }
+    }
 }

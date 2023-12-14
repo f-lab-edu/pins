@@ -20,8 +20,6 @@ class KeyboardAnimationManager {
         }
     }
     private func handleKeyboardNotification(_ notification: Notification, isShowing: Bool, animation: @escaping KeyboardAnimation) {
-        print("asdfasd")
-
         guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardHeight = keyboardFrame.cgRectValue.height
         let (duration, options) = animationManager.keyboardAnimation(notification: notification)
