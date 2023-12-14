@@ -24,7 +24,7 @@ final class DetailUseCase: DetailUseCaseProtocol {
     }
     
     func uploadComment(_ text: String, pinId: String) {
-        let userId = KeychainManager.load(key: "userId")
+        let userId = KeychainManager.load(key: .userId)
         guard let userId else { return }
         commentService.uploadComment(comment: CommentRequest(
             id: UUID().uuidString,
