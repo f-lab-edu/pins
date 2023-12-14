@@ -17,7 +17,7 @@ protocol FirebaseRepositoryProtocol {
 }
 
 final class FirebaseRepository: FirebaseRepositoryProtocol {
-    func getPins() async -> Result<[[String: Any]], Error>{
+    func getPins() async -> Result<[[String: Any]], Error> {
         let db = FirebaseFirestore.shared.db
         let pinsRef = db.collection("pins")
         do {

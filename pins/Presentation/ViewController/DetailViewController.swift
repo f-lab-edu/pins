@@ -55,12 +55,12 @@ final class DetailViewController: UIViewController {
         }.store(in: &cancellable)
         
         viewModel.$page.sink { [weak self] value in
-            self?.detailView.imageCountLabel.text = "\(value)/\(self?.viewModel.getImages().count ?? 0))"
+            self?.detailView.imageCountLabel.text = "\(value)/\(self?.viewModel.getImages().count ?? 0)"
         }.store(in: &cancellable)
         
         viewModel.$comments.receive(on: DispatchQueue.main)
             .sink { [weak self] comments in
-                self?.detailView.contentView.setComments(comments: comments)
+                self?.detailView.contentView.setComments(comments: comments, scrollView: self?.detailView.scrollView)
         }.store(in: &cancellable)
     }
     

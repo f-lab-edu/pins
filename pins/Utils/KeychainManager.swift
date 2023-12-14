@@ -9,9 +9,9 @@ import OSLog
 import Security
 
 enum KeychainManager: String {
-    case userId = "userId"
-    case userEmail = "userEmail"
-    case userProfile = "userProfile"
+    case userId
+    case userEmail
+    case userProfile
     
     static func saveImage(image: UIImage, forKey key: KeychainManager) {
         if let imageData = image.pngData() {

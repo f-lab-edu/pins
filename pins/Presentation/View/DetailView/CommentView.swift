@@ -36,8 +36,10 @@ final class CommentView: UIView {
     
     let contentLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .regular)
         label.numberOfLines = 0
+        label.lineBreakMode = .byCharWrapping
+        label.setLineHeight(lineHeight: 4)
+        label.font = .systemFont(ofSize: 15, weight: .regular)
         label.accessibilityIdentifier = "contentLabel"
         return label
     }()
@@ -58,6 +60,15 @@ final class CommentView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        sizeToFit()
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: UIView.noIntrinsicMetric, height: calculateDynamicHeight())
     }
     
     private func setLayout() {
@@ -87,6 +98,12 @@ final class CommentView: UIView {
             .topLayout(equalTo: profileImageView.bottomAnchor, constant: 12)
             .leadingLayout(equalTo: profileImageView.trailingAnchor, constant: 8)
             .trailingLayout(equalTo: trailingAnchor, constant: 20)
+    }
+    
+    private func calculateDynamicHeight() -> CGFloat {
+        contentLabel.sizeToFit()
+        let labelHeight = contentLabel.frame.height
+        return labelHeight + 72
     }
     
     func setCommentView(_ comment: CommentResponse) {

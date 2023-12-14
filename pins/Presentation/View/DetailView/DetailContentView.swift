@@ -20,7 +20,6 @@ final class DetailContentView: UIView {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "웰시코기"
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.accessibilityIdentifier = "nameLabel"
         return label
@@ -28,7 +27,6 @@ final class DetailContentView: UIView {
     
     private let personalInfo: UILabel = {
         let label = UILabel()
-        label.text = "ENTJ ∙ 26세"
         label.font = .systemFont(ofSize: 12, weight: .light)
         label.accessibilityIdentifier = "personalInfo"
         return label
@@ -53,7 +51,6 @@ final class DetailContentView: UIView {
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.text = "0일 전"
         label.font = .systemFont(ofSize: 12, weight: .thin)
         label.accessibilityIdentifier = "dateLabel"
         return label
@@ -71,12 +68,12 @@ final class DetailContentView: UIView {
     
     private let commentLabel: UILabel = {
         let label = UILabel()
-        label.text = "댓글 0개"
         label.font = .systemFont(ofSize: 12, weight: .thin)
         label.accessibilityIdentifier = "commentLabel"
         return label
     }()
     
+    var commentContainer: UIView = UIView()
     private var commentViews: [CommentView] = []
     private let navigationDivderView: Divider = Divider()
     private let contentDividerView: Divider = Divider()
@@ -92,17 +89,32 @@ final class DetailContentView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        sizeToFit()
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: UIView.noIntrinsicMetric, height: calculateDynamicHeight())
+    }
+    
+    private func calculateDynamicHeight() -> CGFloat {
+        contentLabel.sizeToFit()
+        let labelHeight = contentLabel.frame.height
+        return labelHeight + 215
+    }
+    
     // MARK: - UI
     private func setLayout() {
-        [profileImageView, nameLabel, personalInfo, categoryLabel, titleLabel, dateLabel, contentLabel, commentLabel, navigationDivderView, contentDividerView].forEach {
+        [profileImageView, nameLabel, personalInfo, categoryLabel, titleLabel, dateLabel, contentLabel, commentLabel, navigationDivderView, contentDividerView, commentContainer].forEach {
             addSubview($0)
         }
         
         profileImageView
             .leadingLayout(equalTo: leadingAnchor, constant: 20)
             .topLayout(equalTo: topAnchor, constant: 20)
-            .widthLayout(40)
             .heightLayout(40)
+            .widthLayout(40)
         
         nameLabel
             .leadingLayout(equalTo: profileImageView.trailingAnchor, constant: 8)
@@ -123,7 +135,6 @@ final class DetailContentView: UIView {
         
         titleLabel
             .leadingLayout(equalTo: leadingAnchor, constant: 20)
-            .trailingLayout(equalTo: trailingAnchor, constant: -20)
             .topLayout(equalTo: navigationDivderView.bottomAnchor, constant: 20)
         
         dateLabel
@@ -132,7 +143,6 @@ final class DetailContentView: UIView {
         
         contentLabel
             .leadingLayout(equalTo: leadingAnchor, constant: 20)
-            .trailingLayout(equalTo: trailingAnchor, constant: -20)
             .topLayout(equalTo: dateLabel.bottomAnchor, constant: 12)
         
         commentLabel
@@ -143,6 +153,11 @@ final class DetailContentView: UIView {
             .leadingLayout(equalTo: leadingAnchor)
             .trailingLayout(equalTo: trailingAnchor)
             .topLayout(equalTo: commentLabel.bottomAnchor, constant: 16)
+        
+        commentContainer
+           .topLayout(equalTo: contentDividerView.bottomAnchor)
+           .leadingLayout(equalTo: leadingAnchor)
+           .trailingLayout(equalTo: trailingAnchor)
     }
     
     private func setupAcceesibilityLabel() {
@@ -170,22 +185,31 @@ final class DetailContentView: UIView {
         profileImageView.image = pin.userProfile
     }
     
-    func setComments(comments: [CommentResponse]) {
+    func setComments(comments: [CommentResponse], scrollView: UIScrollView?) {
+        resetCommentContainer()
         commentLabel.text = "댓글 \(comments.count)개"
         
         for (index, comment) in comments.enumerated() {
             let commentView = CommentView()
-            addSubview(commentView)
             commentView.setCommentView(comment)
             commentViews.append(commentView)
+            commentContainer.addSubview(commentView)
             
             if index == 0 {
-                commentView.topLayout(equalTo: contentDividerView.bottomAnchor)
+                commentView.topLayout(equalTo: commentContainer.topAnchor)
             } else {
-                commentView.topLayout(equalTo: commentViews[index - 1].contentLabel.bottomAnchor)
+                commentView.topLayout(equalTo: commentViews[index - 1].bottomAnchor)
             }
             commentView.leadingLayout(equalTo: leadingAnchor)
             commentView.trailingLayout(equalTo: trailingAnchor)
+            commentView.layoutIfNeeded()
+            scrollView?.contentSize.height += commentView.frame.height
+        }
+    }
+    
+    func resetCommentContainer() {
+        for comment in commentContainer.subviews {
+            comment.removeFromSuperview()
         }
     }
 }

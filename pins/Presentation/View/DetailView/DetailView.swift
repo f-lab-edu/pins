@@ -14,7 +14,7 @@ final class DetailView: UIView {
         static let bannerHeight: CGFloat = 300
         static let navigationHeight: CGFloat = 100
         static let commentHeight: CGFloat = 100
-        static let extendedScreenHeight: CGFloat = UIScreenUtils.getScreenHeight() + 130
+        static let extendedScreenHeight: CGFloat = UIScreenUtils.getScreenHeight()
         static let labelCornerRadius: CGFloat = 12
         static let labelFontSize: CGFloat = 12
         static let labelInsets: UIEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
@@ -80,7 +80,6 @@ final class DetailView: UIView {
             .leadingLayout(equalTo: leadingAnchor)
             .trailingLayout(equalTo: trailingAnchor)
             .topLayout(equalTo: scrollView.topAnchor, constant: UIConstants.bannerHeight)
-            .heightLayout(UIScreenUtils.getScreenHeight() - UIConstants.bannerHeight - UIConstants.commentHeight)
     
         bannerScrollView
             .topLayout(equalTo: scrollView.topAnchor)
@@ -150,15 +149,21 @@ final class DetailView: UIView {
     }
     
     func setPinInfoDepondingOnImageExistence(pin: PinResponse) {
+        contentView.setPinContent(pin: pin)
+        contentView.layoutIfNeeded()
+        
         if pin.images.isEmpty {
             imageCountLabel.removeFromSuperview()
             bannerScrollView.removeFromSuperview()
             navigationView.backButton.tintColor = .black
             contentView.topLayout(equalTo: scrollView.topAnchor, constant: UIConstants.navigationHeight)
+            scrollView.contentSize = CGSize(width: UIScreenUtils.getScreenWidth(),
+                                            height: contentView.frame.size.height + UIConstants.commentHeight)
         } else {
             contentView.topLayout(equalTo: scrollView.topAnchor, constant: UIConstants.bannerHeight)
+            scrollView.contentSize = CGSize(width: UIScreenUtils.getScreenWidth(),
+                                                height: contentView.frame.size.height + UIConstants.bannerHeight + UIConstants.commentHeight)
         }
-        contentView.setPinContent(pin: pin)
     }
     
     func updateImageScale(_ offset: CGFloat) {
