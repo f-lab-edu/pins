@@ -231,28 +231,6 @@ extension DetailView: UITextViewDelegate {
     }
 }
 
-extension DetailView: UICollectionViewDelegate {
-}
-
-extension DetailView: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.getImages().count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let images = viewModel.getImages()
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailBannerCell.identifier, for: indexPath) as! DetailBannerCell
-        cell.bannerImageView.image = images[indexPath.item]
-        return cell
-    }
-}
-
-extension DetailView: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-}
-
 extension DetailView: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         switch ScrollViewType(rawValue: scrollView.tag) {
