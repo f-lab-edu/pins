@@ -130,7 +130,8 @@ final class DetailView: UIView {
     
     private func setKeyboardObserver() {
         let keyboardAnimationManager = KeyboardAnimationManager()
-        keyboardAnimationManager.setKeyboardObservers { keyboardHeight, isKeyboardVisible in
+        keyboardAnimationManager.setKeyboardObservers { [weak self] keyboardHeight, isKeyboardVisible in
+            guard let self else { return }
             if isKeyboardVisible {
                 self.commentView.bottomLayout(equalTo: self.bottomAnchor, constant: -keyboardHeight)
                     .heightLayout(UIConstants.commentHeight * 0.7)
