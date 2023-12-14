@@ -208,30 +208,16 @@ final class SigninView: UIView {
     }
     
     private func setKeyboardObserver() {
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { [weak self] notification in
-            guard let self = self else { return }
-            if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-                let keyboardRectangle = keyboardFrame.cgRectValue
-                let keyboardHeight = keyboardRectangle.height
-
-                let (duration, options) = animationManager.keyboardAnimation(notification: notification)
-                UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
-                    self.submitButton
-                        .bottomLayout(equalTo: self.bottomAnchor, constant: -keyboardHeight)
-                        .heightLayout(SigninView.UIConstants.submitButtonHeight)
-                    self.layoutIfNeeded()
-                }, completion: nil)
-            }
-        }
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { [weak self] notification in
-            guard let self = self else { return }
-            let (duration, options) = animationManager.keyboardAnimation(notification: notification)
-            UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
-                self.submitButton
-                    .bottomLayout(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        let keyboardAnimationManager = KeyboardAnimationManager()
+        keyboardAnimationManager.setKeyboardObservers { keyboardHeight, isKeyboardVisible in
+            if isKeyboardVisible {
+                self.submitButton.bottomLayout(equalTo: self.bottomAnchor, constant: -keyboardHeight)
                     .heightLayout(SigninView.UIConstants.submitButtonHeight)
-                self.layoutIfNeeded()
-            }, completion: nil)
+            } else {
+                self.submitButton.bottomLayout(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+                    .heightLayout(SigninView.UIConstants.submitButtonHeight)
+            }
+            self.layoutIfNeeded()
         }
     }
     

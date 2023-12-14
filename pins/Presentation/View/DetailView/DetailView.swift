@@ -153,30 +153,16 @@ final class DetailView: UIView {
     }
     
     private func setKeyboardObserver() {
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { [weak self] notification in
-            guard let self = self else { return }
-            if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-                let keyboardRectangle = keyboardFrame.cgRectValue
-                let keyboardHeight = keyboardRectangle.height
-
-                let (duration, options) = animationManager.keyboardAnimation(notification: notification)
-                UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
-                    self.commentView
-                        .bottomLayout(equalTo: self.bottomAnchor, constant: -keyboardHeight)
-                        .heightLayout(UIConstants.commentHeight * 0.7)
-                    self.layoutIfNeeded()
-                }, completion: nil)
-            }
-        }
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { [weak self] notification in
-            guard let self = self else { return }
-            let (duration, options) = animationManager.keyboardAnimation(notification: notification)
-            UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
-                self.commentView
-                    .bottomLayout(equalTo: self.bottomAnchor, constant: 0)
+        let keyboardAnimationManager = KeyboardAnimationManager()
+        keyboardAnimationManager.setKeyboardObservers { keyboardHeight, isKeyboardVisible in
+            if isKeyboardVisible {
+                self.commentView.bottomLayout(equalTo: self.bottomAnchor, constant: -keyboardHeight)
+                    .heightLayout(UIConstants.commentHeight * 0.7)
+            } else {
+                self.commentView.bottomLayout(equalTo: self.bottomAnchor, constant: 0)
                     .heightLayout(UIConstants.commentHeight)
-                self.layoutIfNeeded()
-            }, completion: nil)
+            }
+            self.layoutIfNeeded()
         }
     }
     
