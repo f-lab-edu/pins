@@ -20,7 +20,6 @@ final class CommentView: UIView {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "웰시코기"
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.accessibilityIdentifier = "nameLabel"
         return label
@@ -28,7 +27,6 @@ final class CommentView: UIView {
     
     private let personalInfo: UILabel = {
         let label = UILabel()
-        label.text = "ENTJ ∙ 26세"
         label.font = .systemFont(ofSize: 12, weight: .light)
         label.accessibilityIdentifier = "personalInfo"
         return label
@@ -46,7 +44,6 @@ final class CommentView: UIView {
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.text = "0일 전"
         label.font = .systemFont(ofSize: 12, weight: .thin)
         label.accessibilityIdentifier = "dateLabel"
         return label
