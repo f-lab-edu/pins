@@ -609,7 +609,6 @@
 			packageReferences = (
 				B7E8A46E2AEB84420026931D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				B7DE80662B08A979007A7AEF /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
-				B703C0DF2B29F1FE008E9181 /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			productRefGroup = B7AF692E2AE0FEDF00385632 /* Products */;
 			projectDirPath = "";
@@ -1269,14 +1268,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B703C0DF2B29F1FE008E9181 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/SwiftLint";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.54.0;
-			};
-		};
 		B7DE80662B08A979007A7AEF /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
