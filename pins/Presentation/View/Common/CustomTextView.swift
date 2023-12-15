@@ -31,7 +31,7 @@ final class CustomTextView: UITextView {
     }
 }
 
-extension CustomTextView: TextPublisher{
+extension CustomTextView: TextPublisher {
     var textDidChangePublisher: AnyPublisher<String, Never> {
         NotificationCenter.default.publisher(for: UITextView.textDidChangeNotification, object: self)
             .map { ($0.object as? UITextView)?.text ?? "" }

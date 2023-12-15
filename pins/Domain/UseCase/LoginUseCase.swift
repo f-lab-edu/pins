@@ -31,8 +31,8 @@ final class LoginUseCase: LoginUseCaseProtocol {
         case .success(let credential):
             let result = await authService.signIn(with: credential)
             return await handleLoginResult(result)
-        case .failure(_):
-            return .failure(NSError(domain: "LoginError", code: -1, userInfo: nil))
+        case .failure(let error):
+            return .failure(NSError(domain: "LoginError: \(error)", code: -1, userInfo: nil))
         }
     }
     
@@ -42,8 +42,8 @@ final class LoginUseCase: LoginUseCaseProtocol {
         case .success(let credential):
             let result = await authService.signIn(with: credential)
             return await handleLoginResult(result)
-        case .failure(_):
-            return .failure(NSError(domain: "LoginError", code: -1, userInfo: nil))
+        case .failure(let error):
+            return .failure(NSError(domain: "LoginError: \(error)", code: -1, userInfo: nil))
         }
     }
     
