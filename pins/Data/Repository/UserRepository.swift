@@ -15,7 +15,7 @@ protocol UserRepositoryProtocol {
 }
 
 final class UserRepository: UserRepositoryProtocol {
-    func getUser(id: String) async -> [String : Any] {
+    func getUser(id: String) async -> [String: Any] {
         let db = FirebaseFirestore.shared.db
         let userRef = db.collection("user")
         do {
