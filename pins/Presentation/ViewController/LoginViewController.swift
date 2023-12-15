@@ -10,6 +10,7 @@ import OSLog
 import Combine
 import FirebaseAuth
 import AuthenticationServices
+import SwiftUI
 
 final class LoginViewController: UIViewController {
     private lazy var authService: FirebaseAuthServiceProtocol = FirebaseAuthService()
@@ -20,21 +21,29 @@ final class LoginViewController: UIViewController {
     private lazy var loginUseCase: LoginUseCaseProtocol = LoginUseCase(authService: authService, userService: userService, firestorageService: firestorageService)
     private lazy var viewModel: LoginViewModel = LoginViewModel(loginUseCase: loginUseCase)
     private var cancellables = Set<AnyCancellable>()
-
-    var loginView: LoginView {
-        view as! LoginView
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setAction()
         setBindings()
+        setView()
     }
     
-    override func loadView() {
-        view = LoginView()
+    private func setView() {
+        let hostingController = UIHostingController(rootView: LoginView(appleLoginAction: {
+            self.viewModel.openAppleAuthorizationController(delegate: self)
+        }, googleLoginAction: {
+            self.viewModel.performGoogleLogin(delegate: self)
+        }))
+        let loginView = hostingController.view!
+        view.addSubview(loginView)
+        loginView
+            .topLayout(equalTo: view.topAnchor)
+            .leadingLayout(equalTo: view.leadingAnchor)
+            .trailingLayout(equalTo: view.trailingAnchor)
+            .bottomLayout(equalTo: view.bottomAnchor)
+        hostingController.didMove(toParent: self)
     }
-        
+    
     private func setBindings() {
         viewModel.$loginState
             .receive(on: DispatchQueue.main)
@@ -54,18 +63,6 @@ final class LoginViewController: UIViewController {
                 }
             }
             .store(in: &cancellables)
-    }
-    
-    private func setAction() {
-        loginView.setAppleLoginAction(UIAction(handler: { [weak self] _ in
-            guard let self = self else { return }
-            self.viewModel.openAppleAuthorizationController(delegate: self)
-        }))
-        
-        loginView.setGoogleLoginAction(UIAction(handler: { [weak self] _ in
-            guard let self = self else { return }
-            self.viewModel.performGoogleLogin(delegate: self)
-        }))
     }
 }
 
