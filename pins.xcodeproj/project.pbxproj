@@ -190,7 +190,6 @@
 		B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
 		B7F071B62B14855000BB5AB9 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		B7F071B82B14876C00BB5AB9 /* PinResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinResponse.swift; sourceTree = "<group>"; };
-		B7F581C02B2DB209009A079D /* Release.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Release.xctestplan; sourceTree = "<group>"; };
 		B7F581C12B2DB349009A079D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B7F6A8D92AE2B61500892215 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -343,7 +342,6 @@
 		B71C387A2B0752780065A783 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B7F581C02B2DB209009A079D /* Release.xctestplan */,
 				B7F581C12B2DB349009A079D /* GoogleService-Info.plist */,
 				B7AF69392AE0FEE000385632 /* Assets.xcassets */,
 				B7AF693E2AE0FEE000385632 /* Info.plist */,
