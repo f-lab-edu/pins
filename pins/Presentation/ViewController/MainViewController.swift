@@ -144,7 +144,7 @@ extension MainViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let pinAnnotation = view.annotation as? PinAnnotation else { return }
         Task {
-            let pin = await viewModel.loadPin(pin: pinAnnotation.pin)
+            let pin = try await viewModel.loadPin(pin: pinAnnotation.pin)
             let detailViewController: DetailViewController = DetailViewController()
             detailViewController.setPin(pin: pin)
             navigationController?.pushViewController(detailViewController, animated: true)

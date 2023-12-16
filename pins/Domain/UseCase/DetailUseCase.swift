@@ -9,7 +9,7 @@ import Foundation
 
 protocol DetailUseCaseProtocol {
     func uploadComment(_ text: String, pinId: String)
-    func getComments(pinId: String) async -> [CommentResponse]
+    func getComments(pinId: String) async throws -> [CommentResponse]
 }
 
 final class DetailUseCase: DetailUseCaseProtocol {
@@ -34,16 +34,16 @@ final class DetailUseCase: DetailUseCaseProtocol {
             createdAt: Date().currentDateTimeAsString()))
     }
     
-    func getComments(pinId: String) async -> [CommentResponse] {
+    func getComments(pinId: String) async throws -> [CommentResponse] {
         let commentRequests = await commentService.getComments(pinId: pinId)
         
         var commentResponses: [CommentResponse] = []
         
         for commentRequest in commentRequests {
             let user = await userService.getUser(id: commentRequest.userId)
-            guard let user else { fatalError("Error feching user") }
+            guard let user else { throw UserError.userFetchError }
             let profile = await firestorageService.downloadImage(urlString: user.profileImage)
-            guard let profile else { fatalError("Error feching profile") }
+            guard let profile else { throw UserError.userProfileImageNotFound }
             commentResponses.append(CommentResponse(commentRequest: commentRequest, user: user, profile: profile))
         }
         return commentResponses

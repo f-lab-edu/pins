@@ -74,32 +74,36 @@ final class MainViewModelTests: XCTestCase {
         // Given
         let pinRequest = PinRequest(id: "testId", title: "testTitle", content: "testContent", longitude: 0.0, latitude: 0.0, category: "testCategory", created: "testCreated", userId: "testUserId", urls: ["testUrl"])
 
-        // When
-        let response = await viewModel.loadPin(pin: pinRequest)
-
-        // Then
-        XCTAssertNotNil(response, "loadPin should return a valid PinResponse")
+        Task {
+            // When
+            let response = try await viewModel.loadPin(pin: pinRequest)
+            
+            // Then
+            XCTAssertNotNil(response, "loadPin should return a valid PinResponse")
+        }
     }
     
     func test_핀로드_핀요청시_정확한이미지수반환() async {
         // Given
         let pinRequest = PinRequest(id: "testId", title: "testTitle", content: "testContent", longitude: 0.0, latitude: 0.0, category: "testCategory", created: "testCreated", userId: "testUserId", urls: ["testUrl"])
 
-        // When
-        let response = await viewModel.loadPin(pin: pinRequest)
+        Task {
+            // When
+            let response = try await viewModel.loadPin(pin: pinRequest)
 
-        // Then
-        XCTAssertEqual(response.images.count, pinRequest.urls.count, "The number of images should match the number of URLs in the pin request")
+            // Then
+            XCTAssertEqual(response.images.count, pinRequest.urls.count, "The number of images should match the number of URLs in the pin request")
+        }
     }
     
     func test_사용자정보가져오기_호출시_mockService로부터사용자반환() async {
-        do {
+        Task {
             // When
             let userInfo = try await viewModel.getUserInfo()
             
             // Then
             XCTAssertEqual(userInfo, mockUserService.mockUser, "fetchUserInfo should return the user from the mock service")
-        } catch { }
+        }
     }
 
     func test_사용자정보가져오기_id를찾을수없을때_userFetchError반환() async {

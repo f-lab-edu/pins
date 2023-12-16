@@ -86,7 +86,7 @@ final class DetailViewController: UIViewController {
     
     func getComments() {
         Task {
-            await viewModel.getComments()
+            try await viewModel.getComments()
         }
     }
 }
