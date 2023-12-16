@@ -35,7 +35,6 @@
 		B74A4FC32AE78BE700226EA7 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74A4FC22AE78BE700226EA7 /* SearchView.swift */; };
 		B74A4FC52AE7905500226EA7 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74A4FC42AE7905500226EA7 /* CreateViewController.swift */; };
 		B74A4FC72AE790BE00226EA7 /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74A4FC62AE790BE00226EA7 /* CreateView.swift */; };
-		B75C3FED2B28A9DE00D0E550 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B75C3FEC2B28A9DE00D0E550 /* GoogleService-Info.plist */; };
 		B7614C0F2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7614C0E2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift */; };
 		B76DD4622AFE0DB000DFE7E1 /* FirestorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DD4612AFE0DB000DFE7E1 /* FirestorageService.swift */; };
 		B76DD4642AFE0E4B00DFE7E1 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B76DD4632AFE0E4B00DFE7E1 /* FirebaseStorage */; };
@@ -88,6 +87,7 @@
 		B7E8A4722AEB84420026931D /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A4712AEB84420026931D /* FirebaseCrashlytics */; };
 		B7F071B72B14855000BB5AB9 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F071B62B14855000BB5AB9 /* DetailViewModel.swift */; };
 		B7F071B92B14876C00BB5AB9 /* PinResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F071B82B14876C00BB5AB9 /* PinResponse.swift */; };
+		B7F581C22B2DB349009A079D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7F581C12B2DB349009A079D /* GoogleService-Info.plist */; };
 		B7F6A8DA2AE2B61500892215 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F6A8D82AE2B61500892215 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -138,7 +138,6 @@
 		B74A4FC22AE78BE700226EA7 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		B74A4FC42AE7905500226EA7 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		B74A4FC62AE790BE00226EA7 /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
-		B75C3FEC2B28A9DE00D0E550 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B7614C0E2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		B76DD4612AFE0DB000DFE7E1 /* FirestorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestorageService.swift; sourceTree = "<group>"; };
 		B76DD4652AFE238F00DFE7E1 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
@@ -154,7 +153,7 @@
 		B79A28F22AF37F93008FD3CE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B7ADFF712AEA8DF300D34CEA /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
 		B7AEC0CD2B034568004BA42A /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
-		B7AF692D2AE0FEDF00385632 /* Pins-Sandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pins-Sandbox.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7AF692D2AE0FEDF00385632 /* pinsSandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pinsSandbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7AF69302AE0FEDF00385632 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7AF69322AE0FEDF00385632 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B7AF69342AE0FEDF00385632 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -181,7 +180,6 @@
 		B7D051512B10AD2100D86183 /* DetailContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentView.swift; sourceTree = "<group>"; };
 		B7D051532B10AD2B00D86183 /* DetailCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCommentView.swift; sourceTree = "<group>"; };
 		B7D99EC72B18640F00250399 /* UIScreenUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenUtils.swift; sourceTree = "<group>"; };
-		B7DC98E32B25BE4B006DD8F7 /* pins.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = pins.xctestplan; sourceTree = "<group>"; };
 		B7DC98E42B260BD9006DD8F7 /* CommentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRequest.swift; sourceTree = "<group>"; };
 		B7DC98E62B260C17006DD8F7 /* CommentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentResponse.swift; sourceTree = "<group>"; };
 		B7DC98E82B260FCF006DD8F7 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
@@ -192,6 +190,8 @@
 		B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
 		B7F071B62B14855000BB5AB9 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		B7F071B82B14876C00BB5AB9 /* PinResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinResponse.swift; sourceTree = "<group>"; };
+		B7F581C02B2DB209009A079D /* Release.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Release.xctestplan; sourceTree = "<group>"; };
+		B7F581C12B2DB349009A079D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B7F6A8D92AE2B61500892215 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -343,8 +343,8 @@
 		B71C387A2B0752780065A783 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B75C3FEC2B28A9DE00D0E550 /* GoogleService-Info.plist */,
-				B7DC98E32B25BE4B006DD8F7 /* pins.xctestplan */,
+				B7F581C02B2DB209009A079D /* Release.xctestplan */,
+				B7F581C12B2DB349009A079D /* GoogleService-Info.plist */,
 				B7AF69392AE0FEE000385632 /* Assets.xcassets */,
 				B7AF693E2AE0FEE000385632 /* Info.plist */,
 				B724F9302AFCBE4400722CE1 /* Localizable.strings */,
@@ -427,7 +427,7 @@
 		B7AF692E2AE0FEDF00385632 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B7AF692D2AE0FEDF00385632 /* Pins-Sandbox.app */,
+				B7AF692D2AE0FEDF00385632 /* pinsSandbox.app */,
 				B7AF69432AE0FEE000385632 /* pinsTests.xctest */,
 				B7AF694D2AE0FEE000385632 /* pinsUITests.xctest */,
 			);
@@ -510,9 +510,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B7AF692C2AE0FEDF00385632 /* Pins */ = {
+		B7AF692C2AE0FEDF00385632 /* pins */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B7AF69572AE0FEE000385632 /* Build configuration list for PBXNativeTarget "Pins" */;
+			buildConfigurationList = B7AF69572AE0FEE000385632 /* Build configuration list for PBXNativeTarget "pins" */;
 			buildPhases = (
 				B7AF69292AE0FEDF00385632 /* Sources */,
 				B703C0E22B29F28E008E9181 /* SwiftLint Script */,
@@ -524,7 +524,7 @@
 			);
 			dependencies = (
 			);
-			name = Pins;
+			name = pins;
 			packageProductDependencies = (
 				B7E8A46F2AEB84420026931D /* FirebaseAnalytics */,
 				B7E8A4712AEB84420026931D /* FirebaseCrashlytics */,
@@ -534,7 +534,7 @@
 				B72EDCA12B2B071C00080328 /* GoogleSignIn */,
 			);
 			productName = pins;
-			productReference = B7AF692D2AE0FEDF00385632 /* Pins-Sandbox.app */;
+			productReference = B7AF692D2AE0FEDF00385632 /* pinsSandbox.app */;
 			productType = "com.apple.product-type.application";
 		};
 		B7AF69422AE0FEE000385632 /* pinsTests */ = {
@@ -614,7 +614,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B7AF692C2AE0FEDF00385632 /* Pins */,
+				B7AF692C2AE0FEDF00385632 /* pins */,
 				B7AF69422AE0FEE000385632 /* pinsTests */,
 				B7AF694C2AE0FEE000385632 /* pinsUITests */,
 			);
@@ -628,9 +628,9 @@
 			files = (
 				B703C0E42B29F351008E9181 /* .swiftlint.yml in Resources */,
 				B724F92E2AFCBE4400722CE1 /* Localizable.strings in Resources */,
-				B75C3FED2B28A9DE00D0E550 /* GoogleService-Info.plist in Resources */,
 				B7F6A8DA2AE2B61500892215 /* LaunchScreen.storyboard in Resources */,
 				B7AF693A2AE0FEE000385632 /* Assets.xcassets in Resources */,
+				B7F581C22B2DB349009A079D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,7 +673,7 @@
 		B745F0D72AF28A6600224EC9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 12;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -684,7 +684,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "# xcconfig에서 API_KEY 값을 읽기\nAPI_KEY=${GOOGLE_API_KEY}\nGCM_SENDER_ID=${GCM_SENDER_ID}\nGOOGLE_APP_ID=${GOOGLE_APP_ID}\nREVERSED_CLIENT_ID=${REVERSED_CLIENT_ID}\n# 커스텀 plist 파일 경로\nPLIST=${SRCROOT}/pins/Resources/GoogleService-Info.plist\n\n# plist 파일에 API_KEY 값 설정\n/usr/libexec/PlistBuddy -c \"Set :API_KEY $API_KEY\" \"$PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :GCM_SENDER_ID $GCM_SENDER_ID\" \"$PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :GOOGLE_APP_ID $GOOGLE_APP_ID\" \"$PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :REVERSED_CLIENT_ID $REVERSED_CLIENT_ID\" \"$PLIST\"\n";
 		};
@@ -788,12 +788,12 @@
 /* Begin PBXTargetDependency section */
 		B7AF69452AE0FEE000385632 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B7AF692C2AE0FEDF00385632 /* Pins */;
+			target = B7AF692C2AE0FEDF00385632 /* pins */;
 			targetProxy = B7AF69442AE0FEE000385632 /* PBXContainerItemProxy */;
 		};
 		B7AF694F2AE0FEE000385632 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B7AF692C2AE0FEDF00385632 /* Pins */;
+			target = B7AF692C2AE0FEDF00385632 /* pins */;
 			targetProxy = B7AF694E2AE0FEE000385632 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -873,11 +873,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IBSC_MODULE = "$(PRODUCT_NAME:c99extidentifier)";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_MODULE_NAME = Pins;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -894,6 +896,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X843D4L2C2;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pins/Resources/Info.plist;
@@ -910,7 +913,8 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "mojito.pins.$(SCHEME_NAME)";
-				PRODUCT_NAME = "$(TARGET_NAME)-$(SCHEME_NAME)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)$(SCHEME_NAME)";
 				SCHEME_NAME = Dev;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -930,11 +934,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mojito.pinsTests;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pins.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/pins";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pinsDev.app/pinsDev";
 			};
 			name = Dev;
 		};
@@ -1010,6 +1015,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IBSC_MODULE = "$(PRODUCT_NAME:c99extidentifier)";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -1031,6 +1037,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X843D4L2C2;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pins/Resources/Info.plist;
@@ -1047,7 +1054,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "mojito.pins.$(SCHEME_NAME)";
-				PRODUCT_NAME = "$(TARGET_NAME)-$(SCHEME_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME)$(SCHEME_NAME)";
 				SCHEME_NAME = Sandbox;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1072,7 +1079,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pins.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/pins";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pins-Sandbox.app/pins-Sandbox";
 			};
 			name = Sandbox;
 		};
@@ -1141,6 +1148,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IBSC_MODULE = "$(PRODUCT_NAME:c99extidentifier)";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -1160,6 +1168,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X843D4L2C2;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pins/Resources/Info.plist;
@@ -1200,7 +1210,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pins.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/pins";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pins.app/pins";
 			};
 			name = Release;
 		};
@@ -1235,7 +1245,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B7AF69572AE0FEE000385632 /* Build configuration list for PBXNativeTarget "Pins" */ = {
+		B7AF69572AE0FEE000385632 /* Build configuration list for PBXNativeTarget "pins" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B76C2B6E2B19EAFD00E4F0E0 /* Sandbox */,

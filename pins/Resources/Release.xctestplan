@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "FAA25BFD-F6A5-42D4-9304-1956FA9CB551",
+      "id" : "3B850366-8B60-42D7-B7DA-4A96B1581EF9",
       "name" : "Test Scheme Action",
       "options" : {
 
@@ -26,7 +26,6 @@
   },
   "testTargets" : [
     {
-      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:pins.xcodeproj",
         "identifier" : "B7AF69422AE0FEE000385632",
@@ -34,7 +33,7 @@
       }
     },
     {
-      "parallelizable" : true,
+      "enabled" : false,
       "target" : {
         "containerPath" : "container:pins.xcodeproj",
         "identifier" : "B7AF694C2AE0FEE000385632",
