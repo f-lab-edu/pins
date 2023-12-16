@@ -11,7 +11,7 @@ import FirebaseAuth
 protocol MainUseCaseProtocol {
     func getPins() async -> [PinRequest]
     func loadPin(pin: PinRequest) async -> PinResponse
-    func fetchUserInfo() async -> UserRequest
+    func fetchUserInfo() async throws -> UserRequest
 }
 
 final class MainUseCase: MainUseCaseProtocol {
@@ -43,11 +43,13 @@ final class MainUseCase: MainUseCaseProtocol {
         return PinResponse(pin: pin, images: images, id: user.id, name: user.nickName, age: userAge, description: user.description ?? "", profile: profile)
     }
     
-    func fetchUserInfo() async -> UserRequest {
-        let id = KeychainManager.load(key: .userId)
-        guard let id else { fatalError("userId is nil") }
-        let user = await userService.getUser(id: id)
-        guard let user = user else { fatalError("Error fetching user") }
+    func fetchUserInfo() async throws -> UserRequest {
+        guard let id = KeychainManager.load(key: .userId) else {
+            throw UserError.userIdNotFound
+        }
+        guard let user = await userService.getUser(id: id) else {
+            throw UserError.userFetchError
+        }
         return user
     }
 }

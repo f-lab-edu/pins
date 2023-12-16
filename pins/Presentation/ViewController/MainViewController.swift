@@ -45,7 +45,7 @@ final class MainViewController: UIViewController {
         }.store(in: &cancellable)
         
         Task {
-            await viewModel.getUserInfo()
+            try await viewModel.getUserInfo()
         }
     }
     
