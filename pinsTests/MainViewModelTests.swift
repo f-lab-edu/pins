@@ -46,13 +46,20 @@ class MockFirestorageService: FirestorageServiceProtocol {
 }
 
 final class MainViewModelTests: XCTestCase {
-    func testGetPins() async {
-        // Given
-        let mockFirestorageService = MockFirestorageService()
-        let mockUserService = MockUserService()
-        let useCase = MainUseCase(firestorageService: mockFirestorageService, userService: mockUserService)
-        let viewModel = MainViewModel(mainUseCase: useCase)
-        
+    var mockFirestorageService: MockFirestorageService!
+    var mockUserService: MockUserService!
+    var useCase: MainUseCase!
+    var viewModel: MainViewModel!
+
+    override func setUp() {
+        super.setUp()
+        mockFirestorageService = MockFirestorageService()
+        mockUserService = MockUserService()
+        useCase = MainUseCase(firestorageService: mockFirestorageService, userService: mockUserService)
+        viewModel = MainViewModel(mainUseCase: useCase)
+    }
+    
+    func testGetCurrentPins_WhenCalled_ShouldReturnMockPinsFromService() async {
         // When
         await viewModel.setCurrentPins()
         
@@ -60,12 +67,30 @@ final class MainViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.currentPins, mockFirestorageService.mockPins, "getPins should return the pins from the mock service")
     }
     
-    func testLoadPin() async {
+    func testSetCurrentPins_WhenFails_ShouldNotUpdateCurrentPins() async {
         // Given
-        let mockFirestorageService = MockFirestorageService()
-        let mockUserService = MockUserService()
-        let useCase = MainUseCase(firestorageService: mockFirestorageService, userService: mockUserService)
-        let viewModel = MainViewModel(mainUseCase: useCase)
+        mockFirestorageService.mockPins = []
+
+        // When
+        await viewModel.setCurrentPins()
+
+        // Then
+        XCTAssertTrue(viewModel.currentPins.isEmpty, "currentPins should not be updated on failure")
+    }
+    
+    func testLoadPin_WhenCalledWithPinRequest_ShouldReturnValidPinResponse() async {
+        // Given
+        let pinRequest = PinRequest(id: "testId", title: "testTitle", content: "testContent", longitude: 0.0, latitude: 0.0, category: "testCategory", created: "testCreated", userId: "testUserId", urls: ["testUrl"])
+
+        // When
+        let response = await viewModel.loadPin(pin: pinRequest)
+
+        // Then
+        XCTAssertNotNil(response, "loadPin should return a valid PinResponse")
+    }
+    
+    func testLoadPin_WhenCalledWithPinRequest_ShouldReturnPinResponseWithCorrectImageCount() async {
+        // Given
         let pinRequest = PinRequest(id: "testId", title: "testTitle", content: "testContent", longitude: 0.0, latitude: 0.0, category: "testCategory", created: "testCreated", userId: "testUserId", urls: ["testUrl"])
 
         // When
@@ -75,14 +100,8 @@ final class MainViewModelTests: XCTestCase {
         XCTAssertNotNil(response, "loadPin should return a valid PinResponse")
         XCTAssertEqual(response.images.count, pinRequest.urls.count, "The number of images should match the number of URLs in the pin request")
     }
-
-    func testFetchUserInfo() async {
-        // Given
-        let mockFirestorageService = MockFirestorageService()
-        let mockUserService = MockUserService()
-        let useCase = MainUseCase(firestorageService: mockFirestorageService, userService: mockUserService)
-        let viewModel = MainViewModel(mainUseCase: useCase)
-       
+    
+    func testFetchUserInfo_WhenCalled_ShouldReturnMockUserFromService() async {
         // When
         let userInfo = await viewModel.getUserInfo()
 
@@ -90,13 +109,7 @@ final class MainViewModelTests: XCTestCase {
         XCTAssertEqual(userInfo, mockUserService.mockUser, "fetchUserInfo should return the user from the mock service")
     }
 
-    func testSetCreateViewIsPresented() {
-        // Given
-        let mockFirestorageService = MockFirestorageService()
-        let mockUserService = MockUserService()
-        let useCase = MainUseCase(firestorageService: mockFirestorageService, userService: mockUserService)
-        let viewModel = MainViewModel(mainUseCase: useCase)
-
+    func testSetCreateViewIsPresented_WhenSetToTrue_ShouldReflectTrueState() {
         // When
         viewModel.setCreateViewIsPresented(isPresented: true)
 
@@ -104,12 +117,8 @@ final class MainViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.getCreateViewIsPresented(), "createViewIsPresented should be true")
     }
 
-    func testGetCreateViewIsPresented() {
+    func testGetCreateViewIsPresented_WhenPreviouslySetToTrue_ShouldReturnTrue() {
         // Given
-        let mockFirestorageService = MockFirestorageService()
-        let mockUserService = MockUserService()
-        let useCase = MainUseCase(firestorageService: mockFirestorageService, userService: mockUserService)
-        let viewModel = MainViewModel(mainUseCase: useCase)
         viewModel.setCreateViewIsPresented(isPresented: true)
 
         // When
@@ -119,12 +128,8 @@ final class MainViewModelTests: XCTestCase {
         XCTAssertTrue(isPresented, "getCreateViewIsPresented should return true")
     }
 
-    func testToggleCreateViewIsPresented() {
+    func testToggleCreateViewIsPresented_WhenToggled_ShouldInverseInitialValue() {
         // Given
-        let mockFirestorageService = MockFirestorageService()
-        let mockUserService = MockUserService()
-        let useCase = MainUseCase(firestorageService: mockFirestorageService, userService: mockUserService)
-        let viewModel = MainViewModel(mainUseCase: useCase)
         let initialValue = viewModel.getCreateViewIsPresented()
 
         // When

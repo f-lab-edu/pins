@@ -139,6 +139,7 @@
 		B74A4FC42AE7905500226EA7 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		B74A4FC62AE790BE00226EA7 /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
 		B7614C0E2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		B7631C6A2B2DB50300B111AA /* Release.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Release.xctestplan; path = pins/Resources/Release.xctestplan; sourceTree = SOURCE_ROOT; };
 		B76DD4612AFE0DB000DFE7E1 /* FirestorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestorageService.swift; sourceTree = "<group>"; };
 		B76DD4652AFE238F00DFE7E1 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		B7781B2F2B0F47C8006372CF /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -342,6 +343,7 @@
 		B71C387A2B0752780065A783 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B7631C6A2B2DB50300B111AA /* Release.xctestplan */,
 				B7F581C12B2DB349009A079D /* GoogleService-Info.plist */,
 				B7AF69392AE0FEE000385632 /* Assets.xcassets */,
 				B7AF693E2AE0FEE000385632 /* Info.plist */,
