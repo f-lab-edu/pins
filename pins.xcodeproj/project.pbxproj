@@ -37,6 +37,8 @@
 		B74A4FC72AE790BE00226EA7 /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74A4FC62AE790BE00226EA7 /* CreateView.swift */; };
 		B7614C0F2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7614C0E2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift */; };
 		B7631C6D2B2DC27700B111AA /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7631C6C2B2DC27700B111AA /* UserError.swift */; };
+		B7631C722B2DCCA800B111AA /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = B7631C712B2DCCA800B111AA /* SnapshotTesting */; };
+		B7631C742B2DCCBD00B111AA /* SnapshotTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7631C732B2DCCBD00B111AA /* SnapshotTest.swift */; };
 		B76DD4622AFE0DB000DFE7E1 /* FirestorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DD4612AFE0DB000DFE7E1 /* FirestorageService.swift */; };
 		B76DD4642AFE0E4B00DFE7E1 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B76DD4632AFE0E4B00DFE7E1 /* FirebaseStorage */; };
 		B76DD4662AFE238F00DFE7E1 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DD4652AFE238F00DFE7E1 /* LoadingIndicator.swift */; };
@@ -56,8 +58,6 @@
 		B7AF69352AE0FEDF00385632 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF69342AE0FEDF00385632 /* MainViewController.swift */; };
 		B7AF693A2AE0FEE000385632 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7AF69392AE0FEE000385632 /* Assets.xcassets */; };
 		B7AF69482AE0FEE000385632 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF69472AE0FEE000385632 /* MainViewModelTests.swift */; };
-		B7AF69522AE0FEE000385632 /* PinsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF69512AE0FEE000385632 /* PinsUITests.swift */; };
-		B7AF69542AE0FEE000385632 /* PinsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF69532AE0FEE000385632 /* PinsUITestsLaunchTests.swift */; };
 		B7B20E1B2B1CB92100C8304B /* SigninUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B20E1A2B1CB92100C8304B /* SigninUseCase.swift */; };
 		B7B20E1D2B1CBAC700C8304B /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B20E1C2B1CBAC700C8304B /* UserRepository.swift */; };
 		B7B20E1F2B1CC02500C8304B /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B20E1E2B1CC02500C8304B /* UserService.swift */; };
@@ -100,13 +100,6 @@
 			remoteGlobalIDString = B7AF692C2AE0FEDF00385632;
 			remoteInfo = pins;
 		};
-		B7AF694E2AE0FEE000385632 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B7AF69252AE0FEDF00385632 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B7AF692C2AE0FEDF00385632;
-			remoteInfo = pins;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +135,7 @@
 		B7614C0E2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		B7631C6A2B2DB50300B111AA /* Release.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Release.xctestplan; path = pins/Resources/Release.xctestplan; sourceTree = SOURCE_ROOT; };
 		B7631C6C2B2DC27700B111AA /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
+		B7631C732B2DCCBD00B111AA /* SnapshotTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTest.swift; sourceTree = "<group>"; };
 		B76DD4612AFE0DB000DFE7E1 /* FirestorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestorageService.swift; sourceTree = "<group>"; };
 		B76DD4652AFE238F00DFE7E1 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		B7781B2F2B0F47C8006372CF /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -164,9 +158,6 @@
 		B7AF693E2AE0FEE000385632 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7AF69432AE0FEE000385632 /* pinsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pinsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7AF69472AE0FEE000385632 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
-		B7AF694D2AE0FEE000385632 /* pinsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pinsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B7AF69512AE0FEE000385632 /* PinsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsUITests.swift; sourceTree = "<group>"; };
-		B7AF69532AE0FEE000385632 /* PinsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B7B20E1A2B1CB92100C8304B /* SigninUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninUseCase.swift; sourceTree = "<group>"; };
 		B7B20E1C2B1CBAC700C8304B /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		B7B20E1E2B1CC02500C8304B /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -215,13 +206,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B7AF694A2AE0FEE000385632 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				B7631C722B2DCCA800B111AA /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,7 +414,6 @@
 				B703C0E32B29F351008E9181 /* .swiftlint.yml */,
 				B7AF692F2AE0FEDF00385632 /* pins */,
 				B7AF69462AE0FEE000385632 /* pinsTests */,
-				B7AF69502AE0FEE000385632 /* pinsUITests */,
 				B7AF692E2AE0FEDF00385632 /* Products */,
 				B7BC79152AF4AB8900BBE0A9 /* Frameworks */,
 			);
@@ -440,7 +424,6 @@
 			children = (
 				B7AF692D2AE0FEDF00385632 /* pinsSandbox.app */,
 				B7AF69432AE0FEE000385632 /* pinsTests.xctest */,
-				B7AF694D2AE0FEE000385632 /* pinsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -463,17 +446,9 @@
 			isa = PBXGroup;
 			children = (
 				B7AF69472AE0FEE000385632 /* MainViewModelTests.swift */,
+				B7631C732B2DCCBD00B111AA /* SnapshotTest.swift */,
 			);
 			path = pinsTests;
-			sourceTree = "<group>";
-		};
-		B7AF69502AE0FEE000385632 /* pinsUITests */ = {
-			isa = PBXGroup;
-			children = (
-				B7AF69512AE0FEE000385632 /* PinsUITests.swift */,
-				B7AF69532AE0FEE000385632 /* PinsUITestsLaunchTests.swift */,
-			);
-			path = pinsUITests;
 			sourceTree = "<group>";
 		};
 		B7BC79152AF4AB8900BBE0A9 /* Frameworks */ = {
@@ -562,27 +537,12 @@
 				B7AF69452AE0FEE000385632 /* PBXTargetDependency */,
 			);
 			name = pinsTests;
+			packageProductDependencies = (
+				B7631C712B2DCCA800B111AA /* SnapshotTesting */,
+			);
 			productName = pinsTests;
 			productReference = B7AF69432AE0FEE000385632 /* pinsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		B7AF694C2AE0FEE000385632 /* pinsUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B7AF695D2AE0FEE000385632 /* Build configuration list for PBXNativeTarget "pinsUITests" */;
-			buildPhases = (
-				B7AF69492AE0FEE000385632 /* Sources */,
-				B7AF694A2AE0FEE000385632 /* Frameworks */,
-				B7AF694B2AE0FEE000385632 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B7AF694F2AE0FEE000385632 /* PBXTargetDependency */,
-			);
-			name = pinsUITests;
-			productName = pinsUITests;
-			productReference = B7AF694D2AE0FEE000385632 /* pinsUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -601,10 +561,6 @@
 						CreatedOnToolsVersion = 15.0;
 						TestTargetID = B7AF692C2AE0FEDF00385632;
 					};
-					B7AF694C2AE0FEE000385632 = {
-						CreatedOnToolsVersion = 15.0;
-						TestTargetID = B7AF692C2AE0FEDF00385632;
-					};
 				};
 			};
 			buildConfigurationList = B7AF69282AE0FEDF00385632 /* Build configuration list for PBXProject "pins" */;
@@ -620,6 +576,7 @@
 			packageReferences = (
 				B7E8A46E2AEB84420026931D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				B7DE80662B08A979007A7AEF /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				B7631C6E2B2DCB0E00B111AA /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			productRefGroup = B7AF692E2AE0FEDF00385632 /* Products */;
 			projectDirPath = "";
@@ -627,7 +584,6 @@
 			targets = (
 				B7AF692C2AE0FEDF00385632 /* pins */,
 				B7AF69422AE0FEE000385632 /* pinsTests */,
-				B7AF694C2AE0FEE000385632 /* pinsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -646,13 +602,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B7AF69412AE0FEE000385632 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B7AF694B2AE0FEE000385632 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -783,15 +732,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7AF69482AE0FEE000385632 /* MainViewModelTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B7AF69492AE0FEE000385632 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B7AF69542AE0FEE000385632 /* PinsUITestsLaunchTests.swift in Sources */,
-				B7AF69522AE0FEE000385632 /* PinsUITests.swift in Sources */,
+				B7631C742B2DCCBD00B111AA /* SnapshotTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,11 +743,6 @@
 			isa = PBXTargetDependency;
 			target = B7AF692C2AE0FEDF00385632 /* pins */;
 			targetProxy = B7AF69442AE0FEE000385632 /* PBXContainerItemProxy */;
-		};
-		B7AF694F2AE0FEE000385632 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B7AF692C2AE0FEDF00385632 /* pins */;
-			targetProxy = B7AF694E2AE0FEE000385632 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -955,24 +891,6 @@
 			};
 			name = Dev;
 		};
-		B76C2B6C2B19EAF500E4F0E0 /* Dev */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X843D4L2C2;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mojito.pinsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = pins;
-			};
-			name = Dev;
-		};
 		B76C2B6D2B19EAFD00E4F0E0 /* Sandbox */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B79A28F02AF37DEB008FD3CE /* Secrets.xcconfig */;
@@ -1095,24 +1013,6 @@
 			};
 			name = Sandbox;
 		};
-		B76C2B702B19EAFD00E4F0E0 /* Sandbox */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X843D4L2C2;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mojito.pinsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = pins;
-			};
-			name = Sandbox;
-		};
 		B7AF69562AE0FEE000385632 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1226,24 +1126,6 @@
 			};
 			name = Release;
 		};
-		B7AF695F2AE0FEE000385632 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X843D4L2C2;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mojito.pinsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = pins;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1277,19 +1159,17 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B7AF695D2AE0FEE000385632 /* Build configuration list for PBXNativeTarget "pinsUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B76C2B702B19EAFD00E4F0E0 /* Sandbox */,
-				B76C2B6C2B19EAF500E4F0E0 /* Dev */,
-				B7AF695F2AE0FEE000385632 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B7631C6E2B2DCB0E00B111AA /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.15.1;
+			};
+		};
 		B7DE80662B08A979007A7AEF /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -1313,6 +1193,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B7DE80662B08A979007A7AEF /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignIn;
+		};
+		B7631C712B2DCCA800B111AA /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B7631C6E2B2DCB0E00B111AA /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
 		};
 		B76DD4632AFE0E4B00DFE7E1 /* FirebaseStorage */ = {
 			isa = XCSwiftPackageProductDependency;
