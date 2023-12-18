@@ -15,6 +15,7 @@ final class PinClusterAnnotationView: MKAnnotationView {
         label.layer.masksToBounds = true
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.backgroundColor = .systemBlue.withAlphaComponent(0.7)
+        label.textColor = .white
         label.textAlignment = .center
         return label
     }()

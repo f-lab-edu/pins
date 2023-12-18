@@ -193,6 +193,10 @@ final class MainMapView: UIView {
         return mapView.centerCoordinate
     }
     
+    func getRegion() -> MKCoordinateRegion {
+        return mapView.region
+    }
+    
     func setDelegate(_ delegate: MKMapViewDelegate) {
         mapView.delegate = delegate
     }
