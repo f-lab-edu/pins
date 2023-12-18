@@ -1,8 +1,12 @@
 import iOSSnapshotTestCase
 @testable import pins
 
-
 final class DetailViewSnapshotTest: FBSnapshotTestCase {
+    override func setUp() {
+        super.setUp()
+        self.recordMode = true
+    }
+    
     func test_DetailViewController_WithNoImage() {
         let detailVC = DetailViewController()
         let pinRequest = PinRequest(id: "testId", title: "test title", content: "test content", longitude: 0.0, latitude: 0.0, category: "산책", created: "", userId: "testUser")

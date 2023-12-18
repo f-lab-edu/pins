@@ -140,3 +140,5 @@ GoogleService-Info.plist
 pinsTests/ReferenceImages_64/pinsTests.SnapshotTestTests/
 
 pinsTests/FailureDiffs/pinsTests.SnapshotTestTests/
+
+pinsTests/ReferenceImages_64/pinsTests.DetailViewSnapshotTest/
