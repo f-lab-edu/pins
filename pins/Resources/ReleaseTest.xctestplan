@@ -18,6 +18,16 @@
         }
       ]
     },
+    "environmentVariableEntries" : [
+      {
+        "key" : "IMAGE_DIFF_DIR",
+        "value" : "$(SOURCE_ROOT)\/$(PROJECT_NAME)Tests\/FailureDiffs"
+      },
+      {
+        "key" : "FB_REFERENCE_IMAGE_DIR",
+        "value" : "$(SOURCE_ROOT)\/$(PROJECT_NAME)Tests\/ReferenceImages"
+      }
+    ],
     "targetForVariableExpansion" : {
       "containerPath" : "container:pins.xcodeproj",
       "identifier" : "B7AF692C2AE0FEDF00385632",
@@ -30,13 +40,6 @@
         "containerPath" : "container:pins.xcodeproj",
         "identifier" : "B7AF69422AE0FEE000385632",
         "name" : "pinsTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:pins.xcodeproj",
-        "identifier" : "B7AF694C2AE0FEE000385632",
-        "name" : "pinsUITests"
       }
     }
   ],

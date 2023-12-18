@@ -89,6 +89,13 @@ final class MainViewController: UIViewController {
         mainMapView.setRegion(region, animated: true)
     }
     
+    private func zoomCamera(position: CLLocationCoordinate2D, delta: CGFloat) {
+        let currentSpan = mainMapView.getRegion().span
+        let zoomSpan = MKCoordinateSpan(latitudeDelta: currentSpan.latitudeDelta * delta, longitudeDelta: currentSpan.longitudeDelta * delta)
+        let region = MKCoordinateRegion(center: position, span: zoomSpan)
+        mainMapView.setRegion(region, animated: true)
+    }
+    
     private func setAction() {
         mainMapView.setMylocationButtonAction(UIAction(handler: { [weak self] _ in
             self?.moveCurrentPosition()
@@ -129,7 +136,12 @@ extension MainViewController: MKMapViewDelegate {
         if annotation is MKUserLocation {
             return nil
         }
-
+        if let cluster = annotation as? MKClusterAnnotation {
+            let clusterView = mapView.dequeueReusableAnnotationView(withIdentifier: PinClusterAnnotationView.identifier) as? PinClusterAnnotationView
+            clusterView?.setClusterCount(count: cluster.memberAnnotations.count)
+            return clusterView
+        }
+        
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: PinAnnotationView.identifier) as? PinAnnotationView
         
         if annotationView == nil {
@@ -142,12 +154,17 @@ extension MainViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        guard let pinAnnotation = view.annotation as? PinAnnotation else { return }
-        Task {
-            let pin = try await viewModel.loadPin(pin: pinAnnotation.pin)
-            let detailViewController: DetailViewController = DetailViewController()
-            detailViewController.setPin(pin: pin)
-            navigationController?.pushViewController(detailViewController, animated: true)
+        if let clusterAnnotationView = view as? PinClusterAnnotationView {
+            if let clusterAnnotation = view.annotation as? MKClusterAnnotation {
+                zoomCamera(position: clusterAnnotation.coordinate, delta: 0.5)
+            }
+        } else if let pinAnnotation = view.annotation as? PinAnnotation {
+            Task {
+                let pin = try await viewModel.loadPin(pin: pinAnnotation.pin)
+                let detailViewController: DetailViewController = DetailViewController()
+                detailViewController.setPin(pin: pin)
+                navigationController?.pushViewController(detailViewController, animated: true)
+            }
         }
     }
 }
