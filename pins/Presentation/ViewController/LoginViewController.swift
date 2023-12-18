@@ -35,6 +35,7 @@ final class LoginViewController: UIViewController {
             self.viewModel.performGoogleLogin(delegate: self)
         }))
         let loginView = hostingController.view!
+        loginView.backgroundColor = .white
         view.addSubview(loginView)
         loginView
             .topLayout(equalTo: view.topAnchor)

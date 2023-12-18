@@ -86,6 +86,7 @@
 		B7E0D5912B0CB59D0090A465 /* AnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */; };
 		B7E8A4702AEB84420026931D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A46F2AEB84420026931D /* FirebaseAnalytics */; };
 		B7E8A4722AEB84420026931D /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A4712AEB84420026931D /* FirebaseCrashlytics */; };
+		B7ECD4502B3059E60085C809 /* PinClusterAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ECD44F2B3059E60085C809 /* PinClusterAnnotationView.swift */; };
 		B7F071B72B14855000BB5AB9 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F071B62B14855000BB5AB9 /* DetailViewModel.swift */; };
 		B7F071B92B14876C00BB5AB9 /* PinResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F071B82B14876C00BB5AB9 /* PinResponse.swift */; };
 		B7F581C22B2DB349009A079D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7F581C12B2DB349009A079D /* GoogleService-Info.plist */; };
@@ -182,6 +183,7 @@
 		B7DC98EE2B2619F3006DD8F7 /* CommentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRepository.swift; sourceTree = "<group>"; };
 		B7E050F02AE4FB3A007903C3 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
 		B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
+		B7ECD44F2B3059E60085C809 /* PinClusterAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinClusterAnnotationView.swift; sourceTree = "<group>"; };
 		B7F071B62B14855000BB5AB9 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		B7F071B82B14876C00BB5AB9 /* PinResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinResponse.swift; sourceTree = "<group>"; };
 		B7F581C12B2DB349009A079D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 				B7E050F02AE4FB3A007903C3 /* MainMapView.swift */,
 				B7781B322B0F4D4B006372CF /* PinAnnotationView.swift */,
 				B7781B342B0F4F91006372CF /* PinAnnotation.swift */,
+				B7ECD44F2B3059E60085C809 /* PinClusterAnnotationView.swift */,
 			);
 			path = MainMapView;
 			sourceTree = "<group>";
@@ -674,6 +677,7 @@
 				B74A4FC52AE7905500226EA7 /* CreateViewController.swift in Sources */,
 				B7194A422B1B4F3300642FDA /* SigninViewController.swift in Sources */,
 				B7DC98EB2B26179A006DD8F7 /* DetailUseCase.swift in Sources */,
+				B7ECD4502B3059E60085C809 /* PinClusterAnnotationView.swift in Sources */,
 				B742C5782AEA5EE900E95E96 /* CreateViewModel.swift in Sources */,
 				B7DC98E72B260C17006DD8F7 /* CommentResponse.swift in Sources */,
 				B7D051502B10AD1A00D86183 /* DetailNavigationView.swift in Sources */,
@@ -872,6 +876,7 @@
 		};
 		B76C2B6B2B19EAF500E4F0E0 /* Dev */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B79A28F02AF37DEB008FD3CE /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1015,6 +1020,7 @@
 		};
 		B7AF69562AE0FEE000385632 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B79A28F02AF37DEB008FD3CE /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1073,6 +1079,7 @@
 		};
 		B7AF69592AE0FEE000385632 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B79A28F02AF37DEB008FD3CE /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1108,6 +1115,7 @@
 		};
 		B7AF695C2AE0FEE000385632 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B79A28F02AF37DEB008FD3CE /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

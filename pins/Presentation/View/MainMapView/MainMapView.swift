@@ -22,6 +22,7 @@ final class MainMapView: UIView {
             mapView.mapType = .standard
         }
         mapView.register(PinAnnotationView.self, forAnnotationViewWithReuseIdentifier: PinAnnotationView.identifier)
+        mapView.register(PinClusterAnnotationView.self, forAnnotationViewWithReuseIdentifier: PinClusterAnnotationView.identifier)
         return mapView
     }()
     private let centerPinImage: UIImageView = {

@@ -129,7 +129,12 @@ extension MainViewController: MKMapViewDelegate {
         if annotation is MKUserLocation {
             return nil
         }
-
+        if let cluster = annotation as? MKClusterAnnotation {
+            let clusterView = mapView.dequeueReusableAnnotationView(withIdentifier: PinClusterAnnotationView.identifier) as? PinClusterAnnotationView
+            clusterView?.setClusterCount(count: cluster.memberAnnotations.count)
+            return clusterView
+        }
+        
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: PinAnnotationView.identifier) as? PinAnnotationView
         
         if annotationView == nil {
