@@ -37,8 +37,7 @@
 		B74A4FC72AE790BE00226EA7 /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74A4FC62AE790BE00226EA7 /* CreateView.swift */; };
 		B7614C0F2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7614C0E2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift */; };
 		B7631C6D2B2DC27700B111AA /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7631C6C2B2DC27700B111AA /* UserError.swift */; };
-		B7631C722B2DCCA800B111AA /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = B7631C712B2DCCA800B111AA /* SnapshotTesting */; };
-		B7631C742B2DCCBD00B111AA /* SnapshotTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7631C732B2DCCBD00B111AA /* SnapshotTest.swift */; };
+		B7631C742B2DCCBD00B111AA /* DetailViewSnapshotTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7631C732B2DCCBD00B111AA /* DetailViewSnapshotTest.swift */; };
 		B76DD4622AFE0DB000DFE7E1 /* FirestorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DD4612AFE0DB000DFE7E1 /* FirestorageService.swift */; };
 		B76DD4642AFE0E4B00DFE7E1 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B76DD4632AFE0E4B00DFE7E1 /* FirebaseStorage */; };
 		B76DD4662AFE238F00DFE7E1 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DD4652AFE238F00DFE7E1 /* LoadingIndicator.swift */; };
@@ -91,6 +90,8 @@
 		B7F071B92B14876C00BB5AB9 /* PinResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F071B82B14876C00BB5AB9 /* PinResponse.swift */; };
 		B7F581C22B2DB349009A079D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7F581C12B2DB349009A079D /* GoogleService-Info.plist */; };
 		B7F6A8DA2AE2B61500892215 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F6A8D82AE2B61500892215 /* LaunchScreen.storyboard */; };
+		B7F8B3052B30938400B869BB /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = B7F8B3042B30938400B869BB /* iOSSnapshotTestCase */; };
+		B7F8B3072B309D2C00B869BB /* MockClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F8B3062B309D2C00B869BB /* MockClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,9 +135,9 @@
 		B74A4FC42AE7905500226EA7 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		B74A4FC62AE790BE00226EA7 /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
 		B7614C0E2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
-		B7631C6A2B2DB50300B111AA /* Release.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Release.xctestplan; path = pins/Resources/Release.xctestplan; sourceTree = SOURCE_ROOT; };
+		B7631C6A2B2DB50300B111AA /* ReleaseTest.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = ReleaseTest.xctestplan; path = pins/Resources/ReleaseTest.xctestplan; sourceTree = SOURCE_ROOT; };
 		B7631C6C2B2DC27700B111AA /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
-		B7631C732B2DCCBD00B111AA /* SnapshotTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTest.swift; sourceTree = "<group>"; };
+		B7631C732B2DCCBD00B111AA /* DetailViewSnapshotTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewSnapshotTest.swift; sourceTree = "<group>"; };
 		B76DD4612AFE0DB000DFE7E1 /* FirestorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestorageService.swift; sourceTree = "<group>"; };
 		B76DD4652AFE238F00DFE7E1 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		B7781B2F2B0F47C8006372CF /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -188,6 +189,7 @@
 		B7F071B82B14876C00BB5AB9 /* PinResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinResponse.swift; sourceTree = "<group>"; };
 		B7F581C12B2DB349009A079D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B7F6A8D92AE2B61500892215 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B7F8B3062B309D2C00B869BB /* MockClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,7 +210,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7631C722B2DCCA800B111AA /* SnapshotTesting in Frameworks */,
+				B7F8B3052B30938400B869BB /* iOSSnapshotTestCase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,7 +335,7 @@
 		B71C387A2B0752780065A783 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B7631C6A2B2DB50300B111AA /* Release.xctestplan */,
+				B7631C6A2B2DB50300B111AA /* ReleaseTest.xctestplan */,
 				B7F581C12B2DB349009A079D /* GoogleService-Info.plist */,
 				B7AF69392AE0FEE000385632 /* Assets.xcassets */,
 				B7AF693E2AE0FEE000385632 /* Info.plist */,
@@ -449,7 +451,8 @@
 			isa = PBXGroup;
 			children = (
 				B7AF69472AE0FEE000385632 /* MainViewModelTests.swift */,
-				B7631C732B2DCCBD00B111AA /* SnapshotTest.swift */,
+				B7631C732B2DCCBD00B111AA /* DetailViewSnapshotTest.swift */,
+				B7F8B3062B309D2C00B869BB /* MockClass.swift */,
 			);
 			path = pinsTests;
 			sourceTree = "<group>";
@@ -541,7 +544,7 @@
 			);
 			name = pinsTests;
 			packageProductDependencies = (
-				B7631C712B2DCCA800B111AA /* SnapshotTesting */,
+				B7F8B3042B30938400B869BB /* iOSSnapshotTestCase */,
 			);
 			productName = pinsTests;
 			productReference = B7AF69432AE0FEE000385632 /* pinsTests.xctest */;
@@ -579,7 +582,7 @@
 			packageReferences = (
 				B7E8A46E2AEB84420026931D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				B7DE80662B08A979007A7AEF /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
-				B7631C6E2B2DCB0E00B111AA /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+				B7F8B3032B30938400B869BB /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */,
 			);
 			productRefGroup = B7AF692E2AE0FEDF00385632 /* Products */;
 			projectDirPath = "";
@@ -736,7 +739,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7AF69482AE0FEE000385632 /* MainViewModelTests.swift in Sources */,
-				B7631C742B2DCCBD00B111AA /* SnapshotTest.swift in Sources */,
+				B7F8B3072B309D2C00B869BB /* MockClass.swift in Sources */,
+				B7631C742B2DCCBD00B111AA /* DetailViewSnapshotTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1170,14 +1174,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B7631C6E2B2DCB0E00B111AA /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.15.1;
-			};
-		};
 		B7DE80662B08A979007A7AEF /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -1194,6 +1190,14 @@
 				minimumVersion = 10.16.0;
 			};
 		};
+		B7F8B3032B30938400B869BB /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uber/ios-snapshot-test-case";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1201,11 +1205,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B7DE80662B08A979007A7AEF /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignIn;
-		};
-		B7631C712B2DCCA800B111AA /* SnapshotTesting */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B7631C6E2B2DCB0E00B111AA /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
-			productName = SnapshotTesting;
 		};
 		B76DD4632AFE0E4B00DFE7E1 /* FirebaseStorage */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1231,6 +1230,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B7E8A46E2AEB84420026931D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		B7F8B3042B30938400B869BB /* iOSSnapshotTestCase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B7F8B3032B30938400B869BB /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */;
+			productName = iOSSnapshotTestCase;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

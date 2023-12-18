@@ -24,8 +24,8 @@ final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setBindings()
         setView()
+        setBindings()
     }
     
     private func setView() {
