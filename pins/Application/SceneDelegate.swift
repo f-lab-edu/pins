@@ -19,12 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         // logout
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            print("Sign out error")
-        }
-        
+//        do {
+//            try Auth.auth().signOut()
+//        } catch {
+//            print("Sign out error")
+//        }
+//        
         window.rootViewController = initialViewController()
 //        window.rootViewController = SigninViewController()
         window.makeKeyAndVisible()
