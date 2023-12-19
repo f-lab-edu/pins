@@ -51,6 +51,7 @@
 		B785A7842B1091BC00DC2E88 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B785A7832B1091BC00DC2E88 /* UILabel+Extensions.swift */; };
 		B79A28F32AF37F93008FD3CE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79A28F22AF37F93008FD3CE /* LoginViewController.swift */; };
 		B7ADFF722AEA8DF300D34CEA /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADFF712AEA8DF300D34CEA /* Divider.swift */; };
+		B7AE77DE2B3199FB0056D451 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AE77DD2B3199FB0056D451 /* ImageCacheManager.swift */; };
 		B7AEC0CE2B034568004BA42A /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AEC0CD2B034568004BA42A /* CustomTextView.swift */; };
 		B7AF69312AE0FEDF00385632 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF69302AE0FEDF00385632 /* AppDelegate.swift */; };
 		B7AF69332AE0FEDF00385632 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AF69322AE0FEDF00385632 /* SceneDelegate.swift */; };
@@ -151,6 +152,7 @@
 		B79A28F02AF37DEB008FD3CE /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		B79A28F22AF37F93008FD3CE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B7ADFF712AEA8DF300D34CEA /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
+		B7AE77DD2B3199FB0056D451 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		B7AEC0CD2B034568004BA42A /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		B7AF692D2AE0FEDF00385632 /* pinsSandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pinsSandbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7AF69302AE0FEDF00385632 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 				B7B20E232B1CCDB800C8304B /* KeychainManager.swift */,
 				B711B6A92B21C08D00C661E3 /* ImagePickerManager.swift */,
 				B72EDCA32B2B0A4000080328 /* KeyboardAnimationManager.swift */,
+				B7AE77DD2B3199FB0056D451 /* ImageCacheManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -685,6 +688,7 @@
 				B7DC98E72B260C17006DD8F7 /* CommentResponse.swift in Sources */,
 				B7D051502B10AD1A00D86183 /* DetailNavigationView.swift in Sources */,
 				B71C387E2B0754F90065A783 /* UserRequest.swift in Sources */,
+				B7AE77DE2B3199FB0056D451 /* ImageCacheManager.swift in Sources */,
 				B7B20E242B1CCDB800C8304B /* KeychainManager.swift in Sources */,
 				B7F071B72B14855000BB5AB9 /* DetailViewModel.swift in Sources */,
 				B7614C0F2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift in Sources */,
