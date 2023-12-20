@@ -10,8 +10,8 @@ import FirebaseAuth
 
 protocol MainUseCaseProtocol {
     func getPins() async -> [PinRequest]
-    func loadPin(pin: PinRequest) async -> PinResponse
-    func fetchUserInfo() async -> UserRequest
+    func loadPin(pin: PinRequest) async throws -> PinResponse
+    func fetchUserInfo() async throws -> UserRequest
 }
 
 final class MainUseCase: MainUseCaseProtocol {
@@ -27,7 +27,7 @@ final class MainUseCase: MainUseCaseProtocol {
         return await firestorageService.getPins()
     }
     
-    func loadPin(pin: PinRequest) async -> PinResponse {
+    func loadPin(pin: PinRequest) async throws -> PinResponse {
         var images: [UIImage] = []
         for url in pin.urls {
             let image = await firestorageService.downloadImage(urlString: url)
@@ -36,18 +36,20 @@ final class MainUseCase: MainUseCaseProtocol {
             }
         }
         let user = await userService.getUser(id: pin.userId)
-        guard let user = user else { fatalError("Error fetching user") }
+        guard let user = user else { throw UserError.userFetchError }
         let profile = await firestorageService.downloadImage(urlString: user.profileImage)
-        guard let profile else { fatalError("Error feching profile") }
+        guard let profile else { throw UserError.userProfileImageNotFound }
         let userAge = user.birthDate?.birthDateToAge() ?? 0
         return PinResponse(pin: pin, images: images, id: user.id, name: user.nickName, age: userAge, description: user.description ?? "", profile: profile)
     }
     
-    func fetchUserInfo() async -> UserRequest {
-        let id = KeychainManager.load(key: "userId")
-        guard let id else { fatalError("userId is nil") }
-        let user = await userService.getUser(id: id)
-        guard let user = user else { fatalError("Error fetching user") }
+    func fetchUserInfo() async throws -> UserRequest {
+        guard let id = KeychainManager.load(key: .userId) else {
+            throw UserError.userIdNotFound
+        }
+        guard let user = await userService.getUser(id: id) else {
+            throw UserError.userFetchError
+        }
         return user
     }
 }

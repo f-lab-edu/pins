@@ -29,7 +29,7 @@ final class SigninUseCase: SigninUseCaseProtocol {
         
         guard let userId, let userEmail else { return }
         
-         let user = UserRequest(id: userId, nickName: nickName, email: userEmail, birthDate: birthDate, description: description, firstTime: false, profileImage: imageUrl.url.absoluteString)
-         userService.putUser(user: user)
+        let user = UserRequest(id: userId, nickName: nickName, email: userEmail, birthDate: birthDate, description: description, firstTime: false, profileImage: imageUrl.url.absoluteString)
+        userService.putUser(user: user)
     }
 }

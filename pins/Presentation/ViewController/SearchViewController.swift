@@ -12,10 +12,6 @@ final class SearchViewController: UIViewController {
         view as! SearchView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func loadView() {
         view = SearchView()
     }

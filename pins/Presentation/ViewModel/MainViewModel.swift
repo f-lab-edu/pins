@@ -21,8 +21,12 @@ final class MainViewModel {
         currentPins = pins
     }
     
-    func loadPin(pin: PinRequest) async -> PinResponse {
-        return await mainUseCase.loadPin(pin: pin)
+    func loadPin(pin: PinRequest) async throws -> PinResponse {
+        do {
+            return try await mainUseCase.loadPin(pin: pin)
+        } catch {
+            throw error
+        }
     }
     
     func setCreateViewIsPresented(isPresented: Bool) {
@@ -37,7 +41,11 @@ final class MainViewModel {
         createViewIsPresented.toggle()
     }
     
-    func getUserInfo() async -> UserRequest {
-        return await mainUseCase.fetchUserInfo()
+    func getUserInfo() async throws -> UserRequest {
+        do {
+            return try await mainUseCase.fetchUserInfo()
+        } catch {
+            throw error
+        }
     }
 }

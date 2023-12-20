@@ -70,9 +70,9 @@ final class DetailCommentView: UIView {
             .heightLayout(40)
         
         inputTextView
-            .leadingLayout(equalTo: myProfileImageView.trailingAnchor, constant: 8)
-            .trailingLayout(equalTo: trailingAnchor, constant: -20)
+            .leadingLayout(equalTo: leadingAnchor, constant: 68)
             .topLayout(equalTo: commentDivderView.bottomAnchor, constant: 16)
+            .widthLayout(UIScreenUtils.getScreenWidth() - 88)
             .heightLayout(40)
         
         submitButton
