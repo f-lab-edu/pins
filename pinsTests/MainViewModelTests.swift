@@ -8,8 +8,6 @@
 import XCTest
 @testable import pins
 
-
-
 final class MainViewModelTests: XCTestCase {
     var mockFirestorageService: MockFirestorageService!
     var mockUserService: MockUserService!

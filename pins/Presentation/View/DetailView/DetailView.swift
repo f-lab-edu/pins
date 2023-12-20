@@ -159,11 +159,11 @@ final class DetailView: UIView {
             navigationView.backButton.tintColor = .black
             contentView.topLayout(equalTo: scrollView.topAnchor, constant: UIConstants.navigationHeight)
             scrollView.contentSize = CGSize(width: UIScreenUtils.getScreenWidth(),
-                                            height: contentView.frame.size.height + UIConstants.commentHeight)
+                                            height: contentView.frame.size.height + UIConstants.commentHeight + UIConstants.navigationHeight)
         } else {
             contentView.topLayout(equalTo: scrollView.topAnchor, constant: UIConstants.bannerHeight)
             scrollView.contentSize = CGSize(width: UIScreenUtils.getScreenWidth(),
-                                                height: contentView.frame.size.height + UIConstants.bannerHeight + UIConstants.commentHeight)
+                                            height: contentView.frame.size.height + UIConstants.bannerHeight + UIConstants.commentHeight)
         }
     }
     

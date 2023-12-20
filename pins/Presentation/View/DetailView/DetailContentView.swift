@@ -73,7 +73,14 @@ final class DetailContentView: UIView {
         return label
     }()
     
-    var commentContainer: UIView = UIView()
+    var commentStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        return stackView
+    }()
+    
     private var commentViews: [CommentView] = []
     private let navigationDivderView: Divider = Divider()
     private let contentDividerView: Divider = Divider()
@@ -106,7 +113,7 @@ final class DetailContentView: UIView {
     
     // MARK: - UI
     private func setLayout() {
-        [profileImageView, nameLabel, personalInfo, categoryLabel, titleLabel, dateLabel, contentLabel, commentLabel, navigationDivderView, contentDividerView, commentContainer].forEach {
+        [profileImageView, nameLabel, personalInfo, categoryLabel, titleLabel, dateLabel, contentLabel, commentLabel, navigationDivderView, contentDividerView, commentStackView].forEach {
             addSubview($0)
         }
         
@@ -154,7 +161,7 @@ final class DetailContentView: UIView {
             .trailingLayout(equalTo: trailingAnchor)
             .topLayout(equalTo: commentLabel.bottomAnchor, constant: 16)
         
-        commentContainer
+        commentStackView
            .topLayout(equalTo: contentDividerView.bottomAnchor)
            .leadingLayout(equalTo: leadingAnchor)
            .trailingLayout(equalTo: trailingAnchor)
@@ -186,30 +193,23 @@ final class DetailContentView: UIView {
     }
     
     func setComments(comments: [CommentResponse], scrollView: UIScrollView?) {
-        resetCommentContainer()
+        resetCommentContainer(scrollView: scrollView)
         commentLabel.text = "댓글 \(comments.count)개"
         
-        for (index, comment) in comments.enumerated() {
+        for comment in comments {
             let commentView = CommentView()
             commentView.setCommentView(comment)
-            commentViews.append(commentView)
-            commentContainer.addSubview(commentView)
-            
-            if index == 0 {
-                commentView.topLayout(equalTo: commentContainer.topAnchor)
-            } else {
-                commentView.topLayout(equalTo: commentViews[index - 1].bottomAnchor)
-            }
-            commentView.leadingLayout(equalTo: leadingAnchor)
-            commentView.trailingLayout(equalTo: trailingAnchor)
-            commentView.layoutIfNeeded()
-            scrollView?.contentSize.height += commentView.frame.height
+            commentStackView.addArrangedSubview(commentView)
         }
+        commentStackView.layoutIfNeeded()
+        scrollView?.contentSize.height += commentStackView.frame.height
     }
-    
-    func resetCommentContainer() {
-        for comment in commentContainer.subviews {
-            comment.removeFromSuperview()
+
+    func resetCommentContainer(scrollView: UIScrollView?) {
+        scrollView?.contentSize.height -= commentStackView.frame.height
+        for view in commentStackView.arrangedSubviews {
+            commentStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
         }
     }
 }
