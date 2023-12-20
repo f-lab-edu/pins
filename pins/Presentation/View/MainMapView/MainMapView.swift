@@ -72,11 +72,11 @@ final class MainMapView: UIView {
         button.accessibilityLabel = "내 위치로"
         return button
     }()
-    private let logoutButton: CustomButton = {
+    private let settingButton: CustomButton = {
         let button = CustomButton()
         button.setShadow()
-        button.setImage(systemName: "door.right.hand.open")
-        button.accessibilityLabel = "로그아웃"
+        button.setImage(systemName: "gearshape")
+        button.accessibilityLabel = "설정"
         return button
     }()
 
@@ -92,7 +92,7 @@ final class MainMapView: UIView {
     
     // MARK: - Layouts
     private func setLayout() {
-        [mapView, centerPinImage, createButton, cancelButton, searchButton, createModeButton, refeshButton, myLocationButton, logoutButton].forEach { addSubview($0) }
+        [mapView, centerPinImage, createButton, cancelButton, searchButton, createModeButton, refeshButton, myLocationButton, settingButton].forEach { addSubview($0) }
         
         mapView
             .leadingLayout(equalTo: leadingAnchor)
@@ -142,7 +142,7 @@ final class MainMapView: UIView {
             .widthLayout(45)
             .heightLayout(45)
         
-        logoutButton
+        settingButton
             .leadingLayout(equalTo: leadingAnchor, constant: 16)
             .topLayout(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16)
             .widthLayout(45)
@@ -221,7 +221,7 @@ final class MainMapView: UIView {
         createButton.addAction(action, for: .touchUpInside)
     }
     
-    func setLogoutButtonAction(_ action: UIAction) {
-        logoutButton.addAction(action, for: .touchUpInside)
+    func setSettingButtonAction(_ action: UIAction) {
+        settingButton.addAction(action, for: .touchUpInside)
     }
 }

@@ -41,6 +41,9 @@
 		B76DD4622AFE0DB000DFE7E1 /* FirestorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DD4612AFE0DB000DFE7E1 /* FirestorageService.swift */; };
 		B76DD4642AFE0E4B00DFE7E1 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B76DD4632AFE0E4B00DFE7E1 /* FirebaseStorage */; };
 		B76DD4662AFE238F00DFE7E1 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DD4652AFE238F00DFE7E1 /* LoadingIndicator.swift */; };
+		B7704A242B3313A900E310AC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7704A232B3313A900E310AC /* SettingViewController.swift */; };
+		B7704A262B3313EB00E310AC /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7704A252B3313EB00E310AC /* SettingView.swift */; };
+		B7704A282B33193100E310AC /* SettingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7704A272B33193100E310AC /* SettingViewCell.swift */; };
 		B7781B302B0F47C8006372CF /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7781B2F2B0F47C8006372CF /* Category.swift */; };
 		B7781B332B0F4D4B006372CF /* PinAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7781B322B0F4D4B006372CF /* PinAnnotationView.swift */; };
 		B7781B352B0F4F91006372CF /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7781B342B0F4F91006372CF /* PinAnnotation.swift */; };
@@ -141,6 +144,9 @@
 		B7631C732B2DCCBD00B111AA /* DetailViewSnapshotTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewSnapshotTest.swift; sourceTree = "<group>"; };
 		B76DD4612AFE0DB000DFE7E1 /* FirestorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestorageService.swift; sourceTree = "<group>"; };
 		B76DD4652AFE238F00DFE7E1 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		B7704A232B3313A900E310AC /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		B7704A252B3313EB00E310AC /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		B7704A272B33193100E310AC /* SettingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewCell.swift; sourceTree = "<group>"; };
 		B7781B2F2B0F47C8006372CF /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		B7781B322B0F4D4B006372CF /* PinAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotationView.swift; sourceTree = "<group>"; };
 		B7781B342B0F4F91006372CF /* PinAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotation.swift; sourceTree = "<group>"; };
@@ -371,6 +377,7 @@
 				B79A28F22AF37F93008FD3CE /* LoginViewController.swift */,
 				B785A77D2B10743600DC2E88 /* DetailViewController.swift */,
 				B7194A412B1B4F3300642FDA /* SigninViewController.swift */,
+				B7704A232B3313A900E310AC /* SettingViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -403,6 +410,15 @@
 				B7631C6C2B2DC27700B111AA /* UserError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		B7704A292B33194700E310AC /* SettingView */ = {
+			isa = PBXGroup;
+			children = (
+				B7704A252B3313EB00E310AC /* SettingView.swift */,
+				B7704A272B33193100E310AC /* SettingViewCell.swift */,
+			);
+			path = SettingView;
 			sourceTree = "<group>";
 		};
 		B7781B312B0F4D3A006372CF /* MainMapView */ = {
@@ -487,6 +503,7 @@
 				B7781B312B0F4D3A006372CF /* MainMapView */,
 				B7614C102AEE085F00CAB8F0 /* CreateView */,
 				B7D0514E2B10ACEF00D86183 /* DetailView */,
+				B7704A292B33194700E310AC /* SettingView */,
 				B74A4FC22AE78BE700226EA7 /* SearchView.swift */,
 				B7157E692AF384E2007CEF95 /* LoginView.swift */,
 				B7194A432B1B4F4600642FDA /* SigninView.swift */,
@@ -699,6 +716,7 @@
 				B7781B332B0F4D4B006372CF /* PinAnnotationView.swift in Sources */,
 				B7BB20262B0F1696003EED3A /* MainUseCase.swift in Sources */,
 				B7E050F12AE4FB3A007903C3 /* MainMapView.swift in Sources */,
+				B7704A282B33193100E310AC /* SettingViewCell.swift in Sources */,
 				B7157E6A2AF384E2007CEF95 /* LoginView.swift in Sources */,
 				B71058932AEA2CB3003D6039 /* CustomButton.swift in Sources */,
 				B7D051542B10AD2B00D86183 /* DetailCommentView.swift in Sources */,
@@ -713,6 +731,7 @@
 				B72EDCA42B2B0A4000080328 /* KeyboardAnimationManager.swift in Sources */,
 				B785A7842B1091BC00DC2E88 /* UILabel+Extensions.swift in Sources */,
 				B7BB20242B0E0745003EED3A /* CreateUseCase.swift in Sources */,
+				B7704A262B3313EB00E310AC /* SettingView.swift in Sources */,
 				B71C38802B07554B0065A783 /* FirebaseAuthService.swift in Sources */,
 				B7194A442B1B4F4600642FDA /* SigninView.swift in Sources */,
 				B7AEC0CE2B034568004BA42A /* CustomTextView.swift in Sources */,
@@ -723,6 +742,7 @@
 				B7B977642AFA0D270023718B /* PinRequest.swift in Sources */,
 				B7AF69332AE0FEDF00385632 /* SceneDelegate.swift in Sources */,
 				B71C38832B075CC70065A783 /* CryptoUtils.swift in Sources */,
+				B7704A242B3313A900E310AC /* SettingViewController.swift in Sources */,
 				B7B20E1D2B1CBAC700C8304B /* UserRepository.swift in Sources */,
 				B7DC98E92B260FCF006DD8F7 /* CommentView.swift in Sources */,
 				B7DC98E52B260BD9006DD8F7 /* CommentRequest.swift in Sources */,
@@ -865,6 +885,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "핀을 생성할 때 사진을 첨부하려면 사진 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -989,6 +1010,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "핀을 생성할 때 사진을 첨부하려면 사진 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1105,6 +1127,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "핀을 생성할 때 사진을 첨부하려면 사진 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

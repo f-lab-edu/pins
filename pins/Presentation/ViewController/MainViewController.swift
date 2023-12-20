@@ -120,13 +120,9 @@ final class MainViewController: UIViewController {
             self?.viewModel.setCreateViewIsPresented(isPresented: false)
         }))
         
-        mainMapView.setLogoutButtonAction(UIAction(handler: { [weak self] _ in
-            do {
-                try Auth.auth().signOut()
-                self?.navigationController?.viewControllers = [LoginViewController()]
-            } catch let signOutError as NSError {
-                os_log("Error signing out: %@", log: .ui, type: .error, signOutError)
-            }
+        mainMapView.setSettingButtonAction(UIAction(handler: { [weak self] _ in
+            let settingViewController: SettingViewController = SettingViewController()
+            self?.navigationController?.pushViewController(settingViewController, animated: true)
         }))
     }
 }
@@ -154,7 +150,7 @@ extension MainViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if let clusterAnnotationView = view as? PinClusterAnnotationView {
+        if view is PinClusterAnnotationView {
             if let clusterAnnotation = view.annotation as? MKClusterAnnotation {
                 zoomCamera(position: clusterAnnotation.coordinate, delta: 0.5)
             }
