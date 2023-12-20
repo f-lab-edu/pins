@@ -202,9 +202,7 @@ final class DetailContentView: UIView {
             commentStackView.addArrangedSubview(commentView)
         }
         commentStackView.layoutIfNeeded()
-        print(commentStackView.frame.height)
         scrollView?.contentSize.height += commentStackView.frame.height
-        print("scrollView: \(scrollView?.contentSize.height)")
     }
 
     func resetCommentContainer(scrollView: UIScrollView?) {
