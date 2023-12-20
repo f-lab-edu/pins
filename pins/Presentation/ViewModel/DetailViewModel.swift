@@ -37,8 +37,12 @@ final class DetailViewModel {
         detailUseCase.uploadComment(text, pinId: currentPin.id)
     }
     
-    func getComments() async {
+    func getComments() async throws {
         guard let currentPin else { return }
-        comments = await detailUseCase.getComments(pinId: currentPin.id)
+        do {
+            comments = try await detailUseCase.getComments(pinId: currentPin.id)
+        } catch {
+            throw error
+        }
     }
 }

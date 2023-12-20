@@ -14,6 +14,7 @@ final class PinAnnotationView: MKAnnotationView {
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        clusteringIdentifier = "PinCluster"
         setLayout()
     }
     

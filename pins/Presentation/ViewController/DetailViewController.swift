@@ -18,7 +18,7 @@ final class DetailViewController: UIViewController {
     private lazy var commentService: CommentServiceProtocol = CommentService(commentRepository: commentRepository)
     
     private lazy var detailUseCase: DetailUseCaseProtocol = DetailUseCase(commentService: commentService, userService: userService, firestorageSerive: firestorageService)
-    private lazy var viewModel: DetailViewModel = DetailViewModel(detailUseCase: detailUseCase)
+    lazy var viewModel: DetailViewModel = DetailViewModel(detailUseCase: detailUseCase)
     private var cancellable = Set<AnyCancellable>()
     
     enum ScrollViewType: Int {
@@ -86,7 +86,7 @@ final class DetailViewController: UIViewController {
     
     func getComments() {
         Task {
-            await viewModel.getComments()
+            try await viewModel.getComments()
         }
     }
 }

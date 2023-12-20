@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1500"
-   version = "1.7">
+   version = "2.2">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -15,10 +15,29 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B7AF692C2AE0FEDF00385632"
-               BuildableName = "Pins.app"
-               BlueprintName = "Pins"
+               BuildableName = "pins.app"
+               BlueprintName = "pins"
                ReferencedContainer = "container:pins.xcodeproj">
             </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <AutocreatedTestPlanReference>
+            </AutocreatedTestPlanReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <TestPlanReference
+               reference = "container:pins/Resources/pins.xctestplan">
+            </TestPlanReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
@@ -44,8 +63,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B7AF692C2AE0FEDF00385632"
-            BuildableName = "Pins.app"
-            BlueprintName = "Pins"
+            BuildableName = "pins.app"
+            BlueprintName = "pins"
             ReferencedContainer = "container:pins.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -61,8 +80,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B7AF692C2AE0FEDF00385632"
-            BuildableName = "Pins.app"
-            BlueprintName = "Pins"
+            BuildableName = "pins.app"
+            BlueprintName = "pins"
             ReferencedContainer = "container:pins.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
