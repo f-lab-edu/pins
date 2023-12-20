@@ -12,7 +12,18 @@ final class SettingViewController: UIViewController {
         view as! SettingView
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setAction()
+    }
+    
     override func loadView() {
         view = SettingView()
+    }
+    
+    private func setAction() {
+        settingView.setBackButtonAction(UIAction(handler: { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }))
     }
 }
