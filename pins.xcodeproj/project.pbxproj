@@ -651,7 +651,7 @@
 		B745F0D72AF28A6600224EC9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -662,7 +662,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# xcconfig에서 API_KEY 값을 읽기\nAPI_KEY=${GOOGLE_API_KEY}\nGCM_SENDER_ID=${GCM_SENDER_ID}\nGOOGLE_APP_ID=${GOOGLE_APP_ID}\nREVERSED_CLIENT_ID=${REVERSED_CLIENT_ID}\n# 커스텀 plist 파일 경로\nPLIST=${SRCROOT}/pins/Resources/GoogleService-Info.plist\n\n# plist 파일에 API_KEY 값 설정\n/usr/libexec/PlistBuddy -c \"Set :API_KEY $API_KEY\" \"$PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :GCM_SENDER_ID $GCM_SENDER_ID\" \"$PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :GOOGLE_APP_ID $GOOGLE_APP_ID\" \"$PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :REVERSED_CLIENT_ID $REVERSED_CLIENT_ID\" \"$PLIST\"\n";
 		};
