@@ -25,6 +25,13 @@ jobs:
     - name: Move Secrets File to Resources
       run: |
         mv Secrets.xcconfig pins/Resources/
+    - name: Update GoogleService-Info.plist
+      run: |
+        PLIST=pins/Resources/GoogleService-Info.plist
+        /usr/libexec/PlistBuddy -c "Set :API_KEY ${{ secrets.GOOGLE_API_KEY }}" "$PLIST"
+        /usr/libexec/PlistBuddy -c "Set :GCM_SENDER_ID ${{ secrets.GCM_SENDER_ID }}" "$PLIST"
+        /usr/libexec/PlistBuddy -c "Set :GOOGLE_APP_ID ${{ secrets.GOOGLE_APP_ID }}" "$PLIST"
+        /usr/libexec/PlistBuddy -c "Set :REVERSED_CLIENT_ID ${{ secrets.REVERSED_CLIENT_ID }}" "$PLIST"
     - name: Build Xcode
       run: |
         xcodebuild clean test -project pins.xcodeproj \
