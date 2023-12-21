@@ -518,11 +518,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B7AF69572AE0FEE000385632 /* Build configuration list for PBXNativeTarget "pins" */;
 			buildPhases = (
+				B745F0D72AF28A6600224EC9 /* Google Service Setting */,
 				B7AF69292AE0FEDF00385632 /* Sources */,
 				B703C0E22B29F28E008E9181 /* SwiftLint Script */,
 				B7AF692A2AE0FEDF00385632 /* Frameworks */,
 				B7AF692B2AE0FEDF00385632 /* Resources */,
-				B745F0D72AF28A6600224EC9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -648,7 +648,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		B745F0D72AF28A6600224EC9 /* ShellScript */ = {
+		B745F0D72AF28A6600224EC9 /* Google Service Setting */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 12;
@@ -658,6 +658,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Google Service Setting";
 			outputFileListPaths = (
 			);
 			outputPaths = (
