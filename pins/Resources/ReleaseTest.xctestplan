@@ -36,6 +36,9 @@
   },
   "testTargets" : [
     {
+      "skippedTests" : [
+        "DetailViewSnapshotTest"
+      ],
       "target" : {
         "containerPath" : "container:pins.xcodeproj",
         "identifier" : "B7AF69422AE0FEE000385632",

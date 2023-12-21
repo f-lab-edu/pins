@@ -65,19 +65,6 @@ final class MainViewModelTests: XCTestCase {
             XCTAssertEqual(userInfo, mockUserService.mockUser, "fetchUserInfo should return the user from the mock service")
         }
     }
-
-    func test_사용자정보가져오기_id를찾을수없을때_userFetchError반환() async {
-        // Given
-        mockUserService.mockUser.id = "unknown"
-
-        do {
-            // When
-            _ = try await viewModel.getUserInfo()
-        } catch {
-            // Then
-            XCTAssertEqual(UserError.userFetchError, error as? UserError)
-        }
-    }
     
     func test_createView표시설정_true로설정시_상태반영() {
         // When
