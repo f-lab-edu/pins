@@ -4,7 +4,7 @@ import iOSSnapshotTestCase
 final class DetailViewSnapshotTest: FBSnapshotTestCase {
     override func setUp() {
         super.setUp()
-        self.recordMode = true
+        self.recordMode = false
     }
     
     func test_DetailViewController_WithNoImage() {
