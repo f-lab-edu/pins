@@ -32,6 +32,8 @@ jobs:
         /usr/libexec/PlistBuddy -c "Set :REVERSED_CLIENT_ID ${{ secrets.REVERSED_CLIENT_ID }}" "$PLIST"
     - name: Print GoogleService-Info.plist
       run: cat pins/Resources/GoogleService-Info.plist
+    - name: Print xcconfig
+      run: cat pins/Resources/Secrets.xcconfig
     - name: Build Xcode
       run: |
         xcodebuild clean test -project pins.xcodeproj \
