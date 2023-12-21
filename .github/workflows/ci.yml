@@ -19,5 +19,5 @@ jobs:
     - name: Build Xcode
       run: |
         xcodebuild clean test -project pins.xcodeproj \
-        -scheme pins \
+        -scheme Release \
         -destination 'platform=iOS Simulator,name=iPhone 13,OS=latest'
