@@ -16,20 +16,20 @@ jobs:
     - uses: actions/checkout@v3
     - name: Create Secrets File
       run: |
-        echo "GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }}" >> Secrets.xcconfig
-        echo "GCM_SENDER_ID=${{ secrets.GCM_SENDER_ID }}" >> Secrets.xcconfig
-        echo "GOOGLE_APP_ID=${{ secrets.GOOGLE_APP_ID }}" >> Secrets.xcconfig
-        echo "REVERSED_CLIENT_ID=${{ secrets.REVERSED_CLIENT_ID }}" >> Secrets.xcconfig
+        echo "GOOGLE_API_KEY=${{ Secrets.GOOGLE_API_KEY }}" >> Secrets.xcconfig
+        echo "GCM_SENDER_ID=${{ Secrets.GCM_SENDER_ID }}" >> Secrets.xcconfig
+        echo "GOOGLE_APP_ID=${{ Secrets.GOOGLE_APP_ID }}" >> Secrets.xcconfig
+        echo "REVERSED_CLIENT_ID=${{ Secrets.REVERSED_CLIENT_ID }}" >> Secrets.xcconfig
     - name: Move Secrets File to Resources
       run: |
         mv Secrets.xcconfig pins/Resources/
     - name: Update GoogleService-Info.plist
       run: |
         PLIST=pins/Resources/GoogleService-Info.plist
-        /usr/libexec/PlistBuddy -c "Set :API_KEY ${{ secrets.GOOGLE_API_KEY }}" "$PLIST"
-        /usr/libexec/PlistBuddy -c "Set :GCM_SENDER_ID ${{ secrets.GCM_SENDER_ID }}" "$PLIST"
-        /usr/libexec/PlistBuddy -c "Set :GOOGLE_APP_ID ${{ secrets.GOOGLE_APP_ID }}" "$PLIST"
-        /usr/libexec/PlistBuddy -c "Set :REVERSED_CLIENT_ID ${{ secrets.REVERSED_CLIENT_ID }}" "$PLIST"
+        /usr/libexec/PlistBuddy -c "Set :API_KEY ${{ Secrets.GOOGLE_API_KEY }}" "$PLIST"
+        /usr/libexec/PlistBuddy -c "Set :GCM_SENDER_ID ${{ Secrets.GCM_SENDER_ID }}" "$PLIST"
+        /usr/libexec/PlistBuddy -c "Set :GOOGLE_APP_ID ${{ Secrets.GOOGLE_APP_ID }}" "$PLIST"
+        /usr/libexec/PlistBuddy -c "Set :REVERSED_CLIENT_ID ${{ Secrets.REVERSED_CLIENT_ID }}" "$PLIST"
     - name: Print GoogleService-Info.plist
       run: cat pins/Resources/GoogleService-Info.plist
     - name: Print xcconfig
