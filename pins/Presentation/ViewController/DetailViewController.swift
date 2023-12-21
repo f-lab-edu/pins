@@ -96,7 +96,7 @@ extension DetailViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor(asset: .placeholderGray) {
             textView.text = nil
-            textView.textColor = UIColor.init(asset: .text)
+            textView.textColor = UIColor(asset: .defaultText)
         }
     }
     

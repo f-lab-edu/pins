@@ -23,7 +23,7 @@ final class CustomTextView: UITextView {
         textColor = placeholderColor
         font = .preferredFont(forTextStyle: .callout)
         adjustsFontForContentSizeCategory = true
-        backgroundColor = UIColor(asset: .background)
+        backgroundColor = UIColor(asset: .defaultBackground)
     }
     
     required init?(coder: NSCoder) {

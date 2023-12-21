@@ -8,9 +8,9 @@
 import Foundation
 
 enum ColorAssets: String {
-    case background
+    case defaultBackground
+    case defaultText
     case categoryGray
     case extraLightGray
     case placeholderGray
-    case text
 }

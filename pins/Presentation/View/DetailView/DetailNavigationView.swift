@@ -41,7 +41,7 @@ final class DetailNavigationView: UIView {
     // MARK: - Method
     func changeBackgroundColor(as offset: CGFloat) {
         if offset > 10 {
-            backgroundColor = .background
+            backgroundColor = UIColor(asset: .defaultBackground)
         } else {
             backgroundColor = .clear
         }

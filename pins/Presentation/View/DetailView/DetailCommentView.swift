@@ -43,7 +43,7 @@ final class DetailCommentView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .background
+        backgroundColor = UIColor(asset: .defaultBackground)
         setLayout()
         setProfileImage()
     }
