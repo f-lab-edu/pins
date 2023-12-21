@@ -21,21 +21,21 @@ enum Category: String, CaseIterable {
     var imageName: String {
         switch self {
         case .culture:
-            return "CulturePin"
+            return "culturePin"
         case .exercise:
-            return "ExercisePin"
+            return "exercisePin"
         case .food:
-            return "FoodPin"
+            return "foodPin"
         case .friendship:
-            return "FriendshipPin"
+            return "friendshipPin"
         case .game:
-            return "GamePin"
+            return "gamePin"
         case .walk:
-            return "WalkPin"
+            return "walkPin"
         case .study:
-            return "StudyPin"
+            return "studyPin"
         case .pet:
-            return "PetPin"
+            return "petPin"
         case .etc:
             return "etc"
         }

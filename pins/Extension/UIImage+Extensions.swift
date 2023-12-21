@@ -19,3 +19,9 @@ extension UIImage {
         return resizedImage!
     }
 }
+
+extension UIImage {
+    convenience init(asset: ImageAssets) {
+        self.init(named: asset.rawValue)!
+    }
+}
