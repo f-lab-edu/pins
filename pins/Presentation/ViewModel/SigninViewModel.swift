@@ -25,7 +25,7 @@ final class SigninViewModel {
     @Published var nickName: String = ""
     @Published var birthDate: String = ""
     @Published var description: String = ""
-    @Published var profileImage: ImageInfo = ImageInfo(index: 0, image: UIImage(resource: .person), extensionType: "png")
+    @Published var profileImage: ImageInfo = ImageInfo(index: 0, image: UIImage(asset: .person), extensionType: "png")
     private let signinUsecase: SigninUseCaseProtocol
     
     init(signinUsecase: SigninUseCaseProtocol) {

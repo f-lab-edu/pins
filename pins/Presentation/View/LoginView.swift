@@ -14,12 +14,12 @@ struct LoginView: View {
     var body: some View {
         VStack {
             Spacer()
-            Image(.pinsIcon) // 로고 이미지
+            Image("pinsIcon") // 로고 이미지
                 .resizable()
                 .scaledToFit()
                 .frame(width: 100, height: 100)
 
-            Image(.pinsTitle) // 타이틀 이미지
+            Image("pinsTitle") // 타이틀 이미지
                 .resizable()
                 .scaledToFit()
                 .frame(width: 100, height: 50)
@@ -30,7 +30,7 @@ struct LoginView: View {
             Button(action: {
                 googleLoginAction()
             }, label: {
-                Image(.googleLogin) // 구글 로그인 버튼 이미지
+                Image("googleLogin") // 구글 로그인 버튼 이미지
                     .resizable()
                     .scaledToFit()
                     .frame(height: 50)
@@ -40,7 +40,7 @@ struct LoginView: View {
             Button(action: {
                 appleLoginAction()
             }, label: {
-                Image(.appleLogin) // 구글 로그인 버튼 이미지
+                Image("appleLogin") // 구글 로그인 버튼 이미지
                     .resizable()
                     .scaledToFit()
                     .frame(height: 50)

@@ -20,11 +20,13 @@ jobs:
         echo "GCM_SENDER_ID=${{ secrets.GCM_SENDER_ID }}" >> Secrets.xcconfig
         echo "GOOGLE_APP_ID=${{ secrets.GOOGLE_APP_ID }}" >> Secrets.xcconfig
         echo "REVERSED_CLIENT_ID=${{ secrets.REVERSED_CLIENT_ID }}" >> Secrets.xcconfig
-    - name: Print Current Working Directory
-      run: pwd
     - name: Move Secrets File to Resources
       run: |
         mv Secrets.xcconfig pins/Resources/
+    - name: Print GoogleService-Info.plist
+      run: cat pins/Resources/GoogleService-Info.plist
+    - name: Print xcconfig
+      run: cat pins/Resources/Secrets.xcconfig
     - name: Build Xcode
       run: |
         xcodebuild clean test -project pins.xcodeproj \

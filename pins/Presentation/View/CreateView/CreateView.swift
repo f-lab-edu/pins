@@ -19,7 +19,7 @@ final class CreateView: UIView {
     }
     
     private let imageButton: CustomButton = {
-        let button = CustomButton(backgroundColor: UIColor(resource: .background), cornerRadius: 10)
+        let button = CustomButton(backgroundColor: UIColor(asset: .defaultBackground), cornerRadius: 10)
         button.setImageTitle(title: "0/\(Constants.selectionLimitCount)", systemName: "photo.badge.plus", titleColor: .gray, imageColor: .gray)
         button.setBorder(width: 1, color: UIColor.lightGray.withAlphaComponent(0.5).cgColor)
         return button
@@ -36,7 +36,7 @@ final class CreateView: UIView {
     }()
     
     private let backButton: CustomButton = {
-        let button = CustomButton(backgroundColor: UIColor(resource: .background))
+        let button = CustomButton(backgroundColor: UIColor(asset: .defaultBackground))
         button.setImage(systemName: "chevron.backward")
         return button
     }()
@@ -46,7 +46,7 @@ final class CreateView: UIView {
         label.text = NSLocalizedString("create.category.title", comment: "")
         label.font = .preferredFont(forTextStyle: .headline)
         label.adjustsFontForContentSizeCategory = true
-        label.textColor = UIColor(resource: .text)
+        label.textColor = UIColor(asset: .defaultText)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -67,7 +67,7 @@ final class CreateView: UIView {
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: "categoryCell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.tag = 0
-        collectionView.backgroundColor = UIColor(resource: .background)
+        collectionView.backgroundColor = UIColor(asset: .defaultBackground)
         return collectionView
     }()
     
@@ -81,7 +81,7 @@ final class CreateView: UIView {
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "imageCell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.tag = 1
-        collectionView.backgroundColor = UIColor(resource: .background)
+        collectionView.backgroundColor = UIColor(asset: .defaultBackground)
         return collectionView
     }()
 
@@ -96,7 +96,7 @@ final class CreateView: UIView {
     init(categoryCount: Int) {
         itemCount = categoryCount
         super.init(frame: .zero)
-        backgroundColor = UIColor(resource: .background)
+        backgroundColor = UIColor(asset: .defaultBackground)
         titleTextView.delegate = self
         contentTextView.delegate = self
         setLayout()
@@ -212,9 +212,9 @@ final class CreateView: UIView {
 // MARK: - Extensions
 extension CreateView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor(resource: .placeholderGray) {
+        if textView.textColor == UIColor(asset: .placeholderGray) {
             textView.text = nil
-            textView.textColor = UIColor.init(resource: .text)
+            textView.textColor = UIColor(asset: .defaultText)
         }
     }
     
@@ -228,7 +228,7 @@ extension CreateView: UITextViewDelegate {
             default:
                 return
             }
-            textView.textColor = UIColor(resource: .placeholderGray)
+            textView.textColor = UIColor(asset: .placeholderGray)
         }
     }
 }

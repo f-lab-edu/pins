@@ -13,7 +13,7 @@ protocol TextPublisher {
 }
 
 final class CustomTextView: UITextView {
-    private let placeholderColor = UIColor(resource: .placeholderGray)
+    private let placeholderColor = UIColor(asset: .placeholderGray)
     private var placeholderLabel: UILabel?
     
     init(placeholder: String, tag: Int) {
@@ -23,7 +23,7 @@ final class CustomTextView: UITextView {
         textColor = placeholderColor
         font = .preferredFont(forTextStyle: .callout)
         adjustsFontForContentSizeCategory = true
-        backgroundColor = UIColor(resource: .background)
+        backgroundColor = UIColor(asset: .defaultBackground)
     }
     
     required init?(coder: NSCoder) {
