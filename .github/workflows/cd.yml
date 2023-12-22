@@ -28,6 +28,17 @@ jobs:
       KEYCHAIN: ${{ 'test.keychain' }}
       
     steps:
+      - name: Create Secrets File
+        run: |
+          echo "GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }}" >> Secrets.xcconfig
+          echo "GCM_SENDER_ID=${{ secrets.GCM_SENDER_ID }}" >> Secrets.xcconfig
+          echo "GOOGLE_APP_ID=${{ secrets.GOOGLE_APP_ID }}" >> Secrets.xcconfig
+          echo "REVERSED_CLIENT_ID=${{ secrets.REVERSED_CLIENT_ID }}" >> Secrets.xcconfig
+      - name: Print Current Working Directory
+        run: pwd
+      - name: Move Secrets File to Resources
+        run: |
+          mv Secrets.xcconfig pins/Resources/
       - name: Select latest Xcode
         run: "sudo xcode-select -s /Applications/Xcode.app"
       - name: Checkout project
