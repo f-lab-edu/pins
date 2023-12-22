@@ -30,9 +30,6 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v3
-      - uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: '15.1'
       - name: Create Secrets File
         run: |
           echo "GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }}" >> Secrets.xcconfig
@@ -71,7 +68,11 @@ jobs:
           done
       - name: Archive app
         run: |
-          xcodebuild clean archive -project $XC_WORKSPACE -scheme $XC_SCHEME -configuration release -archivePath $XC_ARCHIVE -verbose
+          xcodebuild -scheme $XC_SCHEME \
+          -archivePath $XC_ARCHIVE \
+          -configuration release \
+          -destination generic/platform=iOS \
+          clean archive
       - name: Export app
         run: |
           xcodebuild -exportArchive -archivePath $XC_ARCHIVE -exportOptionsPlist ExportOptions.plist -exportPath . -allowProvisioningUpdates -authenticationKeyID ${{ secrets.APPSTORE_API_KEY_ID }} -authenticationKeyIssuerID ${{ secrets.APPSTORE_ISSUER_ID }}
