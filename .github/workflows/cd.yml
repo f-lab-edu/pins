@@ -68,7 +68,7 @@ jobs:
           done
       - name: Archive app
         run: |
-          xcodebuild clean archive -project $XC_WORKSPACE -scheme $XC_SCHEME -configuration release -archivePath $XC_ARCHIVE
+          xcodebuild clean archive -project $XC_WORKSPACE -scheme $XC_SCHEME -configuration release -archivePath $XC_ARCHIVE -verbose
       - name: Export app
         run: |
           xcodebuild -exportArchive -archivePath $XC_ARCHIVE -exportOptionsPlist ExportOptions.plist -exportPath . -allowProvisioningUpdates
