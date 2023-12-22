@@ -32,7 +32,7 @@ jobs:
       - name: List Xcode installations
         run: sudo ls -1 /Applications | grep "Xcode"
       - name: Select Xcode 15.1
-        run: sudo xcode-select -s /Applications/Xcode_15.1.app/Contents/Developer
+        run: sudo xcode-select -s /Applications/Xcode_15.1.app
       - name: Create Secrets File
         run: |
           echo "GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }}" >> Secrets.xcconfig
