@@ -29,10 +29,6 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v3
-      - name: List Xcode installations
-        run: sudo ls -1 /Applications | grep "Xcode"
-      - name: Select Xcode 15.1
-        run: sudo xcode-select -s /Applications/Xcode_15.1.app
       - name: Create Secrets File
         run: |
           echo "GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }}" >> Secrets.xcconfig
@@ -67,11 +63,7 @@ jobs:
             cp "./$PROVISION" "$HOME/Library/MobileDevice/Provisioning Profiles/$UUID.mobileprovision"
           done
       - name: Archive app
-        run: |
-          xcodebuild clean archive -scheme $XC_SCHEME \
-          -archivePath $XC_ARCHIVE \
-          -configuration release \
-          -destination 'platform=iOS Simulator,name=iPhone 13,OS=latest'
+        run: xcodebuild archive -project "$XC_WORKSPACE" -scheme "$XC_SCHEME" -configuration release -archivePath "$XC_ARCHIVE_PATH"
       - name: Export app
         run: |
           xcodebuild -exportArchive -archivePath $XC_ARCHIVE -exportOptionsPlist ExportOptions.plist -exportPath . -allowProvisioningUpdates
