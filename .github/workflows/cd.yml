@@ -71,7 +71,7 @@ jobs:
           xcodebuild clean archive -project $XC_WORKSPACE -scheme $XC_SCHEME -configuration release -archivePath $XC_ARCHIVE -verbose
       - name: Export app
         run: |
-          xcodebuild -exportArchive -archivePath $XC_ARCHIVE -exportOptionsPlist ExportOptions.plist -exportPath . -allowProvisioningUpdates
+          xcodebuild -exportArchive -archivePath $XC_ARCHIVE -exportOptionsPlist ExportOptions.plist -exportPath . -allowProvisioningUpdates -authenticationKeyID ${{ secrets.APPSTORE_API_KEY_ID }} -authenticationKeyIssuerID ${{ secrets.APPSTORE_ISSUER_ID }}
       - name: Upload app to TestFlight
         uses: apple-actions/upload-testflight-build@v1
         with:
