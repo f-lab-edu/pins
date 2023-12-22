@@ -49,7 +49,8 @@ jobs:
           security list-keychains -s "$KEYCHAIN"
           security default-keychain -s "$KEYCHAIN"
           security unlock-keychain -p "" "$KEYCHAIN"
-          security set-keychain-settings
+          security set-keychain-settings -lut 1200
+          security list-keychains
       - name : Configure Code Signing
         run: |
           gpg -d -o "$DECRYPTED_CERT_FILE_PATH" --pinentry-mode=loopback --passphrase "$CERT_ENCRYPTION_KEY" "$ENCRYPTED_CERT_FILE_PATH"
