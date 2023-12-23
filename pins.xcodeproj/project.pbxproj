@@ -50,6 +50,7 @@
 		B785A7822B108A0A00DC2E88 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B785A7812B108A0A00DC2E88 /* PaddingLabel.swift */; };
 		B785A7842B1091BC00DC2E88 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B785A7832B1091BC00DC2E88 /* UILabel+Extensions.swift */; };
 		B795EA5A2B3712E60021A791 /* ReuseIdentifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = B795EA592B3712E60021A791 /* ReuseIdentifying.swift */; };
+		B795EA5C2B3715020021A791 /* AccessibilityIdentifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = B795EA5B2B3715020021A791 /* AccessibilityIdentifying.swift */; };
 		B79A28F32AF37F93008FD3CE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79A28F22AF37F93008FD3CE /* LoginViewController.swift */; };
 		B7ADFF722AEA8DF300D34CEA /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADFF712AEA8DF300D34CEA /* Divider.swift */; };
 		B7AE77DE2B3199FB0056D451 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AE77DD2B3199FB0056D451 /* ImageCacheManager.swift */; };
@@ -154,6 +155,7 @@
 		B785A7812B108A0A00DC2E88 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		B785A7832B1091BC00DC2E88 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		B795EA592B3712E60021A791 /* ReuseIdentifying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifying.swift; sourceTree = "<group>"; };
+		B795EA5B2B3715020021A791 /* AccessibilityIdentifying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifying.swift; sourceTree = "<group>"; };
 		B79A28F02AF37DEB008FD3CE /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		B79A28F22AF37F93008FD3CE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B7ADFF712AEA8DF300D34CEA /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 				B72EDCA32B2B0A4000080328 /* KeyboardAnimationManager.swift */,
 				B7AE77DD2B3199FB0056D451 /* ImageCacheManager.swift */,
 				B795EA592B3712E60021A791 /* ReuseIdentifying.swift */,
+				B795EA5B2B3715020021A791 /* AccessibilityIdentifying.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -736,6 +739,7 @@
 				B7B977682AFA10AE0023718B /* FirebaseRepository.swift in Sources */,
 				B7B20E1B2B1CB92100C8304B /* SigninUseCase.swift in Sources */,
 				B785A7822B108A0A00DC2E88 /* PaddingLabel.swift in Sources */,
+				B795EA5C2B3715020021A791 /* AccessibilityIdentifying.swift in Sources */,
 				B7B977642AFA0D270023718B /* PinRequest.swift in Sources */,
 				B7E1AF472B3466FE008A638D /* UIColor+Extensions.swift in Sources */,
 				B7AF69332AE0FEDF00385632 /* SceneDelegate.swift in Sources */,
