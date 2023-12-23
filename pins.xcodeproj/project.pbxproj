@@ -51,6 +51,8 @@
 		B785A7842B1091BC00DC2E88 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B785A7832B1091BC00DC2E88 /* UILabel+Extensions.swift */; };
 		B795EA5A2B3712E60021A791 /* ReuseIdentifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = B795EA592B3712E60021A791 /* ReuseIdentifying.swift */; };
 		B795EA5C2B3715020021A791 /* AccessibilityIdentifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = B795EA5B2B3715020021A791 /* AccessibilityIdentifying.swift */; };
+		B795EA612B372AFB0021A791 /* CategoryCollectionViewHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = B795EA602B372AFB0021A791 /* CategoryCollectionViewHandling.swift */; };
+		B795EA632B372C940021A791 /* ImageCollectionViewHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = B795EA622B372C940021A791 /* ImageCollectionViewHandling.swift */; };
 		B79A28F32AF37F93008FD3CE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79A28F22AF37F93008FD3CE /* LoginViewController.swift */; };
 		B7ADFF722AEA8DF300D34CEA /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADFF712AEA8DF300D34CEA /* Divider.swift */; };
 		B7AE77DE2B3199FB0056D451 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AE77DD2B3199FB0056D451 /* ImageCacheManager.swift */; };
@@ -156,6 +158,8 @@
 		B785A7832B1091BC00DC2E88 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		B795EA592B3712E60021A791 /* ReuseIdentifying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifying.swift; sourceTree = "<group>"; };
 		B795EA5B2B3715020021A791 /* AccessibilityIdentifying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifying.swift; sourceTree = "<group>"; };
+		B795EA602B372AFB0021A791 /* CategoryCollectionViewHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewHandling.swift; sourceTree = "<group>"; };
+		B795EA622B372C940021A791 /* ImageCollectionViewHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewHandling.swift; sourceTree = "<group>"; };
 		B79A28F02AF37DEB008FD3CE /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		B79A28F22AF37F93008FD3CE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B7ADFF712AEA8DF300D34CEA /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
@@ -365,14 +369,13 @@
 		B71C38812B075CB90065A783 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B795EA5F2B372AE60021A791 /* Protocols */,
 				B71C38822B075CC70065A783 /* CryptoUtils.swift */,
 				B7D99EC72B18640F00250399 /* UIScreenUtils.swift */,
 				B7B20E232B1CCDB800C8304B /* KeychainManager.swift */,
 				B711B6A92B21C08D00C661E3 /* ImagePickerManager.swift */,
 				B72EDCA32B2B0A4000080328 /* KeyboardAnimationManager.swift */,
 				B7AE77DD2B3199FB0056D451 /* ImageCacheManager.swift */,
-				B795EA592B3712E60021A791 /* ReuseIdentifying.swift */,
-				B795EA5B2B3715020021A791 /* AccessibilityIdentifying.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -429,6 +432,17 @@
 				B7ECD44F2B3059E60085C809 /* PinClusterAnnotationView.swift */,
 			);
 			path = MainMapView;
+			sourceTree = "<group>";
+		};
+		B795EA5F2B372AE60021A791 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				B795EA592B3712E60021A791 /* ReuseIdentifying.swift */,
+				B795EA5B2B3715020021A791 /* AccessibilityIdentifying.swift */,
+				B795EA602B372AFB0021A791 /* CategoryCollectionViewHandling.swift */,
+				B795EA622B372C940021A791 /* ImageCollectionViewHandling.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		B7AF69242AE0FEDF00385632 = {
@@ -693,6 +707,7 @@
 				B711B6AA2B21C08D00C661E3 /* ImagePickerManager.swift in Sources */,
 				B7AF69352AE0FEDF00385632 /* MainViewController.swift in Sources */,
 				B74A4FC72AE790BE00226EA7 /* CreateView.swift in Sources */,
+				B795EA632B372C940021A791 /* ImageCollectionViewHandling.swift in Sources */,
 				B7DC98EF2B2619F3006DD8F7 /* CommentRepository.swift in Sources */,
 				B7781B302B0F47C8006372CF /* Category.swift in Sources */,
 				B7ADFF722AEA8DF300D34CEA /* Divider.swift in Sources */,
@@ -726,6 +741,7 @@
 				B79A28F32AF37F93008FD3CE /* LoginViewController.swift in Sources */,
 				B78099432B06047400C01059 /* ImageInfo.swift in Sources */,
 				B71C387C2B0753BB0065A783 /* LoginUseCase.swift in Sources */,
+				B795EA612B372AFB0021A791 /* CategoryCollectionViewHandling.swift in Sources */,
 				B7B20E1F2B1CC02500C8304B /* UserService.swift in Sources */,
 				B7D99EC82B18640F00250399 /* UIScreenUtils.swift in Sources */,
 				B7DC98ED2B261977006DD8F7 /* CommentService.swift in Sources */,

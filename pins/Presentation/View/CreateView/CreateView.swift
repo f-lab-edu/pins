@@ -192,12 +192,14 @@ final class CreateView: UIView {
         createButton.addAction(action, for: .touchUpInside)
     }
     
-    func configureCategoryCollectionView(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
-        categoryCollectionView.delegate = delegate
-        categoryCollectionView.dataSource = dataSource
-        
-        imageCollectionView.delegate = delegate
-        imageCollectionView.dataSource = dataSource
+    func configureCategoryCollectionView(handler: CategoryCollectionViewHandler) {
+        categoryCollectionView.delegate = handler
+        categoryCollectionView.dataSource = handler
+    }
+    
+    func configureImageCollectionView(handler: ImageCollectionViewHandler) {
+        imageCollectionView.delegate = handler
+        imageCollectionView.dataSource = handler
     }
     
     func reloadImageCollectionView() {
