@@ -64,7 +64,7 @@ final class CreateView: UIView {
         layout.itemSize = CGSize(width: itemWidth, height: Int(Constants.itemHeight))
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: "categoryCell")
+        collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.reuseIdentifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.tag = 0
         collectionView.backgroundColor = UIColor(asset: .defaultBackground)
@@ -78,7 +78,7 @@ final class CreateView: UIView {
         layout.itemSize = CGSize(width: 60, height: 60)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "imageCell")
+        collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.reuseIdentifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.tag = 1
         collectionView.backgroundColor = UIColor(asset: .defaultBackground)

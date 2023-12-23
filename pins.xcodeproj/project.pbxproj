@@ -49,6 +49,7 @@
 		B785A77E2B10743600DC2E88 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B785A77D2B10743600DC2E88 /* DetailViewController.swift */; };
 		B785A7822B108A0A00DC2E88 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B785A7812B108A0A00DC2E88 /* PaddingLabel.swift */; };
 		B785A7842B1091BC00DC2E88 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B785A7832B1091BC00DC2E88 /* UILabel+Extensions.swift */; };
+		B795EA5A2B3712E60021A791 /* ReuseIdentifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = B795EA592B3712E60021A791 /* ReuseIdentifying.swift */; };
 		B79A28F32AF37F93008FD3CE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79A28F22AF37F93008FD3CE /* LoginViewController.swift */; };
 		B7ADFF722AEA8DF300D34CEA /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADFF712AEA8DF300D34CEA /* Divider.swift */; };
 		B7AE77DE2B3199FB0056D451 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AE77DD2B3199FB0056D451 /* ImageCacheManager.swift */; };
@@ -152,6 +153,7 @@
 		B785A77D2B10743600DC2E88 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B785A7812B108A0A00DC2E88 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		B785A7832B1091BC00DC2E88 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		B795EA592B3712E60021A791 /* ReuseIdentifying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifying.swift; sourceTree = "<group>"; };
 		B79A28F02AF37DEB008FD3CE /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		B79A28F22AF37F93008FD3CE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B7ADFF712AEA8DF300D34CEA /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 				B711B6A92B21C08D00C661E3 /* ImagePickerManager.swift */,
 				B72EDCA32B2B0A4000080328 /* KeyboardAnimationManager.swift */,
 				B7AE77DD2B3199FB0056D451 /* ImageCacheManager.swift */,
+				B795EA592B3712E60021A791 /* ReuseIdentifying.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -708,6 +711,7 @@
 				B71058912AEA2974003D6039 /* MainViewModel.swift in Sources */,
 				B76DD4662AFE238F00DFE7E1 /* LoadingIndicator.swift in Sources */,
 				B7631C6D2B2DC27700B111AA /* UserError.swift in Sources */,
+				B795EA5A2B3712E60021A791 /* ReuseIdentifying.swift in Sources */,
 				B7781B332B0F4D4B006372CF /* PinAnnotationView.swift in Sources */,
 				B7BB20262B0F1696003EED3A /* MainUseCase.swift in Sources */,
 				B7E050F12AE4FB3A007903C3 /* MainMapView.swift in Sources */,
