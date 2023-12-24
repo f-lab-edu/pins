@@ -8,9 +8,17 @@
 import Foundation
 
 final class SettingViewModel {
-    private let tableData: [String] = ["로그아웃", "현재 캐시 100MB"]
+    private var tableData: [SettingItemHandling] = []
     
-    func getTableData() -> [String] {
+    init(tableData: [SettingItemHandling]) {
+        self.tableData = tableData
+    }
+    
+    func getTableData() -> [SettingItemHandling] {
         return tableData
+    }
+    
+    func getTableStringData() -> [String] {
+        return tableData.map { $0.title }
     }
 }

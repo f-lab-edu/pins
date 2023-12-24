@@ -79,7 +79,7 @@ final class SettingView: UIView {
         dataSource = UITableViewDiffableDataSource<Int, String>(tableView: tableView, cellProvider: { [weak self] tableView, indexPath, _ in
             guard let self else { fatalError("self is nil") }
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingViewCell", for: indexPath) as? SettingViewCell
-            cell?.setLabelText(self.viewModel.getTableData()[indexPath.row])
+            cell?.setLabelText(self.viewModel.getTableStringData()[indexPath.row])
             return cell
         })
     }
@@ -87,7 +87,7 @@ final class SettingView: UIView {
     private func performInitialDataPopulation() {
         var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
         snapshot.appendSections([0])
-        snapshot.appendItems(viewModel.getTableData())
+        snapshot.appendItems(viewModel.getTableStringData())
         dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
