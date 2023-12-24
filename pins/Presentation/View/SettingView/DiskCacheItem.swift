@@ -6,16 +6,25 @@
 //
 
 import OSLog
-import Foundation
+import UIKit
 
 final class DiskCacheItem: SettingItemHandling {
     var title: String = "메모리"
+    var onPresentAlert: ((UIAlertController) -> Void)?
     
     init(title: String) {
         self.title = title
     }
     
     func performAction() {
-        os_log("메모리 제거")
+        let alert = ConfirmManager.makeAlert(title: "캐시 지우기", message: "모든 캐시를 지우시겠습니까?") { [weak self] in
+            self?.removeDiskCache()
+            self?.title = "메모리 Zero KB 사용중"
+        }
+        onPresentAlert?(alert)
+    }
+    
+    private func removeDiskCache() {
+        DiskCacheManager.clearCache()
     }
 }

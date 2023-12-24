@@ -13,9 +13,15 @@ final class SettingViewController: UIViewController {
         logoutItem.onPresentAlert = { [weak self] alert in
             self?.present(alert, animated: true)
         }
+        let cacheSize = DiskCacheManager.calculateCacheSize()
+        let formattedSize = DiskCacheManager.formatBytes(cacheSize)
+        let diskCacheItem = DiskCacheItem(title: "메모리 \(formattedSize) 사용중")
+        diskCacheItem.onPresentAlert = { [weak self] alert in
+            self?.present(alert, animated: true)
+        }
         return SettingViewModel(tableData: [
             logoutItem,
-            DiskCacheItem(title: "메모리 100MB 사용중")
+            diskCacheItem
         ])
     }()
     private var settingView: SettingView {
