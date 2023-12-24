@@ -8,8 +8,7 @@
 import UIKit
 import MapKit
 
-final class PinAnnotationView: MKAnnotationView {
-    static var identifier: String = "PinAnnotation"
+final class PinAnnotationView: MKAnnotationView, AnnotationIdentifying {
     private var pinImageView: UIImageView = UIImageView()
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {

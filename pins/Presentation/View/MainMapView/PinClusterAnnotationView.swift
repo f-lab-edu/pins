@@ -7,8 +7,7 @@
 
 import MapKit
 
-final class PinClusterAnnotationView: MKAnnotationView {
-    static var identifier: String = "PinCluster"
+final class PinClusterAnnotationView: MKAnnotationView, AnnotationIdentifying {
     private var label: UILabel = {
         var label: UILabel = UILabel()
         label.layer.cornerRadius = 30
