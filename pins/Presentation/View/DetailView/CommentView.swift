@@ -11,7 +11,7 @@ final class CommentView: UIView {
     // MARK: - Properties
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(resource: .test)
+        imageView.image = UIImage(asset: .testImage)
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 20
         imageView.clipsToBounds = true

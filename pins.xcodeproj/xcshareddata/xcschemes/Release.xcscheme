@@ -103,6 +103,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "Pins"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

@@ -11,7 +11,7 @@ final class DetailCommentView: UIView {
     // MARK: - Properties
     private let myProfileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(resource: .test)
+        imageView.image = UIImage(asset: .testImage)
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 20
         imageView.clipsToBounds = true
@@ -43,7 +43,7 @@ final class DetailCommentView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .background
+        backgroundColor = UIColor(asset: .defaultBackground)
         setLayout()
         setProfileImage()
     }
