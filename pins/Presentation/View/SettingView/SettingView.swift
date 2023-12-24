@@ -12,28 +12,29 @@ final class SettingView: UIView {
     private let titleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "설정"
-        label.textColor = .text
+        label.textColor = UIColor(asset: .defaultText)
         label.font = UIFont.systemFont(ofSize: 18)
         return label
     }()
     private let backButton: CustomButton = {
-        let button = CustomButton(backgroundColor: UIColor(resource: .background))
+        let button = CustomButton(backgroundColor: UIColor(asset: .defaultBackground))
         button.setImage(systemName: "chevron.backward")
         return button
     }()
-    private let tableView: UITableView = {
+    let tableView: UITableView = {
         let tableView: UITableView = UITableView(frame: .zero, style: .plain)
         tableView.register(SettingViewCell.self, forCellReuseIdentifier: "SettingViewCell")
-        tableView.backgroundColor = .background
+        tableView.backgroundColor = UIColor(asset: .defaultBackground)
         tableView.separatorInset.left = 0
         return tableView
     }()
     private var dataSource: UITableViewDiffableDataSource<Int, String>!
-    private let tableData: [String] = ["로그아웃", "현재 캐시 100MB"]
+    private var viewModel: SettingViewModel!
     // MARK: - 초기화
-    override init(frame: CGRect) {
+    init(viewModel: SettingViewModel) {
         super.init(frame: .zero)
-        backgroundColor = .background
+        backgroundColor = UIColor(asset: .defaultBackground)
+        self.viewModel = viewModel
         
         setBackButtonLayout()
         setTitleLabelLayout()
@@ -78,7 +79,7 @@ final class SettingView: UIView {
         dataSource = UITableViewDiffableDataSource<Int, String>(tableView: tableView, cellProvider: { [weak self] tableView, indexPath, _ in
             guard let self else { fatalError("self is nil") }
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingViewCell", for: indexPath) as? SettingViewCell
-            cell?.setLabelText(self.tableData[indexPath.row])
+            cell?.setLabelText(self.viewModel.getTableData()[indexPath.row])
             return cell
         })
     }
@@ -86,7 +87,7 @@ final class SettingView: UIView {
     private func performInitialDataPopulation() {
         var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
         snapshot.appendSections([0])
-        snapshot.appendItems(tableData)
+        snapshot.appendItems(viewModel.getTableData())
         dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
