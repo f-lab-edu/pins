@@ -8,9 +8,16 @@
 import UIKit
 
 final class SettingViewController: UIViewController {
-    private lazy var viewModel: SettingViewModel = SettingViewModel(tableData: [
-        LogoutItem(navigationController: navigationController)
-    ])
+    private lazy var viewModel: SettingViewModel = {
+        let logoutItem = LogoutItem(navigationController: navigationController)
+        logoutItem.onPresentAlert = { [weak self] alert in
+            self?.present(alert, animated: true)
+        }
+        return SettingViewModel(tableData: [
+            logoutItem,
+            DiskCacheItem(title: "메모리 100MB 사용중")
+        ])
+    }()
     private var settingView: SettingView {
         view as! SettingView
     }
