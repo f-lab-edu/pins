@@ -67,7 +67,7 @@ jobs:
             cp "./$PROVISION" "$HOME/Library/MobileDevice/Provisioning Profiles/$UUID.mobileprovision"
           done
       - name: Archive app
-        run: xcodebuild archive -project "$XC_WORKSPACE" -scheme "$XC_SCHEME" -configuration release -archivePath "$XC_ARCHIVE_PATH"
+        run: xcodebuild archive -project "$XC_WORKSPACE" -scheme "$XC_SCHEME" -configuration release -archivePath "$XC_ARCHIVE"
       - name: Export app
         run: |
           xcodebuild -exportArchive -archivePath $XC_ARCHIVE -exportOptionsPlist ExportOptions.plist -exportPath . -allowProvisioningUpdates
