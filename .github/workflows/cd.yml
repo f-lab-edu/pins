@@ -66,6 +66,10 @@ jobs:
               UUID=`/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i ./$PROVISION)`
             cp "./$PROVISION" "$HOME/Library/MobileDevice/Provisioning Profiles/$UUID.mobileprovision"
           done
+      - uses: yanamura/ios-bump-version@v1
+        with:
+          version: 1.1.0
+          build-number: ${{ github.run_number }}
       - name: Archive app
         run: xcodebuild archive -project "$XC_WORKSPACE" -scheme "$XC_SCHEME" -configuration release -archivePath "$XC_ARCHIVE"
       - name: Export app
