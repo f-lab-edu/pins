@@ -6,7 +6,7 @@ on:
     
 jobs:
   deploy:
-    runs-on: macos-latest
+    runs-on: macos-13
     env:
       XC_WORKSPACE: ${{ 'pins.xcodeproj' }}
       XC_SCHEME: ${{ 'Release' }}
@@ -29,6 +29,10 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v3
+      - name: Setup Xcode version
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.0'
       - name: Create Secrets File
         run: |
           echo "GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }}" >> Secrets.xcconfig
