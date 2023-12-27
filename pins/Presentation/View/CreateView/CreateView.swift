@@ -64,7 +64,7 @@ final class CreateView: UIView {
         layout.itemSize = CGSize(width: itemWidth, height: Int(Constants.itemHeight))
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: "categoryCell")
+        collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.reuseIdentifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.tag = 0
         collectionView.backgroundColor = UIColor(asset: .defaultBackground)
@@ -78,7 +78,7 @@ final class CreateView: UIView {
         layout.itemSize = CGSize(width: 60, height: 60)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "imageCell")
+        collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.reuseIdentifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.tag = 1
         collectionView.backgroundColor = UIColor(asset: .defaultBackground)
@@ -192,12 +192,14 @@ final class CreateView: UIView {
         createButton.addAction(action, for: .touchUpInside)
     }
     
-    func configureCategoryCollectionView(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
-        categoryCollectionView.delegate = delegate
-        categoryCollectionView.dataSource = dataSource
-        
-        imageCollectionView.delegate = delegate
-        imageCollectionView.dataSource = dataSource
+    func configureCategoryCollectionView(handler: CategoryCollectionViewHandler) {
+        categoryCollectionView.delegate = handler
+        categoryCollectionView.dataSource = handler
+    }
+    
+    func configureImageCollectionView(handler: ImageCollectionViewHandler) {
+        imageCollectionView.delegate = handler
+        imageCollectionView.dataSource = handler
     }
     
     func reloadImageCollectionView() {

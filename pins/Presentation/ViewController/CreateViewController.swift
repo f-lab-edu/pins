@@ -14,6 +14,9 @@ final class CreateViewController: UIViewController {
     private lazy var firebaseStorageService: FirestorageServiceProtocol = FirestorageService(firebaseRepository: firebaseRepository)
     private lazy var createUseCase: CreateUseCaseProtocol = CreateUseCase(firestorageService: firebaseStorageService)
     private lazy var viewModel: CreateViewModel = CreateViewModel(createUsecase: createUseCase)
+    private lazy var categoryCollectionViewHandler = CategoryCollectionViewHandler(viewModel: viewModel)
+    private lazy var imageCollectionViewHandler = ImageCollectionViewHandler(viewModel: viewModel)
+
     private enum CollectionViewType: Int {
         case categoryCollection
         case imageCollection
@@ -35,7 +38,8 @@ final class CreateViewController: UIViewController {
         super.viewDidLoad()
         setAction()
         bindViewModel()
-        createView.configureCategoryCollectionView(delegate: self, dataSource: self)
+        createView.configureCategoryCollectionView(handler: categoryCollectionViewHandler)
+        createView.configureImageCollectionView(handler: imageCollectionViewHandler)
         imagePicker.delegate = self
     }
     
@@ -82,18 +86,6 @@ final class CreateViewController: UIViewController {
             }
         }))
     }
-
-    private func updateCategoryUIForSelection(in collectionView: UICollectionView, selected: Int, unselected: Int?) {
-        guard selected != unselected else { return }
-        
-        if let cell = collectionView.cellForItem(at: IndexPath(row: selected, section: 0)) as? CategoryCollectionViewCell {
-            cell.isSelect()
-        }
-
-        if let unselected = unselected, let previousCell = collectionView.cellForItem(at: IndexPath(row: unselected, section: 0)) as? CategoryCollectionViewCell {
-            previousCell.isUnSelect()
-        }
-    }
     
     private func processPickerResult(_ index: Int, _ result: PHPickerResult) {
         if result.itemProvider.canLoadObject(ofClass: UIImage.self) {
@@ -111,44 +103,6 @@ final class CreateViewController: UIViewController {
     
     func setPosition(_ position: CLLocationCoordinate2D) {
         viewModel.setPosition(position: position)
-    }
-}
-
-extension CreateViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch CollectionViewType(rawValue: collectionView.tag) {
-        case .categoryCollection:
-            let (selected, unselected) = viewModel.didSelectCategory(at: indexPath.row, previouslySelected: viewModel.selectedCategoryIndex)
-            updateCategoryUIForSelection(in: collectionView, selected: selected, unselected: unselected)
-        default:
-            return
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch CollectionViewType(rawValue: collectionView.tag) {
-        case .categoryCollection:
-            return viewModel.getCategoriesCount()
-        case .imageCollection:
-            return viewModel.getSelectedImagesCount()
-        default:
-            fatalError("wrong collection view tag")
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch CollectionViewType(rawValue: collectionView.tag) {
-        case .categoryCollection:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
-            cell.setText(Category.types[indexPath.row])
-            return cell
-        case .imageCollection:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
-            cell.setImage(image: viewModel.selectedImageInfos[indexPath.row].image)
-            return cell
-        default:
-            fatalError("wrong collection view tag")
-        }
     }
 }
 
