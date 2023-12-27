@@ -35,7 +35,7 @@ final class MainUseCase: MainUseCaseProtocol {
                 images.append(image)
             }
         }
-        let user = await userService.getUser(id: pin.userId)
+        let user = try await userService.getUser(id: pin.userId)
         guard let user = user else { throw UserError.userFetchError }
         let profile = await firestorageService.downloadImage(urlString: user.profileImage)
         guard let profile else { throw UserError.userProfileImageNotFound }
@@ -47,7 +47,7 @@ final class MainUseCase: MainUseCaseProtocol {
         guard let id = KeychainManager.load(key: .userId) else {
             throw UserError.userIdNotFound
         }
-        guard let user = await userService.getUser(id: id) else {
+        guard let user = try await userService.getUser(id: id) else {
             throw UserError.userFetchError
         }
         return user

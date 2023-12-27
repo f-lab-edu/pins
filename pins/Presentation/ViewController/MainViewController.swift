@@ -154,7 +154,7 @@ extension MainViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if let clusterAnnotationView = view as? PinClusterAnnotationView {
+        if view is PinClusterAnnotationView {
             if let clusterAnnotation = view.annotation as? MKClusterAnnotation {
                 zoomCamera(position: clusterAnnotation.coordinate, delta: 0.5)
             }

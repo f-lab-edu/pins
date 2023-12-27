@@ -40,7 +40,7 @@ final class DetailUseCase: DetailUseCaseProtocol {
         var commentResponses: [CommentResponse] = []
         
         for commentRequest in commentRequests {
-            let user = await userService.getUser(id: commentRequest.userId)
+            let user = try await userService.getUser(id: commentRequest.userId)
             guard let user else { throw UserError.userFetchError }
             let profile = await firestorageService.downloadImage(urlString: user.profileImage)
             guard let profile else { throw UserError.userProfileImageNotFound }
