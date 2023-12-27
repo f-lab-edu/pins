@@ -21,14 +21,14 @@ final class CommentView: UIView {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .medium)
-        label.accessibilityIdentifier = "nameLabel"
+        label.setAccessibilityIdentifier()
         return label
     }()
     
     private let personalInfo: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .light)
-        label.accessibilityIdentifier = "personalInfo"
+        label.setAccessibilityIdentifier()
         return label
     }()
     
@@ -38,14 +38,14 @@ final class CommentView: UIView {
         label.lineBreakMode = .byCharWrapping
         label.setLineHeight(lineHeight: 4)
         label.font = .systemFont(ofSize: 15, weight: .regular)
-        label.accessibilityIdentifier = "contentLabel"
+        label.setAccessibilityIdentifier()
         return label
     }()
     
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .thin)
-        label.accessibilityIdentifier = "dateLabel"
+        label.setAccessibilityIdentifier()
         return label
     }()
     

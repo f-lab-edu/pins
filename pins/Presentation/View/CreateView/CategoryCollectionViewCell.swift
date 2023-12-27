@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CategoryCollectionViewCell: UICollectionViewCell {
+final class CategoryCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     // MARK: - Properties
     private var categoryLabel: UILabel = {
         let label: UILabel = UILabel()

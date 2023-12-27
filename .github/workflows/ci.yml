@@ -10,10 +10,14 @@ on:
 jobs:
   build:
 
-    runs-on: macos-latest
+    runs-on: macos-13
 
     steps:
     - uses: actions/checkout@v3
+    - name: Setup Xcode version
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: '15.0'
     - name: Create Secrets File
       run: |
         echo "GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }}" >> Secrets.xcconfig
@@ -27,7 +31,7 @@ jobs:
       run: cat pins/Resources/GoogleService-Info.plist
     - name: Print xcconfig
       run: cat pins/Resources/Secrets.xcconfig
-    - name: Build Xcode
+    - name: Build & Test Xcode
       run: |
         xcodebuild clean test -project pins.xcodeproj \
         -scheme Release \

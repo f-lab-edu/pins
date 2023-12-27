@@ -6,7 +6,7 @@ on:
     
 jobs:
   deploy:
-    runs-on: macos-latest
+    runs-on: macos-13
     env:
       XC_WORKSPACE: ${{ 'pins.xcodeproj' }}
       XC_SCHEME: ${{ 'Release' }}
@@ -29,6 +29,10 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v3
+      - name: Setup Xcode version
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.0'
       - name: Create Secrets File
         run: |
           echo "GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }}" >> Secrets.xcconfig
@@ -62,8 +66,12 @@ jobs:
               UUID=`/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i ./$PROVISION)`
             cp "./$PROVISION" "$HOME/Library/MobileDevice/Provisioning Profiles/$UUID.mobileprovision"
           done
+      - uses: yanamura/ios-bump-version@v1
+        with:
+          version: 1.1.0
+          build-number: ${{ github.run_number }}
       - name: Archive app
-        run: xcodebuild archive -project "$XC_WORKSPACE" -scheme "$XC_SCHEME" -configuration release -archivePath "$XC_ARCHIVE_PATH"
+        run: xcodebuild archive -project "$XC_WORKSPACE" -scheme "$XC_SCHEME" -configuration release -archivePath "$XC_ARCHIVE"
       - name: Export app
         run: |
           xcodebuild -exportArchive -archivePath $XC_ARCHIVE -exportOptionsPlist ExportOptions.plist -exportPath . -allowProvisioningUpdates
