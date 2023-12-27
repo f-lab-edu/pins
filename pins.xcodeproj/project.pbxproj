@@ -42,6 +42,7 @@
 		B76DD4622AFE0DB000DFE7E1 /* FirestorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DD4612AFE0DB000DFE7E1 /* FirestorageService.swift */; };
 		B76DD4642AFE0E4B00DFE7E1 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B76DD4632AFE0E4B00DFE7E1 /* FirebaseStorage */; };
 		B76DD4662AFE238F00DFE7E1 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DD4652AFE238F00DFE7E1 /* LoadingIndicator.swift */; };
+		B76EEA9E2B35F06E00D349EA /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B76EEA9D2B35F06E00D349EA /* InfoPlist.xcstrings */; };
 		B7781B302B0F47C8006372CF /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7781B2F2B0F47C8006372CF /* Category.swift */; };
 		B7781B332B0F4D4B006372CF /* PinAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7781B322B0F4D4B006372CF /* PinAnnotationView.swift */; };
 		B7781B352B0F4F91006372CF /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7781B342B0F4F91006372CF /* PinAnnotation.swift */; };
@@ -150,6 +151,7 @@
 		B7631C732B2DCCBD00B111AA /* DetailViewSnapshotTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewSnapshotTest.swift; sourceTree = "<group>"; };
 		B76DD4612AFE0DB000DFE7E1 /* FirestorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestorageService.swift; sourceTree = "<group>"; };
 		B76DD4652AFE238F00DFE7E1 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		B76EEA9D2B35F06E00D349EA /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		B7781B2F2B0F47C8006372CF /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		B7781B322B0F4D4B006372CF /* PinAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotationView.swift; sourceTree = "<group>"; };
 		B7781B342B0F4F91006372CF /* PinAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotation.swift; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 				B7F6A8D82AE2B61500892215 /* LaunchScreen.storyboard */,
 				B7E1AF422B346328008A638D /* ColorAssets.swift */,
 				B7E1AF442B346380008A638D /* ImageAssets.swift */,
+				B76EEA9D2B35F06E00D349EA /* InfoPlist.xcstrings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -634,6 +637,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B76EEA9E2B35F06E00D349EA /* InfoPlist.xcstrings in Resources */,
 				B703C0E42B29F351008E9181 /* .swiftlint.yml in Resources */,
 				B724F92E2AFCBE4400722CE1 /* Localizable.strings in Resources */,
 				B7F6A8DA2AE2B61500892215 /* LaunchScreen.storyboard in Resources */,
