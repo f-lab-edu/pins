@@ -32,9 +32,13 @@ final class DetailViewModel {
         return currentPin.images
     }
     
-    func uploadComment(_ text: String) {
+    func uploadComment(_ text: String) throws {
         guard let currentPin else { return }
-        detailUseCase.uploadComment(text, pinId: currentPin.id)
+        do {
+            try detailUseCase.uploadComment(text, pinId: currentPin.id)
+        } catch {
+            throw error
+        }
     }
     
     func getComments() async throws {

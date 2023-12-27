@@ -9,8 +9,8 @@ import Foundation
 import OSLog
 
 protocol CommentServiceProtocol {
-    func getComments(pinId: String) async -> [CommentRequest]
-    func uploadComment(comment: CommentRequest)
+    func getComments(pinId: String) async throws -> [CommentRequest]
+    func uploadComment(comment: CommentRequest) throws
 }
 
 final class CommentService: CommentServiceProtocol {
@@ -18,26 +18,26 @@ final class CommentService: CommentServiceProtocol {
     init(commentRepository: CommentRepositoryProtocol) {
         self.commentRepository = commentRepository
     }
-    func getComments(pinId: String) async -> [CommentRequest] {
+    func getComments(pinId: String) async throws -> [CommentRequest] {
         let jsonData = await commentRepository.getComments(pinId: pinId)
         let decoder = JSONDecoder()
         var returnComments: [CommentRequest] = []
         do {
             returnComments = try decoder.decode([CommentRequest].self, from: JSONSerialization.data(withJSONObject: jsonData))
         } catch {
-            os_log("Error getting documents: \(error)")
+            throw CommentError.commentDecoderError
         }
         return returnComments
     }
     
-    func uploadComment(comment: CommentRequest) {
+    func uploadComment(comment: CommentRequest) throws {
         let encoder = JSONEncoder()
         do {
             let commentData = try encoder.encode(comment)
             let commentDict = try JSONSerialization.jsonObject(with: commentData) as! [String: Any]
             commentRepository.uploadComment(comment: commentDict)
         } catch {
-            os_log("Error getting documents: \(error)")
+            throw CommentError.commentDecoderError
         }
     }
 }

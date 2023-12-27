@@ -81,7 +81,6 @@ final class FirestorageService: FirestorageServiceProtocol {
                 urls.append(url)
             }
         }
-
         return urls
     }
     

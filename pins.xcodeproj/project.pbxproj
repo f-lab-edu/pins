@@ -99,6 +99,7 @@
 		B7ECD4502B3059E60085C809 /* PinClusterAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ECD44F2B3059E60085C809 /* PinClusterAnnotationView.swift */; };
 		B7F071B72B14855000BB5AB9 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F071B62B14855000BB5AB9 /* DetailViewModel.swift */; };
 		B7F071B92B14876C00BB5AB9 /* PinResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F071B82B14876C00BB5AB9 /* PinResponse.swift */; };
+		B7F0B8F32B3C34A100E9BA6D /* CommentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F0B8F22B3C34A100E9BA6D /* CommentError.swift */; };
 		B7F6A8DA2AE2B61500892215 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F6A8D82AE2B61500892215 /* LaunchScreen.storyboard */; };
 		B7F8B3052B30938400B869BB /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = B7F8B3042B30938400B869BB /* iOSSnapshotTestCase */; };
 		B7F8B3072B309D2C00B869BB /* MockClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F8B3062B309D2C00B869BB /* MockClass.swift */; };
@@ -208,6 +209,7 @@
 		B7ECD44F2B3059E60085C809 /* PinClusterAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinClusterAnnotationView.swift; sourceTree = "<group>"; };
 		B7F071B62B14855000BB5AB9 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		B7F071B82B14876C00BB5AB9 /* PinResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinResponse.swift; sourceTree = "<group>"; };
+		B7F0B8F22B3C34A100E9BA6D /* CommentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentError.swift; sourceTree = "<group>"; };
 		B7F6A8D92AE2B61500892215 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B7F8B3062B309D2C00B869BB /* MockClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -424,6 +426,7 @@
 			isa = PBXGroup;
 			children = (
 				B7631C6C2B2DC27700B111AA /* UserError.swift */,
+				B7F0B8F22B3C34A100E9BA6D /* CommentError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -759,6 +762,7 @@
 				B71C38802B07554B0065A783 /* FirebaseAuthService.swift in Sources */,
 				B7194A442B1B4F4600642FDA /* SigninView.swift in Sources */,
 				B7AEC0CE2B034568004BA42A /* CustomTextView.swift in Sources */,
+				B7F0B8F32B3C34A100E9BA6D /* CommentError.swift in Sources */,
 				B70EE5BD2B15D7DD00BCCACF /* String+Extensions.swift in Sources */,
 				B7B977682AFA10AE0023718B /* FirebaseRepository.swift in Sources */,
 				B7B20E1B2B1CB92100C8304B /* SigninUseCase.swift in Sources */,

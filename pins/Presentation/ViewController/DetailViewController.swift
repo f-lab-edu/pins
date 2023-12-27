@@ -70,12 +70,14 @@ final class DetailViewController: UIViewController {
         }))
         
         detailView.commentView.setSubmitButtonAction(UIAction(handler: { [weak self] _ in
-            let comment = self?.detailView.commentView.inputTextView.text
-            guard let comment else { return }
-            guard !comment.isEmpty else { return }
-            self?.viewModel.uploadComment(comment)
-            self?.detailView.commentView.inputTextView.text = ""
-            self?.getComments()
+            Task {
+                let comment = self?.detailView.commentView.inputTextView.text
+                guard let comment else { return }
+                guard !comment.isEmpty else { return }
+                try self?.viewModel.uploadComment(comment)
+                self?.detailView.commentView.inputTextView.text = ""
+                self?.getComments()
+            }
         }))
     }
     
