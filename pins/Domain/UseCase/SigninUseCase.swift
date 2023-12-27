@@ -31,7 +31,7 @@ final class SigninUseCase: SigninUseCaseProtocol {
         
         let user = UserRequest(id: userId, nickName: nickName, email: userEmail, birthDate: birthDate, description: description, firstTime: false, profileImage: imageUrl.url.absoluteString)
         do {
-            try userService.putUser(user: user)
+            try await userService.putUser(user: user)
         } catch {
             throw error
         }

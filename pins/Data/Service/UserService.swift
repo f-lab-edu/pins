@@ -10,7 +10,7 @@ import OSLog
 
 protocol UserServiceProtocol {
     func getUser(id: String) async throws -> UserRequest?
-    func putUser(user: UserRequest) throws
+    func putUser(user: UserRequest) async throws
 }
 
 final class UserService: UserServiceProtocol {
@@ -38,7 +38,7 @@ final class UserService: UserServiceProtocol {
         }
     }
     
-    func putUser(user: UserRequest) throws {
+    func putUser(user: UserRequest) async throws {
         let encoder = JSONEncoder()
         do {
             let userData = try encoder.encode(user)
