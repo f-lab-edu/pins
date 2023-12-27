@@ -70,8 +70,8 @@ final class FirestorageService: FirestorageServiceProtocol {
     func uploadImages(imageInfos: [ImageInfo]) async -> [URLWithIndex] {
         var urls: [URLWithIndex] = []
         for imageInfo in imageInfos {
-            let url = await uploadImage(imageInfo: imageInfo)
-            urls.append(url)
+            async let url = uploadImage(imageInfo: imageInfo)
+            urls.append(await url)
         }
         return urls
     }
