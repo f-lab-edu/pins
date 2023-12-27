@@ -10,7 +10,7 @@ import OSLog
 
 protocol UserServiceProtocol {
     func getUser(id: String) async throws -> UserRequest?
-    func putUser(user: UserRequest)
+    func putUser(user: UserRequest) throws
 }
 
 final class UserService: UserServiceProtocol {
@@ -27,25 +27,25 @@ final class UserService: UserServiceProtocol {
             userData = try await userRepository.getUser(id: id)
         } catch {
             os_log(.error, log: .default, "Error fetching user data: %@", error.localizedDescription)
-            throw UserError.userFetchError
+            throw error
         }
         do {
             let user = try decoder.decode(UserRequest.self, from: JSONSerialization.data(withJSONObject: userData))
             return user
         } catch {
             os_log(.error, log: .default, "Error decoding user data: %@", error.localizedDescription)
-            return nil
+            throw UserError.userDecodingError
         }
     }
     
-    func putUser(user: UserRequest) {
+    func putUser(user: UserRequest) throws {
         let encoder = JSONEncoder()
         do {
             let userData = try encoder.encode(user)
             let userDict = try JSONSerialization.jsonObject(with: userData) as? [String: Any]
             userRepository.putUser(user: userDict!)
         } catch {
-            fatalError("Error putting user: \(error.localizedDescription)")
+            throw UserError.userDecodingError
         }
     }
 }

@@ -11,4 +11,5 @@ enum UserError: Error {
     case userIdNotFound
     case userFetchError
     case userProfileImageNotFound
+    case userDecodingError
 }

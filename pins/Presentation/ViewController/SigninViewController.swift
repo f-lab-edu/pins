@@ -70,7 +70,7 @@ final class SigninViewController: UIViewController {
                 self.viewModel.setBirthDate(self.signinView.birthDateInput.text ?? "")
                 self.viewModel.setDescription(self.signinView.descriptionInput.text ?? "")
                 Task {
-                    await self.viewModel.saveUserInfo()
+                    try await self.viewModel.saveUserInfo()
                     let mainViewController = MainViewController()
                     self.navigationController?.pushViewController(mainViewController, animated: true)
                 }
