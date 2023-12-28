@@ -153,7 +153,7 @@ final class DetailView: UIView {
         contentView.setPinContent(pin: pin)
         contentView.layoutIfNeeded()
         
-        if pin.images.isEmpty {
+        if pin.imageDatas.isEmpty {
             imageCountLabel.removeFromSuperview()
             bannerScrollView.removeFromSuperview()
             navigationView.backButton.tintColor = .black

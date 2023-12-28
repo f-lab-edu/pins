@@ -29,7 +29,7 @@ final class DetailViewModel {
     
     func getImages() -> [UIImage] {
         guard let currentPin = currentPin else { return [] }
-        return currentPin.images
+        return currentPin.imageDatas.map { $0.toUIImage() }
     }
     
     func uploadComment(_ text: String) throws {

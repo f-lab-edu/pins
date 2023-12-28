@@ -189,7 +189,7 @@ final class DetailContentView: UIView {
         categoryLabel.text = NSLocalizedString(pin.category, comment: "")
         nameLabel.text = pin.userName
         personalInfo.text = "\(pin.userDescription) ∙ \(pin.userAge)세"
-        profileImageView.image = pin.userProfile
+        profileImageView.image = pin.userProfile.toUIImage()
     }
     
     func setComments(comments: [CommentResponse], scrollView: UIScrollView?) {

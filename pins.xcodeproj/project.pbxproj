@@ -91,6 +91,7 @@
 		B7DC98EF2B2619F3006DD8F7 /* CommentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC98EE2B2619F3006DD8F7 /* CommentRepository.swift */; };
 		B7E050F12AE4FB3A007903C3 /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E050F02AE4FB3A007903C3 /* MainMapView.swift */; };
 		B7E0D5912B0CB59D0090A465 /* AnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */; };
+		B7E1236A2B3D7C520044E1DB /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E123692B3D7C520044E1DB /* Data+Extensions.swift */; };
 		B7E8A4702AEB84420026931D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A46F2AEB84420026931D /* FirebaseAnalytics */; };
 		B7E8A4722AEB84420026931D /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A4712AEB84420026931D /* FirebaseCrashlytics */; };
 		B7ECD4502B3059E60085C809 /* PinClusterAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ECD44F2B3059E60085C809 /* PinClusterAnnotationView.swift */; };
@@ -200,6 +201,7 @@
 		B7DC98EE2B2619F3006DD8F7 /* CommentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRepository.swift; sourceTree = "<group>"; };
 		B7E050F02AE4FB3A007903C3 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
 		B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
+		B7E123692B3D7C520044E1DB /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		B7ECD44F2B3059E60085C809 /* PinClusterAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinClusterAnnotationView.swift; sourceTree = "<group>"; };
 		B7F071B62B14855000BB5AB9 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		B7F071B82B14876C00BB5AB9 /* PinResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinResponse.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				B70EE5BC2B15D7DD00BCCACF /* String+Extensions.swift */,
 				B70BBA522B1703C700F0F9A6 /* UIImage+Extensions.swift */,
 				B7194A452B1B573800642FDA /* CALayer+Extensions.swift */,
+				B7E123692B3D7C520044E1DB /* Data+Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -728,6 +731,7 @@
 				B7AF69312AE0FEDF00385632 /* AppDelegate.swift in Sources */,
 				B71058912AEA2974003D6039 /* MainViewModel.swift in Sources */,
 				B76DD4662AFE238F00DFE7E1 /* LoadingIndicator.swift in Sources */,
+				B7E1236A2B3D7C520044E1DB /* Data+Extensions.swift in Sources */,
 				B7631C6D2B2DC27700B111AA /* UserError.swift in Sources */,
 				B795EA5A2B3712E60021A791 /* ReuseIdentifying.swift in Sources */,
 				B7781B332B0F4D4B006372CF /* PinAnnotationView.swift in Sources */,

@@ -83,7 +83,7 @@ final class DetailViewController: UIViewController {
     
     func setPin(pin: PinResponse) {
         viewModel.currentPin = pin
-        viewModel.setIsImage(value: !pin.images.isEmpty)
+        viewModel.setIsImage(value: !pin.imageDatas.isEmpty)
     }
     
     func getComments() {
