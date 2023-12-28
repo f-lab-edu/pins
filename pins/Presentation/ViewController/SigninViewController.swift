@@ -119,9 +119,8 @@ final class SigninViewController: UIViewController {
     }
     
     private func isValidBirthDate(dateString: String) -> Bool {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyMMdd"
-        return dateFormatter.date(from: dateString) != nil && dateString.count == 6
+        String.dateFormatter.dateFormat = "yyMMdd"
+        return String.dateFormatter.date(from: dateString) != nil && dateString.count == 6
     }
     
     private func isValidNickname(nickname: String) -> Bool {
