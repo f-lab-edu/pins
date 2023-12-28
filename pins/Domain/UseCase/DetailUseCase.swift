@@ -38,22 +38,25 @@ final class DetailUseCase: DetailUseCaseProtocol {
         }
     }
     
+    func fetchCommentRequests(pinId: String) async throws -> [CommentRequest] {
+        return try await commentService.getComments(pinId: pinId)
+    }
+
+    func processCommentRequest(_ commentRequest: CommentRequest) async throws -> CommentResponse {
+        let user = try await userService.getUser(id: commentRequest.userId)
+        guard let user else { throw UserError.userFetchError }
+        let profile = await firestorageService.downloadImage(urlString: user.profileImage)
+        guard let profile else { throw UserError.userProfileImageNotFound }
+        return CommentResponse(commentRequest: commentRequest, user: user, profile: profile)
+    }
+
     func getComments(pinId: String) async throws -> [CommentResponse] {
-        var commentRequests: [CommentRequest] = []
-        do {
-            commentRequests = try await commentService.getComments(pinId: pinId)
-        } catch {
-            throw error
-        }
+        let commentRequests = try await fetchCommentRequests(pinId: pinId)
         return try await withThrowingTaskGroup(of: CommentResponse?.self, returning: [CommentResponse].self) { group in
             var commentResponses: [CommentResponse] = []
             for commentRequest in commentRequests {
                 group.addTask { [weak self] in
-                    let user = try await self?.userService.getUser(id: commentRequest.userId)
-                    guard let user else { throw UserError.userFetchError }
-                    let profile = await self?.firestorageService.downloadImage(urlString: user.profileImage)
-                    guard let profile else { throw UserError.userProfileImageNotFound }
-                    return CommentResponse(commentRequest: commentRequest, user: user, profile: profile)
+                    return try await self?.processCommentRequest(commentRequest)
                 }
             }
             for try await response in group {
