@@ -21,7 +21,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        contentView.backgroundColor = UIColor(asset: .categoryGray)
+        contentView.backgroundColor = .categoryGray
         contentView.layer.cornerRadius = 17.5
         setLayout()
     }
@@ -47,7 +47,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     }
     
     func isUnSelect() {
-        contentView.backgroundColor = UIColor(asset: .categoryGray)
+        contentView.backgroundColor = .categoryGray
         categoryLabel.textColor = .gray
     }
     

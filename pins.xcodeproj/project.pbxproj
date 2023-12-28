@@ -91,9 +91,6 @@
 		B7DC98EF2B2619F3006DD8F7 /* CommentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC98EE2B2619F3006DD8F7 /* CommentRepository.swift */; };
 		B7E050F12AE4FB3A007903C3 /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E050F02AE4FB3A007903C3 /* MainMapView.swift */; };
 		B7E0D5912B0CB59D0090A465 /* AnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */; };
-		B7E1AF432B346328008A638D /* ColorAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E1AF422B346328008A638D /* ColorAssets.swift */; };
-		B7E1AF452B346380008A638D /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E1AF442B346380008A638D /* ImageAssets.swift */; };
-		B7E1AF472B3466FE008A638D /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E1AF462B3466FE008A638D /* UIColor+Extensions.swift */; };
 		B7E8A4702AEB84420026931D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A46F2AEB84420026931D /* FirebaseAnalytics */; };
 		B7E8A4722AEB84420026931D /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A4712AEB84420026931D /* FirebaseCrashlytics */; };
 		B7ECD4502B3059E60085C809 /* PinClusterAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ECD44F2B3059E60085C809 /* PinClusterAnnotationView.swift */; };
@@ -203,9 +200,6 @@
 		B7DC98EE2B2619F3006DD8F7 /* CommentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRepository.swift; sourceTree = "<group>"; };
 		B7E050F02AE4FB3A007903C3 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
 		B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
-		B7E1AF422B346328008A638D /* ColorAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorAssets.swift; sourceTree = "<group>"; };
-		B7E1AF442B346380008A638D /* ImageAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAssets.swift; sourceTree = "<group>"; };
-		B7E1AF462B3466FE008A638D /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		B7ECD44F2B3059E60085C809 /* PinClusterAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinClusterAnnotationView.swift; sourceTree = "<group>"; };
 		B7F071B62B14855000BB5AB9 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		B7F071B82B14876C00BB5AB9 /* PinResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinResponse.swift; sourceTree = "<group>"; };
@@ -250,7 +244,6 @@
 				B70EE5BC2B15D7DD00BCCACF /* String+Extensions.swift */,
 				B70BBA522B1703C700F0F9A6 /* UIImage+Extensions.swift */,
 				B7194A452B1B573800642FDA /* CALayer+Extensions.swift */,
-				B7E1AF462B3466FE008A638D /* UIColor+Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -366,8 +359,6 @@
 				B7157E6B2AF392E4007CEF95 /* pins.entitlements */,
 				B79A28F02AF37DEB008FD3CE /* Secrets.xcconfig */,
 				B7F6A8D82AE2B61500892215 /* LaunchScreen.storyboard */,
-				B7E1AF422B346328008A638D /* ColorAssets.swift */,
-				B7E1AF442B346380008A638D /* ImageAssets.swift */,
 				B76EEA9D2B35F06E00D349EA /* InfoPlist.xcstrings */,
 			);
 			path = Resources;
@@ -726,13 +717,11 @@
 				B7194A422B1B4F3300642FDA /* SigninViewController.swift in Sources */,
 				B7DC98EB2B26179A006DD8F7 /* DetailUseCase.swift in Sources */,
 				B7ECD4502B3059E60085C809 /* PinClusterAnnotationView.swift in Sources */,
-				B7E1AF452B346380008A638D /* ImageAssets.swift in Sources */,
 				B742C5782AEA5EE900E95E96 /* CreateViewModel.swift in Sources */,
 				B7DC98E72B260C17006DD8F7 /* CommentResponse.swift in Sources */,
 				B7D051502B10AD1A00D86183 /* DetailNavigationView.swift in Sources */,
 				B71C387E2B0754F90065A783 /* UserRequest.swift in Sources */,
 				B7AE77DE2B3199FB0056D451 /* ImageCacheManager.swift in Sources */,
-				B7E1AF432B346328008A638D /* ColorAssets.swift in Sources */,
 				B7B20E242B1CCDB800C8304B /* KeychainManager.swift in Sources */,
 				B7F071B72B14855000BB5AB9 /* DetailViewModel.swift in Sources */,
 				B7614C0F2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift in Sources */,
@@ -769,7 +758,6 @@
 				B785A7822B108A0A00DC2E88 /* PaddingLabel.swift in Sources */,
 				B795EA5C2B3715020021A791 /* AccessibilityIdentifying.swift in Sources */,
 				B7B977642AFA0D270023718B /* PinRequest.swift in Sources */,
-				B7E1AF472B3466FE008A638D /* UIColor+Extensions.swift in Sources */,
 				B7AF69332AE0FEDF00385632 /* SceneDelegate.swift in Sources */,
 				B71C38832B075CC70065A783 /* CryptoUtils.swift in Sources */,
 				B7B20E1D2B1CBAC700C8304B /* UserRepository.swift in Sources */,

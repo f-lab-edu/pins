@@ -28,7 +28,7 @@ final class MainMapView: UIView {
     private let centerPinImage: UIImageView = {
         let imageView = UIImageView()
         imageView.isHidden = true
-        imageView.image = UIImage(asset: .pinsIcon)
+        imageView.image = .pinsIcon
         imageView.tintColor = .systemBlue
         return imageView
     }()

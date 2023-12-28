@@ -96,16 +96,16 @@ final class DetailViewController: UIViewController {
 // MARK: - Extensions
 extension DetailViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor(asset: .placeholderGray) {
+        if textView.textColor == .placeholderGray {
             textView.text = nil
-            textView.textColor = UIColor(asset: .defaultText)
+            textView.textColor = .defaultText
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "댓글을 입력해주세요."
-            textView.textColor = UIColor(asset: .placeholderGray)
+            textView.textColor = .placeholderGray
         }
     }
 }
