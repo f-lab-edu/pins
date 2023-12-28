@@ -12,4 +12,5 @@ enum UserError: Error {
     case userFetchError
     case userProfileImageNotFound
     case userDecodingError
+    case userSocialLoginError
 }
