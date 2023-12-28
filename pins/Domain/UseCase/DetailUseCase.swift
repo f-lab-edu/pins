@@ -39,20 +39,29 @@ final class DetailUseCase: DetailUseCaseProtocol {
     }
     
     func getComments(pinId: String) async throws -> [CommentResponse] {
-        var commentResponses: [CommentResponse] = []
         var commentRequests: [CommentRequest] = []
         do {
             commentRequests = try await commentService.getComments(pinId: pinId)
         } catch {
             throw error
         }
-        for commentRequest in commentRequests {
-            let user = try await userService.getUser(id: commentRequest.userId)
-            guard let user else { throw UserError.userFetchError }
-            let profile = await firestorageService.downloadImage(urlString: user.profileImage)
-            guard let profile else { throw UserError.userProfileImageNotFound }
-            commentResponses.append(CommentResponse(commentRequest: commentRequest, user: user, profile: profile))
+        return try await withThrowingTaskGroup(of: CommentResponse?.self, returning: [CommentResponse].self) { group in
+            var commentResponses: [CommentResponse] = []
+            for commentRequest in commentRequests {
+                group.addTask { [weak self] in
+                    let user = try await self?.userService.getUser(id: commentRequest.userId)
+                    guard let user else { throw UserError.userFetchError }
+                    let profile = await self?.firestorageService.downloadImage(urlString: user.profileImage)
+                    guard let profile else { throw UserError.userProfileImageNotFound }
+                    return CommentResponse(commentRequest: commentRequest, user: user, profile: profile)
+                }
+            }
+            for try await response in group {
+                if let response = response {
+                    commentResponses.append(response)
+                }
+            }
+            return commentResponses
         }
-        return commentResponses
     }
 }
