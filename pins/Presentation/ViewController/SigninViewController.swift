@@ -9,6 +9,7 @@ import OSLog
 import UIKit
 import Combine
 import PhotosUI
+import PinsUtilKit
 
 final class SigninViewController: UIViewController {
     private lazy var userRepository: UserRepositoryProtocol = UserRepository()

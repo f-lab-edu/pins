@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 import PhotosUI
+import PinsUtilKit
 
 final class CreateViewController: UIViewController {
     private lazy var firebaseRepository: FirebaseRepositoryProtocol = FirebaseRepository()
