@@ -88,7 +88,6 @@
 		B7DC98ED2B261977006DD8F7 /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC98EC2B261977006DD8F7 /* CommentService.swift */; };
 		B7DC98EF2B2619F3006DD8F7 /* CommentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC98EE2B2619F3006DD8F7 /* CommentRepository.swift */; };
 		B7E050F12AE4FB3A007903C3 /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E050F02AE4FB3A007903C3 /* MainMapView.swift */; };
-		B7E0D5912B0CB59D0090A465 /* AnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */; };
 		B7E1236A2B3D7C520044E1DB /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E123692B3D7C520044E1DB /* Data+Extensions.swift */; };
 		B7E8A4702AEB84420026931D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A46F2AEB84420026931D /* FirebaseAnalytics */; };
 		B7E8A4722AEB84420026931D /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A4712AEB84420026931D /* FirebaseCrashlytics */; };
@@ -223,7 +222,6 @@
 		B7DC98EC2B261977006DD8F7 /* CommentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		B7DC98EE2B2619F3006DD8F7 /* CommentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRepository.swift; sourceTree = "<group>"; };
 		B7E050F02AE4FB3A007903C3 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
-		B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
 		B7E123692B3D7C520044E1DB /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		B7ECD44F2B3059E60085C809 /* PinClusterAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinClusterAnnotationView.swift; sourceTree = "<group>"; };
 		B7F071B62B14855000BB5AB9 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
@@ -291,7 +289,6 @@
 		B71C38722B07510A0065A783 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				B7E0D58F2B0CB5920090A465 /* Animation */,
 				B7E050EF2AE4FB30007903C3 /* View */,
 				B74A4FBF2AE78B7600226EA7 /* ViewController */,
 				B710588F2AEA291E003D6039 /* ViewModel */,
@@ -563,14 +560,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		B7E0D58F2B0CB5920090A465 /* Animation */ = {
-			isa = PBXGroup;
-			children = (
-				B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */,
-			);
-			path = Animation;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -767,7 +756,6 @@
 				B70BBA532B1703C700F0F9A6 /* UIImage+Extensions.swift in Sources */,
 				B785A77E2B10743600DC2E88 /* DetailViewController.swift in Sources */,
 				B7F071B92B14876C00BB5AB9 /* PinResponse.swift in Sources */,
-				B7E0D5912B0CB59D0090A465 /* AnimationManager.swift in Sources */,
 				B7B9776C2AFA20D80023718B /* Date+Extensions.swift in Sources */,
 				B7D051522B10AD2100D86183 /* DetailContentView.swift in Sources */,
 				B7194A462B1B573800642FDA /* CALayer+Extensions.swift in Sources */,
