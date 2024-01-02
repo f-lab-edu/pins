@@ -12,7 +12,7 @@ import CryptoKit
 enum DiskCacheManager {
     static func cacheImage(_ image: UIImage, withFilename filename: String) {
         let hash = CryptoUtils.sha256(filename)
-        if let data = image.jpegData(compressionQuality: 1.0) ?? image.pngData() {
+        if let data = image.jpegData(compressionQuality: 0.7) ?? image.pngData() {
             let fileManager = FileManager.default
             if let cacheDirectory = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first {
                 let fileURL = cacheDirectory.appendingPathComponent(hash)
