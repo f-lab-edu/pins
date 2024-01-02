@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SettingViewCell: UITableViewCell {
+final class SettingViewCell: UITableViewCell, ReuseIdentifying {
     private let label: UILabel = {
         let label: UILabel = UILabel()
         label.textColor = UIColor(asset: .defaultText)

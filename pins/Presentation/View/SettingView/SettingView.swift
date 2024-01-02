@@ -8,6 +8,7 @@
 import UIKit
 
 final class SettingView: UIView {
+    typealias SettingsDataSource = UITableViewDiffableDataSource<Int, String>
     // MARK: - 프로퍼티
     private let titleLabel: UILabel = {
         let label: UILabel = UILabel()
@@ -28,7 +29,7 @@ final class SettingView: UIView {
         tableView.separatorInset.left = 0
         return tableView
     }()
-    private var dataSource: UITableViewDiffableDataSource<Int, String>!
+    private var dataSource: SettingsDataSource!
     private var viewModel: SettingViewModel!
     // MARK: - 초기화
     init(viewModel: SettingViewModel) {
@@ -76,9 +77,9 @@ final class SettingView: UIView {
     }
     
     private func configureDiffableDataSource() {
-        dataSource = UITableViewDiffableDataSource<Int, String>(tableView: tableView, cellProvider: { [weak self] tableView, indexPath, _ in
+        dataSource = SettingsDataSource(tableView: tableView, cellProvider: { [weak self] tableView, indexPath, _ in
             guard let self else { fatalError("self is nil") }
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingViewCell", for: indexPath) as? SettingViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: SettingViewCell.reuseIdentifier, for: indexPath) as? SettingViewCell
             cell?.setLabelText(self.viewModel.getTableStringData()[indexPath.row])
             return cell
         })
