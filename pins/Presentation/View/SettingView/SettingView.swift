@@ -8,7 +8,10 @@
 import UIKit
 
 final class SettingView: UIView {
-    typealias SettingsDataSource = UITableViewDiffableDataSource<Int, String>
+    enum SettingSection: Int {
+        case mainSection
+    }
+    typealias SettingsDataSource = UITableViewDiffableDataSource<SettingSection, String>
     // MARK: - 프로퍼티
     private let titleLabel: UILabel = {
         let label: UILabel = UILabel()
@@ -86,8 +89,8 @@ final class SettingView: UIView {
     }
     
     private func performInitialDataPopulation() {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
-        snapshot.appendSections([0])
+        var snapshot = NSDiffableDataSourceSnapshot<SettingSection, String>()
+        snapshot.appendSections([.mainSection])
         snapshot.appendItems(viewModel.getTableStringData())
         dataSource.apply(snapshot, animatingDifferences: true)
     }
