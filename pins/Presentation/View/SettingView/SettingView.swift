@@ -11,7 +11,8 @@ final class SettingView: UIView {
     enum SettingSection: Int {
         case mainSection
     }
-    typealias SettingsDataSource = UITableViewDiffableDataSource<SettingSection, String>
+    typealias SettingDataSource = UITableViewDiffableDataSource<SettingSection, String>
+    typealias SettingSnapshot = NSDiffableDataSourceSnapshot<SettingSection, String>
     // MARK: - 프로퍼티
     private let titleLabel: UILabel = {
         let label: UILabel = UILabel()
@@ -32,7 +33,7 @@ final class SettingView: UIView {
         tableView.separatorInset.left = 0
         return tableView
     }()
-    private var dataSource: SettingsDataSource!
+    private var dataSource: SettingDataSource!
     private var viewModel: SettingViewModel!
     // MARK: - 초기화
     init(viewModel: SettingViewModel) {
@@ -80,7 +81,7 @@ final class SettingView: UIView {
     }
     
     private func configureDiffableDataSource() {
-        dataSource = SettingsDataSource(tableView: tableView, cellProvider: { [weak self] tableView, indexPath, _ in
+        dataSource = SettingDataSource(tableView: tableView, cellProvider: { [weak self] tableView, indexPath, _ in
             guard let self else { fatalError("self is nil") }
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingViewCell.reuseIdentifier, for: indexPath) as? SettingViewCell
             cell?.setLabelText(self.viewModel.getTableStringData()[indexPath.row])
@@ -89,7 +90,7 @@ final class SettingView: UIView {
     }
     
     private func performInitialDataPopulation() {
-        var snapshot = NSDiffableDataSourceSnapshot<SettingSection, String>()
+        var snapshot = SettingSnapshot()
         snapshot.appendSections([.mainSection])
         snapshot.appendItems(viewModel.getTableStringData())
         dataSource.apply(snapshot, animatingDifferences: true)
