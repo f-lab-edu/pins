@@ -35,10 +35,9 @@ final class FirestorageService: FirestorageServiceProtocol {
     }
     
     func downloadImage(urlString: String) async -> UIImage? {
-        if let cachedImage = ImageCacheManager.shared.getImage(forKey: urlString) {
+        if let cachedImage = DiskCacheManager.retrieveCachedImage(withFilename: urlString) {
             return cachedImage
         }
-        
         let storageReference = Storage.storage().reference(forURL: urlString)
         let megaByte = Int64(2 * 1024 * 1024)
         
@@ -48,7 +47,7 @@ final class FirestorageService: FirestorageServiceProtocol {
                     os_log("Error downloading image: \(error)")
                     continuation.resume(returning: nil)
                 } else if let data = data, let image = UIImage(data: data) {
-                    ImageCacheManager.shared.setImage(image, forKey: urlString)
+                    DiskCacheManager.cacheImage(image, withFilename: urlString)
                     continuation.resume(returning: image)
                 } else {
                     continuation.resume(returning: nil)
