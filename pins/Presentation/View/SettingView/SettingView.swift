@@ -17,19 +17,19 @@ final class SettingView: UIView {
     private let titleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "설정"
-        label.textColor = UIColor(asset: .defaultText)
+        label.textColor = .defaultText
         label.font = UIFont.systemFont(ofSize: 18)
         return label
     }()
     private let backButton: CustomButton = {
-        let button = CustomButton(backgroundColor: UIColor(asset: .defaultBackground))
+        let button = CustomButton(backgroundColor: .defaultBackground)
         button.setImage(systemName: "chevron.backward")
         return button
     }()
     let tableView: UITableView = {
         let tableView: UITableView = UITableView(frame: .zero, style: .plain)
         tableView.register(SettingViewCell.self, forCellReuseIdentifier: "SettingViewCell")
-        tableView.backgroundColor = UIColor(asset: .defaultBackground)
+        tableView.backgroundColor = .defaultBackground
         tableView.separatorInset.left = 0
         return tableView
     }()
@@ -38,7 +38,7 @@ final class SettingView: UIView {
     // MARK: - 초기화
     init(viewModel: SettingViewModel) {
         super.init(frame: .zero)
-        backgroundColor = UIColor(asset: .defaultBackground)
+        backgroundColor = .defaultBackground
         self.viewModel = viewModel
         
         setBackButtonLayout()

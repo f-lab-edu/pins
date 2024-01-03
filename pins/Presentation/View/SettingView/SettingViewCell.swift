@@ -10,14 +10,14 @@ import UIKit
 final class SettingViewCell: UITableViewCell, ReuseIdentifying {
     private let label: UILabel = {
         let label: UILabel = UILabel()
-        label.textColor = UIColor(asset: .defaultText)
+        label.textColor = .defaultText
         label.font = UIFont.systemFont(ofSize: 18)
         return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = UIColor(asset: .defaultBackground)
+        backgroundColor = .defaultBackground
         configureLabel()
     }
     

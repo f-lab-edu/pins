@@ -103,7 +103,8 @@
 		B7E1236A2B3D7C520044E1DB /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E123692B3D7C520044E1DB /* Data+Extensions.swift */; };
 		B7E8A4702AEB84420026931D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A46F2AEB84420026931D /* FirebaseAnalytics */; };
 		B7E8A4722AEB84420026931D /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A4712AEB84420026931D /* FirebaseCrashlytics */; };
-		B7EC21B12B456EC5008F80F7 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC21B02B456EC5008F80F7 /* UITableView+Extensions.swift */; };
+		B7EC21B12B456EC5008F80F7 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B7EC21B32B458A29008F80F7 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC21B22B458A29008F80F7 /* UITableView+Extensions.swift */; };
 		B7ECD4502B3059E60085C809 /* PinClusterAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ECD44F2B3059E60085C809 /* PinClusterAnnotationView.swift */; };
 		B7F071B72B14855000BB5AB9 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F071B62B14855000BB5AB9 /* DetailViewModel.swift */; };
 		B7F071B92B14876C00BB5AB9 /* PinResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F071B82B14876C00BB5AB9 /* PinResponse.swift */; };
@@ -221,6 +222,7 @@
 		B7E050F02AE4FB3A007903C3 /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
 		B7E0D5902B0CB59D0090A465 /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
 		B7E123692B3D7C520044E1DB /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
+		B7EC21B22B458A29008F80F7 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		B7ECD44F2B3059E60085C809 /* PinClusterAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinClusterAnnotationView.swift; sourceTree = "<group>"; };
 		B7F071B62B14855000BB5AB9 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		B7F071B82B14876C00BB5AB9 /* PinResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinResponse.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				B710588D2AEA2699003D6039 /* OSLog+Extensions.swift */,
+				B7EC21B22B458A29008F80F7 /* UITableView+Extensions.swift */,
 				B7035B842AF8D1FF000F74ED /* UIView+Extensions.swift */,
 				B7B9776B2AFA20D80023718B /* Date+Extensions.swift */,
 				B785A7832B1091BC00DC2E88 /* UILabel+Extensions.swift */,
@@ -265,8 +268,6 @@
 				B70EE5BC2B15D7DD00BCCACF /* String+Extensions.swift */,
 				B70BBA522B1703C700F0F9A6 /* UIImage+Extensions.swift */,
 				B7194A452B1B573800642FDA /* CALayer+Extensions.swift */,
-				B7E1AF462B3466FE008A638D /* UIColor+Extensions.swift */,
-				B7EC21B02B456EC5008F80F7 /* UITableView+Extensions.swift */,
 				B7E123692B3D7C520044E1DB /* Data+Extensions.swift */,
 			);
 			path = Extension;
@@ -786,7 +787,8 @@
 				B7D051542B10AD2B00D86183 /* DetailCommentView.swift in Sources */,
 				B7D0514D2B10AC9C00D86183 /* UITextField+Extensions.swift in Sources */,
 				B74A4FC32AE78BE700226EA7 /* SearchView.swift in Sources */,
-				B7EC21B12B456EC5008F80F7 /* UITableView+Extensions.swift in Sources */,
+				B7EC21B12B456EC5008F80F7 /* (null) in Sources */,
+				B7EC21B32B458A29008F80F7 /* UITableView+Extensions.swift in Sources */,
 				B79A28F32AF37F93008FD3CE /* LoginViewController.swift in Sources */,
 				B78099432B06047400C01059 /* ImageInfo.swift in Sources */,
 				B71C387C2B0753BB0065A783 /* LoginUseCase.swift in Sources */,
