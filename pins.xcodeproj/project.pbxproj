@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,10 +26,6 @@
 		B71C38802B07554B0065A783 /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71C387F2B07554B0065A783 /* FirebaseAuthService.swift */; };
 		B7226B162B01F6990034B451 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7226B152B01F6990034B451 /* LoginViewModel.swift */; };
 		B724F92E2AFCBE4400722CE1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B724F9302AFCBE4400722CE1 /* Localizable.strings */; };
-		B72DBCE32B415C51009F6B9B /* PinsUtilKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B72DBCE22B415BFC009F6B9B /* PinsUtilKit.framework */; };
-		B72DBCE42B415C51009F6B9B /* PinsUtilKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B72DBCE22B415BFC009F6B9B /* PinsUtilKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B72DBD122B415F6D009F6B9B /* PinsAnimationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B72DBD112B415F67009F6B9B /* PinsAnimationKit.framework */; };
-		B72DBD132B415F6D009F6B9B /* PinsAnimationKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B72DBD112B415F67009F6B9B /* PinsAnimationKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B72EDCA22B2B071C00080328 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = B72EDCA12B2B071C00080328 /* GoogleSignIn */; };
 		B742C5782AEA5EE900E95E96 /* CreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B742C5772AEA5EE900E95E96 /* CreateViewModel.swift */; };
 		B749AED82B3831CB00633BB1 /* AnnotationIdentifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = B749AED72B3831CB00633BB1 /* AnnotationIdentifying.swift */; };
@@ -91,6 +87,7 @@
 		B7E1236A2B3D7C520044E1DB /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E123692B3D7C520044E1DB /* Data+Extensions.swift */; };
 		B7E8A4702AEB84420026931D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A46F2AEB84420026931D /* FirebaseAnalytics */; };
 		B7E8A4722AEB84420026931D /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A4712AEB84420026931D /* FirebaseCrashlytics */; };
+		B7EC21A92B455D13008F80F7 /* PinsUtilKit in Frameworks */ = {isa = PBXBuildFile; productRef = B7EC21A82B455D13008F80F7 /* PinsUtilKit */; };
 		B7ECD4502B3059E60085C809 /* PinClusterAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ECD44F2B3059E60085C809 /* PinClusterAnnotationView.swift */; };
 		B7F071B72B14855000BB5AB9 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F071B62B14855000BB5AB9 /* DetailViewModel.swift */; };
 		B7F071B92B14876C00BB5AB9 /* PinResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F071B82B14876C00BB5AB9 /* PinResponse.swift */; };
@@ -101,20 +98,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B72DBCE12B415BFC009F6B9B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B72DBCDD2B415BFC009F6B9B /* PinsUtilKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B7A5B4522B415ACF009C246D;
-			remoteInfo = PinsUtilKit;
-		};
-		B72DBD102B415F67009F6B9B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B72DBD0C2B415F67009F6B9B /* PinsAnimationKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B72DBCFA2B415E6B009F6B9B;
-			remoteInfo = PinsAnimationKit;
-		};
 		B7AF69442AE0FEE000385632 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B7AF69252AE0FEDF00385632 /* Project object */;
@@ -131,8 +114,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B72DBD132B415F6D009F6B9B /* PinsAnimationKit.framework in Embed Frameworks */,
-				B72DBCE42B415C51009F6B9B /* PinsUtilKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,8 +142,6 @@
 		B7226B152B01F6990034B451 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		B724F92F2AFCBE4400722CE1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B724F9312AFCBE7A00722CE1 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B72DBCDD2B415BFC009F6B9B /* PinsUtilKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PinsUtilKit.xcodeproj; path = ../PinsUtilKit/PinsUtilKit.xcodeproj; sourceTree = "<group>"; };
-		B72DBD0C2B415F67009F6B9B /* PinsAnimationKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PinsAnimationKit.xcodeproj; path = ../PinsAnimationKit/PinsAnimationKit.xcodeproj; sourceTree = "<group>"; };
 		B742C5772AEA5EE900E95E96 /* CreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewModel.swift; sourceTree = "<group>"; };
 		B749AED72B3831CB00633BB1 /* AnnotationIdentifying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationIdentifying.swift; sourceTree = "<group>"; };
 		B74A4FC02AE78BAE00226EA7 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -236,14 +215,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B72DBD122B415F6D009F6B9B /* PinsAnimationKit.framework in Frameworks */,
 				B7E8A4702AEB84420026931D /* FirebaseAnalytics in Frameworks */,
 				B7B977662AFA0F550023718B /* FirebaseFirestore in Frameworks */,
 				B7BC79172AF4AB8900BBE0A9 /* FirebaseAuth in Frameworks */,
 				B76DD4642AFE0E4B00DFE7E1 /* FirebaseStorage in Frameworks */,
-				B72DBCE32B415C51009F6B9B /* PinsUtilKit.framework in Frameworks */,
 				B7E8A4722AEB84420026931D /* FirebaseCrashlytics in Frameworks */,
 				B72EDCA22B2B071C00080328 /* GoogleSignIn in Frameworks */,
+				B7EC21A92B455D13008F80F7 /* PinsUtilKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,22 +375,6 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		B72DBCDE2B415BFC009F6B9B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B72DBCE22B415BFC009F6B9B /* PinsUtilKit.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		B72DBD0D2B415F67009F6B9B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B72DBD112B415F67009F6B9B /* PinsAnimationKit.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		B74A4FBF2AE78B7600226EA7 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -527,8 +489,6 @@
 		B7BC79152AF4AB8900BBE0A9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B72DBD0C2B415F67009F6B9B /* PinsAnimationKit.xcodeproj */,
-				B72DBCDD2B415BFC009F6B9B /* PinsUtilKit.xcodeproj */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -586,6 +546,7 @@
 				B7B977652AFA0F550023718B /* FirebaseFirestore */,
 				B76DD4632AFE0E4B00DFE7E1 /* FirebaseStorage */,
 				B72EDCA12B2B071C00080328 /* GoogleSignIn */,
+				B7EC21A82B455D13008F80F7 /* PinsUtilKit */,
 			);
 			productName = pins;
 			productReference = B7AF692D2AE0FEDF00385632 /* pinsSandbox.app */;
@@ -645,19 +606,10 @@
 				B7E8A46E2AEB84420026931D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				B7DE80662B08A979007A7AEF /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				B7F8B3032B30938400B869BB /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */,
+				B7EC21A72B455D13008F80F7 /* XCLocalSwiftPackageReference "../PinsUtilKit" */,
 			);
 			productRefGroup = B7AF692E2AE0FEDF00385632 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = B72DBD0D2B415F67009F6B9B /* Products */;
-					ProjectRef = B72DBD0C2B415F67009F6B9B /* PinsAnimationKit.xcodeproj */;
-				},
-				{
-					ProductGroup = B72DBCDE2B415BFC009F6B9B /* Products */;
-					ProjectRef = B72DBCDD2B415BFC009F6B9B /* PinsUtilKit.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				B7AF692C2AE0FEDF00385632 /* pins */,
@@ -665,23 +617,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		B72DBCE22B415BFC009F6B9B /* PinsUtilKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = PinsUtilKit.framework;
-			remoteRef = B72DBCE12B415BFC009F6B9B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B72DBD112B415F67009F6B9B /* PinsAnimationKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = PinsAnimationKit.framework;
-			remoteRef = B72DBD102B415F67009F6B9B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B7AF692B2AE0FEDF00385632 /* Resources */ = {
@@ -1286,6 +1221,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		B7EC21A72B455D13008F80F7 /* XCLocalSwiftPackageReference "../PinsUtilKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../PinsUtilKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		B7DE80662B08A979007A7AEF /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1343,6 +1285,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B7E8A46E2AEB84420026931D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		B7EC21A82B455D13008F80F7 /* PinsUtilKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PinsUtilKit;
 		};
 		B7F8B3042B30938400B869BB /* iOSSnapshotTestCase */ = {
 			isa = XCSwiftPackageProductDependency;

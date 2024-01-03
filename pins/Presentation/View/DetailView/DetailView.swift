@@ -8,7 +8,6 @@
 import UIKit
 import Combine
 import PinsUtilKit
-import PinsAnimationKit
 
 final class DetailView: UIView {
     // MARK: - UI Property
