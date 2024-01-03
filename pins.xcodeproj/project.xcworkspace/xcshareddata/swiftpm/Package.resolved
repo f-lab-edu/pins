@@ -131,8 +131,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/MojitoBar/PinsUtilsKit",
       "state" : {
-        "revision" : "eede5aa960999f87c7723fd3b06db3796f713822",
-        "version" : "0.1.0"
+        "revision" : "db7c5e98e3abc44a83b7d8452436d781a5491d26",
+        "version" : "0.1.3"
       }
     },
     {

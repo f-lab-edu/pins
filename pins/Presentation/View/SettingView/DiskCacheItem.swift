@@ -7,6 +7,7 @@
 
 import OSLog
 import UIKit
+import PinsUtilKit
 
 final class DiskCacheItem: SettingItemHandling {
     var title: String = "메모리"
