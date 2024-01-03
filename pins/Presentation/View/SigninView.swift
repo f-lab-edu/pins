@@ -21,7 +21,7 @@ final class SigninView: UIView {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "만나서 반가워요!"
-        label.textColor = UIColor(asset: .defaultText)
+        label.textColor = .defaultText
         label.numberOfLines = 0
         label.font = .boldSystemFont(ofSize: 20)
         label.setLineHeight(lineHeight: 10)
@@ -101,7 +101,7 @@ final class SigninView: UIView {
     init(viewModel: SigninViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
-        backgroundColor = UIColor(asset: .defaultBackground)
+        backgroundColor = .defaultBackground
         setLayout()
         setKeyboardObserver()
     }

@@ -8,7 +8,7 @@
 import UIKit
 import QuartzCore
 
-class AnimationManager {
+final class AnimationManager {
     func shakeAnimation() -> CABasicAnimation {
         let shakeAnimation = CABasicAnimation(keyPath: "transform.rotation")
         shakeAnimation.fromValue = -0.15

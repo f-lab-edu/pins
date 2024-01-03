@@ -28,26 +28,26 @@ final class MainUseCase: MainUseCaseProtocol {
     }
     
     func loadPin(pin: PinRequest) async throws -> PinResponse {
-        var images: [UIImage] = []
+        var imageDatas: [Data] = []
         for url in pin.urls {
             let image = await firestorageService.downloadImage(urlString: url)
-            if let image = image {
-                images.append(image)
+            if let imageData = image?.pngData() {
+                imageDatas.append(imageData)
             }
         }
-        let user = await userService.getUser(id: pin.userId)
+        let user = try await userService.getUser(id: pin.userId)
         guard let user = user else { throw UserError.userFetchError }
-        let profile = await firestorageService.downloadImage(urlString: user.profileImage)
+        let profile = await firestorageService.downloadImage(urlString: user.profileImage)?.pngData()
         guard let profile else { throw UserError.userProfileImageNotFound }
         let userAge = user.birthDate?.birthDateToAge() ?? 0
-        return PinResponse(pin: pin, images: images, id: user.id, name: user.nickName, age: userAge, description: user.description ?? "", profile: profile)
+        return PinResponse(pin: pin, images: imageDatas, id: user.id, name: user.nickName, age: userAge, description: user.description ?? "", profile: profile)
     }
     
     func fetchUserInfo() async throws -> UserRequest {
         guard let id = KeychainManager.load(key: .userId) else {
             throw UserError.userIdNotFound
         }
-        guard let user = await userService.getUser(id: id) else {
+        guard let user = try await userService.getUser(id: id) else {
             throw UserError.userFetchError
         }
         return user

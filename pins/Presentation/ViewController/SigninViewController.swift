@@ -70,7 +70,7 @@ final class SigninViewController: UIViewController {
                 self.viewModel.setBirthDate(self.signinView.birthDateInput.text ?? "")
                 self.viewModel.setDescription(self.signinView.descriptionInput.text ?? "")
                 Task {
-                    await self.viewModel.saveUserInfo()
+                    try await self.viewModel.saveUserInfo()
                     let mainViewController = MainViewController()
                     self.navigationController?.pushViewController(mainViewController, animated: true)
                 }
@@ -119,9 +119,8 @@ final class SigninViewController: UIViewController {
     }
     
     private func isValidBirthDate(dateString: String) -> Bool {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyMMdd"
-        return dateFormatter.date(from: dateString) != nil && dateString.count == 6
+        String.dateFormatter.dateFormat = "yyMMdd"
+        return String.dateFormatter.date(from: dateString) != nil && dateString.count == 6
     }
     
     private func isValidNickname(nickname: String) -> Bool {

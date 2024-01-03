@@ -25,7 +25,7 @@ final class SigninViewModel {
     @Published var nickName: String = ""
     @Published var birthDate: String = ""
     @Published var description: String = ""
-    @Published var profileImage: ImageInfo = ImageInfo(index: 0, image: UIImage(asset: .person), extensionType: "png")
+    @Published var profileImage: ImageInfo = ImageInfo(index: 0, image: .person, extensionType: "png")
     private let signinUsecase: SigninUseCaseProtocol
     
     init(signinUsecase: SigninUseCaseProtocol) {
@@ -52,8 +52,12 @@ final class SigninViewModel {
         self.description = description
     }
     
-    func saveUserInfo() async {
-        await signinUsecase.saveUserInfo(nickName: nickName, description: description, birthDate: birthDate, imageInfo: profileImage)
+    func saveUserInfo() async throws {
+        do {
+            try await signinUsecase.saveUserInfo(nickName: nickName, description: description, birthDate: birthDate, imageInfo: profileImage)
+        } catch {
+            throw error
+        }
     }
     
     func setProfileImage(_ image: UIImage, type: String) {

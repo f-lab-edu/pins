@@ -4,15 +4,14 @@
 //
 //  Created by 주동석 on 2023/11/27.
 //
-
-import UIKit
+import Foundation
 
 struct PinResponse {
     var id: String
     var userId: String
     var userName: String
     var userAge: Int
-    var userProfile: UIImage
+    var userProfile: Data
     var userDescription: String
     var title: String
     var content: String
@@ -20,9 +19,9 @@ struct PinResponse {
     var latitude: Double
     var category: String
     var created: String
-    var images: [UIImage] = []
+    var imageDatas: [Data] = []
     
-    init (pin: PinRequest, images: [UIImage], id: String, name: String, age: Int, description: String, profile: UIImage) {
+    init (pin: PinRequest, images: [Data], id: String, name: String, age: Int, description: String, profile: Data) {
         self.id = pin.id
         self.title = pin.title
         self.content = pin.content
@@ -30,7 +29,7 @@ struct PinResponse {
         self.latitude = pin.latitude
         self.category = pin.category
         self.created = pin.created
-        self.images = images
+        self.imageDatas = images
         self.userId = id
         self.userName = name
         self.userAge = age

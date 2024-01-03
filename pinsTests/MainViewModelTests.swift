@@ -52,7 +52,7 @@ final class MainViewModelTests: XCTestCase {
             let response = try await viewModel.loadPin(pin: pinRequest)
 
             // Then
-            XCTAssertEqual(response.images.count, pinRequest.urls.count, "The number of images should match the number of URLs in the pin request")
+            XCTAssertEqual(response.imageDatas.count, pinRequest.urls.count, "The number of images should match the number of URLs in the pin request")
         }
     }
     

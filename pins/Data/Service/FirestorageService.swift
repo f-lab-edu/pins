@@ -69,9 +69,17 @@ final class FirestorageService: FirestorageServiceProtocol {
     
     func uploadImages(imageInfos: [ImageInfo]) async -> [URLWithIndex] {
         var urls: [URLWithIndex] = []
-        for imageInfo in imageInfos {
-            let url = await uploadImage(imageInfo: imageInfo)
-            urls.append(url)
+
+        await withTaskGroup(of: URLWithIndex.self) { group in
+            for imageInfo in imageInfos {
+                group.addTask { [weak self] in
+                    guard let self else { fatalError("self is nil") }
+                    return await self.uploadImage(imageInfo: imageInfo)
+                }
+            }
+            for await url in group {
+                urls.append(url)
+            }
         }
         return urls
     }

@@ -87,3 +87,26 @@ extension UIView {
         return self
     }
 }
+
+extension UIView {
+    func showToast(message: String, duration: TimeInterval = 1.0) {
+        let toastLabel = PaddingLabel(inset: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.textAlignment = .center
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10
+        toastLabel.clipsToBounds  =  true
+        self.addSubview(toastLabel)
+        toastLabel
+            .bottomLayout(equalTo: self.bottomAnchor, constant: -100)
+            .centerXLayout(equalTo: self.centerXAnchor)
+            .heightLayout(30)
+        UIView.animate(withDuration: duration, delay: 2.0, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: { _ in
+            toastLabel.removeFromSuperview()
+        })
+    }
+}

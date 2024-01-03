@@ -8,6 +8,7 @@
 import Foundation
 
 extension String {
+    static let dateFormatter = DateFormatter()
     func convertDaysAgo() -> String {
         let dateFormatsWithLocale = [
             ("yyyy년 MM월 dd일 a hh:mm:ss", "ko_KR"),
@@ -15,13 +16,11 @@ extension String {
             ("MMMM dd, yyyy 'at' h:mm:ss a", "en_US_POSIX")
         ]
 
-        let dateFormatter = DateFormatter()
-
         var date: Date?
         for (format, localeIdentifier) in dateFormatsWithLocale {
-            dateFormatter.dateFormat = format
-            dateFormatter.locale = Locale(identifier: localeIdentifier)
-            if let formattedDate = dateFormatter.date(from: self) {
+            String.dateFormatter.dateFormat = format
+            String.dateFormatter.locale = Locale(identifier: localeIdentifier)
+            if let formattedDate = String.dateFormatter.date(from: self) {
                 date = formattedDate
                 break
             }
@@ -49,9 +48,8 @@ extension String {
     }
     
     func birthDateToAge() -> Int {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyMMdd"
-        let birthDate = dateFormatter.date(from: self)
+        String.dateFormatter.dateFormat = "yyMMdd"
+        let birthDate = String.dateFormatter.date(from: self)
         let calendar = Calendar.current
         let ageComponents = calendar.dateComponents([.year], from: birthDate!, to: Date())
         let age = ageComponents.year!
