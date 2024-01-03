@@ -83,8 +83,8 @@ final class SettingView: UIView {
     private func configureDiffableDataSource() {
         dataSource = SettingDataSource(tableView: tableView, cellProvider: { [weak self] tableView, indexPath, _ in
             guard let self else { fatalError("self is nil") }
-            let cell = tableView.dequeueReusableCell(withIdentifier: SettingViewCell.reuseIdentifier, for: indexPath) as? SettingViewCell
-            cell?.setLabelText(self.viewModel.getTableStringData()[indexPath.row])
+            let cell = tableView.dequeueReusableCell(forIndexPath: indexPath) as SettingViewCell
+            cell.setLabelText(self.viewModel.getTableStringData()[indexPath.row])
             return cell
         })
     }
