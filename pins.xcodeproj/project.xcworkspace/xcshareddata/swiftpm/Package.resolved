@@ -127,6 +127,15 @@
       }
     },
     {
+      "identity" : "pinsutilskit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MojitoBar/PinsUtilsKit",
+      "state" : {
+        "revision" : "eede5aa960999f87c7723fd3b06db3796f713822",
+        "version" : "0.1.0"
+      }
+    },
+    {
       "identity" : "promises",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/promises.git",

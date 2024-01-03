@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -87,7 +87,7 @@
 		B7E1236A2B3D7C520044E1DB /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E123692B3D7C520044E1DB /* Data+Extensions.swift */; };
 		B7E8A4702AEB84420026931D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A46F2AEB84420026931D /* FirebaseAnalytics */; };
 		B7E8A4722AEB84420026931D /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = B7E8A4712AEB84420026931D /* FirebaseCrashlytics */; };
-		B7EC21A92B455D13008F80F7 /* PinsUtilKit in Frameworks */ = {isa = PBXBuildFile; productRef = B7EC21A82B455D13008F80F7 /* PinsUtilKit */; };
+		B7EC21AF2B456D46008F80F7 /* PinsUtilKit in Frameworks */ = {isa = PBXBuildFile; productRef = B7EC21AE2B456D46008F80F7 /* PinsUtilKit */; };
 		B7ECD4502B3059E60085C809 /* PinClusterAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ECD44F2B3059E60085C809 /* PinClusterAnnotationView.swift */; };
 		B7F071B72B14855000BB5AB9 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F071B62B14855000BB5AB9 /* DetailViewModel.swift */; };
 		B7F071B92B14876C00BB5AB9 /* PinResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F071B82B14876C00BB5AB9 /* PinResponse.swift */; };
@@ -221,7 +221,7 @@
 				B76DD4642AFE0E4B00DFE7E1 /* FirebaseStorage in Frameworks */,
 				B7E8A4722AEB84420026931D /* FirebaseCrashlytics in Frameworks */,
 				B72EDCA22B2B071C00080328 /* GoogleSignIn in Frameworks */,
-				B7EC21A92B455D13008F80F7 /* PinsUtilKit in Frameworks */,
+				B7EC21AF2B456D46008F80F7 /* PinsUtilKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,7 +546,7 @@
 				B7B977652AFA0F550023718B /* FirebaseFirestore */,
 				B76DD4632AFE0E4B00DFE7E1 /* FirebaseStorage */,
 				B72EDCA12B2B071C00080328 /* GoogleSignIn */,
-				B7EC21A82B455D13008F80F7 /* PinsUtilKit */,
+				B7EC21AE2B456D46008F80F7 /* PinsUtilKit */,
 			);
 			productName = pins;
 			productReference = B7AF692D2AE0FEDF00385632 /* pinsSandbox.app */;
@@ -606,7 +606,7 @@
 				B7E8A46E2AEB84420026931D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				B7DE80662B08A979007A7AEF /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				B7F8B3032B30938400B869BB /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */,
-				B7EC21A72B455D13008F80F7 /* XCLocalSwiftPackageReference "../PinsUtilKit" */,
+				B7EC21AD2B456D46008F80F7 /* XCRemoteSwiftPackageReference "PinsUtilsKit" */,
 			);
 			productRefGroup = B7AF692E2AE0FEDF00385632 /* Products */;
 			projectDirPath = "";
@@ -1221,13 +1221,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		B7EC21A72B455D13008F80F7 /* XCLocalSwiftPackageReference "../PinsUtilKit" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../PinsUtilKit;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		B7DE80662B08A979007A7AEF /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1243,6 +1236,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 10.16.0;
+			};
+		};
+		B7EC21AD2B456D46008F80F7 /* XCRemoteSwiftPackageReference "PinsUtilsKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MojitoBar/PinsUtilsKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
 			};
 		};
 		B7F8B3032B30938400B869BB /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */ = {
@@ -1286,8 +1287,9 @@
 			package = B7E8A46E2AEB84420026931D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
 		};
-		B7EC21A82B455D13008F80F7 /* PinsUtilKit */ = {
+		B7EC21AE2B456D46008F80F7 /* PinsUtilKit */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = B7EC21AD2B456D46008F80F7 /* XCRemoteSwiftPackageReference "PinsUtilsKit" */;
 			productName = PinsUtilKit;
 		};
 		B7F8B3042B30938400B869BB /* iOSSnapshotTestCase */ = {
