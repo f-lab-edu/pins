@@ -120,13 +120,9 @@ final class MainViewController: UIViewController {
             self?.viewModel.setCreateViewIsPresented(isPresented: false)
         }))
         
-        mainMapView.setLogoutButtonAction(UIAction(handler: { [weak self] _ in
-            do {
-                try Auth.auth().signOut()
-                self?.navigationController?.viewControllers = [LoginViewController()]
-            } catch let signOutError as NSError {
-                os_log("Error signing out: %@", log: .ui, type: .error, signOutError)
-            }
+        mainMapView.setSettingButtonAction(UIAction(handler: { [weak self] _ in
+            let settingViewController: SettingViewController = SettingViewController()
+            self?.navigationController?.pushViewController(settingViewController, animated: true)
         }))
     }
 }
