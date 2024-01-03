@@ -22,7 +22,7 @@ final class DetailView: UIView {
     }
     let scrollView: DetailScrollView = {
         let scrollView = DetailScrollView()
-        scrollView.backgroundColor = UIColor(asset: .defaultBackground)
+        scrollView.backgroundColor = .defaultBackground
         scrollView.contentSize = CGSize(width: UIScreenUtils.getScreenWidth(), height: UIConstants.extendedScreenHeight)
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.tag = 0
@@ -153,7 +153,7 @@ final class DetailView: UIView {
         contentView.setPinContent(pin: pin)
         contentView.layoutIfNeeded()
         
-        if pin.images.isEmpty {
+        if pin.imageDatas.isEmpty {
             imageCountLabel.removeFromSuperview()
             bannerScrollView.removeFromSuperview()
             navigationView.backButton.tintColor = .black

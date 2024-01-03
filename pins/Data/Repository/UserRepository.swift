@@ -10,12 +10,12 @@ import Foundation
 import FirebaseAuth
 
 protocol UserRepositoryProtocol {
-    func getUser(id: String) async -> [String: Any]
+    func getUser(id: String) async throws -> [String: Any] 
     func putUser(user: [String: Any])
 }
 
 final class UserRepository: UserRepositoryProtocol {
-    func getUser(id: String) async -> [String: Any] {
+    func getUser(id: String) async throws -> [String: Any] {
         let db = FirebaseFirestore.shared.db
         let userRef = db.collection("user")
         do {
@@ -27,7 +27,7 @@ final class UserRepository: UserRepositoryProtocol {
             return user
         } catch {
             os_log(.error, log: .default, "Error getting documents: %@", error.localizedDescription)
-            fatalError("Error getting documents: \(error.localizedDescription)")
+            throw UserError.userFetchError
         }
     }
     

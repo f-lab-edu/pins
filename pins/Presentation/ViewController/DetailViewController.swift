@@ -70,18 +70,20 @@ final class DetailViewController: UIViewController {
         }))
         
         detailView.commentView.setSubmitButtonAction(UIAction(handler: { [weak self] _ in
-            let comment = self?.detailView.commentView.inputTextView.text
-            guard let comment else { return }
-            guard !comment.isEmpty else { return }
-            self?.viewModel.uploadComment(comment)
-            self?.detailView.commentView.inputTextView.text = ""
-            self?.getComments()
+            Task {
+                let comment = self?.detailView.commentView.inputTextView.text
+                guard let comment else { return }
+                guard !comment.isEmpty else { return }
+                try self?.viewModel.uploadComment(comment)
+                self?.detailView.commentView.inputTextView.text = ""
+                self?.getComments()
+            }
         }))
     }
     
     func setPin(pin: PinResponse) {
         viewModel.currentPin = pin
-        viewModel.setIsImage(value: !pin.images.isEmpty)
+        viewModel.setIsImage(value: !pin.imageDatas.isEmpty)
     }
     
     func getComments() {
@@ -94,16 +96,16 @@ final class DetailViewController: UIViewController {
 // MARK: - Extensions
 extension DetailViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor(asset: .placeholderGray) {
+        if textView.textColor == .placeholderGray {
             textView.text = nil
-            textView.textColor = UIColor(asset: .defaultText)
+            textView.textColor = .defaultText
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "댓글을 입력해주세요."
-            textView.textColor = UIColor(asset: .placeholderGray)
+            textView.textColor = .placeholderGray
         }
     }
 }

@@ -9,12 +9,11 @@ import Foundation
 
 extension Date {
     func currentDateTimeAsString() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale.current
+        String.dateFormatter.locale = Locale.current
 
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .medium
+        String.dateFormatter.dateStyle = .long
+        String.dateFormatter.timeStyle = .medium
 
-        return dateFormatter.string(from: self)
+        return String.dateFormatter.string(from: self)
     }
 }

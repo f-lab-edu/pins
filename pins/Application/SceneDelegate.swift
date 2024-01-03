@@ -18,15 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        // logout
-//        do {
-//            try Auth.auth().signOut()
-//        } catch {
-//            print("Sign out error")
-//        }
-//        
+        
         window.rootViewController = initialViewController()
-//        window.rootViewController = SigninViewController()
         window.makeKeyAndVisible()
         
         self.window = window
@@ -37,11 +30,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navigationController.isNavigationBarHidden = true
         
         let isAuthenticated = checkAuthorizationState()
-        let viewController: UIViewController
-        if isAuthenticated {
-            viewController = MainViewController()
+        let viewController: UIViewController = if isAuthenticated {
+            MainViewController()
         } else {
-            viewController = LoginViewController()
+            LoginViewController()
         }
         navigationController.viewControllers = [viewController]
         
