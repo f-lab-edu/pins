@@ -52,19 +52,20 @@ final class DetailUseCase: DetailUseCaseProtocol {
 
     func getComments(pinId: String) async throws -> [CommentResponse] {
         let commentRequests = try await fetchCommentRequests(pinId: pinId)
-        return try await withThrowingTaskGroup(of: CommentResponse?.self, returning: [CommentResponse].self) { group in
-            var commentResponses: [CommentResponse] = []
-            for commentRequest in commentRequests {
+        return try await withThrowingTaskGroup(of: (Int, CommentResponse?).self, returning: [CommentResponse].self) { group in
+            var commentResponses: [(Int, CommentResponse)] = []
+            for (index, commentRequest) in commentRequests.enumerated() {
                 group.addTask { [weak self] in
-                    return try await self?.processCommentRequest(commentRequest)
+                    let response = try await self?.processCommentRequest(commentRequest)
+                    return (index, response)
                 }
             }
-            for try await response in group {
+            for try await (index, response) in group {
                 if let response = response {
-                    commentResponses.append(response)
+                    commentResponses.append((index, response))
                 }
             }
-            return commentResponses
+            return commentResponses.sorted(by: { $0.0 < $1.0 }).map { $0.1 }
         }
     }
 }
