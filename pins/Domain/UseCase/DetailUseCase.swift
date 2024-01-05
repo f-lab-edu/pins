@@ -32,7 +32,7 @@ final class DetailUseCase: DetailUseCaseProtocol {
             pinId: pinId,
             userId: userId,
             content: text,
-            createdAt: Date().currentDateTimeAsString()))
+            createdAt: Date()))
         } catch {
             throw error
         }

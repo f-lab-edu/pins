@@ -12,5 +12,5 @@ struct CommentRequest: Codable {
     let pinId: String
     let userId: String
     let content: String
-    let createdAt: String
+    let createdAt: Date
 }
