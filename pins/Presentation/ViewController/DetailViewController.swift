@@ -70,15 +70,24 @@ final class DetailViewController: UIViewController {
         }))
         
         detailView.commentView.setSubmitButtonAction(UIAction(handler: { [weak self] _ in
-            Task {
-                let comment = self?.detailView.commentView.inputTextView.text
-                guard let comment else { return }
-                guard !comment.isEmpty else { return }
-                try self?.viewModel.uploadComment(comment)
-                self?.detailView.commentView.inputTextView.text = ""
-                self?.getComments()
-            }
+            self?.handleSubmitAction()
         }))
+    }
+    private func handleSubmitAction() {
+        Task {
+            do {
+                try uploadComment()
+            } catch {
+                view.showToast(message: "\(error.localizedDescription)")
+            }
+        }
+    }
+
+    private func uploadComment() throws {
+        guard let comment = detailView.commentView.inputTextView.text, !comment.isEmpty else { return }
+        try viewModel.uploadComment(comment)
+        detailView.commentView.inputTextView.text = ""
+        getComments()
     }
     
     func setPin(pin: PinResponse) {
@@ -88,7 +97,11 @@ final class DetailViewController: UIViewController {
     
     func getComments() {
         Task {
-            try await viewModel.getComments()
+            do {
+                try await viewModel.getComments()
+            } catch {
+                view.showToast(message: "에러 발생: \(error.localizedDescription)")
+            }
         }
     }
 }

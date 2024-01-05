@@ -9,6 +9,7 @@ import OSLog
 import UIKit
 import Combine
 import PhotosUI
+import PinsUtilKit
 
 final class SigninViewController: UIViewController {
     private lazy var userRepository: UserRepositoryProtocol = UserRepository()
@@ -54,32 +55,69 @@ final class SigninViewController: UIViewController {
     }
     
     private func setActions() {
-        signinView.setSubmitButtonAction(UIAction(handler: { [weak self] _ in
-            guard let self else { return }
-            switch self.viewModel.inputStep {
-            case .nickName:
-                self.viewModel.setInputStep(.birthDate)
-            case .birthDate:
-                self.viewModel.setInputStep(.description)
-            case .description:
-                self.viewModel.setInputStep(.profileImage)
-                let validAll = self.isValidAll()
-                self.updateInputState(isValid: validAll)
-            case .profileImage:
-                self.viewModel.setNickName(self.signinView.nickNameInput.text ?? "")
-                self.viewModel.setBirthDate(self.signinView.birthDateInput.text ?? "")
-                self.viewModel.setDescription(self.signinView.descriptionInput.text ?? "")
-                Task {
-                    try await self.viewModel.saveUserInfo()
-                    let mainViewController = MainViewController()
-                    self.navigationController?.pushViewController(mainViewController, animated: true)
-                }
-            }
-        }))
+        configureSubmitButtonAction()
+        
         signinView.setProfileImageButtonAction(UIAction(handler: { [weak self] _ in
             guard let imagePicker = self?.imagePicker else { return }
             self?.present(imagePicker, animated: true, completion: nil)
         }))
+    }
+    
+    private func configureSubmitButtonAction() {
+        signinView.setSubmitButtonAction(UIAction(handler: { [weak self] _ in
+            guard let self = self else { return }
+            self.handleInputStep()
+        }))
+    }
+
+    private func handleInputStep() {
+        switch viewModel.inputStep {
+        case .nickName:
+            viewModel.setInputStep(.birthDate)
+        case .birthDate:
+            handleBirthDateStep()
+        case .description:
+            handleDescriptionStep()
+        case .profileImage:
+            handleSubmitProfileImageStep()
+        }
+    }
+
+    private func handleBirthDateStep() {
+        viewModel.setInputStep(.description)
+    }
+
+    private func handleDescriptionStep() {
+        viewModel.setInputStep(.profileImage)
+        let validAll = isValidAll()
+        updateInputState(isValid: validAll)
+    }
+
+    private func handleSubmitProfileImageStep() {
+        saveUserInput()
+        submitUserInfo()
+    }
+
+    private func saveUserInput() {
+        viewModel.setNickName(signinView.nickNameInput.text ?? "")
+        viewModel.setBirthDate(signinView.birthDateInput.text ?? "")
+        viewModel.setDescription(signinView.descriptionInput.text ?? "")
+    }
+
+    private func submitUserInfo() {
+        Task {
+            do {
+                try await viewModel.saveUserInfo()
+                navigateToMainViewController()
+            } catch {
+                view.showToast(message: "회원가입 중 문제가 발생했습니다: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    private func navigateToMainViewController() {
+        let mainViewController = MainViewController()
+        navigationController?.pushViewController(mainViewController, animated: true)
     }
     
     private func updateInputBasedOnTextField(_ textField: UITextField, with updatedText: String) {

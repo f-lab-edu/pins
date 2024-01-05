@@ -9,6 +9,7 @@ import UIKit
 import OSLog
 import FirebaseAuth
 import FirebaseStorage
+import PinsUtilKit
 
 typealias URLWithIndex = (index: Int, url: URL)
 

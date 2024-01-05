@@ -8,6 +8,7 @@
 import OSLog
 import UIKit
 import FirebaseAuth
+import PinsUtilKit
 
 final class LogoutItem: SettingItemHandling {
     var title: String = "로그아웃"

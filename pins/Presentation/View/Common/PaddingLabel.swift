@@ -42,4 +42,15 @@ final class PaddingLabel: UILabel {
         layer.cornerRadius = offset
         layer.masksToBounds = true
     }
+    
+    func setToastStyle() {
+        backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        textColor = UIColor.white
+        textAlignment = .center
+        alpha = 1.0
+        layer.cornerRadius = 10
+        clipsToBounds  =  true
+        numberOfLines = 0
+        lineBreakMode = .byWordWrapping
+    }
 }

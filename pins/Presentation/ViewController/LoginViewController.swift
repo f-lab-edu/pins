@@ -58,7 +58,7 @@ final class LoginViewController: UIViewController {
                         self?.navigationController?.pushViewController(MainViewController(), animated: true)
                     }
                 case .failure(let error):
-                    os_log("Login Error: %@", log: .default, type: .error, error.localizedDescription)
+                    self?.view.showToast(message: "로그인 중 문제가 발생했습니다: \(error.localizedDescription)")
                 case .none:
                     break
                 }

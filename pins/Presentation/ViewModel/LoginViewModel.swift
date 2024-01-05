@@ -8,6 +8,7 @@
 import OSLog
 import FirebaseAuth
 import AuthenticationServices
+import PinsUtilKit
 
 final class LoginViewModel {
     @Published var loginState: Result<UserResponse, Error>?

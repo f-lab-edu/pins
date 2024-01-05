@@ -7,6 +7,7 @@
 
 import UIKit
 import MapKit
+import PinsUtilKit
 
 final class MainMapView: UIView {
     // MARK: - Properties
