@@ -30,6 +30,12 @@
 		B724F92E2AFCBE4400722CE1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B724F9302AFCBE4400722CE1 /* Localizable.strings */; };
 		B72EDCA22B2B071C00080328 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = B72EDCA12B2B071C00080328 /* GoogleSignIn */; };
 		B72EDCA42B2B0A4000080328 /* KeyboardAnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72EDCA32B2B0A4000080328 /* KeyboardAnimationManager.swift */; };
+		B734DE3A2B497346009787BE /* SigninProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B734DE392B497346009787BE /* SigninProfileView.swift */; };
+		B734DE3C2B4975F1009787BE /* SigninDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B734DE3B2B4975F1009787BE /* SigninDescriptionView.swift */; };
+		B734DE3E2B49796A009787BE /* SigninBirthdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B734DE3D2B49796A009787BE /* SigninBirthdateView.swift */; };
+		B734DE402B497A2A009787BE /* SigninUIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B734DE3F2B497A2A009787BE /* SigninUIConstants.swift */; };
+		B734DE422B497A66009787BE /* SigninNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B734DE412B497A66009787BE /* SigninNicknameView.swift */; };
+		B734DE442B498593009787BE /* VlidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B734DE432B498593009787BE /* VlidationError.swift */; };
 		B742C5782AEA5EE900E95E96 /* CreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B742C5772AEA5EE900E95E96 /* CreateViewModel.swift */; };
 		B749AED82B3831CB00633BB1 /* AnnotationIdentifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = B749AED72B3831CB00633BB1 /* AnnotationIdentifying.swift */; };
 		B749AEDA2B38391E00633BB1 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B749AED92B38391E00633BB1 /* SettingViewModel.swift */; };
@@ -149,6 +155,12 @@
 		B724F92F2AFCBE4400722CE1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B724F9312AFCBE7A00722CE1 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B72EDCA32B2B0A4000080328 /* KeyboardAnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAnimationManager.swift; sourceTree = "<group>"; };
+		B734DE392B497346009787BE /* SigninProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninProfileView.swift; sourceTree = "<group>"; };
+		B734DE3B2B4975F1009787BE /* SigninDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninDescriptionView.swift; sourceTree = "<group>"; };
+		B734DE3D2B49796A009787BE /* SigninBirthdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninBirthdateView.swift; sourceTree = "<group>"; };
+		B734DE3F2B497A2A009787BE /* SigninUIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninUIConstants.swift; sourceTree = "<group>"; };
+		B734DE412B497A66009787BE /* SigninNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninNicknameView.swift; sourceTree = "<group>"; };
+		B734DE432B498593009787BE /* VlidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VlidationError.swift; sourceTree = "<group>"; };
 		B742C5772AEA5EE900E95E96 /* CreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewModel.swift; sourceTree = "<group>"; };
 		B749AED72B3831CB00633BB1 /* AnnotationIdentifying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationIdentifying.swift; sourceTree = "<group>"; };
 		B749AED92B38391E00633BB1 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
@@ -407,6 +419,19 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		B734DE382B49732A009787BE /* SigninView */ = {
+			isa = PBXGroup;
+			children = (
+				B7194A432B1B4F4600642FDA /* SigninView.swift */,
+				B734DE392B497346009787BE /* SigninProfileView.swift */,
+				B734DE3B2B4975F1009787BE /* SigninDescriptionView.swift */,
+				B734DE3D2B49796A009787BE /* SigninBirthdateView.swift */,
+				B734DE412B497A66009787BE /* SigninNicknameView.swift */,
+				B734DE3F2B497A2A009787BE /* SigninUIConstants.swift */,
+			);
+			path = SigninView;
+			sourceTree = "<group>";
+		};
 		B74A4FBF2AE78B7600226EA7 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +473,7 @@
 			children = (
 				B7631C6C2B2DC27700B111AA /* UserError.swift */,
 				B7F0B8F22B3C34A100E9BA6D /* CommentError.swift */,
+				B734DE432B498593009787BE /* VlidationError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -553,6 +579,7 @@
 		B7E050EF2AE4FB30007903C3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B734DE382B49732A009787BE /* SigninView */,
 				B7614C112AEE087000CAB8F0 /* Common */,
 				B7781B312B0F4D3A006372CF /* MainMapView */,
 				B7614C102AEE085F00CAB8F0 /* CreateView */,
@@ -560,7 +587,6 @@
 				B7704A292B33194700E310AC /* SettingView */,
 				B74A4FC22AE78BE700226EA7 /* SearchView.swift */,
 				B7157E692AF384E2007CEF95 /* LoginView.swift */,
-				B7194A432B1B4F4600642FDA /* SigninView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -745,6 +771,7 @@
 				B7B9776C2AFA20D80023718B /* Date+Extensions.swift in Sources */,
 				B7D051522B10AD2100D86183 /* DetailContentView.swift in Sources */,
 				B7194A462B1B573800642FDA /* CALayer+Extensions.swift in Sources */,
+				B734DE402B497A2A009787BE /* SigninUIConstants.swift in Sources */,
 				B749AEE32B38509A00633BB1 /* DiskCacheItem.swift in Sources */,
 				B7B977612AFA0A550023718B /* FirebaseFirestore.swift in Sources */,
 				B74A4FC12AE78BAE00226EA7 /* SearchViewController.swift in Sources */,
@@ -764,6 +791,7 @@
 				B749AEE12B383ECC00633BB1 /* LogoutItem.swift in Sources */,
 				B742C5782AEA5EE900E95E96 /* CreateViewModel.swift in Sources */,
 				B749AEE72B38636000633BB1 /* DiskCacheManager.swift in Sources */,
+				B734DE3E2B49796A009787BE /* SigninBirthdateView.swift in Sources */,
 				B7DC98E72B260C17006DD8F7 /* CommentResponse.swift in Sources */,
 				B7D051502B10AD1A00D86183 /* DetailNavigationView.swift in Sources */,
 				B71C387E2B0754F90065A783 /* UserRequest.swift in Sources */,
@@ -799,6 +827,7 @@
 				B72EDCA42B2B0A4000080328 /* KeyboardAnimationManager.swift in Sources */,
 				B785A7842B1091BC00DC2E88 /* UILabel+Extensions.swift in Sources */,
 				B7BB20242B0E0745003EED3A /* CreateUseCase.swift in Sources */,
+				B734DE3A2B497346009787BE /* SigninProfileView.swift in Sources */,
 				B7704A262B3313EB00E310AC /* SettingView.swift in Sources */,
 				B71C38802B07554B0065A783 /* FirebaseAuthService.swift in Sources */,
 				B7194A442B1B4F4600642FDA /* SigninView.swift in Sources */,
@@ -815,8 +844,11 @@
 				B71C38832B075CC70065A783 /* CryptoUtils.swift in Sources */,
 				B7704A242B3313A900E310AC /* SettingViewController.swift in Sources */,
 				B7B20E1D2B1CBAC700C8304B /* UserRepository.swift in Sources */,
+				B734DE442B498593009787BE /* VlidationError.swift in Sources */,
 				B7DC98E92B260FCF006DD8F7 /* CommentView.swift in Sources */,
+				B734DE3C2B4975F1009787BE /* SigninDescriptionView.swift in Sources */,
 				B7DC98E52B260BD9006DD8F7 /* CommentRequest.swift in Sources */,
+				B734DE422B497A66009787BE /* SigninNicknameView.swift in Sources */,
 				B710588E2AEA2699003D6039 /* OSLog+Extensions.swift in Sources */,
 				B76DD4622AFE0DB000DFE7E1 /* FirestorageService.swift in Sources */,
 				B7035B852AF8D1FF000F74ED /* UIView+Extensions.swift in Sources */,
@@ -1195,10 +1227,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = pins/Resources/pins.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: dongseok ju (X843D4L2C2)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X843D4L2C2;
+				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = X843D4L2C2;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
@@ -1222,7 +1255,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mojito.pins;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "pins GithubActions";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "pins GithubActions";
 				SCHEME_NAME = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

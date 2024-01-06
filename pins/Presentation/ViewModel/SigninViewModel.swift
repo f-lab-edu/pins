@@ -7,25 +7,17 @@
 
 import UIKit
 
-enum InputStep: Int {
-    case nickName
-    case birthDate
-    case description
-    case profileImage
-}
-
 enum InputButtonStype {
     case enabled
     case disabled
 }
 
 final class SigninViewModel {
-    @Published var inputStep: InputStep = .nickName
     @Published var inputButtonStyle: InputButtonStype = .disabled
     @Published var nickName: String = ""
     @Published var birthDate: String = ""
     @Published var description: String = ""
-    @Published var profileImage: ImageInfo = ImageInfo(index: 0, image: .person, extensionType: "png")
+    @Published var profileImage: ImageInfo?
     private let signinUsecase: SigninUseCaseProtocol
     
     init(signinUsecase: SigninUseCaseProtocol) {
@@ -35,11 +27,6 @@ final class SigninViewModel {
     func setInputButtonStyle(_ style: InputButtonStype) {
         inputButtonStyle = style
     }
-    
-    func setInputStep(_ step: InputStep) {
-        inputStep = step
-    }
-    
     func setNickName(_ nickName: String) {
         self.nickName = nickName
     }
@@ -53,6 +40,7 @@ final class SigninViewModel {
     }
     
     func saveUserInfo() async throws {
+        guard let profileImage = profileImage else { return }
         do {
             try await signinUsecase.saveUserInfo(nickName: nickName, description: description, birthDate: birthDate, imageInfo: profileImage)
         } catch {
