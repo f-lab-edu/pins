@@ -181,7 +181,8 @@ final class MainMapView: UIView {
     }
     
     func drawPins(pins: [PinRequest]) {
-        mapView.removeAnnotations(mapView.annotations)
+        let pinAnnotations = mapView.annotations.filter { $0 is PinAnnotation }
+        mapView.removeAnnotations(pinAnnotations)
         
         for pin in pins {
             let annotation: PinAnnotation = PinAnnotation(pin: pin)
