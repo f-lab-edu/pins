@@ -49,7 +49,7 @@ final class MockFirestorageService: FirestorageServiceProtocol {
 }
 
 final class MockCommentService: CommentServiceProtocol {
-    var mockComment: [CommentRequest] = [CommentRequest(id: "testId", pinId: "testPin", userId: "testUserId", content: "testComment", createdAt: "")]
+    var mockComment: [CommentRequest] = [CommentRequest(id: "testId", pinId: "testPin", userId: "testUserId", content: "testComment", createdAt: Date())]
     func getComments(pinId: String) async -> [pins.CommentRequest] {
         return mockComment
     }
