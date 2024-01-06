@@ -128,31 +128,10 @@ final class MainViewController: UIViewController {
 }
 
 extension MainViewController: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation is MKUserLocation {
-            return nil
-        }
-        if let cluster = annotation as? MKClusterAnnotation {
-            let clusterView = mapView.dequeueReusableAnnotationView(withIdentifier: PinClusterAnnotationView.identifier) as? PinClusterAnnotationView
-            clusterView?.setClusterCount(count: cluster.memberAnnotations.count)
-            return clusterView
-        }
-        
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: PinAnnotationView.identifier) as? PinAnnotationView
-        
-        if annotationView == nil {
-            annotationView = PinAnnotationView(annotation: annotation, reuseIdentifier: PinAnnotationView.identifier)
-        } else {
-            annotationView?.annotation = annotation
-        }
-        annotationView?.setPinImage()
-        return annotationView
-    }
-    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if view is PinClusterAnnotationView {
             if let clusterAnnotation = view.annotation as? MKClusterAnnotation {
-                zoomCamera(position: clusterAnnotation.coordinate, delta: 0.5)
+                zoomCamera(position: clusterAnnotation.coordinate, delta: 0.1)
             }
         } else if let pinAnnotation = view.annotation as? PinAnnotation {
             Task {

@@ -49,10 +49,10 @@ extension String {
     
     func birthDateToAge() -> Int {
         String.dateFormatter.dateFormat = "yyMMdd"
-        let birthDate = String.dateFormatter.date(from: self)
+        let birthDate = String.dateFormatter.date(from: self) ?? Date()
         let calendar = Calendar.current
-        let ageComponents = calendar.dateComponents([.year], from: birthDate!, to: Date())
-        let age = ageComponents.year!
+        let ageComponents = calendar.dateComponents([.year], from: birthDate, to: Date())
+        let age = ageComponents.year ?? 0
         return age
     }
 }
