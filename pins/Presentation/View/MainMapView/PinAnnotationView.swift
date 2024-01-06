@@ -11,14 +11,13 @@ import MapKit
 final class PinAnnotationView: MKAnnotationView, AnnotationIdentifying {
     private var pinImageView: UIImageView = UIImageView()
     
-    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        clusteringIdentifier = "PinCluster"
-        setLayout()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override var annotation: MKAnnotation? {
+        didSet {
+            guard annotation is PinAnnotation else { return }
+            clusteringIdentifier = "PinCluster"
+            setLayout()
+            setPinImage()
+        }
     }
     
     override func prepareForReuse() {

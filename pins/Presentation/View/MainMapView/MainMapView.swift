@@ -21,8 +21,8 @@ final class MainMapView: UIView {
         } else {
             mapView.mapType = .standard
         }
-        mapView.register(PinAnnotationView.self, forAnnotationViewWithReuseIdentifier: PinAnnotationView.identifier)
-        mapView.register(PinClusterAnnotationView.self, forAnnotationViewWithReuseIdentifier: PinClusterAnnotationView.identifier)
+        mapView.register(PinAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        mapView.register(PinClusterAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
         return mapView
     }()
     private let centerPinImage: UIImageView = {
@@ -59,7 +59,7 @@ final class MainMapView: UIView {
         button.accessibilityLabel = "핀 생성"
         return button
     }()
-    private let refeshButton: CustomButton = {
+    private let refreshButton: CustomButton = {
         let button = CustomButton()
         button.setShadow()
         button.setImage(systemName: "arrow.clockwise")
@@ -92,7 +92,7 @@ final class MainMapView: UIView {
     
     // MARK: - Layouts
     private func setLayout() {
-        [mapView, centerPinImage, createButton, cancelButton, searchButton, createModeButton, refeshButton, myLocationButton, settingButton].forEach { addSubview($0) }
+        [mapView, centerPinImage, createButton, cancelButton, searchButton, createModeButton, refreshButton, myLocationButton, settingButton].forEach { addSubview($0) }
         
         mapView
             .leadingLayout(equalTo: leadingAnchor)
@@ -130,7 +130,7 @@ final class MainMapView: UIView {
             .widthLayout(50)
             .heightLayout(50)
         
-        refeshButton
+        refreshButton
             .leadingLayout(equalTo: leadingAnchor, constant: 16)
             .bottomLayout(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16)
             .widthLayout(45)
@@ -171,7 +171,7 @@ final class MainMapView: UIView {
     
     func presentCreateView(isPresented: Bool) {
         searchButton.isHidden = isPresented
-        refeshButton.isHidden = isPresented
+        refreshButton.isHidden = isPresented
         createModeButton.isHidden = isPresented
         myLocationButton.isHidden = isPresented
         
@@ -181,7 +181,8 @@ final class MainMapView: UIView {
     }
     
     func drawPins(pins: [PinRequest]) {
-        mapView.removeAnnotations(mapView.annotations)
+        let pinAnnotations = mapView.annotations.filter { $0 is PinAnnotation }
+        mapView.removeAnnotations(pinAnnotations)
         
         for pin in pins {
             let annotation: PinAnnotation = PinAnnotation(pin: pin)
@@ -223,5 +224,9 @@ final class MainMapView: UIView {
     
     func setSettingButtonAction(_ action: UIAction) {
         settingButton.addAction(action, for: .touchUpInside)
+    }
+    
+    func setRefreshButtonAction(_ action: UIAction) {
+        refreshButton.addAction(action, for: .touchUpInside)
     }
 }

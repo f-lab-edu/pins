@@ -19,13 +19,13 @@ final class PinClusterAnnotationView: MKAnnotationView, AnnotationIdentifying {
         return label
     }()
     
-    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        setLayout()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override var annotation: MKAnnotation? {
+        didSet {
+            guard let annotation = annotation as? MKClusterAnnotation else { return }
+            displayPriority = .defaultHigh
+            setLayout()
+            setClusterCount(count: annotation.memberAnnotations.count)
+        }
     }
     
     override func prepareForReuse() {
