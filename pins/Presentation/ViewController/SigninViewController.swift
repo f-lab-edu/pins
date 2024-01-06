@@ -36,19 +36,19 @@ final class SigninViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setActions()
-        signinView.birthDateInput.delegate = self
-        signinView.nickNameInput.delegate = self
-        signinView.descriptionInput.delegate = self
+        signinView.signinBirthdateView.input.delegate = self
+        signinView.signinNicknameView.input.delegate = self
+        signinView.signinDescriptionView.input.delegate = self
         imagePicker.delegate = self
-        viewModel.$inputStep.sink { [weak self] step in
-            self?.signinView.remakeLayout(step: step)
-        }.store(in: &cancellables)
         
         viewModel.$inputButtonStyle.sink { [weak self] style in
             self?.signinView.setSubmitButton(type: style)
         }.store(in: &cancellables)
         
         viewModel.$profileImage.sink { [weak self] imageInfo in
+            guard let imageInfo = imageInfo else { return }
+            self?.checkAndUpdateInputState()
+            self?.signinView.signinProfileView.setValidateText("")
             self?.signinView.setProfileImage(imageInfo)
         }.store(in: &cancellables)
     }
@@ -56,24 +56,14 @@ final class SigninViewController: UIViewController {
     private func setActions() {
         signinView.setSubmitButtonAction(UIAction(handler: { [weak self] _ in
             guard let self else { return }
-            switch self.viewModel.inputStep {
-            case .nickName:
-                self.viewModel.setInputStep(.birthDate)
-            case .birthDate:
-                self.viewModel.setInputStep(.description)
-            case .description:
-                self.viewModel.setInputStep(.profileImage)
-                let validAll = self.isValidAll()
-                self.updateInputState(isValid: validAll)
-            case .profileImage:
-                self.viewModel.setNickName(self.signinView.nickNameInput.text ?? "")
-                self.viewModel.setBirthDate(self.signinView.birthDateInput.text ?? "")
-                self.viewModel.setDescription(self.signinView.descriptionInput.text ?? "")
-                Task {
-                    try await self.viewModel.saveUserInfo()
-                    let mainViewController = MainViewController()
-                    self.navigationController?.pushViewController(mainViewController, animated: true)
-                }
+            guard isValidAll() else { return }
+            self.viewModel.setNickName(self.signinView.signinNicknameView.input.text ?? "")
+            self.viewModel.setBirthDate(self.signinView.signinBirthdateView.input.text ?? "")
+            self.viewModel.setDescription(self.signinView.signinDescriptionView.input.text ?? "")
+            Task {
+                try await self.viewModel.saveUserInfo()
+                let mainViewController = MainViewController()
+                self.navigationController?.pushViewController(mainViewController, animated: true)
             }
         }))
         signinView.setProfileImageButtonAction(UIAction(handler: { [weak self] _ in
@@ -82,71 +72,49 @@ final class SigninViewController: UIViewController {
         }))
     }
     
-    private func updateInputBasedOnTextField(_ textField: UITextField, with updatedText: String) {
-        if textField == signinView.nickNameInput {
-            updateNicknameInput(updatedText)
-        } else if textField == signinView.birthDateInput {
-            updateBirthDateInput(updatedText)
-        } else if textField == signinView.descriptionInput {
-            updateDescriptionInput(updatedText)
+    private func isValidAll() -> Bool {
+        let nickName = signinView.signinNicknameView.input.text ?? ""
+        let birthDate = signinView.signinBirthdateView.input.text ?? ""
+        let description = signinView.signinDescriptionView.input.text ?? ""
+        do {
+            try validateNickname(nickname: nickName)
+            try validateBirthDate(dateString: birthDate)
+            try validateDescription(description: description)
+            return true
+        } catch {
+            return false
         }
     }
     
-    private func updateNicknameInput(_ text: String) {
-        let isNicknameValid = isValidNickname(nickname: text)
-        updateInputState(isValid: isNicknameValid)
-        signinView.setSubmitButtonTitle("다음")
-    }
-
-    private func updateBirthDateInput(_ text: String) {
-        let isBirthDateValid = isValidBirthDate(dateString: text)
-        updateInputState(isValid: isBirthDateValid)
-        signinView.setSubmitButtonTitle("다음")
-
-    }
-
-    private func updateDescriptionInput(_ text: String) {
-        let isDescriptionValid = isValidDescription(description: text)
-        updateInputState(isValid: isDescriptionValid)
-        signinView.setSubmitButtonTitle("다음")
-    }
-    
-    private func isValidAll() -> Bool {
-        let nickName = signinView.nickNameInput.text ?? ""
-        let birthDate = signinView.birthDateInput.text ?? ""
-        let description = signinView.descriptionInput.text ?? ""
-        return isValidNickname(nickname: nickName) && isValidBirthDate(dateString: birthDate) && isValidDescription(description: description)
-    }
-    
-    private func isValidBirthDate(dateString: String) -> Bool {
+    private func validateBirthDate(dateString: String) throws {
         String.dateFormatter.dateFormat = "yyMMdd"
-        return String.dateFormatter.date(from: dateString) != nil && dateString.count == 6
-    }
-    
-    private func isValidNickname(nickname: String) -> Bool {
-        return nickname.count <= 5 && nickname.count >= 1
-    }
-    
-    private func isValidDescription(description: String) -> Bool {
-        return description.count <= 5 && description.count >= 1
+        guard dateString.count == 6 else {
+            throw ValidationErrors.invalidBirthDateLength
+        }
+        guard String.dateFormatter.date(from: dateString) != nil else {
+            throw ValidationErrors.invalidBirthDateFormat
+        }
     }
 
+    private func validateNickname(nickname: String) throws {
+        guard nickname.count <= 6 && nickname.count >= 1 else {
+            throw ValidationErrors.invalidNicknameLength
+        }
+    }
+
+    private func validateDescription(description: String) throws {
+        guard description.count <= 6 && description.count >= 1 else {
+            throw ValidationErrors.invalidDescriptionLength
+        }
+    }
+    
+    private func checkAndUpdateInputState() {
+        let isAllValid = isValidAll() && viewModel.profileImage != nil
+        updateInputState(isValid: isAllValid)
+    }
+    
     private func updateInputState(isValid: Bool) {
         viewModel.setInputButtonStyle(isValid ? .enabled : .disabled)
-    }
-    
-    private func updateButtonState(for textField: UITextField) {
-        let text = textField.text ?? ""
-        switch textField {
-        case signinView.nickNameInput:
-            updateNicknameInput(text)
-        case signinView.birthDateInput:
-            updateBirthDateInput(text)
-        case signinView.descriptionInput:
-            updateDescriptionInput(text)
-        default:
-            break
-        }
     }
     
     private func processPickerResult(_ index: Int, _ result: PHPickerResult) {
@@ -157,6 +125,7 @@ final class SigninViewController: UIViewController {
                 if let image = image, let extensionType = extensionType {
                     await MainActor.run {
                         viewModel.setProfileImage(image, type: extensionType)
+                        checkAndUpdateInputState()
                     }
                 }
             }
@@ -166,31 +135,41 @@ final class SigninViewController: UIViewController {
 
 extension SigninViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.frame.size = CGSize(width: UIScreenUtils.getScreenWidth() - 40, height: 30)
+        textField.frame.size = CGSize(width: UIScreenUtils.getScreenWidth() - UIConstants.padding, height: 30)
         textField.layer.addBorder(edge: .bottom, color: .systemBlue, thickness: 1)
-        
-        if textField == signinView.nickNameInput {
-            viewModel.setInputStep(.nickName)
-        } else if textField == signinView.birthDateInput {
-            viewModel.setInputStep(.birthDate)
-        } else if textField == signinView.descriptionInput {
-            viewModel.setInputStep(.description)
-        }
-        updateButtonState(for: textField)
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.frame.size = CGSize(width: UIScreenUtils.getScreenWidth() - 40, height: 30)
+        textField.frame.size = CGSize(width: UIScreenUtils.getScreenWidth() - UIConstants.padding, height: 30)
         textField.layer.addBorder(edge: .bottom, color: .systemGray, thickness: 1)
-        updateButtonState(for: textField)
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let currentText = textField.text ?? ""
-        guard let stringRange = Range(range, in: currentText) else { return false }
-        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-        updateInputBasedOnTextField(textField, with: updatedText)
-        return true
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField == signinView.signinNicknameView.input {
+            do {
+                try validateNickname(nickname: textField.text ?? "")
+                signinView.signinNicknameView.setValidateText("")
+            } catch {
+                signinView.signinNicknameView.setValidateText("1~6 글자를 입력해야 합니다.")
+            }
+        } else if textField == signinView.signinBirthdateView.input {
+            do {
+                try validateBirthDate(dateString: textField.text ?? "")
+                signinView.signinBirthdateView.setValidateText("")
+            } catch ValidationErrors.invalidBirthDateLength {
+                signinView.signinBirthdateView.setValidateText("생년월일을 6글자로 입력해야 합니다. ex) 990101")
+            } catch {
+                signinView.signinBirthdateView.setValidateText("올바른 날짜 형식이 아닙니다.")
+            }
+        } else if textField == signinView.signinDescriptionView.input {
+            do {
+                try validateDescription(description: textField.text ?? "")
+                signinView.signinDescriptionView.setValidateText("")
+            } catch {
+                signinView.signinDescriptionView.setValidateText("1~6 글자를 입력해야 합니다.")
+            }
+        }
+        checkAndUpdateInputState()
     }
 }
 
