@@ -124,6 +124,10 @@ final class MainViewController: UIViewController {
             let settingViewController: SettingViewController = SettingViewController()
             self?.navigationController?.pushViewController(settingViewController, animated: true)
         }))
+        
+        mainMapView.setRefreshButtonAction(UIAction(handler: { [weak self] _ in
+            self?.loadPins()
+        }))
     }
 }
 
