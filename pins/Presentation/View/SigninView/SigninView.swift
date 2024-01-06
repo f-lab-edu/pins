@@ -14,9 +14,9 @@ final class SigninView: UIView {
     private let animationManager: AnimationManager = AnimationManager()
     private let viewModel: SigninViewModel
     let signinProfileView: SigninProfileView = SigninProfileView()
-    let signinDescriptionView: SigninDescriptionView = SigninDescriptionView()
-    let signinBirthdateView: SigninBirthdateView = SigninBirthdateView()
-    let signinNicknameView: SigninNicknameView = SigninNicknameView()
+    let signinDescriptionView: SigninTextInput = SigninTextInput(name: "자기소개", placeholder: "자기소개를 입력해주세요.")
+    let signinBirthdateView: SigninTextInput = SigninTextInput(name: "생년월일", placeholder: "생년월일을 입력해주세요.")
+    let signinNicknameView: SigninTextInput = SigninTextInput(name: "닉네임", placeholder: "닉네임을 입력해주세요")
     
     let titleLabel: UILabel = {
         let label = UILabel()

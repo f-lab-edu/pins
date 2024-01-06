@@ -1,5 +1,5 @@
 //
-//  SigninDescriptionView.swift
+//  SigninTextInput.swift
 //  pins
 //
 //  Created by 주동석 on 1/6/24.
@@ -7,19 +7,17 @@
 
 import UIKit
 
-final class SigninDescriptionView: UIView {
-    let descriptionInput: UITextField = {
+final class SigninTextInput: UIView {
+    let input: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "자기소개를 입력해주세요."
         textField.font = .systemFont(ofSize: 16)
         textField.frame.size = CGSize(width: UIScreenUtils.getScreenWidth() - UIConstants.padding, height: 30)
         textField.layer.addBorder(edge: .bottom, color: .systemGray, thickness: 1)
         return textField
     }()
     
-    private let descriptionLabel: UILabel = {
+    private let label: UILabel = {
         let label = UILabel()
-        label.text = "자기소개"
         label.font = .systemFont(ofSize: 12)
         label.textColor = .systemGray
         return label
@@ -32,9 +30,12 @@ final class SigninDescriptionView: UIView {
         return label
     }()
     
-    override init(frame: CGRect) {
+    init(name: String, placeholder: String) {
         super.init(frame: .zero)
         setLayout()
+        
+        input.placeholder = placeholder
+        label.text = name
     }
     
     required init?(coder: NSCoder) {
@@ -42,18 +43,18 @@ final class SigninDescriptionView: UIView {
     }
     
     private func setLayout() {
-        [descriptionLabel, descriptionInput, validateLabel].forEach { addSubview($0) }
+        [input, label, validateLabel].forEach { addSubview($0) }
         
-        descriptionInput
+        input
             .topLayout(equalTo: topAnchor)
             .leadingLayout(equalTo: leadingAnchor, constant: UIConstants.padding / 2)
         
-        descriptionLabel
-            .bottomLayout(equalTo: descriptionInput.topAnchor, constant: -5)
+        label
+            .bottomLayout(equalTo: input.topAnchor, constant: -5)
             .leadingLayout(equalTo: leadingAnchor, constant: UIConstants.padding / 2)
         
         validateLabel
-            .topLayout(equalTo: descriptionInput.bottomAnchor, constant: 10)
+            .topLayout(equalTo: input.bottomAnchor, constant: 10)
             .leadingLayout(equalTo: leadingAnchor, constant: UIConstants.padding / 2)
     }
     

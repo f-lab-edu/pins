@@ -36,9 +36,9 @@ final class SigninViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setActions()
-        signinView.signinBirthdateView.birthDateInput.delegate = self
-        signinView.signinNicknameView.nicknameInput.delegate = self
-        signinView.signinDescriptionView.descriptionInput.delegate = self
+        signinView.signinBirthdateView.input.delegate = self
+        signinView.signinNicknameView.input.delegate = self
+        signinView.signinDescriptionView.input.delegate = self
         imagePicker.delegate = self
         
         viewModel.$inputButtonStyle.sink { [weak self] style in
@@ -57,9 +57,9 @@ final class SigninViewController: UIViewController {
         signinView.setSubmitButtonAction(UIAction(handler: { [weak self] _ in
             guard let self else { return }
             guard isValidAll() else { return }
-            self.viewModel.setNickName(self.signinView.signinNicknameView.nicknameInput.text ?? "")
-            self.viewModel.setBirthDate(self.signinView.signinBirthdateView.birthDateInput.text ?? "")
-            self.viewModel.setDescription(self.signinView.signinDescriptionView.descriptionInput.text ?? "")
+            self.viewModel.setNickName(self.signinView.signinNicknameView.input.text ?? "")
+            self.viewModel.setBirthDate(self.signinView.signinBirthdateView.input.text ?? "")
+            self.viewModel.setDescription(self.signinView.signinDescriptionView.input.text ?? "")
             Task {
                 try await self.viewModel.saveUserInfo()
                 let mainViewController = MainViewController()
@@ -73,9 +73,9 @@ final class SigninViewController: UIViewController {
     }
     
     private func isValidAll() -> Bool {
-        let nickName = signinView.signinNicknameView.nicknameInput.text ?? ""
-        let birthDate = signinView.signinBirthdateView.birthDateInput.text ?? ""
-        let description = signinView.signinDescriptionView.descriptionInput.text ?? ""
+        let nickName = signinView.signinNicknameView.input.text ?? ""
+        let birthDate = signinView.signinBirthdateView.input.text ?? ""
+        let description = signinView.signinDescriptionView.input.text ?? ""
         do {
             try validateNickname(nickname: nickName)
             try validateBirthDate(dateString: birthDate)
@@ -145,14 +145,14 @@ extension SigninViewController: UITextFieldDelegate {
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        if textField == signinView.signinNicknameView.nicknameInput {
+        if textField == signinView.signinNicknameView.input {
             do {
                 try validateNickname(nickname: textField.text ?? "")
                 signinView.signinNicknameView.setValidateText("")
             } catch {
                 signinView.signinNicknameView.setValidateText("1~6 글자를 입력해야 합니다.")
             }
-        } else if textField == signinView.signinBirthdateView.birthDateInput {
+        } else if textField == signinView.signinBirthdateView.input {
             do {
                 try validateBirthDate(dateString: textField.text ?? "")
                 signinView.signinBirthdateView.setValidateText("")
@@ -161,7 +161,7 @@ extension SigninViewController: UITextFieldDelegate {
             } catch {
                 signinView.signinBirthdateView.setValidateText("올바른 날짜 형식이 아닙니다.")
             }
-        } else if textField == signinView.signinDescriptionView.descriptionInput {
+        } else if textField == signinView.signinDescriptionView.input {
             do {
                 try validateDescription(description: textField.text ?? "")
                 signinView.signinDescriptionView.setValidateText("")

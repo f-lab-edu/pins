@@ -19,8 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-//        window.rootViewController = initialViewController()
-        window.rootViewController = SigninViewController()
+        window.rootViewController = initialViewController()
         window.makeKeyAndVisible()
         
         self.window = window
