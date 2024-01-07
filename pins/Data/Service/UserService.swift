@@ -34,7 +34,7 @@ final class UserService: UserServiceProtocol {
             return user
         } catch {
             os_log(.error, log: .default, "Error decoding user data: %@", error.localizedDescription)
-            throw UserError.userDecodingError
+            return nil
         }
     }
     

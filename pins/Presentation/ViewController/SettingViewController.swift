@@ -19,9 +19,14 @@ final class SettingViewController: UIViewController {
         diskCacheItem.onPresentAlert = { [weak self] alert in
             self?.present(alert, animated: true)
         }
+        let resignItem = ResignItem(navigationController: navigationController)
+        resignItem.onPresentAlert = { [weak self] alert in
+            self?.present(alert, animated: true)
+        }
         return SettingViewModel(tableData: [
             logoutItem,
-            diskCacheItem
+            diskCacheItem,
+            resignItem
         ])
     }()
     private var settingView: SettingView {
