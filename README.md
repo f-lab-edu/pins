@@ -33,8 +33,6 @@
 - [유지보수와 확장에 용이한 구조 설계](https://github.com/f-lab-edu/pins/wiki/%EC%9C%A0%EC%A7%80%EB%B3%B4%EC%88%98%EC%99%80-%ED%99%95%EC%9E%A5%EC%97%90-%EC%9A%A9%EC%9D%B4%ED%95%9C-%EA%B5%AC%EC%A1%B0-%EC%84%A4%EA%B3%84)
 - [이미지가 포함된 게시물 로드 속도 개선](https://github.com/f-lab-edu/pins/wiki/%EC%9D%B4%EB%AF%B8%EC%A7%80%EA%B0%80-%ED%8F%AC%ED%95%A8%EB%90%9C-%EA%B2%8C%EC%8B%9C%EB%AC%BC-%EB%A1%9C%EB%93%9C-%EC%86%8D%EB%8F%84-%EA%B0%9C%EC%84%A0)
 - [회원 탈퇴를 위한 재인증](https://github.com/f-lab-edu/pins/wiki/%ED%9A%8C%EC%9B%90-%ED%83%88%ED%87%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%EC%9E%AC%EC%9D%B8%EC%A6%9D)
-
-- 
 - [맵 어노테이션 클러스터링 이슈](https://github.com/f-lab-edu/pins/wiki/%EB%A7%B5-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81-%EC%9D%B4%EC%8A%88)
 
 # 기술 스택
