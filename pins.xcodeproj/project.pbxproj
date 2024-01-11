@@ -104,6 +104,7 @@
 		B7F6A8DA2AE2B61500892215 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F6A8D82AE2B61500892215 /* LaunchScreen.storyboard */; };
 		B7F8B3052B30938400B869BB /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = B7F8B3042B30938400B869BB /* iOSSnapshotTestCase */; };
 		B7F8B3072B309D2C00B869BB /* MockClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F8B3062B309D2C00B869BB /* MockClass.swift */; };
+		B7FB341D2B4B01540010CE5A /* ResignItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FB341C2B4B01540010CE5A /* ResignItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -225,6 +226,7 @@
 		B7F0B8F22B3C34A100E9BA6D /* CommentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentError.swift; sourceTree = "<group>"; };
 		B7F6A8D92AE2B61500892215 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B7F8B3062B309D2C00B869BB /* MockClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockClass.swift; sourceTree = "<group>"; };
+		B7FB341C2B4B01540010CE5A /* ResignItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -446,6 +448,7 @@
 				B7704A272B33193100E310AC /* SettingViewCell.swift */,
 				B749AEE02B383ECC00633BB1 /* LogoutItem.swift */,
 				B749AEE22B38509A00633BB1 /* DiskCacheItem.swift */,
+				B7FB341C2B4B01540010CE5A /* ResignItem.swift */,
 			);
 			path = SettingView;
 			sourceTree = "<group>";
@@ -749,6 +752,7 @@
 				B7F071B72B14855000BB5AB9 /* DetailViewModel.swift in Sources */,
 				B7614C0F2AEE085B00CAB8F0 /* ImageCollectionViewCell.swift in Sources */,
 				B7AF69312AE0FEDF00385632 /* AppDelegate.swift in Sources */,
+				B7FB341D2B4B01540010CE5A /* ResignItem.swift in Sources */,
 				B71058912AEA2974003D6039 /* MainViewModel.swift in Sources */,
 				B76DD4662AFE238F00DFE7E1 /* LoadingIndicator.swift in Sources */,
 				B7E1236A2B3D7C520044E1DB /* Data+Extensions.swift in Sources */,
