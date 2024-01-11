@@ -39,6 +39,6 @@ struct CommentResponse {
         self.userProfile = profile
         self.userDescription = user.description ?? ""
         self.content = commentRequest.content
-        self.createdAt = commentRequest.createdAt.convertDaysAgo()
+        self.createdAt = commentRequest.createdAt.currentDateTimeAsString().convertDaysAgo()
     }
 }
