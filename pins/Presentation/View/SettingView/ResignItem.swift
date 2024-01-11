@@ -10,6 +10,7 @@ import OSLog
 import FirebaseAuth
 import GoogleSignIn
 import AuthenticationServices
+import PinsUtilKit
 
 final class ResignItem: SettingItemHandling {
     private lazy var authService: FirebaseAuthServiceProtocol = FirebaseAuthService()

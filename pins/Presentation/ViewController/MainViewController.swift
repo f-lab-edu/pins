@@ -58,7 +58,7 @@ final class MainViewController: UIViewController {
     private func getUserInfo() {
         Task {
             do {
-                let result = try await viewModel.getUserInfo()
+                _ = try await viewModel.getUserInfo()
             } catch {
                 view.showToast(message: "\(error.localizedDescription)")
             }
