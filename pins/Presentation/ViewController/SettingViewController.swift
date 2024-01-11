@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PinsUtilKit
 
 final class SettingViewController: UIViewController {
     private lazy var viewModel: SettingViewModel = {

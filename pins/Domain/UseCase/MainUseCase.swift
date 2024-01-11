@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import PinsUtilKit
 
 protocol MainUseCaseProtocol {
     func getPins() async -> [PinRequest]

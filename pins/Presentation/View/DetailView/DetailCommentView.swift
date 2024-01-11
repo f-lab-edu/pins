@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PinsUtilKit
 
 final class DetailCommentView: UIView {
     // MARK: - Properties
