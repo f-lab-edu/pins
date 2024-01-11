@@ -4,6 +4,13 @@
 지도 기반 SNS 서비스를 개발함으로써 다양한 기술의 통합적 역량을 높이고자 시작한 프로젝트입니다. <br>
 이 프로젝트의 핵심은 사용자가 지도에 핀을 생성하여 커뮤니티와 소통하는 것입니다.
 
+# 기술적 고민
+- [유지보수와 확장에 용이한 구조 설계](https://github.com/f-lab-edu/pins/wiki/%EC%9C%A0%EC%A7%80%EB%B3%B4%EC%88%98%EC%99%80-%ED%99%95%EC%9E%A5%EC%97%90-%EC%9A%A9%EC%9D%B4%ED%95%9C-%EA%B5%AC%EC%A1%B0-%EC%84%A4%EA%B3%84)
+- [이미지가 포함된 게시물 로드 속도 개선](https://github.com/f-lab-edu/pins/wiki/%EC%9D%B4%EB%AF%B8%EC%A7%80%EA%B0%80-%ED%8F%AC%ED%95%A8%EB%90%9C-%EA%B2%8C%EC%8B%9C%EB%AC%BC-%EB%A1%9C%EB%93%9C-%EC%86%8D%EB%8F%84-%EA%B0%9C%EC%84%A0)
+- [회원 탈퇴를 위한 재인증](https://github.com/f-lab-edu/pins/wiki/%EC%9D%B4%EB%AF%B8%EC%A7%80%EA%B0%80-%ED%8F%AC%ED%95%A8%EB%90%9C-%EA%B2%8C%EC%8B%9C%EB%AC%BC-%EB%A1%9C%EB%93%9C-%EC%86%8D%EB%8F%84-%EA%B0%9C%EC%84%A0)
+- [맵 어노테이션 클러스터링 이슈](https://github.com/f-lab-edu/pins/wiki/%EB%A7%B5-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81-%EC%9D%B4%EC%8A%88)
+- [CI/CD 구현 중 Xcode 최신 버전 이슈](https://github.com/f-lab-edu/pins/wiki/CI-CD-%EA%B5%AC%ED%98%84-%EC%A4%91-Xcode-%EC%B5%9C%EC%8B%A0-%EB%B2%84%EC%A0%84-%EC%9D%B4%EC%8A%88)
+
 # 주요 기능
 - 로그인
   - 구글 소셜 로그인
@@ -25,13 +32,6 @@
   - 로그아웃
   - 회원탈퇴
   - 캐시 삭제
-
-# 기술적 고민
-- [유지보수와 확장에 용이한 구조 설계](https://github.com/f-lab-edu/pins/wiki/%EC%9C%A0%EC%A7%80%EB%B3%B4%EC%88%98%EC%99%80-%ED%99%95%EC%9E%A5%EC%97%90-%EC%9A%A9%EC%9D%B4%ED%95%9C-%EA%B5%AC%EC%A1%B0-%EC%84%A4%EA%B3%84)
-- [이미지가 포함된 게시물 로드 속도 개선](https://github.com/f-lab-edu/pins/wiki/%EC%9D%B4%EB%AF%B8%EC%A7%80%EA%B0%80-%ED%8F%AC%ED%95%A8%EB%90%9C-%EA%B2%8C%EC%8B%9C%EB%AC%BC-%EB%A1%9C%EB%93%9C-%EC%86%8D%EB%8F%84-%EA%B0%9C%EC%84%A0)
-- [회원 탈퇴를 위한 재인증](https://github.com/f-lab-edu/pins/wiki/%EC%9D%B4%EB%AF%B8%EC%A7%80%EA%B0%80-%ED%8F%AC%ED%95%A8%EB%90%9C-%EA%B2%8C%EC%8B%9C%EB%AC%BC-%EB%A1%9C%EB%93%9C-%EC%86%8D%EB%8F%84-%EA%B0%9C%EC%84%A0)
-- [맵 어노테이션 클러스터링 이슈](https://github.com/f-lab-edu/pins/wiki/%EB%A7%B5-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81-%EC%9D%B4%EC%8A%88)
-- [CI/CD 구현 중 Xcode 최신 버전 이슈](https://github.com/f-lab-edu/pins/wiki/CI-CD-%EA%B5%AC%ED%98%84-%EC%A4%91-Xcode-%EC%B5%9C%EC%8B%A0-%EB%B2%84%EC%A0%84-%EC%9D%B4%EC%8A%88)
 
 # 기술 스택
 
