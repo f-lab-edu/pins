@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import PinsUtilKit
 
 protocol SigninUseCaseProtocol {
     func saveUserInfo(nickName: String, description: String, birthDate: String, imageInfo: ImageInfo) async throws

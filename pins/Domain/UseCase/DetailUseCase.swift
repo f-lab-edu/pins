@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import PinsUtilKit
 
 protocol DetailUseCaseProtocol {
     func uploadComment(_ text: String, pinId: String) throws

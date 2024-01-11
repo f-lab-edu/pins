@@ -91,18 +91,17 @@ extension UIView {
 extension UIView {
     func showToast(message: String, duration: TimeInterval = 1.0) {
         let toastLabel = PaddingLabel(inset: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
-        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        toastLabel.textColor = UIColor.white
-        toastLabel.textAlignment = .center
+        toastLabel.setToastStyle()
         toastLabel.text = message
-        toastLabel.alpha = 1.0
-        toastLabel.layer.cornerRadius = 10
-        toastLabel.clipsToBounds  =  true
+        toastLabel.font = UIFont.systemFont(ofSize: 14)
         self.addSubview(toastLabel)
-        toastLabel
-            .bottomLayout(equalTo: self.bottomAnchor, constant: -100)
-            .centerXLayout(equalTo: self.centerXAnchor)
-            .heightLayout(30)
+        toastLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            toastLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -100),
+            toastLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            toastLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -20),
+            toastLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 35)
+        ])
         UIView.animate(withDuration: duration, delay: 2.0, options: .curveEaseOut, animations: {
             toastLabel.alpha = 0.0
         }, completion: { _ in

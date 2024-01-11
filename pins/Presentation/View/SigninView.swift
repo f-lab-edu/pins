@@ -8,6 +8,7 @@
 import OSLog
 import UIKit
 import Combine
+import PinsUtilKit
 
 final class SigninView: UIView {
     // MARK: - Properties
